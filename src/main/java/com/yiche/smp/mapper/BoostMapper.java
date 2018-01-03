@@ -10,9 +10,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 /**
- *fff
+ *
  */
 public interface BoostMapper {
+
     int countByExample(@Param("currentYear") String currentYear);
     //补量申请人员查看自己的申请列表
     List<Boost> selectOwnApplyList(@Param("userId")String userId);
