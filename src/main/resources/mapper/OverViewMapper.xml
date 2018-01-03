@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yiche.smp.mapper.OverViewMapper" >
+  <resultMap id="BaseResultMap" type="com.yiche.smp.domain.OverView" >
+    <id column="over_view_id" property="overViewId" jdbcType="INTEGER" />
+    <result column="clue_servey_month" property="clueServeyMonth" jdbcType="VARCHAR" />
+    <result column="clue_servey" property="clueServey" jdbcType="VARCHAR" />
+    <result column="clue_trend_month" property="clueTrendMonth" jdbcType="VARCHAR" />
+    <result column="clue_trend" property="clueTrend" jdbcType="VARCHAR" />
+    <result column="early_warn_month" property="earlyWarnMonth" jdbcType="VARCHAR" />
+    <result column="early_warn" property="earlyWarn" jdbcType="VARCHAR" />
+    <result column="lack_brand_month" property="lackBrandMonth" jdbcType="VARCHAR" />
+    <result column="lack_brand" property="lackBrand" jdbcType="VARCHAR" />
+    <result column="month" property="month" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    over_view_id, clue_servey_month, clue_servey,
+    clue_trend_month,clue_trend,early_warn_month,
+    early_warn,lack_brand_month,lack_brand,month
+  </sql>
+  <select id="selectOverViewByYearMonth" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_over_view
+   where month = #{yearMonth,jdbcType=VARCHAR}
+  </select>
+</mapper>

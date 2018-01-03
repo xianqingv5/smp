@@ -1,0 +1,702 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yiche.smp.mapper.ShopAvgCluesMapper">
+    <resultMap id="BaseResultMap" type="com.yiche.smp.domain.ShopAvgClues">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="is_top" property="isTop" jdbcType="VARCHAR"/>
+        <result column="brand_name" property="brandName" jdbcType="VARCHAR"/>
+        <result column="trend_decide" property="trendDecide" jdbcType="VARCHAR"/>
+        <result column="shop_sell_difference" property="shopSellDifference" jdbcType="DOUBLE"/>
+        <result column="total_sell_difference" property="totalSellDifference" jdbcType="DOUBLE"/>
+        <result column="sell_yesteryear_owt" property="sellYesteryearOwt" jdbcType="DOUBLE"/>
+        <result column="sell" property="sell" jdbcType="DOUBLE"/>
+        <result column="sell_compare" property="sellCompare" jdbcType="DOUBLE"/>
+        <result column="store_clues_yesteryear_owt" property="storeCluesYesteryearOwt" jdbcType="DOUBLE"/>
+        <result column="store_clues" property="storeClues" jdbcType="DOUBLE"/>
+        <result column="store_clues_compare" property="storeCluesCompare" jdbcType="DOUBLE"/>
+        <result column="all_clues_yesteryear_owt" property="allCluesYesteryearOwt" jdbcType="DOUBLE"/>
+        <result column="all_clues" property="allClues" jdbcType="DOUBLE"/>
+        <result column="yiche_clues_compare" property="yicheCluesCompare" jdbcType="DOUBLE"/>
+        <result column="dealer_data_yesteryear_owt" property="dealerDataYesteryearOwt" jdbcType="DOUBLE"/>
+        <result column="dealer_data" property="dealerData" jdbcType="DOUBLE"/>
+        <result column="shop_compare" property="shopCompare" jdbcType="DOUBLE"/>
+        <result column="baojia_app_yesteryear_owt" property="baojiaAppYesteryearOwt" jdbcType="DOUBLE"/>
+        <result column="baojia_app" property="baojiaApp" jdbcType="DOUBLE"/>
+        <result column="baojia_app_clues_compare" property="baojiaAppCluesCompare" jdbcType="DOUBLE"/>
+        <result column="yiche_app_yesteryear_owt" property="yicheAppYesteryearOwt" jdbcType="DOUBLE"/>
+        <result column="yiche_app" property="yicheApp" jdbcType="DOUBLE"/>
+        <result column="yiche_app_clues_compare" property="yicheAppCluesCompare" jdbcType="DOUBLE"/>
+        <result column="yiche_pc_yesteryear_owt" property="yichePcYesteryearOwt" jdbcType="DOUBLE"/>
+        <result column="yiche_pc" property="yichePc" jdbcType="DOUBLE"/>
+        <result column="yiche_pc_clues_compare" property="yichePcCluesCompare" jdbcType="DOUBLE"/>
+        <result column="yiche_wap_yesteryear_owt" property="yicheWapYesteryearOwt" jdbcType="DOUBLE"/>
+        <result column="yiche_wap" property="yicheWap" jdbcType="DOUBLE"/>
+        <result column="yiche_wap_clues_compare" property="yicheWapCluesCompare" jdbcType="DOUBLE"/>
+        <result column="other_yesteryear_owt" property="otherYesteryearOwt" jdbcType="DOUBLE"/>
+        <result column="other" property="other" jdbcType="DOUBLE"/>
+        <result column="other_clues_compare" property="otherCluesCompare" jdbcType="DOUBLE"/>
+        <result column="clues_date" property="cluesDate" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, is_top, brand_name, trend_decide, shop_sell_difference, total_sell_difference, 
+    sell_yesteryear_owt, sell, sell_compare, store_clues_yesteryear_owt, store_clues, 
+    store_clues_compare, all_clues_yesteryear_owt, all_clues, yiche_clues_compare, dealer_data_yesteryear_owt, 
+    dealer_data, shop_compare, baojia_app_yesteryear_owt, baojia_app, baojia_app_clues_compare, 
+    yiche_app_yesteryear_owt, yiche_app, yiche_app_clues_compare, yiche_pc_yesteryear_owt, 
+    yiche_pc, yiche_pc_clues_compare, yiche_wap_yesteryear_owt, yiche_wap, yiche_wap_clues_compare, 
+    other_yesteryear_owt, other, other_clues_compare, clues_date
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yiche.smp.domain.ShopAvgCluesExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from shop_avg_clues
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from shop_avg_clues
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from shop_avg_clues
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.yiche.smp.domain.ShopAvgCluesExample">
+        delete from shop_avg_clues
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.yiche.smp.domain.ShopAvgClues">
+    insert into shop_avg_clues (id, is_top, brand_name, 
+      trend_decide, shop_sell_difference, total_sell_difference, 
+      sell_yesteryear_owt, sell, sell_compare, 
+      store_clues_yesteryear_owt, store_clues, store_clues_compare, 
+      all_clues_yesteryear_owt, all_clues, yiche_clues_compare, 
+      dealer_data_yesteryear_owt, dealer_data, shop_compare, 
+      baojia_app_yesteryear_owt, baojia_app, baojia_app_clues_compare, 
+      yiche_app_yesteryear_owt, yiche_app, yiche_app_clues_compare, 
+      yiche_pc_yesteryear_owt, yiche_pc, yiche_pc_clues_compare, 
+      yiche_wap_yesteryear_owt, yiche_wap, yiche_wap_clues_compare, 
+      other_yesteryear_owt, other, other_clues_compare, 
+      clues_date)
+    values (#{id,jdbcType=INTEGER}, #{isTop,jdbcType=VARCHAR}, #{brandName,jdbcType=VARCHAR}, 
+      #{trendDecide,jdbcType=VARCHAR}, #{shopSellDifference,jdbcType=DOUBLE}, #{totalSellDifference,jdbcType=DOUBLE}, 
+      #{sellYesteryearOwt,jdbcType=DOUBLE}, #{sell,jdbcType=DOUBLE}, #{sellCompare,jdbcType=DOUBLE}, 
+      #{storeCluesYesteryearOwt,jdbcType=DOUBLE}, #{storeClues,jdbcType=DOUBLE}, #{storeCluesCompare,jdbcType=DOUBLE}, 
+      #{allCluesYesteryearOwt,jdbcType=DOUBLE}, #{allClues,jdbcType=DOUBLE}, #{yicheCluesCompare,jdbcType=DOUBLE}, 
+      #{dealerDataYesteryearOwt,jdbcType=DOUBLE}, #{dealerData,jdbcType=DOUBLE}, #{shopCompare,jdbcType=DOUBLE}, 
+      #{baojiaAppYesteryearOwt,jdbcType=DOUBLE}, #{baojiaApp,jdbcType=DOUBLE}, #{baojiaAppCluesCompare,jdbcType=DOUBLE}, 
+      #{yicheAppYesteryearOwt,jdbcType=DOUBLE}, #{yicheApp,jdbcType=DOUBLE}, #{yicheAppCluesCompare,jdbcType=DOUBLE}, 
+      #{yichePcYesteryearOwt,jdbcType=DOUBLE}, #{yichePc,jdbcType=DOUBLE}, #{yichePcCluesCompare,jdbcType=DOUBLE}, 
+      #{yicheWapYesteryearOwt,jdbcType=DOUBLE}, #{yicheWap,jdbcType=DOUBLE}, #{yicheWapCluesCompare,jdbcType=DOUBLE}, 
+      #{otherYesteryearOwt,jdbcType=DOUBLE}, #{other,jdbcType=DOUBLE}, #{otherCluesCompare,jdbcType=DOUBLE}, 
+      #{cluesDate,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.yiche.smp.domain.ShopAvgClues">
+        insert into shop_avg_clues
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="isTop != null">
+                is_top,
+            </if>
+            <if test="brandName != null">
+                brand_name,
+            </if>
+            <if test="trendDecide != null">
+                trend_decide,
+            </if>
+            <if test="shopSellDifference != null">
+                shop_sell_difference,
+            </if>
+            <if test="totalSellDifference != null">
+                total_sell_difference,
+            </if>
+            <if test="sellYesteryearOwt != null">
+                sell_yesteryear_owt,
+            </if>
+            <if test="sell != null">
+                sell,
+            </if>
+            <if test="sellCompare != null">
+                sell_compare,
+            </if>
+            <if test="storeCluesYesteryearOwt != null">
+                store_clues_yesteryear_owt,
+            </if>
+            <if test="storeClues != null">
+                store_clues,
+            </if>
+            <if test="storeCluesCompare != null">
+                store_clues_compare,
+            </if>
+            <if test="allCluesYesteryearOwt != null">
+                all_clues_yesteryear_owt,
+            </if>
+            <if test="allClues != null">
+                all_clues,
+            </if>
+            <if test="yicheCluesCompare != null">
+                yiche_clues_compare,
+            </if>
+            <if test="dealerDataYesteryearOwt != null">
+                dealer_data_yesteryear_owt,
+            </if>
+            <if test="dealerData != null">
+                dealer_data,
+            </if>
+            <if test="shopCompare != null">
+                shop_compare,
+            </if>
+            <if test="baojiaAppYesteryearOwt != null">
+                baojia_app_yesteryear_owt,
+            </if>
+            <if test="baojiaApp != null">
+                baojia_app,
+            </if>
+            <if test="baojiaAppCluesCompare != null">
+                baojia_app_clues_compare,
+            </if>
+            <if test="yicheAppYesteryearOwt != null">
+                yiche_app_yesteryear_owt,
+            </if>
+            <if test="yicheApp != null">
+                yiche_app,
+            </if>
+            <if test="yicheAppCluesCompare != null">
+                yiche_app_clues_compare,
+            </if>
+            <if test="yichePcYesteryearOwt != null">
+                yiche_pc_yesteryear_owt,
+            </if>
+            <if test="yichePc != null">
+                yiche_pc,
+            </if>
+            <if test="yichePcCluesCompare != null">
+                yiche_pc_clues_compare,
+            </if>
+            <if test="yicheWapYesteryearOwt != null">
+                yiche_wap_yesteryear_owt,
+            </if>
+            <if test="yicheWap != null">
+                yiche_wap,
+            </if>
+            <if test="yicheWapCluesCompare != null">
+                yiche_wap_clues_compare,
+            </if>
+            <if test="otherYesteryearOwt != null">
+                other_yesteryear_owt,
+            </if>
+            <if test="other != null">
+                other,
+            </if>
+            <if test="otherCluesCompare != null">
+                other_clues_compare,
+            </if>
+            <if test="cluesDate != null">
+                clues_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="isTop != null">
+                #{isTop,jdbcType=VARCHAR},
+            </if>
+            <if test="brandName != null">
+                #{brandName,jdbcType=VARCHAR},
+            </if>
+            <if test="trendDecide != null">
+                #{trendDecide,jdbcType=VARCHAR},
+            </if>
+            <if test="shopSellDifference != null">
+                #{shopSellDifference,jdbcType=DOUBLE},
+            </if>
+            <if test="totalSellDifference != null">
+                #{totalSellDifference,jdbcType=DOUBLE},
+            </if>
+            <if test="sellYesteryearOwt != null">
+                #{sellYesteryearOwt,jdbcType=DOUBLE},
+            </if>
+            <if test="sell != null">
+                #{sell,jdbcType=DOUBLE},
+            </if>
+            <if test="sellCompare != null">
+                #{sellCompare,jdbcType=DOUBLE},
+            </if>
+            <if test="storeCluesYesteryearOwt != null">
+                #{storeCluesYesteryearOwt,jdbcType=DOUBLE},
+            </if>
+            <if test="storeClues != null">
+                #{storeClues,jdbcType=DOUBLE},
+            </if>
+            <if test="storeCluesCompare != null">
+                #{storeCluesCompare,jdbcType=DOUBLE},
+            </if>
+            <if test="allCluesYesteryearOwt != null">
+                #{allCluesYesteryearOwt,jdbcType=DOUBLE},
+            </if>
+            <if test="allClues != null">
+                #{allClues,jdbcType=DOUBLE},
+            </if>
+            <if test="yicheCluesCompare != null">
+                #{yicheCluesCompare,jdbcType=DOUBLE},
+            </if>
+            <if test="dealerDataYesteryearOwt != null">
+                #{dealerDataYesteryearOwt,jdbcType=DOUBLE},
+            </if>
+            <if test="dealerData != null">
+                #{dealerData,jdbcType=DOUBLE},
+            </if>
+            <if test="shopCompare != null">
+                #{shopCompare,jdbcType=DOUBLE},
+            </if>
+            <if test="baojiaAppYesteryearOwt != null">
+                #{baojiaAppYesteryearOwt,jdbcType=DOUBLE},
+            </if>
+            <if test="baojiaApp != null">
+                #{baojiaApp,jdbcType=DOUBLE},
+            </if>
+            <if test="baojiaAppCluesCompare != null">
+                #{baojiaAppCluesCompare,jdbcType=DOUBLE},
+            </if>
+            <if test="yicheAppYesteryearOwt != null">
+                #{yicheAppYesteryearOwt,jdbcType=DOUBLE},
+            </if>
+            <if test="yicheApp != null">
+                #{yicheApp,jdbcType=DOUBLE},
+            </if>
+            <if test="yicheAppCluesCompare != null">
+                #{yicheAppCluesCompare,jdbcType=DOUBLE},
+            </if>
+            <if test="yichePcYesteryearOwt != null">
+                #{yichePcYesteryearOwt,jdbcType=DOUBLE},
+            </if>
+            <if test="yichePc != null">
+                #{yichePc,jdbcType=DOUBLE},
+            </if>
+            <if test="yichePcCluesCompare != null">
+                #{yichePcCluesCompare,jdbcType=DOUBLE},
+            </if>
+            <if test="yicheWapYesteryearOwt != null">
+                #{yicheWapYesteryearOwt,jdbcType=DOUBLE},
+            </if>
+            <if test="yicheWap != null">
+                #{yicheWap,jdbcType=DOUBLE},
+            </if>
+            <if test="yicheWapCluesCompare != null">
+                #{yicheWapCluesCompare,jdbcType=DOUBLE},
+            </if>
+            <if test="otherYesteryearOwt != null">
+                #{otherYesteryearOwt,jdbcType=DOUBLE},
+            </if>
+            <if test="other != null">
+                #{other,jdbcType=DOUBLE},
+            </if>
+            <if test="otherCluesCompare != null">
+                #{otherCluesCompare,jdbcType=DOUBLE},
+            </if>
+            <if test="cluesDate != null">
+                #{cluesDate,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.yiche.smp.domain.ShopAvgCluesExample" resultType="java.lang.Integer">
+        select count(*) from shop_avg_clues
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update shop_avg_clues
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.isTop != null">
+                is_top = #{record.isTop,jdbcType=VARCHAR},
+            </if>
+            <if test="record.brandName != null">
+                brand_name = #{record.brandName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.trendDecide != null">
+                trend_decide = #{record.trendDecide,jdbcType=VARCHAR},
+            </if>
+            <if test="record.shopSellDifference != null">
+                shop_sell_difference = #{record.shopSellDifference,jdbcType=DOUBLE},
+            </if>
+            <if test="record.totalSellDifference != null">
+                total_sell_difference = #{record.totalSellDifference,jdbcType=DOUBLE},
+            </if>
+            <if test="record.sellYesteryearOwt != null">
+                sell_yesteryear_owt = #{record.sellYesteryearOwt,jdbcType=DOUBLE},
+            </if>
+            <if test="record.sell != null">
+                sell = #{record.sell,jdbcType=DOUBLE},
+            </if>
+            <if test="record.sellCompare != null">
+                sell_compare = #{record.sellCompare,jdbcType=DOUBLE},
+            </if>
+            <if test="record.storeCluesYesteryearOwt != null">
+                store_clues_yesteryear_owt = #{record.storeCluesYesteryearOwt,jdbcType=DOUBLE},
+            </if>
+            <if test="record.storeClues != null">
+                store_clues = #{record.storeClues,jdbcType=DOUBLE},
+            </if>
+            <if test="record.storeCluesCompare != null">
+                store_clues_compare = #{record.storeCluesCompare,jdbcType=DOUBLE},
+            </if>
+            <if test="record.allCluesYesteryearOwt != null">
+                all_clues_yesteryear_owt = #{record.allCluesYesteryearOwt,jdbcType=DOUBLE},
+            </if>
+            <if test="record.allClues != null">
+                all_clues = #{record.allClues,jdbcType=DOUBLE},
+            </if>
+            <if test="record.yicheCluesCompare != null">
+                yiche_clues_compare = #{record.yicheCluesCompare,jdbcType=DOUBLE},
+            </if>
+            <if test="record.dealerDataYesteryearOwt != null">
+                dealer_data_yesteryear_owt = #{record.dealerDataYesteryearOwt,jdbcType=DOUBLE},
+            </if>
+            <if test="record.dealerData != null">
+                dealer_data = #{record.dealerData,jdbcType=DOUBLE},
+            </if>
+            <if test="record.shopCompare != null">
+                shop_compare = #{record.shopCompare,jdbcType=DOUBLE},
+            </if>
+            <if test="record.baojiaAppYesteryearOwt != null">
+                baojia_app_yesteryear_owt = #{record.baojiaAppYesteryearOwt,jdbcType=DOUBLE},
+            </if>
+            <if test="record.baojiaApp != null">
+                baojia_app = #{record.baojiaApp,jdbcType=DOUBLE},
+            </if>
+            <if test="record.baojiaAppCluesCompare != null">
+                baojia_app_clues_compare = #{record.baojiaAppCluesCompare,jdbcType=DOUBLE},
+            </if>
+            <if test="record.yicheAppYesteryearOwt != null">
+                yiche_app_yesteryear_owt = #{record.yicheAppYesteryearOwt,jdbcType=DOUBLE},
+            </if>
+            <if test="record.yicheApp != null">
+                yiche_app = #{record.yicheApp,jdbcType=DOUBLE},
+            </if>
+            <if test="record.yicheAppCluesCompare != null">
+                yiche_app_clues_compare = #{record.yicheAppCluesCompare,jdbcType=DOUBLE},
+            </if>
+            <if test="record.yichePcYesteryearOwt != null">
+                yiche_pc_yesteryear_owt = #{record.yichePcYesteryearOwt,jdbcType=DOUBLE},
+            </if>
+            <if test="record.yichePc != null">
+                yiche_pc = #{record.yichePc,jdbcType=DOUBLE},
+            </if>
+            <if test="record.yichePcCluesCompare != null">
+                yiche_pc_clues_compare = #{record.yichePcCluesCompare,jdbcType=DOUBLE},
+            </if>
+            <if test="record.yicheWapYesteryearOwt != null">
+                yiche_wap_yesteryear_owt = #{record.yicheWapYesteryearOwt,jdbcType=DOUBLE},
+            </if>
+            <if test="record.yicheWap != null">
+                yiche_wap = #{record.yicheWap,jdbcType=DOUBLE},
+            </if>
+            <if test="record.yicheWapCluesCompare != null">
+                yiche_wap_clues_compare = #{record.yicheWapCluesCompare,jdbcType=DOUBLE},
+            </if>
+            <if test="record.otherYesteryearOwt != null">
+                other_yesteryear_owt = #{record.otherYesteryearOwt,jdbcType=DOUBLE},
+            </if>
+            <if test="record.other != null">
+                other = #{record.other,jdbcType=DOUBLE},
+            </if>
+            <if test="record.otherCluesCompare != null">
+                other_clues_compare = #{record.otherCluesCompare,jdbcType=DOUBLE},
+            </if>
+            <if test="record.cluesDate != null">
+                clues_date = #{record.cluesDate,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update shop_avg_clues
+        set id = #{record.id,jdbcType=INTEGER},
+        is_top = #{record.isTop,jdbcType=VARCHAR},
+        brand_name = #{record.brandName,jdbcType=VARCHAR},
+        trend_decide = #{record.trendDecide,jdbcType=VARCHAR},
+        shop_sell_difference = #{record.shopSellDifference,jdbcType=DOUBLE},
+        total_sell_difference = #{record.totalSellDifference,jdbcType=DOUBLE},
+        sell_yesteryear_owt = #{record.sellYesteryearOwt,jdbcType=DOUBLE},
+        sell = #{record.sell,jdbcType=DOUBLE},
+        sell_compare = #{record.sellCompare,jdbcType=DOUBLE},
+        store_clues_yesteryear_owt = #{record.storeCluesYesteryearOwt,jdbcType=DOUBLE},
+        store_clues = #{record.storeClues,jdbcType=DOUBLE},
+        store_clues_compare = #{record.storeCluesCompare,jdbcType=DOUBLE},
+        all_clues_yesteryear_owt = #{record.allCluesYesteryearOwt,jdbcType=DOUBLE},
+        all_clues = #{record.allClues,jdbcType=DOUBLE},
+        yiche_clues_compare = #{record.yicheCluesCompare,jdbcType=DOUBLE},
+        dealer_data_yesteryear_owt = #{record.dealerDataYesteryearOwt,jdbcType=DOUBLE},
+        dealer_data = #{record.dealerData,jdbcType=DOUBLE},
+        shop_compare = #{record.shopCompare,jdbcType=DOUBLE},
+        baojia_app_yesteryear_owt = #{record.baojiaAppYesteryearOwt,jdbcType=DOUBLE},
+        baojia_app = #{record.baojiaApp,jdbcType=DOUBLE},
+        baojia_app_clues_compare = #{record.baojiaAppCluesCompare,jdbcType=DOUBLE},
+        yiche_app_yesteryear_owt = #{record.yicheAppYesteryearOwt,jdbcType=DOUBLE},
+        yiche_app = #{record.yicheApp,jdbcType=DOUBLE},
+        yiche_app_clues_compare = #{record.yicheAppCluesCompare,jdbcType=DOUBLE},
+        yiche_pc_yesteryear_owt = #{record.yichePcYesteryearOwt,jdbcType=DOUBLE},
+        yiche_pc = #{record.yichePc,jdbcType=DOUBLE},
+        yiche_pc_clues_compare = #{record.yichePcCluesCompare,jdbcType=DOUBLE},
+        yiche_wap_yesteryear_owt = #{record.yicheWapYesteryearOwt,jdbcType=DOUBLE},
+        yiche_wap = #{record.yicheWap,jdbcType=DOUBLE},
+        yiche_wap_clues_compare = #{record.yicheWapCluesCompare,jdbcType=DOUBLE},
+        other_yesteryear_owt = #{record.otherYesteryearOwt,jdbcType=DOUBLE},
+        other = #{record.other,jdbcType=DOUBLE},
+        other_clues_compare = #{record.otherCluesCompare,jdbcType=DOUBLE},
+        clues_date = #{record.cluesDate,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yiche.smp.domain.ShopAvgClues">
+        update shop_avg_clues
+        <set>
+            <if test="isTop != null">
+                is_top = #{isTop,jdbcType=VARCHAR},
+            </if>
+            <if test="brandName != null">
+                brand_name = #{brandName,jdbcType=VARCHAR},
+            </if>
+            <if test="trendDecide != null">
+                trend_decide = #{trendDecide,jdbcType=VARCHAR},
+            </if>
+            <if test="shopSellDifference != null">
+                shop_sell_difference = #{shopSellDifference,jdbcType=DOUBLE},
+            </if>
+            <if test="totalSellDifference != null">
+                total_sell_difference = #{totalSellDifference,jdbcType=DOUBLE},
+            </if>
+            <if test="sellYesteryearOwt != null">
+                sell_yesteryear_owt = #{sellYesteryearOwt,jdbcType=DOUBLE},
+            </if>
+            <if test="sell != null">
+                sell = #{sell,jdbcType=DOUBLE},
+            </if>
+            <if test="sellCompare != null">
+                sell_compare = #{sellCompare,jdbcType=DOUBLE},
+            </if>
+            <if test="storeCluesYesteryearOwt != null">
+                store_clues_yesteryear_owt = #{storeCluesYesteryearOwt,jdbcType=DOUBLE},
+            </if>
+            <if test="storeClues != null">
+                store_clues = #{storeClues,jdbcType=DOUBLE},
+            </if>
+            <if test="storeCluesCompare != null">
+                store_clues_compare = #{storeCluesCompare,jdbcType=DOUBLE},
+            </if>
+            <if test="allCluesYesteryearOwt != null">
+                all_clues_yesteryear_owt = #{allCluesYesteryearOwt,jdbcType=DOUBLE},
+            </if>
+            <if test="allClues != null">
+                all_clues = #{allClues,jdbcType=DOUBLE},
+            </if>
+            <if test="yicheCluesCompare != null">
+                yiche_clues_compare = #{yicheCluesCompare,jdbcType=DOUBLE},
+            </if>
+            <if test="dealerDataYesteryearOwt != null">
+                dealer_data_yesteryear_owt = #{dealerDataYesteryearOwt,jdbcType=DOUBLE},
+            </if>
+            <if test="dealerData != null">
+                dealer_data = #{dealerData,jdbcType=DOUBLE},
+            </if>
+            <if test="shopCompare != null">
+                shop_compare = #{shopCompare,jdbcType=DOUBLE},
+            </if>
+            <if test="baojiaAppYesteryearOwt != null">
+                baojia_app_yesteryear_owt = #{baojiaAppYesteryearOwt,jdbcType=DOUBLE},
+            </if>
+            <if test="baojiaApp != null">
+                baojia_app = #{baojiaApp,jdbcType=DOUBLE},
+            </if>
+            <if test="baojiaAppCluesCompare != null">
+                baojia_app_clues_compare = #{baojiaAppCluesCompare,jdbcType=DOUBLE},
+            </if>
+            <if test="yicheAppYesteryearOwt != null">
+                yiche_app_yesteryear_owt = #{yicheAppYesteryearOwt,jdbcType=DOUBLE},
+            </if>
+            <if test="yicheApp != null">
+                yiche_app = #{yicheApp,jdbcType=DOUBLE},
+            </if>
+            <if test="yicheAppCluesCompare != null">
+                yiche_app_clues_compare = #{yicheAppCluesCompare,jdbcType=DOUBLE},
+            </if>
+            <if test="yichePcYesteryearOwt != null">
+                yiche_pc_yesteryear_owt = #{yichePcYesteryearOwt,jdbcType=DOUBLE},
+            </if>
+            <if test="yichePc != null">
+                yiche_pc = #{yichePc,jdbcType=DOUBLE},
+            </if>
+            <if test="yichePcCluesCompare != null">
+                yiche_pc_clues_compare = #{yichePcCluesCompare,jdbcType=DOUBLE},
+            </if>
+            <if test="yicheWapYesteryearOwt != null">
+                yiche_wap_yesteryear_owt = #{yicheWapYesteryearOwt,jdbcType=DOUBLE},
+            </if>
+            <if test="yicheWap != null">
+                yiche_wap = #{yicheWap,jdbcType=DOUBLE},
+            </if>
+            <if test="yicheWapCluesCompare != null">
+                yiche_wap_clues_compare = #{yicheWapCluesCompare,jdbcType=DOUBLE},
+            </if>
+            <if test="otherYesteryearOwt != null">
+                other_yesteryear_owt = #{otherYesteryearOwt,jdbcType=DOUBLE},
+            </if>
+            <if test="other != null">
+                other = #{other,jdbcType=DOUBLE},
+            </if>
+            <if test="otherCluesCompare != null">
+                other_clues_compare = #{otherCluesCompare,jdbcType=DOUBLE},
+            </if>
+            <if test="cluesDate != null">
+                clues_date = #{cluesDate,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.yiche.smp.domain.ShopAvgClues">
+    update shop_avg_clues
+    set is_top = #{isTop,jdbcType=VARCHAR},
+      brand_name = #{brandName,jdbcType=VARCHAR},
+      trend_decide = #{trendDecide,jdbcType=VARCHAR},
+      shop_sell_difference = #{shopSellDifference,jdbcType=DOUBLE},
+      total_sell_difference = #{totalSellDifference,jdbcType=DOUBLE},
+      sell_yesteryear_owt = #{sellYesteryearOwt,jdbcType=DOUBLE},
+      sell = #{sell,jdbcType=DOUBLE},
+      sell_compare = #{sellCompare,jdbcType=DOUBLE},
+      store_clues_yesteryear_owt = #{storeCluesYesteryearOwt,jdbcType=DOUBLE},
+      store_clues = #{storeClues,jdbcType=DOUBLE},
+      store_clues_compare = #{storeCluesCompare,jdbcType=DOUBLE},
+      all_clues_yesteryear_owt = #{allCluesYesteryearOwt,jdbcType=DOUBLE},
+      all_clues = #{allClues,jdbcType=DOUBLE},
+      yiche_clues_compare = #{yicheCluesCompare,jdbcType=DOUBLE},
+      dealer_data_yesteryear_owt = #{dealerDataYesteryearOwt,jdbcType=DOUBLE},
+      dealer_data = #{dealerData,jdbcType=DOUBLE},
+      shop_compare = #{shopCompare,jdbcType=DOUBLE},
+      baojia_app_yesteryear_owt = #{baojiaAppYesteryearOwt,jdbcType=DOUBLE},
+      baojia_app = #{baojiaApp,jdbcType=DOUBLE},
+      baojia_app_clues_compare = #{baojiaAppCluesCompare,jdbcType=DOUBLE},
+      yiche_app_yesteryear_owt = #{yicheAppYesteryearOwt,jdbcType=DOUBLE},
+      yiche_app = #{yicheApp,jdbcType=DOUBLE},
+      yiche_app_clues_compare = #{yicheAppCluesCompare,jdbcType=DOUBLE},
+      yiche_pc_yesteryear_owt = #{yichePcYesteryearOwt,jdbcType=DOUBLE},
+      yiche_pc = #{yichePc,jdbcType=DOUBLE},
+      yiche_pc_clues_compare = #{yichePcCluesCompare,jdbcType=DOUBLE},
+      yiche_wap_yesteryear_owt = #{yicheWapYesteryearOwt,jdbcType=DOUBLE},
+      yiche_wap = #{yicheWap,jdbcType=DOUBLE},
+      yiche_wap_clues_compare = #{yicheWapCluesCompare,jdbcType=DOUBLE},
+      other_yesteryear_owt = #{otherYesteryearOwt,jdbcType=DOUBLE},
+      other = #{other,jdbcType=DOUBLE},
+      other_clues_compare = #{otherCluesCompare,jdbcType=DOUBLE},
+      clues_date = #{cluesDate,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+    <!--查询品牌接口-->
+    <select id="findBrandNameByMonth" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT
+	      sac.id,
+	      sac.brand_name
+        FROM
+	      shop_avg_clues sac
+        WHERE
+	      sac.clues_date = #{monthData,jdbcType=VARCHAR }
+  </select>
+
+    <!--预警列表-->
+    <select id="earlyWarningList" parameterType="map" resultMap="BaseResultMap">
+        SELECT
+	      sac.id,
+	      sac.is_top,
+	      sac.brand_name,
+	      sac.trend_decide,
+	      sac.shop_sell_difference,
+	      sac.total_sell_difference
+        FROM
+	      shop_avg_clues sac
+        WHERE
+	      sac.clues_date = #{monthData,jdbcType=VARCHAR }
+        AND sac.trend_decide = #{condition,jdbcType=VARCHAR}
+    </select>
+</mapper>

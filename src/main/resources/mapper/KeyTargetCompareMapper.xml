@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yiche.smp.mapper.KeyTargetCompareMapper" >
+  <resultMap id="BaseResultMap" type="com.yiche.smp.domain.KeyTargetCompare" >
+    <id column="key_index_id" property="keyIndexId" jdbcType="INTEGER" />
+    <result column="key_type" property="keyType" jdbcType="VARCHAR" />
+    <result column="detail_name" property="detailName" jdbcType="VARCHAR" />
+    <result column="month_compare" property="monthCompare" jdbcType="DOUBLE" />
+    <result column="channel_name" property="channelName" jdbcType="VARCHAR" />
+    <result column="channel_compare" property="channelCompare" jdbcType="DOUBLE" />
+    <result column="platform" property="platform" jdbcType="INTEGER" />
+    <result column="month" property="month" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    key_index_id, key_type, detail_name, month_compare, channel_name, channel_compare, 
+    platform, month
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yiche.smp.domain.KeyTargetCompareExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from key_target_compare
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from key_target_compare
+    where key_index_id = #{keyIndexId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from key_target_compare
+    where key_index_id = #{keyIndexId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yiche.smp.domain.KeyTargetCompareExample" >
+    delete from key_target_compare
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yiche.smp.domain.KeyTargetCompare" >
+    insert into key_target_compare (key_index_id, key_type, detail_name, 
+      month_compare, channel_name, channel_compare, 
+      platform, month)
+    values (#{keyIndexId,jdbcType=INTEGER}, #{keyType,jdbcType=VARCHAR}, #{detailName,jdbcType=VARCHAR}, 
+      #{monthCompare,jdbcType=DOUBLE}, #{channelName,jdbcType=VARCHAR}, #{channelCompare,jdbcType=DOUBLE}, 
+      #{platform,jdbcType=INTEGER}, #{month,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yiche.smp.domain.KeyTargetCompare" >
+    insert into key_target_compare
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="keyIndexId != null" >
+        key_index_id,
+      </if>
+      <if test="keyType != null" >
+        key_type,
+      </if>
+      <if test="detailName != null" >
+        detail_name,
+      </if>
+      <if test="monthCompare != null" >
+        month_compare,
+      </if>
+      <if test="channelName != null" >
+        channel_name,
+      </if>
+      <if test="channelCompare != null" >
+        channel_compare,
+      </if>
+      <if test="platform != null" >
+        platform,
+      </if>
+      <if test="month != null" >
+        month,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="keyIndexId != null" >
+        #{keyIndexId,jdbcType=INTEGER},
+      </if>
+      <if test="keyType != null" >
+        #{keyType,jdbcType=VARCHAR},
+      </if>
+      <if test="detailName != null" >
+        #{detailName,jdbcType=VARCHAR},
+      </if>
+      <if test="monthCompare != null" >
+        #{monthCompare,jdbcType=DOUBLE},
+      </if>
+      <if test="channelName != null" >
+        #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="channelCompare != null" >
+        #{channelCompare,jdbcType=DOUBLE},
+      </if>
+      <if test="platform != null" >
+        #{platform,jdbcType=INTEGER},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yiche.smp.domain.KeyTargetCompareExample" resultType="java.lang.Integer" >
+    select count(*) from key_target_compare
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update key_target_compare
+    <set >
+      <if test="record.keyIndexId != null" >
+        key_index_id = #{record.keyIndexId,jdbcType=INTEGER},
+      </if>
+      <if test="record.keyType != null" >
+        key_type = #{record.keyType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detailName != null" >
+        detail_name = #{record.detailName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.monthCompare != null" >
+        month_compare = #{record.monthCompare,jdbcType=DOUBLE},
+      </if>
+      <if test="record.channelName != null" >
+        channel_name = #{record.channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channelCompare != null" >
+        channel_compare = #{record.channelCompare,jdbcType=DOUBLE},
+      </if>
+      <if test="record.platform != null" >
+        platform = #{record.platform,jdbcType=INTEGER},
+      </if>
+      <if test="record.month != null" >
+        month = #{record.month,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update key_target_compare
+    set key_index_id = #{record.keyIndexId,jdbcType=INTEGER},
+      key_type = #{record.keyType,jdbcType=VARCHAR},
+      detail_name = #{record.detailName,jdbcType=VARCHAR},
+      month_compare = #{record.monthCompare,jdbcType=DOUBLE},
+      channel_name = #{record.channelName,jdbcType=VARCHAR},
+      channel_compare = #{record.channelCompare,jdbcType=DOUBLE},
+      platform = #{record.platform,jdbcType=INTEGER},
+      month = #{record.month,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yiche.smp.domain.KeyTargetCompare" >
+    update key_target_compare
+    <set >
+      <if test="keyType != null" >
+        key_type = #{keyType,jdbcType=VARCHAR},
+      </if>
+      <if test="detailName != null" >
+        detail_name = #{detailName,jdbcType=VARCHAR},
+      </if>
+      <if test="monthCompare != null" >
+        month_compare = #{monthCompare,jdbcType=DOUBLE},
+      </if>
+      <if test="channelName != null" >
+        channel_name = #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="channelCompare != null" >
+        channel_compare = #{channelCompare,jdbcType=DOUBLE},
+      </if>
+      <if test="platform != null" >
+        platform = #{platform,jdbcType=INTEGER},
+      </if>
+      <if test="month != null" >
+        month = #{month,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where key_index_id = #{keyIndexId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yiche.smp.domain.KeyTargetCompare" >
+    update key_target_compare
+    set key_type = #{keyType,jdbcType=VARCHAR},
+      detail_name = #{detailName,jdbcType=VARCHAR},
+      month_compare = #{monthCompare,jdbcType=DOUBLE},
+      channel_name = #{channelName,jdbcType=VARCHAR},
+      channel_compare = #{channelCompare,jdbcType=DOUBLE},
+      platform = #{platform,jdbcType=INTEGER},
+      month = #{month,jdbcType=VARCHAR}
+    where key_index_id = #{keyIndexId,jdbcType=INTEGER}
+  </update>
+
+  <!--批量添加-->
+  <insert id="insertList" parameterType="List">
+
+    insert into key_target_compare(
+    key_index_id, key_type, detail_name,
+    month_compare, channel_name, channel_compare,
+    platform, month
+    )
+    values
+    <foreach collection="KeyTargetCompareList" index="index" item="item"  separator=","  >
+      (
+      #{item.keyIndexId},
+      #{item.keyType},
+      #{item.detailName},
+      #{item.monthCompare,jdbcType=DOUBLE},
+      #{item.channelName},
+      #{item.channelCompare,jdbcType=DOUBLE},
+      #{item.platform},
+      #{item.month}
+      )
+
+    </foreach>
+  </insert>
+</mapper>

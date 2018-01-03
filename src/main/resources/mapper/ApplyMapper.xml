@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yiche.smp.mapper.ApplyMapper" >
+  <resultMap id="BaseResultMap" type="com.yiche.smp.domain.Apply" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="apply_type" property="applyType" jdbcType="VARCHAR" />
+    <result column="channel_info_name" property="channelInfoName" jdbcType="VARCHAR" />
+    <result column="channel_info_value" property="channelInfoValue" jdbcType="VARCHAR" />
+    <result column="sample_demand_name" property="sampleDemandName" jdbcType="VARCHAR" />
+    <result column="sample_demand_value" property="sampleDemandValue" jdbcType="VARCHAR" />
+    <result column="data_refer_name" property="dataReferName" jdbcType="VARCHAR" />
+    <result column="data_refer_value" property="dataReferValue" jdbcType="VARCHAR" />
+    <result column="enclosure" property="enclosure" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="branch" property="branch" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="upload_file_path" property="uploadFilePath" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="DATE" />
+    <result column="filename" property="filename" jdbcType="VARCHAR" />
+    <result column="enclosure_name" property="enclosureName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, apply_type, channel_info_name, channel_info_value, sample_demand_name, sample_demand_value, 
+    data_refer_name, data_refer_value, enclosure, user_id, branch, status, number, upload_file_path, 
+    create_time, filename, enclosure_name
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yiche.smp.domain.ApplyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from apply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from apply
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from apply
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yiche.smp.domain.ApplyExample" >
+    delete from apply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yiche.smp.domain.Apply" >
+    insert into apply (id, apply_type, channel_info_name, 
+      channel_info_value, sample_demand_name, sample_demand_value, 
+      data_refer_name, data_refer_value, enclosure, 
+      user_id, branch, status, 
+      number, upload_file_path, create_time, 
+      filename, enclosure_name)
+    values (#{id,jdbcType=INTEGER}, #{applyType,jdbcType=VARCHAR}, #{channelInfoName,jdbcType=VARCHAR}, 
+      #{channelInfoValue,jdbcType=VARCHAR}, #{sampleDemandName,jdbcType=VARCHAR}, #{sampleDemandValue,jdbcType=VARCHAR}, 
+      #{dataReferName,jdbcType=VARCHAR}, #{dataReferValue,jdbcType=VARCHAR}, #{enclosure,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=VARCHAR}, #{branch,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{number,jdbcType=VARCHAR}, #{uploadFilePath,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, 
+      #{filename,jdbcType=VARCHAR}, #{enclosureName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yiche.smp.domain.Apply" >
+    insert into apply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="applyType != null" >
+        apply_type,
+      </if>
+      <if test="channelInfoName != null" >
+        channel_info_name,
+      </if>
+      <if test="channelInfoValue != null" >
+        channel_info_value,
+      </if>
+      <if test="sampleDemandName != null" >
+        sample_demand_name,
+      </if>
+      <if test="sampleDemandValue != null" >
+        sample_demand_value,
+      </if>
+      <if test="dataReferName != null" >
+        data_refer_name,
+      </if>
+      <if test="dataReferValue != null" >
+        data_refer_value,
+      </if>
+      <if test="enclosure != null" >
+        enclosure,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="branch != null" >
+        branch,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="uploadFilePath != null" >
+        upload_file_path,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="filename != null" >
+        filename,
+      </if>
+      <if test="enclosureName != null" >
+        enclosure_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="applyType != null" >
+        #{applyType,jdbcType=VARCHAR},
+      </if>
+      <if test="channelInfoName != null" >
+        #{channelInfoName,jdbcType=VARCHAR},
+      </if>
+      <if test="channelInfoValue != null" >
+        #{channelInfoValue,jdbcType=VARCHAR},
+      </if>
+      <if test="sampleDemandName != null" >
+        #{sampleDemandName,jdbcType=VARCHAR},
+      </if>
+      <if test="sampleDemandValue != null" >
+        #{sampleDemandValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dataReferName != null" >
+        #{dataReferName,jdbcType=VARCHAR},
+      </if>
+      <if test="dataReferValue != null" >
+        #{dataReferValue,jdbcType=VARCHAR},
+      </if>
+      <if test="enclosure != null" >
+        #{enclosure,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="branch != null" >
+        #{branch,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadFilePath != null" >
+        #{uploadFilePath,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="filename != null" >
+        #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="enclosureName != null" >
+        #{enclosureName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yiche.smp.domain.ApplyExample" resultType="java.lang.Integer" >
+    select count(*) from apply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update apply
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.applyType != null" >
+        apply_type = #{record.applyType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channelInfoName != null" >
+        channel_info_name = #{record.channelInfoName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channelInfoValue != null" >
+        channel_info_value = #{record.channelInfoValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sampleDemandName != null" >
+        sample_demand_name = #{record.sampleDemandName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sampleDemandValue != null" >
+        sample_demand_value = #{record.sampleDemandValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataReferName != null" >
+        data_refer_name = #{record.dataReferName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataReferValue != null" >
+        data_refer_value = #{record.dataReferValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enclosure != null" >
+        enclosure = #{record.enclosure,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.branch != null" >
+        branch = #{record.branch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uploadFilePath != null" >
+        upload_file_path = #{record.uploadFilePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=DATE},
+      </if>
+      <if test="record.filename != null" >
+        filename = #{record.filename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enclosureName != null" >
+        enclosure_name = #{record.enclosureName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update apply
+    set id = #{record.id,jdbcType=INTEGER},
+      apply_type = #{record.applyType,jdbcType=VARCHAR},
+      channel_info_name = #{record.channelInfoName,jdbcType=VARCHAR},
+      channel_info_value = #{record.channelInfoValue,jdbcType=VARCHAR},
+      sample_demand_name = #{record.sampleDemandName,jdbcType=VARCHAR},
+      sample_demand_value = #{record.sampleDemandValue,jdbcType=VARCHAR},
+      data_refer_name = #{record.dataReferName,jdbcType=VARCHAR},
+      data_refer_value = #{record.dataReferValue,jdbcType=VARCHAR},
+      enclosure = #{record.enclosure,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      branch = #{record.branch,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      number = #{record.number,jdbcType=VARCHAR},
+      upload_file_path = #{record.uploadFilePath,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=DATE},
+      filename = #{record.filename,jdbcType=VARCHAR},
+      enclosure_name = #{record.enclosureName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yiche.smp.domain.Apply" >
+    update apply
+    <set >
+      <if test="applyType != null" >
+        apply_type = #{applyType,jdbcType=VARCHAR},
+      </if>
+      <if test="channelInfoName != null" >
+        channel_info_name = #{channelInfoName,jdbcType=VARCHAR},
+      </if>
+      <if test="channelInfoValue != null" >
+        channel_info_value = #{channelInfoValue,jdbcType=VARCHAR},
+      </if>
+      <if test="sampleDemandName != null" >
+        sample_demand_name = #{sampleDemandName,jdbcType=VARCHAR},
+      </if>
+      <if test="sampleDemandValue != null" >
+        sample_demand_value = #{sampleDemandValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dataReferName != null" >
+        data_refer_name = #{dataReferName,jdbcType=VARCHAR},
+      </if>
+      <if test="dataReferValue != null" >
+        data_refer_value = #{dataReferValue,jdbcType=VARCHAR},
+      </if>
+      <if test="enclosure != null" >
+        enclosure = #{enclosure,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="branch != null" >
+        branch = #{branch,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadFilePath != null" >
+        upload_file_path = #{uploadFilePath,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="filename != null" >
+        filename = #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="enclosureName != null" >
+        enclosure_name = #{enclosureName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yiche.smp.domain.Apply" >
+    update apply
+    set apply_type = #{applyType,jdbcType=VARCHAR},
+      channel_info_name = #{channelInfoName,jdbcType=VARCHAR},
+      channel_info_value = #{channelInfoValue,jdbcType=VARCHAR},
+      sample_demand_name = #{sampleDemandName,jdbcType=VARCHAR},
+      sample_demand_value = #{sampleDemandValue,jdbcType=VARCHAR},
+      data_refer_name = #{dataReferName,jdbcType=VARCHAR},
+      data_refer_value = #{dataReferValue,jdbcType=VARCHAR},
+      enclosure = #{enclosure,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      branch = #{branch,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      number = #{number,jdbcType=VARCHAR},
+      upload_file_path = #{uploadFilePath,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=DATE},
+      filename = #{filename,jdbcType=VARCHAR},
+      enclosure_name = #{enclosureName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    SELECT * from apply ORDER BY id ASC
+  </select>
+  <select id="selectAllByUserId" parameterType="string" resultMap="BaseResultMap">
+    SELECT * from apply WHERE user_id=#{userId} ORDER BY id ASC
+  </select>
+</mapper>

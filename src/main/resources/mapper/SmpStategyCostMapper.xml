@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yiche.smp.mapper.SmpStategyCostMapper" >
+  <resultMap id="BaseResultMap" type="com.yiche.smp.domain.SmpStategyCost" >
+    <id column="stategy_cost_id" property="stategyCostId" jdbcType="INTEGER" />
+    <result column="cost_channel_name" property="costChannelName" jdbcType="VARCHAR" />
+    <result column="cost_month" property="costMonth" jdbcType="VARCHAR" />
+    <result column="cost" property="cost" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    stategy_cost_id, cost_channel_name, cost_month, cost
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yiche.smp.domain.SmpStategyCostExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from smp_stategy_cost
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from smp_stategy_cost
+    where stategy_cost_id = #{stategyCostId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from smp_stategy_cost
+    where stategy_cost_id = #{stategyCostId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yiche.smp.domain.SmpStategyCostExample" >
+    delete from smp_stategy_cost
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yiche.smp.domain.SmpStategyCost" >
+    insert into smp_stategy_cost (stategy_cost_id, cost_channel_name, cost_month, 
+      cost)
+    values (#{stategyCostId,jdbcType=INTEGER}, #{costChannelName,jdbcType=VARCHAR}, #{costMonth,jdbcType=VARCHAR}, 
+      #{cost,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yiche.smp.domain.SmpStategyCost" >
+    insert into smp_stategy_cost
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stategyCostId != null" >
+        stategy_cost_id,
+      </if>
+      <if test="costChannelName != null" >
+        cost_channel_name,
+      </if>
+      <if test="costMonth != null" >
+        cost_month,
+      </if>
+      <if test="cost != null" >
+        cost,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stategyCostId != null" >
+        #{stategyCostId,jdbcType=INTEGER},
+      </if>
+      <if test="costChannelName != null" >
+        #{costChannelName,jdbcType=VARCHAR},
+      </if>
+      <if test="costMonth != null" >
+        #{costMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null" >
+        #{cost,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yiche.smp.domain.SmpStategyCostExample" resultType="java.lang.Integer" >
+    select count(*) from smp_stategy_cost
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update smp_stategy_cost
+    <set >
+      <if test="record.stategyCostId != null" >
+        stategy_cost_id = #{record.stategyCostId,jdbcType=INTEGER},
+      </if>
+      <if test="record.costChannelName != null" >
+        cost_channel_name = #{record.costChannelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.costMonth != null" >
+        cost_month = #{record.costMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cost != null" >
+        cost = #{record.cost,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update smp_stategy_cost
+    set stategy_cost_id = #{record.stategyCostId,jdbcType=INTEGER},
+      cost_channel_name = #{record.costChannelName,jdbcType=VARCHAR},
+      cost_month = #{record.costMonth,jdbcType=VARCHAR},
+      cost = #{record.cost,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yiche.smp.domain.SmpStategyCost" >
+    update smp_stategy_cost
+    <set >
+      <if test="costChannelName != null" >
+        cost_channel_name = #{costChannelName,jdbcType=VARCHAR},
+      </if>
+      <if test="costMonth != null" >
+        cost_month = #{costMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null" >
+        cost = #{cost,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where stategy_cost_id = #{stategyCostId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yiche.smp.domain.SmpStategyCost" >
+    update smp_stategy_cost
+    set cost_channel_name = #{costChannelName,jdbcType=VARCHAR},
+      cost_month = #{costMonth,jdbcType=VARCHAR},
+      cost = #{cost,jdbcType=DOUBLE}
+    where stategy_cost_id = #{stategyCostId,jdbcType=INTEGER}
+  </update>
+</mapper>

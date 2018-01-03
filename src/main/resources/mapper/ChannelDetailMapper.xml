@@ -1,0 +1,703 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yiche.smp.mapper.ChannelDetailMapper">
+    <resultMap id="BaseResultMap" type="com.yiche.smp.domain.ChannelDetail">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="channel_id" property="channelId" jdbcType="VARCHAR"/>
+        <result column="channel_name" property="channelName" jdbcType="VARCHAR"/>
+        <result column="new_ac_ratio" property="newAcRatio" jdbcType="REAL"/>
+        <result column="new_ac_score" property="newAcScore" jdbcType="REAL"/>
+        <result column="day_sevenoc_ratio" property="daySevenocRatio" jdbcType="REAL"/>
+        <result column="day_sevenoc_score" property="daySevenocScore" jdbcType="REAL"/>
+        <result column="day_sevenuc_ratio" property="daySevenucRatio" jdbcType="REAL"/>
+        <result column="day_sevenuc_score" property="daySevenucScore" jdbcType="REAL"/>
+        <result column="dau_ratio" property="dauRatio" jdbcType="REAL"/>
+        <result column="dau_score" property="dauScore" jdbcType="REAL"/>
+        <result column="new_au_ratio" property="newAuRatio" jdbcType="REAL"/>
+        <result column="new_au_num" property="newAuNum" jdbcType="INTEGER"/>
+        <result column="new_au_score" property="newAuScore" jdbcType="REAL"/>
+        <result column="day_sevencn_ratio" property="daySevencnRatio" jdbcType="REAL"/>
+        <result column="day_sevencn_score" property="daySevencnScore" jdbcType="REAL"/>
+        <result column="day_sevenun_ratio" property="daySevenunRatio" jdbcType="REAL"/>
+        <result column="day_sevenun_score" property="daySevenunScore" jdbcType="REAL"/>
+        <result column="morrow_keep_ratio" property="morrowKeepRatio" jdbcType="REAL"/>
+        <result column="morrow_keep_score" property="morrowKeepScore" jdbcType="REAL"/>
+        <result column="seven_keep_ratio" property="sevenKeepRatio" jdbcType="REAL"/>
+        <result column="seven_keep_score" property="sevenKeepScore" jdbcType="REAL"/>
+        <result column="month_keep_ratio" property="monthKeepRatio" jdbcType="REAL"/>
+        <result column="month_keep_score" property="monthKeepScore" jdbcType="REAL"/>
+        <result column="avg_ua_time_ratio" property="avgUaTimeRatio" jdbcType="REAL"/>
+        <result column="avg_ua_time_score" property="avgUaTimeScore" jdbcType="REAL"/>
+        <result column="avg_ua_pn_ratio" property="avgUaPnRatio" jdbcType="REAL"/>
+        <result column="avg_ua_pn_score" property="avgUaPnScore" jdbcType="REAL"/>
+        <result column="day_sevenbcc_ratio" property="daySevenbccRatio" jdbcType="REAL"/>
+        <result column="day_sevenbcc_score" property="daySevenbccScore" jdbcType="REAL"/>
+        <result column="day_sevenouc_ratio" property="daySevenoucRatio" jdbcType="REAL"/>
+        <result column="day_sevenouc_score" property="daySevenoucScore" jdbcType="REAL"/>
+        <result column="platform" property="platform" jdbcType="INTEGER"/>
+        <result column="channel_date" property="channelDate" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, channel_id, channel_name, new_ac_ratio, new_ac_score, day_sevenoc_ratio, day_sevenoc_score, 
+    day_sevenuc_ratio, day_sevenuc_score, dau_ratio, dau_score, new_au_ratio, new_au_num, 
+    new_au_score, day_sevencn_ratio, day_sevencn_score, day_sevenun_ratio, day_sevenun_score, 
+    morrow_keep_ratio, morrow_keep_score, seven_keep_ratio, seven_keep_score, month_keep_ratio, 
+    month_keep_score, avg_ua_time_ratio, avg_ua_time_score, avg_ua_pn_ratio, avg_ua_pn_score, 
+    day_sevenbcc_ratio, day_sevenbcc_score, day_sevenouc_ratio, day_sevenouc_score, platform, 
+    channel_date
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yiche.smp.domain.ChannelDetailExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from channel_detail
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from channel_detail
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from channel_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.yiche.smp.domain.ChannelDetailExample">
+        delete from channel_detail
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.yiche.smp.domain.ChannelDetail">
+    insert into channel_detail (id, channel_id, channel_name, 
+      new_ac_ratio, new_ac_score, day_sevenoc_ratio, 
+      day_sevenoc_score, day_sevenuc_ratio, day_sevenuc_score, 
+      dau_ratio, dau_score, new_au_ratio, 
+      new_au_num, new_au_score, day_sevencn_ratio, 
+      day_sevencn_score, day_sevenun_ratio, day_sevenun_score, 
+      morrow_keep_ratio, morrow_keep_score, seven_keep_ratio, 
+      seven_keep_score, month_keep_ratio, month_keep_score, 
+      avg_ua_time_ratio, avg_ua_time_score, avg_ua_pn_ratio, 
+      avg_ua_pn_score, day_sevenbcc_ratio, day_sevenbcc_score, 
+      day_sevenouc_ratio, day_sevenouc_score, platform, 
+      channel_date)
+    values (#{id,jdbcType=INTEGER}, #{channelId,jdbcType=VARCHAR}, #{channelName,jdbcType=VARCHAR}, 
+      #{newAcRatio,jdbcType=REAL}, #{newAcScore,jdbcType=REAL}, #{daySevenocRatio,jdbcType=REAL}, 
+      #{daySevenocScore,jdbcType=REAL}, #{daySevenucRatio,jdbcType=REAL}, #{daySevenucScore,jdbcType=REAL}, 
+      #{dauRatio,jdbcType=REAL}, #{dauScore,jdbcType=REAL}, #{newAuRatio,jdbcType=REAL}, 
+      #{newAuNum,jdbcType=INTEGER}, #{newAuScore,jdbcType=REAL}, #{daySevencnRatio,jdbcType=REAL}, 
+      #{daySevencnScore,jdbcType=REAL}, #{daySevenunRatio,jdbcType=REAL}, #{daySevenunScore,jdbcType=REAL}, 
+      #{morrowKeepRatio,jdbcType=REAL}, #{morrowKeepScore,jdbcType=REAL}, #{sevenKeepRatio,jdbcType=REAL}, 
+      #{sevenKeepScore,jdbcType=REAL}, #{monthKeepRatio,jdbcType=REAL}, #{monthKeepScore,jdbcType=REAL}, 
+      #{avgUaTimeRatio,jdbcType=REAL}, #{avgUaTimeScore,jdbcType=REAL}, #{avgUaPnRatio,jdbcType=REAL}, 
+      #{avgUaPnScore,jdbcType=REAL}, #{daySevenbccRatio,jdbcType=REAL}, #{daySevenbccScore,jdbcType=REAL}, 
+      #{daySevenoucRatio,jdbcType=REAL}, #{daySevenoucScore,jdbcType=REAL}, #{platform,jdbcType=INTEGER}, 
+      #{channelDate,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.yiche.smp.domain.ChannelDetail">
+        insert into channel_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="channelId != null">
+                channel_id,
+            </if>
+            <if test="channelName != null">
+                channel_name,
+            </if>
+            <if test="newAcRatio != null">
+                new_ac_ratio,
+            </if>
+            <if test="newAcScore != null">
+                new_ac_score,
+            </if>
+            <if test="daySevenocRatio != null">
+                day_sevenoc_ratio,
+            </if>
+            <if test="daySevenocScore != null">
+                day_sevenoc_score,
+            </if>
+            <if test="daySevenucRatio != null">
+                day_sevenuc_ratio,
+            </if>
+            <if test="daySevenucScore != null">
+                day_sevenuc_score,
+            </if>
+            <if test="dauRatio != null">
+                dau_ratio,
+            </if>
+            <if test="dauScore != null">
+                dau_score,
+            </if>
+            <if test="newAuRatio != null">
+                new_au_ratio,
+            </if>
+            <if test="newAuNum != null">
+                new_au_num,
+            </if>
+            <if test="newAuScore != null">
+                new_au_score,
+            </if>
+            <if test="daySevencnRatio != null">
+                day_sevencn_ratio,
+            </if>
+            <if test="daySevencnScore != null">
+                day_sevencn_score,
+            </if>
+            <if test="daySevenunRatio != null">
+                day_sevenun_ratio,
+            </if>
+            <if test="daySevenunScore != null">
+                day_sevenun_score,
+            </if>
+            <if test="morrowKeepRatio != null">
+                morrow_keep_ratio,
+            </if>
+            <if test="morrowKeepScore != null">
+                morrow_keep_score,
+            </if>
+            <if test="sevenKeepRatio != null">
+                seven_keep_ratio,
+            </if>
+            <if test="sevenKeepScore != null">
+                seven_keep_score,
+            </if>
+            <if test="monthKeepRatio != null">
+                month_keep_ratio,
+            </if>
+            <if test="monthKeepScore != null">
+                month_keep_score,
+            </if>
+            <if test="avgUaTimeRatio != null">
+                avg_ua_time_ratio,
+            </if>
+            <if test="avgUaTimeScore != null">
+                avg_ua_time_score,
+            </if>
+            <if test="avgUaPnRatio != null">
+                avg_ua_pn_ratio,
+            </if>
+            <if test="avgUaPnScore != null">
+                avg_ua_pn_score,
+            </if>
+            <if test="daySevenbccRatio != null">
+                day_sevenbcc_ratio,
+            </if>
+            <if test="daySevenbccScore != null">
+                day_sevenbcc_score,
+            </if>
+            <if test="daySevenoucRatio != null">
+                day_sevenouc_ratio,
+            </if>
+            <if test="daySevenoucScore != null">
+                day_sevenouc_score,
+            </if>
+            <if test="platform != null">
+                platform,
+            </if>
+            <if test="channelDate != null">
+                channel_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="channelId != null">
+                #{channelId,jdbcType=VARCHAR},
+            </if>
+            <if test="channelName != null">
+                #{channelName,jdbcType=VARCHAR},
+            </if>
+            <if test="newAcRatio != null">
+                #{newAcRatio,jdbcType=REAL},
+            </if>
+            <if test="newAcScore != null">
+                #{newAcScore,jdbcType=REAL},
+            </if>
+            <if test="daySevenocRatio != null">
+                #{daySevenocRatio,jdbcType=REAL},
+            </if>
+            <if test="daySevenocScore != null">
+                #{daySevenocScore,jdbcType=REAL},
+            </if>
+            <if test="daySevenucRatio != null">
+                #{daySevenucRatio,jdbcType=REAL},
+            </if>
+            <if test="daySevenucScore != null">
+                #{daySevenucScore,jdbcType=REAL},
+            </if>
+            <if test="dauRatio != null">
+                #{dauRatio,jdbcType=REAL},
+            </if>
+            <if test="dauScore != null">
+                #{dauScore,jdbcType=REAL},
+            </if>
+            <if test="newAuRatio != null">
+                #{newAuRatio,jdbcType=REAL},
+            </if>
+            <if test="newAuNum != null">
+                #{newAuNum,jdbcType=INTEGER},
+            </if>
+            <if test="newAuScore != null">
+                #{newAuScore,jdbcType=REAL},
+            </if>
+            <if test="daySevencnRatio != null">
+                #{daySevencnRatio,jdbcType=REAL},
+            </if>
+            <if test="daySevencnScore != null">
+                #{daySevencnScore,jdbcType=REAL},
+            </if>
+            <if test="daySevenunRatio != null">
+                #{daySevenunRatio,jdbcType=REAL},
+            </if>
+            <if test="daySevenunScore != null">
+                #{daySevenunScore,jdbcType=REAL},
+            </if>
+            <if test="morrowKeepRatio != null">
+                #{morrowKeepRatio,jdbcType=REAL},
+            </if>
+            <if test="morrowKeepScore != null">
+                #{morrowKeepScore,jdbcType=REAL},
+            </if>
+            <if test="sevenKeepRatio != null">
+                #{sevenKeepRatio,jdbcType=REAL},
+            </if>
+            <if test="sevenKeepScore != null">
+                #{sevenKeepScore,jdbcType=REAL},
+            </if>
+            <if test="monthKeepRatio != null">
+                #{monthKeepRatio,jdbcType=REAL},
+            </if>
+            <if test="monthKeepScore != null">
+                #{monthKeepScore,jdbcType=REAL},
+            </if>
+            <if test="avgUaTimeRatio != null">
+                #{avgUaTimeRatio,jdbcType=REAL},
+            </if>
+            <if test="avgUaTimeScore != null">
+                #{avgUaTimeScore,jdbcType=REAL},
+            </if>
+            <if test="avgUaPnRatio != null">
+                #{avgUaPnRatio,jdbcType=REAL},
+            </if>
+            <if test="avgUaPnScore != null">
+                #{avgUaPnScore,jdbcType=REAL},
+            </if>
+            <if test="daySevenbccRatio != null">
+                #{daySevenbccRatio,jdbcType=REAL},
+            </if>
+            <if test="daySevenbccScore != null">
+                #{daySevenbccScore,jdbcType=REAL},
+            </if>
+            <if test="daySevenoucRatio != null">
+                #{daySevenoucRatio,jdbcType=REAL},
+            </if>
+            <if test="daySevenoucScore != null">
+                #{daySevenoucScore,jdbcType=REAL},
+            </if>
+            <if test="platform != null">
+                #{platform,jdbcType=INTEGER},
+            </if>
+            <if test="channelDate != null">
+                #{channelDate,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.yiche.smp.domain.ChannelDetailExample"
+            resultType="java.lang.Integer">
+        select count(*) from channel_detail
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update channel_detail
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.channelId != null">
+                channel_id = #{record.channelId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.channelName != null">
+                channel_name = #{record.channelName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.newAcRatio != null">
+                new_ac_ratio = #{record.newAcRatio,jdbcType=REAL},
+            </if>
+            <if test="record.newAcScore != null">
+                new_ac_score = #{record.newAcScore,jdbcType=REAL},
+            </if>
+            <if test="record.daySevenocRatio != null">
+                day_sevenoc_ratio = #{record.daySevenocRatio,jdbcType=REAL},
+            </if>
+            <if test="record.daySevenocScore != null">
+                day_sevenoc_score = #{record.daySevenocScore,jdbcType=REAL},
+            </if>
+            <if test="record.daySevenucRatio != null">
+                day_sevenuc_ratio = #{record.daySevenucRatio,jdbcType=REAL},
+            </if>
+            <if test="record.daySevenucScore != null">
+                day_sevenuc_score = #{record.daySevenucScore,jdbcType=REAL},
+            </if>
+            <if test="record.dauRatio != null">
+                dau_ratio = #{record.dauRatio,jdbcType=REAL},
+            </if>
+            <if test="record.dauScore != null">
+                dau_score = #{record.dauScore,jdbcType=REAL},
+            </if>
+            <if test="record.newAuRatio != null">
+                new_au_ratio = #{record.newAuRatio,jdbcType=REAL},
+            </if>
+            <if test="record.newAuNum != null">
+                new_au_num = #{record.newAuNum,jdbcType=INTEGER},
+            </if>
+            <if test="record.newAuScore != null">
+                new_au_score = #{record.newAuScore,jdbcType=REAL},
+            </if>
+            <if test="record.daySevencnRatio != null">
+                day_sevencn_ratio = #{record.daySevencnRatio,jdbcType=REAL},
+            </if>
+            <if test="record.daySevencnScore != null">
+                day_sevencn_score = #{record.daySevencnScore,jdbcType=REAL},
+            </if>
+            <if test="record.daySevenunRatio != null">
+                day_sevenun_ratio = #{record.daySevenunRatio,jdbcType=REAL},
+            </if>
+            <if test="record.daySevenunScore != null">
+                day_sevenun_score = #{record.daySevenunScore,jdbcType=REAL},
+            </if>
+            <if test="record.morrowKeepRatio != null">
+                morrow_keep_ratio = #{record.morrowKeepRatio,jdbcType=REAL},
+            </if>
+            <if test="record.morrowKeepScore != null">
+                morrow_keep_score = #{record.morrowKeepScore,jdbcType=REAL},
+            </if>
+            <if test="record.sevenKeepRatio != null">
+                seven_keep_ratio = #{record.sevenKeepRatio,jdbcType=REAL},
+            </if>
+            <if test="record.sevenKeepScore != null">
+                seven_keep_score = #{record.sevenKeepScore,jdbcType=REAL},
+            </if>
+            <if test="record.monthKeepRatio != null">
+                month_keep_ratio = #{record.monthKeepRatio,jdbcType=REAL},
+            </if>
+            <if test="record.monthKeepScore != null">
+                month_keep_score = #{record.monthKeepScore,jdbcType=REAL},
+            </if>
+            <if test="record.avgUaTimeRatio != null">
+                avg_ua_time_ratio = #{record.avgUaTimeRatio,jdbcType=REAL},
+            </if>
+            <if test="record.avgUaTimeScore != null">
+                avg_ua_time_score = #{record.avgUaTimeScore,jdbcType=REAL},
+            </if>
+            <if test="record.avgUaPnRatio != null">
+                avg_ua_pn_ratio = #{record.avgUaPnRatio,jdbcType=REAL},
+            </if>
+            <if test="record.avgUaPnScore != null">
+                avg_ua_pn_score = #{record.avgUaPnScore,jdbcType=REAL},
+            </if>
+            <if test="record.daySevenbccRatio != null">
+                day_sevenbcc_ratio = #{record.daySevenbccRatio,jdbcType=REAL},
+            </if>
+            <if test="record.daySevenbccScore != null">
+                day_sevenbcc_score = #{record.daySevenbccScore,jdbcType=REAL},
+            </if>
+            <if test="record.daySevenoucRatio != null">
+                day_sevenouc_ratio = #{record.daySevenoucRatio,jdbcType=REAL},
+            </if>
+            <if test="record.daySevenoucScore != null">
+                day_sevenouc_score = #{record.daySevenoucScore,jdbcType=REAL},
+            </if>
+            <if test="record.platform != null">
+                platform = #{record.platform,jdbcType=INTEGER},
+            </if>
+            <if test="record.channelDate != null">
+                channel_date = #{record.channelDate,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update channel_detail
+        set id = #{record.id,jdbcType=INTEGER},
+        channel_id = #{record.channelId,jdbcType=VARCHAR},
+        channel_name = #{record.channelName,jdbcType=VARCHAR},
+        new_ac_ratio = #{record.newAcRatio,jdbcType=REAL},
+        new_ac_score = #{record.newAcScore,jdbcType=REAL},
+        day_sevenoc_ratio = #{record.daySevenocRatio,jdbcType=REAL},
+        day_sevenoc_score = #{record.daySevenocScore,jdbcType=REAL},
+        day_sevenuc_ratio = #{record.daySevenucRatio,jdbcType=REAL},
+        day_sevenuc_score = #{record.daySevenucScore,jdbcType=REAL},
+        dau_ratio = #{record.dauRatio,jdbcType=REAL},
+        dau_score = #{record.dauScore,jdbcType=REAL},
+        new_au_ratio = #{record.newAuRatio,jdbcType=REAL},
+        new_au_num = #{record.newAuNum,jdbcType=INTEGER},
+        new_au_score = #{record.newAuScore,jdbcType=REAL},
+        day_sevencn_ratio = #{record.daySevencnRatio,jdbcType=REAL},
+        day_sevencn_score = #{record.daySevencnScore,jdbcType=REAL},
+        day_sevenun_ratio = #{record.daySevenunRatio,jdbcType=REAL},
+        day_sevenun_score = #{record.daySevenunScore,jdbcType=REAL},
+        morrow_keep_ratio = #{record.morrowKeepRatio,jdbcType=REAL},
+        morrow_keep_score = #{record.morrowKeepScore,jdbcType=REAL},
+        seven_keep_ratio = #{record.sevenKeepRatio,jdbcType=REAL},
+        seven_keep_score = #{record.sevenKeepScore,jdbcType=REAL},
+        month_keep_ratio = #{record.monthKeepRatio,jdbcType=REAL},
+        month_keep_score = #{record.monthKeepScore,jdbcType=REAL},
+        avg_ua_time_ratio = #{record.avgUaTimeRatio,jdbcType=REAL},
+        avg_ua_time_score = #{record.avgUaTimeScore,jdbcType=REAL},
+        avg_ua_pn_ratio = #{record.avgUaPnRatio,jdbcType=REAL},
+        avg_ua_pn_score = #{record.avgUaPnScore,jdbcType=REAL},
+        day_sevenbcc_ratio = #{record.daySevenbccRatio,jdbcType=REAL},
+        day_sevenbcc_score = #{record.daySevenbccScore,jdbcType=REAL},
+        day_sevenouc_ratio = #{record.daySevenoucRatio,jdbcType=REAL},
+        day_sevenouc_score = #{record.daySevenoucScore,jdbcType=REAL},
+        platform = #{record.platform,jdbcType=INTEGER},
+        channel_date = #{record.channelDate,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yiche.smp.domain.ChannelDetail">
+        update channel_detail
+        <set>
+            <if test="channelId != null">
+                channel_id = #{channelId,jdbcType=VARCHAR},
+            </if>
+            <if test="channelName != null">
+                channel_name = #{channelName,jdbcType=VARCHAR},
+            </if>
+            <if test="newAcRatio != null">
+                new_ac_ratio = #{newAcRatio,jdbcType=REAL},
+            </if>
+            <if test="newAcScore != null">
+                new_ac_score = #{newAcScore,jdbcType=REAL},
+            </if>
+            <if test="daySevenocRatio != null">
+                day_sevenoc_ratio = #{daySevenocRatio,jdbcType=REAL},
+            </if>
+            <if test="daySevenocScore != null">
+                day_sevenoc_score = #{daySevenocScore,jdbcType=REAL},
+            </if>
+            <if test="daySevenucRatio != null">
+                day_sevenuc_ratio = #{daySevenucRatio,jdbcType=REAL},
+            </if>
+            <if test="daySevenucScore != null">
+                day_sevenuc_score = #{daySevenucScore,jdbcType=REAL},
+            </if>
+            <if test="dauRatio != null">
+                dau_ratio = #{dauRatio,jdbcType=REAL},
+            </if>
+            <if test="dauScore != null">
+                dau_score = #{dauScore,jdbcType=REAL},
+            </if>
+            <if test="newAuRatio != null">
+                new_au_ratio = #{newAuRatio,jdbcType=REAL},
+            </if>
+            <if test="newAuNum != null">
+                new_au_num = #{newAuNum,jdbcType=INTEGER},
+            </if>
+            <if test="newAuScore != null">
+                new_au_score = #{newAuScore,jdbcType=REAL},
+            </if>
+            <if test="daySevencnRatio != null">
+                day_sevencn_ratio = #{daySevencnRatio,jdbcType=REAL},
+            </if>
+            <if test="daySevencnScore != null">
+                day_sevencn_score = #{daySevencnScore,jdbcType=REAL},
+            </if>
+            <if test="daySevenunRatio != null">
+                day_sevenun_ratio = #{daySevenunRatio,jdbcType=REAL},
+            </if>
+            <if test="daySevenunScore != null">
+                day_sevenun_score = #{daySevenunScore,jdbcType=REAL},
+            </if>
+            <if test="morrowKeepRatio != null">
+                morrow_keep_ratio = #{morrowKeepRatio,jdbcType=REAL},
+            </if>
+            <if test="morrowKeepScore != null">
+                morrow_keep_score = #{morrowKeepScore,jdbcType=REAL},
+            </if>
+            <if test="sevenKeepRatio != null">
+                seven_keep_ratio = #{sevenKeepRatio,jdbcType=REAL},
+            </if>
+            <if test="sevenKeepScore != null">
+                seven_keep_score = #{sevenKeepScore,jdbcType=REAL},
+            </if>
+            <if test="monthKeepRatio != null">
+                month_keep_ratio = #{monthKeepRatio,jdbcType=REAL},
+            </if>
+            <if test="monthKeepScore != null">
+                month_keep_score = #{monthKeepScore,jdbcType=REAL},
+            </if>
+            <if test="avgUaTimeRatio != null">
+                avg_ua_time_ratio = #{avgUaTimeRatio,jdbcType=REAL},
+            </if>
+            <if test="avgUaTimeScore != null">
+                avg_ua_time_score = #{avgUaTimeScore,jdbcType=REAL},
+            </if>
+            <if test="avgUaPnRatio != null">
+                avg_ua_pn_ratio = #{avgUaPnRatio,jdbcType=REAL},
+            </if>
+            <if test="avgUaPnScore != null">
+                avg_ua_pn_score = #{avgUaPnScore,jdbcType=REAL},
+            </if>
+            <if test="daySevenbccRatio != null">
+                day_sevenbcc_ratio = #{daySevenbccRatio,jdbcType=REAL},
+            </if>
+            <if test="daySevenbccScore != null">
+                day_sevenbcc_score = #{daySevenbccScore,jdbcType=REAL},
+            </if>
+            <if test="daySevenoucRatio != null">
+                day_sevenouc_ratio = #{daySevenoucRatio,jdbcType=REAL},
+            </if>
+            <if test="daySevenoucScore != null">
+                day_sevenouc_score = #{daySevenoucScore,jdbcType=REAL},
+            </if>
+            <if test="platform != null">
+                platform = #{platform,jdbcType=INTEGER},
+            </if>
+            <if test="channelDate != null">
+                channel_date = #{channelDate,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.yiche.smp.domain.ChannelDetail">
+    update channel_detail
+    set channel_id = #{channelId,jdbcType=VARCHAR},
+      channel_name = #{channelName,jdbcType=VARCHAR},
+      new_ac_ratio = #{newAcRatio,jdbcType=REAL},
+      new_ac_score = #{newAcScore,jdbcType=REAL},
+      day_sevenoc_ratio = #{daySevenocRatio,jdbcType=REAL},
+      day_sevenoc_score = #{daySevenocScore,jdbcType=REAL},
+      day_sevenuc_ratio = #{daySevenucRatio,jdbcType=REAL},
+      day_sevenuc_score = #{daySevenucScore,jdbcType=REAL},
+      dau_ratio = #{dauRatio,jdbcType=REAL},
+      dau_score = #{dauScore,jdbcType=REAL},
+      new_au_ratio = #{newAuRatio,jdbcType=REAL},
+      new_au_num = #{newAuNum,jdbcType=INTEGER},
+      new_au_score = #{newAuScore,jdbcType=REAL},
+      day_sevencn_ratio = #{daySevencnRatio,jdbcType=REAL},
+      day_sevencn_score = #{daySevencnScore,jdbcType=REAL},
+      day_sevenun_ratio = #{daySevenunRatio,jdbcType=REAL},
+      day_sevenun_score = #{daySevenunScore,jdbcType=REAL},
+      morrow_keep_ratio = #{morrowKeepRatio,jdbcType=REAL},
+      morrow_keep_score = #{morrowKeepScore,jdbcType=REAL},
+      seven_keep_ratio = #{sevenKeepRatio,jdbcType=REAL},
+      seven_keep_score = #{sevenKeepScore,jdbcType=REAL},
+      month_keep_ratio = #{monthKeepRatio,jdbcType=REAL},
+      month_keep_score = #{monthKeepScore,jdbcType=REAL},
+      avg_ua_time_ratio = #{avgUaTimeRatio,jdbcType=REAL},
+      avg_ua_time_score = #{avgUaTimeScore,jdbcType=REAL},
+      avg_ua_pn_ratio = #{avgUaPnRatio,jdbcType=REAL},
+      avg_ua_pn_score = #{avgUaPnScore,jdbcType=REAL},
+      day_sevenbcc_ratio = #{daySevenbccRatio,jdbcType=REAL},
+      day_sevenbcc_score = #{daySevenbccScore,jdbcType=REAL},
+      day_sevenouc_ratio = #{daySevenoucRatio,jdbcType=REAL},
+      day_sevenouc_score = #{daySevenoucScore,jdbcType=REAL},
+      platform = #{platform,jdbcType=INTEGER},
+      channel_date = #{channelDate,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <!--条件 平台id 0:易车.1:报价大全 取前俩条新增用户数环比最大的渠道信息-->
+    <select id="selectChannelDetailByOrderChannelNameDesc" resultMap="BaseResultMap"
+            parameterType="map">
+           SELECT
+                *
+            FROM
+                channel_detail
+            WHERE
+                platform = #{platform}
+            ORDER BY
+                ${filed} DESC
+            LIMIT 2;
+  </select>
+
+    <!--条件 平台id 0:易车.1:报价大全 取前俩条新增用户数环比最大的渠道信息-->
+    <select id="selectChannelDetailByOrderChannelNameAsc" resultMap="BaseResultMap"
+            parameterType="map">
+        SELECT
+        *
+        FROM
+        channel_detail
+        WHERE
+        platform = #{platform}
+        ORDER BY
+        ${filed} ASC
+        LIMIT 2;
+    </select>
+</mapper>

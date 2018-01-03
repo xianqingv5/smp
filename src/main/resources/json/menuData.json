@@ -1,0 +1,92 @@
+{
+
+    "data": [{
+        "name": "销售数据分析",
+        "ischecked": true,
+        "value": "marketdata",
+        "children": [{
+            "name": "线索数据分析",
+            "ischecked": true,
+            "id": "11",
+            "value": "clueanalysis"
+        },{
+            "name": "每月平台线索趋势",
+            "ischecked": false,
+            "id": "12",
+            "value": "cluetrend"
+        },{
+            "name": "线索及成本数据分析",
+            "ischecked": false,
+            "id": "13",
+            "value": "costanalysis"
+        }]
+    },{
+        "name": "渠道数据分析",
+        "ischecked": false,
+        "value": "channelanalysis",
+        "children": [{
+            "name": "渠道数据分析",
+            "ischecked": false,
+            "id": "21",
+            "value": "channelanalysis"
+        }]
+    },{
+        "name": "预警",
+        "ischecked": false,
+        "value": "warning",
+        "children": [{
+            "name": "品牌线索量每月预警",
+            "ischecked": false,
+            "id": "41",
+            "value": "monthwarning"
+        },{
+            "name": "品牌线索量每周预警",
+            "ischecked": false,
+            "id": "42",
+            "value": "weekwarning"
+        }]
+    },{
+        "name": "投放策略",
+        "ischecked": false,
+        "value": "putstrategy",
+        "children": [{
+            "name": "投放策略",
+            "ischecked": false,
+            "id": "31",
+            "value": "putstrategy"
+        }]
+    }
+    ,{
+        "name": "补量",
+        "ischecked": false,
+        "value": "supplement",
+        "children": [{
+            "name": "我的补量",
+            "ischecked": false,
+            "id": "51",
+            "value": "mysupplement"
+        },{
+            "name": "补量处理列表",
+            "ischecked": false,
+            "id": "52",
+            "value": "supplementlist"
+        }]
+    },{
+        "name": "反作弊",
+        "ischecked": false,
+        "value": "inspection",
+        "children": [{
+            "name": "抽样检查申请",
+            "ischecked": false,
+            "id": "61",
+            "value": "inspectionapply"
+        },{
+            "name": "申请处理列表",
+            "ischecked": false,
+            "id": "62",
+            "value": "inspectionlist"
+        }
+        ]
+    }]
+}
+

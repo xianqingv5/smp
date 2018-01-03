@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yiche.smp.mapper.MonthCluePieMapper" >
+  <resultMap id="BaseResultMap" type="com.yiche.smp.domain.MonthCluePie" >
+    <id column="clue_pie_id" property="cluePieId" jdbcType="INTEGER" />
+    <result column="conform_market_trend" property="conformMarketTrend" jdbcType="DOUBLE" />
+    <result column="up_market_trend" property="upMarketTrend" jdbcType="DOUBLE" />
+    <result column="under_maket_trend_shop_up" property="underMaketTrendShopUp" jdbcType="DOUBLE" />
+    <result column="under_maket_trend_clue_up_insufficient" property="underMaketTrendClueUpInsufficient" jdbcType="DOUBLE" />
+    <result column="under_maket_trend_clue_glide" property="underMaketTrendClueGlide" jdbcType="DOUBLE" />
+    <result column="data_date" property="dataDate" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    clue_pie_id, conform_market_trend, up_market_trend, under_maket_trend_shop_up, under_maket_trend_clue_up_insufficient, 
+    under_maket_trend_clue_glide, data_date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yiche.smp.domain.MonthCluePieExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from month_clue_pie
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from month_clue_pie
+    where clue_pie_id = #{cluePieId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from month_clue_pie
+    where clue_pie_id = #{cluePieId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yiche.smp.domain.MonthCluePieExample" >
+    delete from month_clue_pie
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yiche.smp.domain.MonthCluePie" >
+    insert into month_clue_pie (clue_pie_id, conform_market_trend, up_market_trend, 
+      under_maket_trend_shop_up, under_maket_trend_clue_up_insufficient, 
+      under_maket_trend_clue_glide, data_date)
+    values (#{cluePieId,jdbcType=INTEGER}, #{conformMarketTrend,jdbcType=DOUBLE}, #{upMarketTrend,jdbcType=DOUBLE}, 
+      #{underMaketTrendShopUp,jdbcType=DOUBLE}, #{underMaketTrendClueUpInsufficient,jdbcType=DOUBLE}, 
+      #{underMaketTrendClueGlide,jdbcType=DOUBLE}, #{dataDate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yiche.smp.domain.MonthCluePie" >
+    insert into month_clue_pie
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cluePieId != null" >
+        clue_pie_id,
+      </if>
+      <if test="conformMarketTrend != null" >
+        conform_market_trend,
+      </if>
+      <if test="upMarketTrend != null" >
+        up_market_trend,
+      </if>
+      <if test="underMaketTrendShopUp != null" >
+        under_maket_trend_shop_up,
+      </if>
+      <if test="underMaketTrendClueUpInsufficient != null" >
+        under_maket_trend_clue_up_insufficient,
+      </if>
+      <if test="underMaketTrendClueGlide != null" >
+        under_maket_trend_clue_glide,
+      </if>
+      <if test="dataDate != null" >
+        data_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cluePieId != null" >
+        #{cluePieId,jdbcType=INTEGER},
+      </if>
+      <if test="conformMarketTrend != null" >
+        #{conformMarketTrend,jdbcType=DOUBLE},
+      </if>
+      <if test="upMarketTrend != null" >
+        #{upMarketTrend,jdbcType=DOUBLE},
+      </if>
+      <if test="underMaketTrendShopUp != null" >
+        #{underMaketTrendShopUp,jdbcType=DOUBLE},
+      </if>
+      <if test="underMaketTrendClueUpInsufficient != null" >
+        #{underMaketTrendClueUpInsufficient,jdbcType=DOUBLE},
+      </if>
+      <if test="underMaketTrendClueGlide != null" >
+        #{underMaketTrendClueGlide,jdbcType=DOUBLE},
+      </if>
+      <if test="dataDate != null" >
+        #{dataDate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yiche.smp.domain.MonthCluePieExample" resultType="java.lang.Integer" >
+    select count(*) from month_clue_pie
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update month_clue_pie
+    <set >
+      <if test="record.cluePieId != null" >
+        clue_pie_id = #{record.cluePieId,jdbcType=INTEGER},
+      </if>
+      <if test="record.conformMarketTrend != null" >
+        conform_market_trend = #{record.conformMarketTrend,jdbcType=DOUBLE},
+      </if>
+      <if test="record.upMarketTrend != null" >
+        up_market_trend = #{record.upMarketTrend,jdbcType=DOUBLE},
+      </if>
+      <if test="record.underMaketTrendShopUp != null" >
+        under_maket_trend_shop_up = #{record.underMaketTrendShopUp,jdbcType=DOUBLE},
+      </if>
+      <if test="record.underMaketTrendClueUpInsufficient != null" >
+        under_maket_trend_clue_up_insufficient = #{record.underMaketTrendClueUpInsufficient,jdbcType=DOUBLE},
+      </if>
+      <if test="record.underMaketTrendClueGlide != null" >
+        under_maket_trend_clue_glide = #{record.underMaketTrendClueGlide,jdbcType=DOUBLE},
+      </if>
+      <if test="record.dataDate != null" >
+        data_date = #{record.dataDate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update month_clue_pie
+    set clue_pie_id = #{record.cluePieId,jdbcType=INTEGER},
+      conform_market_trend = #{record.conformMarketTrend,jdbcType=DOUBLE},
+      up_market_trend = #{record.upMarketTrend,jdbcType=DOUBLE},
+      under_maket_trend_shop_up = #{record.underMaketTrendShopUp,jdbcType=DOUBLE},
+      under_maket_trend_clue_up_insufficient = #{record.underMaketTrendClueUpInsufficient,jdbcType=DOUBLE},
+      under_maket_trend_clue_glide = #{record.underMaketTrendClueGlide,jdbcType=DOUBLE},
+      data_date = #{record.dataDate,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yiche.smp.domain.MonthCluePie" >
+    update month_clue_pie
+    <set >
+      <if test="conformMarketTrend != null" >
+        conform_market_trend = #{conformMarketTrend,jdbcType=DOUBLE},
+      </if>
+      <if test="upMarketTrend != null" >
+        up_market_trend = #{upMarketTrend,jdbcType=DOUBLE},
+      </if>
+      <if test="underMaketTrendShopUp != null" >
+        under_maket_trend_shop_up = #{underMaketTrendShopUp,jdbcType=DOUBLE},
+      </if>
+      <if test="underMaketTrendClueUpInsufficient != null" >
+        under_maket_trend_clue_up_insufficient = #{underMaketTrendClueUpInsufficient,jdbcType=DOUBLE},
+      </if>
+      <if test="underMaketTrendClueGlide != null" >
+        under_maket_trend_clue_glide = #{underMaketTrendClueGlide,jdbcType=DOUBLE},
+      </if>
+      <if test="dataDate != null" >
+        data_date = #{dataDate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where clue_pie_id = #{cluePieId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yiche.smp.domain.MonthCluePie" >
+    update month_clue_pie
+    set conform_market_trend = #{conformMarketTrend,jdbcType=DOUBLE},
+      up_market_trend = #{upMarketTrend,jdbcType=DOUBLE},
+      under_maket_trend_shop_up = #{underMaketTrendShopUp,jdbcType=DOUBLE},
+      under_maket_trend_clue_up_insufficient = #{underMaketTrendClueUpInsufficient,jdbcType=DOUBLE},
+      under_maket_trend_clue_glide = #{underMaketTrendClueGlide,jdbcType=DOUBLE},
+      data_date = #{dataDate,jdbcType=VARCHAR}
+    where clue_pie_id = #{cluePieId,jdbcType=INTEGER}
+  </update>
+</mapper>

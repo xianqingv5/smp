@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yiche.smp.mapper.SmpLaunchStategyMapper" >
+  <resultMap id="BaseResultMap" type="com.yiche.smp.domain.SmpLaunchStategy" >
+    <id column="launch_stategy_id" property="launchStategyId" jdbcType="INTEGER" />
+    <result column="advert_type" property="advertType" jdbcType="VARCHAR" />
+    <result column="channel_trait" property="channelTrait" jdbcType="VARCHAR" />
+    <result column="commerce_festival" property="commerceFestival" jdbcType="VARCHAR" />
+    <result column="car_show_stategy" property="carShowStategy" jdbcType="VARCHAR" />
+    <result column="month" property="month" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    launch_stategy_id, advert_type, channel_trait, commerce_festival, car_show_stategy, 
+    month
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yiche.smp.domain.SmpLaunchStategyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from smp_launch_stategy
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from smp_launch_stategy
+    where launch_stategy_id = #{launchStategyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from smp_launch_stategy
+    where launch_stategy_id = #{launchStategyId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yiche.smp.domain.SmpLaunchStategyExample" >
+    delete from smp_launch_stategy
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yiche.smp.domain.SmpLaunchStategy" >
+    insert into smp_launch_stategy (launch_stategy_id, advert_type, channel_trait, 
+      commerce_festival, car_show_stategy, month
+      )
+    values (#{launchStategyId,jdbcType=INTEGER}, #{advertType,jdbcType=VARCHAR}, #{channelTrait,jdbcType=VARCHAR}, 
+      #{commerceFestival,jdbcType=VARCHAR}, #{carShowStategy,jdbcType=VARCHAR}, #{month,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yiche.smp.domain.SmpLaunchStategy" >
+    insert into smp_launch_stategy
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="launchStategyId != null" >
+        launch_stategy_id,
+      </if>
+      <if test="advertType != null" >
+        advert_type,
+      </if>
+      <if test="channelTrait != null" >
+        channel_trait,
+      </if>
+      <if test="commerceFestival != null" >
+        commerce_festival,
+      </if>
+      <if test="carShowStategy != null" >
+        car_show_stategy,
+      </if>
+      <if test="month != null" >
+        month,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="launchStategyId != null" >
+        #{launchStategyId,jdbcType=INTEGER},
+      </if>
+      <if test="advertType != null" >
+        #{advertType,jdbcType=VARCHAR},
+      </if>
+      <if test="channelTrait != null" >
+        #{channelTrait,jdbcType=VARCHAR},
+      </if>
+      <if test="commerceFestival != null" >
+        #{commerceFestival,jdbcType=VARCHAR},
+      </if>
+      <if test="carShowStategy != null" >
+        #{carShowStategy,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yiche.smp.domain.SmpLaunchStategyExample" resultType="java.lang.Integer" >
+    select count(*) from smp_launch_stategy
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update smp_launch_stategy
+    <set >
+      <if test="record.launchStategyId != null" >
+        launch_stategy_id = #{record.launchStategyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.advertType != null" >
+        advert_type = #{record.advertType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channelTrait != null" >
+        channel_trait = #{record.channelTrait,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commerceFestival != null" >
+        commerce_festival = #{record.commerceFestival,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carShowStategy != null" >
+        car_show_stategy = #{record.carShowStategy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.month != null" >
+        month = #{record.month,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update smp_launch_stategy
+    set launch_stategy_id = #{record.launchStategyId,jdbcType=INTEGER},
+      advert_type = #{record.advertType,jdbcType=VARCHAR},
+      channel_trait = #{record.channelTrait,jdbcType=VARCHAR},
+      commerce_festival = #{record.commerceFestival,jdbcType=VARCHAR},
+      car_show_stategy = #{record.carShowStategy,jdbcType=VARCHAR},
+      month = #{record.month,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yiche.smp.domain.SmpLaunchStategy" >
+    update smp_launch_stategy
+    <set >
+      <if test="advertType != null" >
+        advert_type = #{advertType,jdbcType=VARCHAR},
+      </if>
+      <if test="channelTrait != null" >
+        channel_trait = #{channelTrait,jdbcType=VARCHAR},
+      </if>
+      <if test="commerceFestival != null" >
+        commerce_festival = #{commerceFestival,jdbcType=VARCHAR},
+      </if>
+      <if test="carShowStategy != null" >
+        car_show_stategy = #{carShowStategy,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null" >
+        month = #{month,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where launch_stategy_id = #{launchStategyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yiche.smp.domain.SmpLaunchStategy" >
+    update smp_launch_stategy
+    set advert_type = #{advertType,jdbcType=VARCHAR},
+      channel_trait = #{channelTrait,jdbcType=VARCHAR},
+      commerce_festival = #{commerceFestival,jdbcType=VARCHAR},
+      car_show_stategy = #{carShowStategy,jdbcType=VARCHAR},
+      month = #{month,jdbcType=VARCHAR}
+    where launch_stategy_id = #{launchStategyId,jdbcType=INTEGER}
+  </update>
+</mapper>

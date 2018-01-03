@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yiche.smp.mapper.ClueCostMapper" >
+  <resultMap id="BaseResultMap" type="com.yiche.smp.domain.ClueCost" >
+    <id column="costId" property="costid" jdbcType="INTEGER" />
+    <result column="costTypeName" property="costtypename" jdbcType="VARCHAR" />
+    <result column="costMonthYear" property="costmonthyear" jdbcType="VARCHAR" />
+    <result column="costValue" property="costvalue" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    costId, costTypeName, costMonthYear, costValue
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yiche.smp.domain.ClueCostExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from clue_cost
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from clue_cost
+    where costId = #{costid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from clue_cost
+    where costId = #{costid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yiche.smp.domain.ClueCostExample" >
+    delete from clue_cost
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yiche.smp.domain.ClueCost" >
+    insert into clue_cost (costId, costTypeName, costMonthYear, 
+      costValue)
+    values (#{costid,jdbcType=INTEGER}, #{costtypename,jdbcType=VARCHAR}, #{costmonthyear,jdbcType=DATE}, 
+      #{costvalue,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yiche.smp.domain.ClueCost" >
+    insert into clue_cost
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="costid != null" >
+        costId,
+      </if>
+      <if test="costtypename != null" >
+        costTypeName,
+      </if>
+      <if test="costmonthyear != null" >
+        costMonthYear,
+      </if>
+      <if test="costvalue != null" >
+        costValue,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="costid != null" >
+        #{costid,jdbcType=INTEGER},
+      </if>
+      <if test="costtypename != null" >
+        #{costtypename,jdbcType=VARCHAR},
+      </if>
+      <if test="costmonthyear != null" >
+        #{costmonthyear,jdbcType=DATE},
+      </if>
+      <if test="costvalue != null" >
+        #{costvalue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yiche.smp.domain.ClueCostExample" resultType="java.lang.Integer" >
+    select count(*) from clue_cost
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update clue_cost
+    <set >
+      <if test="record.costid != null" >
+        costId = #{record.costid,jdbcType=INTEGER},
+      </if>
+      <if test="record.costtypename != null" >
+        costTypeName = #{record.costtypename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.costmonthyear != null" >
+        costMonthYear = #{record.costmonthyear,jdbcType=DATE},
+      </if>
+      <if test="record.costvalue != null" >
+        costValue = #{record.costvalue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update clue_cost
+    set costId = #{record.costid,jdbcType=INTEGER},
+      costTypeName = #{record.costtypename,jdbcType=VARCHAR},
+      costMonthYear = #{record.costmonthyear,jdbcType=DATE},
+      costValue = #{record.costvalue,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yiche.smp.domain.ClueCost" >
+    update clue_cost
+    <set >
+      <if test="costtypename != null" >
+        costTypeName = #{costtypename,jdbcType=VARCHAR},
+      </if>
+      <if test="costmonthyear != null" >
+        costMonthYear = #{costmonthyear,jdbcType=DATE},
+      </if>
+      <if test="costvalue != null" >
+        costValue = #{costvalue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where costId = #{costid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yiche.smp.domain.ClueCost" >
+    update clue_cost
+    set costTypeName = #{costtypename,jdbcType=VARCHAR},
+      costMonthYear = #{costmonthyear,jdbcType=DATE},
+      costValue = #{costvalue,jdbcType=VARCHAR}
+    where costId = #{costid,jdbcType=INTEGER}
+  </update>
+  <!--查询合计单价的所有数据-->
+  <select id="selectTotalClueCostList" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM clue_cost
+    where costTypeName="总费用"
+    order by costId ASC
+  </select>
+  <!--查询合计单价的所有数据-->
+  <select id="selectByPlantAndCountTime" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM clue_cost
+    <where>
+      1=1
+      <if test="plantName !='总体'">
+       and costTypeName=#{plantName}
+      </if>
+      <if test="plantName =='总体'">
+        and costTypeName="总费用"
+      </if>
+      <if test="countTime !=null">
+      and costMonthYear &lt;#{countTime}
+      </if>
+    </where>
+    order by costId ASC
+  </select>
+
+  <!--批量添加-->
+  <insert id="insertClueCostList" parameterType="List">
+
+    insert into clue_cost(
+    costId, costTypeName, costMonthYear,
+    costValue
+    )
+    values
+    <foreach collection="clueCostList" index="index" item="item"  separator=","  >
+      (
+      #{item.costid},
+      #{item.costtypename},
+      #{item.costmonthyear},
+      #{item.costvalue,jdbcType=DOUBLE}
+      )
+
+    </foreach>
+  </insert>
+
+</mapper>

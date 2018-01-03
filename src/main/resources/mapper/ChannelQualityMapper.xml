@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yiche.smp.mapper.ChannelQualityMapper" >
+  <resultMap id="BaseResultMap" type="com.yiche.smp.domain.ChannelQuality" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="channel_number" property="channelNumber" jdbcType="VARCHAR" />
+    <result column="channel_name" property="channelName" jdbcType="VARCHAR" />
+    <result column="index_score" property="indexScore" jdbcType="DOUBLE" />
+    <result column="number_score" property="numberScore" jdbcType="DOUBLE" />
+    <result column="quality_score" property="qualityScore" jdbcType="DOUBLE" />
+    <result column="efficiency_score" property="efficiencyScore" jdbcType="DOUBLE" />
+    <result column="rank" property="rank" jdbcType="INTEGER" />
+    <result column="total_score" property="totalScore" jdbcType="DOUBLE" />
+    <result column="rank_shange" property="rankShange" jdbcType="INTEGER" />
+    <result column="score_change" property="scoreChange" jdbcType="DOUBLE" />
+    <result column="month_time" property="monthTime" jdbcType="VARCHAR" />
+    <result column="come_from" property="comeFrom" jdbcType="INTEGER" />
+    <result column="channel_time" property="channelTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, channel_number, channel_name, index_score, number_score, quality_score, efficiency_score, 
+    rank, total_score, rank_shange, score_change, month_time, come_from, channel_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yiche.smp.domain.ChannelQualityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from channel_quality
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from channel_quality
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from channel_quality
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yiche.smp.domain.ChannelQualityExample" >
+    delete from channel_quality
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yiche.smp.domain.ChannelQuality" >
+    insert into channel_quality (id, channel_number, channel_name, 
+      index_score, number_score, quality_score, 
+      efficiency_score, rank, total_score, 
+      rank_shange, score_change, month_time, 
+      come_from, channel_time)
+    values (#{id,jdbcType=INTEGER}, #{channelNumber,jdbcType=VARCHAR}, #{channelName,jdbcType=VARCHAR}, 
+      #{indexScore,jdbcType=DOUBLE}, #{numberScore,jdbcType=DOUBLE}, #{qualityScore,jdbcType=DOUBLE}, 
+      #{efficiencyScore,jdbcType=DOUBLE}, #{rank,jdbcType=INTEGER}, #{totalScore,jdbcType=DOUBLE}, 
+      #{rankShange,jdbcType=INTEGER}, #{scoreChange,jdbcType=DOUBLE}, #{monthTime,jdbcType=VARCHAR}, 
+      #{comeFrom,jdbcType=INTEGER}, #{channelTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yiche.smp.domain.ChannelQuality" >
+    insert into channel_quality
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="channelNumber != null" >
+        channel_number,
+      </if>
+      <if test="channelName != null" >
+        channel_name,
+      </if>
+      <if test="indexScore != null" >
+        index_score,
+      </if>
+      <if test="numberScore != null" >
+        number_score,
+      </if>
+      <if test="qualityScore != null" >
+        quality_score,
+      </if>
+      <if test="efficiencyScore != null" >
+        efficiency_score,
+      </if>
+      <if test="rank != null" >
+        rank,
+      </if>
+      <if test="totalScore != null" >
+        total_score,
+      </if>
+      <if test="rankShange != null" >
+        rank_shange,
+      </if>
+      <if test="scoreChange != null" >
+        score_change,
+      </if>
+      <if test="monthTime != null" >
+        month_time,
+      </if>
+      <if test="comeFrom != null" >
+        come_from,
+      </if>
+      <if test="channelTime != null" >
+        channel_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="channelNumber != null" >
+        #{channelNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="channelName != null" >
+        #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="indexScore != null" >
+        #{indexScore,jdbcType=DOUBLE},
+      </if>
+      <if test="numberScore != null" >
+        #{numberScore,jdbcType=DOUBLE},
+      </if>
+      <if test="qualityScore != null" >
+        #{qualityScore,jdbcType=DOUBLE},
+      </if>
+      <if test="efficiencyScore != null" >
+        #{efficiencyScore,jdbcType=DOUBLE},
+      </if>
+      <if test="rank != null" >
+        #{rank,jdbcType=INTEGER},
+      </if>
+      <if test="totalScore != null" >
+        #{totalScore,jdbcType=DOUBLE},
+      </if>
+      <if test="rankShange != null" >
+        #{rankShange,jdbcType=INTEGER},
+      </if>
+      <if test="scoreChange != null" >
+        #{scoreChange,jdbcType=DOUBLE},
+      </if>
+      <if test="monthTime != null" >
+        #{monthTime,jdbcType=VARCHAR},
+      </if>
+      <if test="comeFrom != null" >
+        #{comeFrom,jdbcType=INTEGER},
+      </if>
+      <if test="channelTime != null" >
+        #{channelTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yiche.smp.domain.ChannelQualityExample" resultType="java.lang.Integer" >
+    select count(*) from channel_quality
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update channel_quality
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.channelNumber != null" >
+        channel_number = #{record.channelNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channelName != null" >
+        channel_name = #{record.channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.indexScore != null" >
+        index_score = #{record.indexScore,jdbcType=DOUBLE},
+      </if>
+      <if test="record.numberScore != null" >
+        number_score = #{record.numberScore,jdbcType=DOUBLE},
+      </if>
+      <if test="record.qualityScore != null" >
+        quality_score = #{record.qualityScore,jdbcType=DOUBLE},
+      </if>
+      <if test="record.efficiencyScore != null" >
+        efficiency_score = #{record.efficiencyScore,jdbcType=DOUBLE},
+      </if>
+      <if test="record.rank != null" >
+        rank = #{record.rank,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalScore != null" >
+        total_score = #{record.totalScore,jdbcType=DOUBLE},
+      </if>
+      <if test="record.rankShange != null" >
+        rank_shange = #{record.rankShange,jdbcType=INTEGER},
+      </if>
+      <if test="record.scoreChange != null" >
+        score_change = #{record.scoreChange,jdbcType=DOUBLE},
+      </if>
+      <if test="record.monthTime != null" >
+        month_time = #{record.monthTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comeFrom != null" >
+        come_from = #{record.comeFrom,jdbcType=INTEGER},
+      </if>
+      <if test="record.channelTime != null" >
+        channel_time = #{record.channelTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update channel_quality
+    set id = #{record.id,jdbcType=INTEGER},
+      channel_number = #{record.channelNumber,jdbcType=VARCHAR},
+      channel_name = #{record.channelName,jdbcType=VARCHAR},
+      index_score = #{record.indexScore,jdbcType=DOUBLE},
+      number_score = #{record.numberScore,jdbcType=DOUBLE},
+      quality_score = #{record.qualityScore,jdbcType=DOUBLE},
+      efficiency_score = #{record.efficiencyScore,jdbcType=DOUBLE},
+      rank = #{record.rank,jdbcType=INTEGER},
+      total_score = #{record.totalScore,jdbcType=DOUBLE},
+      rank_shange = #{record.rankShange,jdbcType=INTEGER},
+      score_change = #{record.scoreChange,jdbcType=DOUBLE},
+      month_time = #{record.monthTime,jdbcType=VARCHAR},
+      come_from = #{record.comeFrom,jdbcType=INTEGER},
+      channel_time = #{record.channelTime,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yiche.smp.domain.ChannelQuality" >
+    update channel_quality
+    <set >
+      <if test="channelNumber != null" >
+        channel_number = #{channelNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="channelName != null" >
+        channel_name = #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="indexScore != null" >
+        index_score = #{indexScore,jdbcType=DOUBLE},
+      </if>
+      <if test="numberScore != null" >
+        number_score = #{numberScore,jdbcType=DOUBLE},
+      </if>
+      <if test="qualityScore != null" >
+        quality_score = #{qualityScore,jdbcType=DOUBLE},
+      </if>
+      <if test="efficiencyScore != null" >
+        efficiency_score = #{efficiencyScore,jdbcType=DOUBLE},
+      </if>
+      <if test="rank != null" >
+        rank = #{rank,jdbcType=INTEGER},
+      </if>
+      <if test="totalScore != null" >
+        total_score = #{totalScore,jdbcType=DOUBLE},
+      </if>
+      <if test="rankShange != null" >
+        rank_shange = #{rankShange,jdbcType=INTEGER},
+      </if>
+      <if test="scoreChange != null" >
+        score_change = #{scoreChange,jdbcType=DOUBLE},
+      </if>
+      <if test="monthTime != null" >
+        month_time = #{monthTime,jdbcType=VARCHAR},
+      </if>
+      <if test="comeFrom != null" >
+        come_from = #{comeFrom,jdbcType=INTEGER},
+      </if>
+      <if test="channelTime != null" >
+        channel_time = #{channelTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yiche.smp.domain.ChannelQuality" >
+    update channel_quality
+    set channel_number = #{channelNumber,jdbcType=VARCHAR},
+      channel_name = #{channelName,jdbcType=VARCHAR},
+      index_score = #{indexScore,jdbcType=DOUBLE},
+      number_score = #{numberScore,jdbcType=DOUBLE},
+      quality_score = #{qualityScore,jdbcType=DOUBLE},
+      efficiency_score = #{efficiencyScore,jdbcType=DOUBLE},
+      rank = #{rank,jdbcType=INTEGER},
+      total_score = #{totalScore,jdbcType=DOUBLE},
+      rank_shange = #{rankShange,jdbcType=INTEGER},
+      score_change = #{scoreChange,jdbcType=DOUBLE},
+      month_time = #{monthTime,jdbcType=VARCHAR},
+      come_from = #{comeFrom,jdbcType=INTEGER},
+      channel_time = #{channelTime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByScoreAfterData" parameterType="HashMap" resultMap="BaseResultMap">
+    SELECT * from channel_quality where come_from=#{comeFrom,jdbcType=INTEGER} and month_time=#{monthData,jdbcType=VARCHAR} and channel_time=#{channelTime,jdbcType=VARCHAR} ORDER BY rank DESC LIMIT 3
+  </select>
+  <!--综合得分波动（下降）较大的渠道-->
+  <select id="selectByScoreWaveDownData" parameterType="HashMap" resultMap="BaseResultMap">
+    SELECT * from channel_quality where come_from=#{comeFrom,jdbcType=INTEGER} and month_time=#{monthData,jdbcType=VARCHAR} and channel_time=#{channelTime,jdbcType=VARCHAR} ORDER BY score_change LIMIT 3
+  </select>
+  <!--综合得分靠前的渠道-->
+  <select id="selectByScoreFontData" parameterType="HashMap" resultMap="BaseResultMap">
+    SELECT * from channel_quality where come_from=#{comeFrom,jdbcType=INTEGER} and month_time=#{monthData,jdbcType=VARCHAR} and channel_time=#{channelTime,jdbcType=VARCHAR} ORDER BY rank LIMIT 3
+  </select>
+  <!--综合得分波动（上升）较大的渠道-->
+  <select id="selectByScoreWaveUpDate" parameterType="HashMap" resultMap="BaseResultMap">
+    SELECT * from channel_quality where come_from=#{comeFrom,jdbcType=INTEGER} and month_time=#{monthData,jdbcType=VARCHAR} and channel_time=#{channelTime,jdbcType=VARCHAR} ORDER BY score_change DESC LIMIT 3
+  </select>
+  <!--综合得分排名-->
+  <select id="selectTotalScoreRank" parameterType="HashMap" resultMap="BaseResultMap">
+    SELECT * from channel_quality where come_from=#{comeFrom,jdbcType=INTEGER} and month_time=#{monthData,jdbcType=VARCHAR} and channel_time=#{channelTime,jdbcType=VARCHAR} ORDER BY rank
+  </select>
+</mapper>

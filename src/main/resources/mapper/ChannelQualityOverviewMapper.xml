@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yiche.smp.mapper.ChannelQualityOverviewMapper" >
+  <resultMap id="BaseResultMap" type="com.yiche.smp.domain.ChannelQualityOverview" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="score_after_data" property="scoreAfterData" jdbcType="VARCHAR" />
+    <result column="score_wave_down_data" property="scoreWaveDownData" jdbcType="VARCHAR" />
+    <result column="score_front_data" property="scoreFrontData" jdbcType="VARCHAR" />
+    <result column="score_wave_up_data" property="scoreWaveUpData" jdbcType="VARCHAR" />
+    <result column="come_from" property="comeFrom" jdbcType="INTEGER" />
+    <result column="month_data" property="monthData" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, score_after_data, score_wave_down_data, score_front_data, score_wave_up_data, 
+    come_from, month_data
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yiche.smp.domain.ChannelQualityOverviewExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from channel_quality_overview
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from channel_quality_overview
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from channel_quality_overview
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yiche.smp.domain.ChannelQualityOverviewExample" >
+    delete from channel_quality_overview
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yiche.smp.domain.ChannelQualityOverview" >
+    insert into channel_quality_overview (id, score_after_data, score_wave_down_data, 
+      score_front_data, score_wave_up_data, come_from, 
+      month_data)
+    values (#{id,jdbcType=INTEGER}, #{scoreAfterData,jdbcType=VARCHAR}, #{scoreWaveDownData,jdbcType=VARCHAR}, 
+      #{scoreFrontData,jdbcType=VARCHAR}, #{scoreWaveUpData,jdbcType=VARCHAR}, #{comeFrom,jdbcType=INTEGER}, 
+      #{monthData,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yiche.smp.domain.ChannelQualityOverview" >
+    insert into channel_quality_overview
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="scoreAfterData != null" >
+        score_after_data,
+      </if>
+      <if test="scoreWaveDownData != null" >
+        score_wave_down_data,
+      </if>
+      <if test="scoreFrontData != null" >
+        score_front_data,
+      </if>
+      <if test="scoreWaveUpData != null" >
+        score_wave_up_data,
+      </if>
+      <if test="comeFrom != null" >
+        come_from,
+      </if>
+      <if test="monthData != null" >
+        month_data,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="scoreAfterData != null" >
+        #{scoreAfterData,jdbcType=VARCHAR},
+      </if>
+      <if test="scoreWaveDownData != null" >
+        #{scoreWaveDownData,jdbcType=VARCHAR},
+      </if>
+      <if test="scoreFrontData != null" >
+        #{scoreFrontData,jdbcType=VARCHAR},
+      </if>
+      <if test="scoreWaveUpData != null" >
+        #{scoreWaveUpData,jdbcType=VARCHAR},
+      </if>
+      <if test="comeFrom != null" >
+        #{comeFrom,jdbcType=INTEGER},
+      </if>
+      <if test="monthData != null" >
+        #{monthData,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yiche.smp.domain.ChannelQualityOverviewExample" resultType="java.lang.Integer" >
+    select count(*) from channel_quality_overview
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update channel_quality_overview
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.scoreAfterData != null" >
+        score_after_data = #{record.scoreAfterData,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scoreWaveDownData != null" >
+        score_wave_down_data = #{record.scoreWaveDownData,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scoreFrontData != null" >
+        score_front_data = #{record.scoreFrontData,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scoreWaveUpData != null" >
+        score_wave_up_data = #{record.scoreWaveUpData,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comeFrom != null" >
+        come_from = #{record.comeFrom,jdbcType=INTEGER},
+      </if>
+      <if test="record.monthData != null" >
+        month_data = #{record.monthData,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update channel_quality_overview
+    set id = #{record.id,jdbcType=INTEGER},
+      score_after_data = #{record.scoreAfterData,jdbcType=VARCHAR},
+      score_wave_down_data = #{record.scoreWaveDownData,jdbcType=VARCHAR},
+      score_front_data = #{record.scoreFrontData,jdbcType=VARCHAR},
+      score_wave_up_data = #{record.scoreWaveUpData,jdbcType=VARCHAR},
+      come_from = #{record.comeFrom,jdbcType=INTEGER},
+      month_data = #{record.monthData,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yiche.smp.domain.ChannelQualityOverview" >
+    update channel_quality_overview
+    <set >
+      <if test="scoreAfterData != null" >
+        score_after_data = #{scoreAfterData,jdbcType=VARCHAR},
+      </if>
+      <if test="scoreWaveDownData != null" >
+        score_wave_down_data = #{scoreWaveDownData,jdbcType=VARCHAR},
+      </if>
+      <if test="scoreFrontData != null" >
+        score_front_data = #{scoreFrontData,jdbcType=VARCHAR},
+      </if>
+      <if test="scoreWaveUpData != null" >
+        score_wave_up_data = #{scoreWaveUpData,jdbcType=VARCHAR},
+      </if>
+      <if test="comeFrom != null" >
+        come_from = #{comeFrom,jdbcType=INTEGER},
+      </if>
+      <if test="monthData != null" >
+        month_data = #{monthData,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yiche.smp.domain.ChannelQualityOverview" >
+    update channel_quality_overview
+    set score_after_data = #{scoreAfterData,jdbcType=VARCHAR},
+      score_wave_down_data = #{scoreWaveDownData,jdbcType=VARCHAR},
+      score_front_data = #{scoreFrontData,jdbcType=VARCHAR},
+      score_wave_up_data = #{scoreWaveUpData,jdbcType=VARCHAR},
+      come_from = #{comeFrom,jdbcType=INTEGER},
+      month_data = #{monthData,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

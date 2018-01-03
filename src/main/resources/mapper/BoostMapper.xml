@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yiche.smp.mapper.BoostMapper">
+    <resultMap id="BaseResultMap" type="com.yiche.smp.domain.Boost">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="number" property="number" jdbcType="VARCHAR"/>
+        <result column="carmake" property="carmake" jdbcType="VARCHAR"/>
+        <result column="carbrand" property="carbrand" jdbcType="VARCHAR"/>
+        <result column="carmodel" property="carmodel" jdbcType="VARCHAR"/>
+        <result column="province" property="province" jdbcType="VARCHAR"/>
+        <result column="budgetDepartment" property="budgetdepartment" jdbcType="VARCHAR"/>
+        <result column="budgetValue" property="budgetvalue" jdbcType="INTEGER"/>
+        <result column="clue" property="clue" jdbcType="INTEGER"/>
+        <result column="startTime" property="starttime" jdbcType="VARCHAR"/>
+        <result column="finishTime" property="finishtime" jdbcType="VARCHAR"/>
+        <result column="linkType" property="linktype" jdbcType="VARCHAR"/>
+        <result column="linkUrl" property="linkurl" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="userId" property="userid" jdbcType="VARCHAR"/>
+        <result column="branch" property="branch" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="uploadFilePath" property="uploadfilepath" jdbcType="VARCHAR"/>
+        <result column="refuseReason" property="refuseReason" jdbcType="VARCHAR"/>
+        <result column="applyTime" property="applyTime"/>
+        <result column="applyYear" property="applyYear"/>
+        <result column="filename" property="fileName"/>
+        <result column="strategy" property="strategy"/>
+        <collection property="cityList" ofType="com.yiche.smp.domain.City"
+                    resultMap="com.yiche.smp.mapper.CityMapper.BaseResultMap"/>
+    </resultMap>
+    <resultMap id="BaseResultMapExtend" type="com.yiche.smp.common.boostVo.BoostVO" extends="com.yiche.smp.mapper.BoostMapper.BaseResultMap">
+        <result column="carmakeId" property="carMakeId" jdbcType="VARCHAR"/>
+        <result column="carbrandId" property="carBrandId" jdbcType="VARCHAR"/>
+        <result column="carmodelId" property="carModelId" jdbcType="VARCHAR"/>
+        <result column="provinceId" property="provinceId" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id,
+    number,
+    carmake,
+    carbrand,
+    carmodel,
+    province,
+    budgetDepartment,
+    budgetValue,
+    clue,
+    startTime,
+    finishTime,
+    linkType,
+    linkUrl,
+    remark,
+    userId,
+    branch,
+    status,
+    uploadFilePath,
+    refuseReason,
+    applyTime,
+    applyYear,
+    carmakeId,
+    carbrandId,
+    carmodelId,
+    provinceId,
+    filename,
+    strategy
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yiche.smp.domain.BoostExample">
+        select
+        <include refid="Base_Column_List"/>
+        from boost
+        order by id asc
+    </select>
+
+
+    <delete id="deleteByExample" parameterType="com.yiche.smp.domain.BoostExample">
+        delete from boost
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.yiche.smp.domain.Boost">
+    insert into boost (id, number, carmake, 
+      carbrand, carmodel, province, 
+      budgetDepartment, budgetValue, clue, 
+      startTime, finishTime, linkType, 
+      linkUrl, remark, userId, 
+      branch, status, uploadFilePath
+      )
+    values (#{id,jdbcType=INTEGER}, #{number,jdbcType=VARCHAR}, #{carmake,jdbcType=VARCHAR}, 
+      #{carbrand,jdbcType=VARCHAR}, #{carmodel,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{budgetdepartment,jdbcType=VARCHAR}, #{budgetvalue,jdbcType=INTEGER}, #{clue,jdbcType=INTEGER}, 
+      #{starttime,jdbcType=TIMESTAMP}, #{finishtime,jdbcType=TIMESTAMP}, #{linktype,jdbcType=VARCHAR}, 
+      #{linkurl,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, 
+      #{branch,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{uploadfilepath,jdbcType=VARCHAR}
+      )
+  </insert>
+
+    <select id="countByExample" parameterType="com.yiche.smp.domain.BoostExample" resultType="java.lang.Integer">
+        select count(*) from boost
+        <where>
+            <if test="currentYear !=null">
+                applyYear =#{currentYear}
+            </if>
+        </where>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update boost
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.number != null">
+                number = #{record.number,jdbcType=VARCHAR},
+            </if>
+            <if test="record.carmake != null">
+                carmake = #{record.carmake,jdbcType=VARCHAR},
+            </if>
+            <if test="record.carbrand != null">
+                carbrand = #{record.carbrand,jdbcType=VARCHAR},
+            </if>
+            <if test="record.carmodel != null">
+                carmodel = #{record.carmodel,jdbcType=VARCHAR},
+            </if>
+            <if test="record.province != null">
+                province = #{record.province,jdbcType=VARCHAR},
+            </if>
+            <if test="record.budgetdepartment != null">
+                budgetDepartment = #{record.budgetdepartment,jdbcType=VARCHAR},
+            </if>
+            <if test="record.budgetvalue != null">
+                budgetValue = #{record.budgetvalue,jdbcType=INTEGER},
+            </if>
+            <if test="record.clue != null">
+                clue = #{record.clue,jdbcType=INTEGER},
+            </if>
+            <if test="record.starttime != null">
+                startTime = #{record.starttime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.finishtime != null">
+                finishTime = #{record.finishtime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.linktype != null">
+                linkType = #{record.linktype,jdbcType=VARCHAR},
+            </if>
+            <if test="record.linkurl != null">
+                linkUrl = #{record.linkurl,jdbcType=VARCHAR},
+            </if>
+            <if test="record.remark != null">
+                remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userid != null">
+                userId = #{record.userid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.branch != null">
+                branch = #{record.branch,jdbcType=VARCHAR},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=INTEGER},
+            </if>
+            <if test="record.uploadfilepath != null">
+                uploadFilePath = #{record.uploadfilepath,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update boost
+        set id = #{record.id,jdbcType=INTEGER},
+        number = #{record.number,jdbcType=VARCHAR},
+        carmake = #{record.carmake,jdbcType=VARCHAR},
+        carbrand = #{record.carbrand,jdbcType=VARCHAR},
+        carmodel = #{record.carmodel,jdbcType=VARCHAR},
+        province = #{record.province,jdbcType=VARCHAR},
+        budgetDepartment = #{record.budgetdepartment,jdbcType=VARCHAR},
+        budgetValue = #{record.budgetvalue,jdbcType=INTEGER},
+        clue = #{record.clue,jdbcType=INTEGER},
+        startTime = #{record.starttime,jdbcType=TIMESTAMP},
+        finishTime = #{record.finishtime,jdbcType=TIMESTAMP},
+        linkType = #{record.linktype,jdbcType=VARCHAR},
+        linkUrl = #{record.linkurl,jdbcType=VARCHAR},
+        remark = #{record.remark,jdbcType=VARCHAR},
+        userId = #{record.userid,jdbcType=VARCHAR},
+        branch = #{record.branch,jdbcType=VARCHAR},
+        status = #{record.status,jdbcType=INTEGER},
+        uploadFilePath = #{record.uploadfilepath,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.yiche.smp.domain.Boost">
+    update boost
+    set
+      status = #{status,jdbcType=INTEGER},
+      uploadFilePath = #{uploadfilepath,jdbcType=VARCHAR},
+      filename=#{fileName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <!--添加补量申请表单-->
+    <insert id="insertSelective" parameterType="com.yiche.smp.domain.Boost" keyProperty="id" useGeneratedKeys="true">
+        insert into boost
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="number != null">
+                number,
+            </if>
+            <if test="carmake != null">
+                carmake,
+            </if>
+            <if test="carbrand != null">
+                carbrand,
+            </if>
+            <if test="carmodel != null">
+                carmodel,
+            </if>
+            <if test="province != null">
+                province,
+            </if>
+            <if test="budgetdepartment != null">
+                budgetDepartment,
+            </if>
+            <if test="budgetvalue != null">
+                budgetValue,
+            </if>
+            <if test="clue != null">
+                clue,
+            </if>
+            <if test="starttime != null">
+                startTime,
+            </if>
+            <if test="finishtime != null">
+                finishTime,
+            </if>
+            <if test="linktype != null">
+                linkType,
+            </if>
+            <if test="linkurl != null">
+                linkUrl,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="userid != null">
+                userId,
+            </if>
+            <if test="branch != null">
+                branch,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="uploadfilepath != null">
+                uploadFilePath,
+            </if>
+            <if test="applyTime != null">
+                applyTime,
+            </if>
+            <if test="applyYear !=null">
+                applyYear,
+            </if>
+            <if test="refuseReason !=null">
+                refuseReason,
+            </if>
+            <if test="carMakeId !=null">
+                carmakeId,
+            </if>
+            <if test="carBrandId !=null">
+                carbrandId,
+            </if>
+            <if test="carModelId !=null">
+                carmodelId,
+            </if>
+            <if test="provinceId !=null">
+                provinceId,
+            </if>
+            <if test="strategy !=null">
+                strategy
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="number != null">
+                #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="carmake != null">
+                #{carmake,jdbcType=VARCHAR},
+            </if>
+            <if test="carbrand != null">
+                #{carbrand,jdbcType=VARCHAR},
+            </if>
+            <if test="carmodel != null">
+                #{carmodel,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null">
+                #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="budgetdepartment != null">
+                #{budgetdepartment,jdbcType=VARCHAR},
+            </if>
+            <if test="budgetvalue != null">
+                #{budgetvalue,jdbcType=INTEGER},
+            </if>
+            <if test="clue != null">
+                #{clue,jdbcType=INTEGER},
+            </if>
+            <if test="starttime != null">
+                #{starttime,jdbcType=VARCHAR},
+            </if>
+            <if test="finishtime != null">
+                #{finishtime,jdbcType=VARCHAR},
+            </if>
+            <if test="linktype != null">
+                #{linktype,jdbcType=VARCHAR},
+            </if>
+            <if test="linkurl != null">
+                #{linkurl,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="userid != null">
+                #{userid,jdbcType=VARCHAR},
+            </if>
+            <if test="branch != null">
+                #{branch,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="uploadfilepath != null">
+                #{uploadfilepath,jdbcType=VARCHAR},
+            </if>
+            <if test="applyTime != null">
+                #{applyTime},
+            </if>
+            <if test="applyYear !=null">
+                #{applyYear},
+            </if>
+            <if test="refuseReason !=null">
+                #{refuseReason},
+            </if>
+            <if test="carMakeId !=null">
+                #{carMakeId},
+            </if>
+            <if test="carBrandId !=null">
+                #{carBrandId},
+            </if>
+            <if test="carModelId !=null">
+                #{carModelId},
+            </if>
+            <if test="provinceId !=null">
+                #{provinceId},
+            </if>
+            <if test="strategy !=null">
+                #{strategy}
+            </if>
+        </trim>
+    </insert>
+    <!--删除该条补量申请记录-->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from boost
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <!--再次提交审核表单的修改-->
+    <update id="updateByPrimaryKeySelective" parameterType="com.yiche.smp.domain.Boost">
+        update boost
+        <set>
+            <if test="number != null">
+                number = #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="carmake != null">
+                carmake = #{carmake,jdbcType=VARCHAR},
+            </if>
+            <if test="carbrand != null">
+                carbrand = #{carbrand,jdbcType=VARCHAR},
+            </if>
+            <if test="carmodel != null">
+                carmodel = #{carmodel,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null">
+                province = #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="budgetdepartment != null">
+                budgetDepartment = #{budgetdepartment,jdbcType=VARCHAR},
+            </if>
+            <if test="budgetvalue != null">
+                budgetValue = #{budgetvalue,jdbcType=INTEGER},
+            </if>
+            <if test="clue != null">
+                clue = #{clue,jdbcType=INTEGER},
+            </if>
+            <if test="starttime != null">
+                startTime = #{starttime,jdbcType=VARCHAR},
+            </if>
+            <if test="finishtime != null">
+                finishTime = #{finishtime,jdbcType=VARCHAR},
+            </if>
+            <if test="linktype != null">
+                linkType = #{linktype,jdbcType=VARCHAR},
+            </if>
+            <if test="linkurl != null">
+                linkUrl = #{linkurl,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="userid != null">
+                userId = #{userid,jdbcType=VARCHAR},
+            </if>
+            <if test="branch != null">
+                branch = #{branch,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="uploadfilepath != null">
+                uploadFilePath = #{uploadfilepath,jdbcType=VARCHAR},
+            </if>
+            <if test="refuseReason != null">
+                refuseReason = #{refuseReason,jdbcType=VARCHAR},
+            </if>
+            <if test="applyTime != null">
+                applyTime = #{applyTime},
+            </if>
+            <if test="applyYear != null">
+                applyYear = #{applyYear,jdbcType=VARCHAR},
+            </if>
+            <if test="carMakeId != null">
+                carmakeId = #{carMakeId,jdbcType=VARCHAR},
+            </if>
+            <if test="carBrandId != null">
+                carbrandId = #{carBrandId,jdbcType=VARCHAR},
+            </if>
+            <if test="carModelId != null">
+                carmodelId = #{carModelId,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceId != null">
+                provinceId = #{provinceId,jdbcType=VARCHAR},
+            </if>
+            <if test="strategy != null">
+                strategy = #{strategy,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--修改审核信息-->
+    <update id="updateCheckMes">
+        update boost
+        <set>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="refuseReason != null">
+                refuseReason = #{refuseReason,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--业务申请部门的申请岗查看自己申请列表-->
+    <select id="selectOwnApplyList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="com.yiche.smp.mapper.CityMapper.Base_Column_List"/>
+        from boost
+        left join city on boost.id=city.boostId
+        <where>
+            boost.userId=#{userId}
+        </where>
+        order by id ASC
+    </select>
+    <!--业务申请部门的审核岗查看【从未审核过的】申请列表-->
+    <select id="selectAppltDeptUnCheckList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="com.yiche.smp.mapper.CityMapper.Base_Column_List"/>
+        from boost
+        left join city on boost.id=city.boostId
+        where branch=#{dept} and status =0
+        order by id ASC
+    </select>
+    <!--业务申请部门的审核岗查看【审核过的通过】申请列表-->
+    <select id="selectAppltDeptCheckList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="com.yiche.smp.mapper.CityMapper.Base_Column_List"/>
+        from boost
+        left join city on boost.id=city.boostId
+        where branch=#{dept} and status =1 or status=2 or status=3 or status=4
+        order by id ASC
+    </select>
+    <!--补量实施部门的操作岗查看【从未审核过】申请列表  -->
+    <select id="selectCarryDeptOptionUnCheckList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="com.yiche.smp.mapper.CityMapper.Base_Column_List"/>
+        from boost
+        left join city on boost.id=city.boostId
+        where status =1
+        order by id ASC
+    </select>
+    <!--补量实施部门的操作岗查看【审核过通过】申请列表-->
+    <select id="selectCarryDeptOptionCheckList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="com.yiche.smp.mapper.CityMapper.Base_Column_List"/>
+        from boost
+        left join city on boost.id=city.boostId
+        where status =2 or status =3 or status =4
+        order by id ASC
+    </select>
+    <!--补量实施部门的审核岗查看【从未审核过】申请列表-->
+    <select id="selectCarryDeptAuditUnCheckList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="com.yiche.smp.mapper.CityMapper.Base_Column_List"/>
+        from boost
+        left join city on boost.id=city.boostId
+        where status =2
+        order by id ASC
+    </select>
+    <!--补量实施部门的审核岗查看【审核过通过】申请列表-->
+    <select id="selectCarryDeptAuditCheckList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="com.yiche.smp.mapper.CityMapper.Base_Column_List"/>
+        from boost
+        left join city on boost.id=city.boostId
+        where status =3 or status=4
+        order by id ASC
+    </select>
+    <!--查看补量申请详情【根据补量ID】-->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="com.yiche.smp.mapper.CityMapper.Base_Column_List"/>
+        from boost
+        left join city on boost.id=city.boostId
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <!--生成申请单序号-->
+    <insert id="createApplySeq" useGeneratedKeys="true" keyProperty="seqId">
+  insert into boost_sequence( description) values(#{description} )
+  </insert>
+    <!--设置申请单序号从1开始生成【会清空表中原有数据】-->
+    <update id="reTruncate">
+        truncate table boost_sequence
+    </update>
+    <!--再次申请表单回显-->
+    <select id="selectBoostVoById" resultMap="BaseResultMapExtend">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="com.yiche.smp.mapper.CityMapper.Base_Column_List"/>
+        from boost
+        left join city on boost.id=city.boostId
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+</mapper>
