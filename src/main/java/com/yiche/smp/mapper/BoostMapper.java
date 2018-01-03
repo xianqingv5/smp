@@ -10,7 +10,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 /**
- *
+ *fff
  */
 public interface BoostMapper {
     int countByExample(@Param("currentYear") String currentYear);
