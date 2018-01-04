@@ -8,7 +8,6 @@ import com.yiche.smp.common.TrendJudgeEnum;
 import com.yiche.smp.common.early.warning.EarlyWarning;
 import com.yiche.smp.common.early.warning.EarlyWarningList;
 import com.yiche.smp.common.early.warning.EarlyWarningPiece;
-import com.yiche.smp.common.early.warning.ResultBrand;
 import com.yiche.smp.common.euraka.data.Data;
 import com.yiche.smp.core.service.EarlyWarningService;
 import com.yiche.smp.domain.SellTrend;
