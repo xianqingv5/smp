@@ -10,6 +10,7 @@
         <result column="month" property="month" jdbcType="VARCHAR"/>
         <result column="quarter_data" property="quarterData" jdbcType="VARCHAR"/>
         <result column="year_data" property="yearData" jdbcType="VARCHAR"/>
+        <result column="status" property="status"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -73,7 +74,7 @@
     </sql>
     <sql id="Base_Column_List">
     launch_stategy_id, advert_type, channel_trait, commerce_festival, car_show_stategy, 
-    month,quarter_data,year_data
+    month,quarter_data,year_data,status
   </sql>
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yiche.smp.domain.SmpLaunchStategyExample">
         select

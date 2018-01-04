@@ -1,7 +1,9 @@
 package com.yiche.smp.api;
 
+import com.yiche.smp.common.CluesTrend.ClueTrend;
 import com.yiche.smp.common.CollectionUtil;
 import com.yiche.smp.common.ResultResponse;
+import com.yiche.smp.common.StringUtil;
 import com.yiche.smp.core.service.AvgCluesTendenService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,10 +32,10 @@ public class AvgCluesTendenController {
 
     @ApiOperation("每月店均线索趋势数据")
     @RequestMapping(value = "/intelligent/getClueTrendData", produces = MediaType.APPLICATION_JSON_UTF8_VALUE + ";charset=utf-8", method = RequestMethod.POST)
-    public ResultResponse cluesTenden(@RequestBody Map <String, String> map) {
+    public ResultResponse cluesTenden(@RequestBody Map<String, String> map) {
         if (CollectionUtil.notEmpty(map)) {
             String monthData = map.get("monthData");
-            Map <String, Object> result = new HashMap <>();
+            Map<String, Object> result = new HashMap<>();
             result.put("data", avgCluesTendenService.getClueTrendData(monthData));
             return ResultResponse.success(result);
         }

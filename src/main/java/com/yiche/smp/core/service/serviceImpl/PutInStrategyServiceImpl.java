@@ -217,7 +217,8 @@ public class PutInStrategyServiceImpl implements PutInStrategyService {
                 bodies.add(new TBody(smpLaunchStategy.getAdvertType(),
                         smpLaunchStategy.getChannelTrait(),
                         smpLaunchStategy.getCommerceFestival(),
-                        smpLaunchStategy.getCarShowStategy()));
+                        smpLaunchStategy.getCarShowStategy(),
+                        smpLaunchStategy.getStatus()));
             }
         }
         return bodies;

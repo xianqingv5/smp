@@ -14,6 +14,15 @@ public class SmpLaunchStategy {
     private String month;
     private String quarterData;
     private String yearData;
+    private int status;
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public String getQuarterData() {
         return quarterData;

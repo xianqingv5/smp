@@ -12,15 +12,25 @@ public class TBody implements Serializable {
     private String shopStrategy;
 
     private String carStrategy;
+    private int status;
 
-    public TBody(String advType, String channelInfo, String shopStrategy, String carStrategy) {
+    public TBody(String advType, String channelInfo, String shopStrategy, String carStrategy, int status) {
         this.advType = advType;
         this.channelInfo = channelInfo;
         this.shopStrategy = shopStrategy;
         this.carStrategy = carStrategy;
+        this.status = status;
     }
 
     public TBody() {
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public String getAdvType() {
