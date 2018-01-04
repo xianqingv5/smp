@@ -44,7 +44,7 @@ public class SmpLaunchStategy {
     }
 
     public void setAdvertType(String advertType) {
-        this.advertType = advertType == null ? null : advertType.trim();
+        this.advertType = advertType;
     }
 
     public String getChannelTrait() {

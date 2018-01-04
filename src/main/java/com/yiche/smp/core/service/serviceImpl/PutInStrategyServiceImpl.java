@@ -33,8 +33,8 @@ public class PutInStrategyServiceImpl implements PutInStrategyService {
      * 表格
      */
     public Data getPutStrategyTable(SmpLaunchStategy smpLaunchStategy) {
-        List <SmpLaunchStategy> smpLaunchStategies = smpLaunchStategyMapper.selectByYearAndQuarter(smpLaunchStategy);
-        return new Data(jointHead(), jointBody(smpLaunchStategies));
+        List<SmpLaunchStategy> smpLaunchStategies = smpLaunchStategyMapper.selectByYearAndQuarter(smpLaunchStategy);
+        return new Data(jointHead(smpLaunchStategies), jointBody(smpLaunchStategies));
     }
 
     /**
@@ -44,15 +44,15 @@ public class PutInStrategyServiceImpl implements PutInStrategyService {
         com.yiche.smp.common.put.in.strategy.chart.Data data = new com.yiche.smp.common.put.in.strategy.chart.Data();
         //legend
         //获取所有品牌(线索)
-        List <SmpStategyClue> smpStategyClues = smpStategyClueMapper.selectByExample(new SmpStategyClueExample());
+        List<SmpStategyClue> smpStategyClues = smpStategyClueMapper.selectByExample(new SmpStategyClueExample());
         //去重(获取所有品牌)
-        Set <String> brandNames = checkBrandToClue(smpStategyClues);
+        Set<String> brandNames = checkBrandToClue(smpStategyClues);
         //获取日期
-        List <String> month = checkMonthToClue(smpStategyClues);
+        List<String> month = checkMonthToClue(smpStategyClues);
         //计算数据
-        List <Series> series = checkSeriesToClue(smpStategyClues, brandNames);
+        List<Series> series = checkSeriesToClue(smpStategyClues, brandNames);
         Chart chart = new Chart();
-        ArrayList <String> strings = new ArrayList <>(brandNames);
+        ArrayList<String> strings = new ArrayList<>(brandNames);
         Tooltip tooltip = new Tooltip();
         chart.setTooltip(tooltip);
         chart.setLegend(new Legend(strings));
@@ -60,15 +60,15 @@ public class PutInStrategyServiceImpl implements PutInStrategyService {
         chart.setyAxis(new YAxis("value", "单位:条"));
         chart.setSeries(series);
         //成本
-        List <SmpStategyCost> smpStategyCosts = smpStategyCostMapper.selectByExample(new SmpStategyCostExample());
+        List<SmpStategyCost> smpStategyCosts = smpStategyCostMapper.selectByExample(new SmpStategyCostExample());
         //去重(获取所有品牌)
-        Set <String> costBrands = checkBrandToCost(smpStategyCosts);
+        Set<String> costBrands = checkBrandToCost(smpStategyCosts);
         //获取日期
-        List <String> costMonth = checkMonthToCost(smpStategyCosts);
+        List<String> costMonth = checkMonthToCost(smpStategyCosts);
         //计算数据
-        List <Series> costSeries = checkSeriesToCost(smpStategyCosts, costBrands);
+        List<Series> costSeries = checkSeriesToCost(smpStategyCosts, costBrands);
         Chart costChart = new Chart();
-        List <String> costStrings = new ArrayList <>(costBrands);
+        List<String> costStrings = new ArrayList<>(costBrands);
         costChart.setTooltip(tooltip);
         costChart.setLegend(new Legend(costStrings));
         costChart.setxAxis(new XAxis("category", false, costMonth));
@@ -83,10 +83,10 @@ public class PutInStrategyServiceImpl implements PutInStrategyService {
     /**
      * 获取所有品牌(线索)
      */
-    private Set <String> checkBrandToClue(List <SmpStategyClue> smpStategyClues) {
-        Set <String> brandNames = null;
+    private Set<String> checkBrandToClue(List<SmpStategyClue> smpStategyClues) {
+        Set<String> brandNames = null;
         if (CollectionUtil.listNotNull(smpStategyClues)) {
-            brandNames = new LinkedHashSet <>();
+            brandNames = new LinkedHashSet<>();
             for (int i = 0; i < smpStategyClues.size(); i++) {
                 for (SmpStategyClue smpStategyClue : smpStategyClues) {
                     if (smpStategyClues.get(i).getChannelName().equals(smpStategyClue.getChannelName())) {
@@ -102,10 +102,10 @@ public class PutInStrategyServiceImpl implements PutInStrategyService {
     /**
      * 获取所有品牌(成本)
      */
-    private Set <String> checkBrandToCost(List <SmpStategyCost> smpStategyClues) {
-        Set <String> brandNames = null;
+    private Set<String> checkBrandToCost(List<SmpStategyCost> smpStategyClues) {
+        Set<String> brandNames = null;
         if (CollectionUtil.listNotNull(smpStategyClues)) {
-            brandNames = new LinkedHashSet <>();
+            brandNames = new LinkedHashSet<>();
             for (int i = 0; i < smpStategyClues.size(); i++) {
                 for (SmpStategyCost smpStategyClue : smpStategyClues) {
                     if (smpStategyClues.get(i).getCostChannelName().equals(smpStategyClue.getCostChannelName())) {
@@ -122,10 +122,10 @@ public class PutInStrategyServiceImpl implements PutInStrategyService {
     /**
      * 获取日期
      */
-    private List <String> checkMonthToClue(List <SmpStategyClue> smpStategyClues) {
-        List <String> month = null;
+    private List<String> checkMonthToClue(List<SmpStategyClue> smpStategyClues) {
+        List<String> month = null;
         if (CollectionUtil.listNotNull(smpStategyClues)) {
-            month = new ArrayList <>();
+            month = new ArrayList<>();
             for (SmpStategyClue smpStategyClue : smpStategyClues) {
                 if (smpStategyClues.get(0).getChannelName().equals(smpStategyClue.getChannelName())) {
                     month.add(smpStategyClue.getMonth());
@@ -138,10 +138,10 @@ public class PutInStrategyServiceImpl implements PutInStrategyService {
     /**
      * 获取日期(成本)
      */
-    private List <String> checkMonthToCost(List <SmpStategyCost> smpStategyClues) {
-        List <String> month = null;
+    private List<String> checkMonthToCost(List<SmpStategyCost> smpStategyClues) {
+        List<String> month = null;
         if (CollectionUtil.listNotNull(smpStategyClues)) {
-            month = new ArrayList <>();
+            month = new ArrayList<>();
             for (SmpStategyCost smpStategyClue : smpStategyClues) {
                 if (smpStategyClues.get(0).getCostChannelName().equals(smpStategyClue.getCostChannelName())) {
                     month.add(smpStategyClue.getCostMonth());
@@ -154,12 +154,12 @@ public class PutInStrategyServiceImpl implements PutInStrategyService {
     /**
      * 计算数据
      */
-    private List <Series> checkSeriesToClue(List <SmpStategyClue> smpStategyClues, Set <String> brandNames) {
-        List <Series> series = null;
+    private List<Series> checkSeriesToClue(List<SmpStategyClue> smpStategyClues, Set<String> brandNames) {
+        List<Series> series = null;
         if (CollectionUtil.listNotNull(smpStategyClues)) {
-            series = new ArrayList <>();
+            series = new ArrayList<>();
             for (String brand : brandNames) {
-                List <String> list = new ArrayList <>();
+                List<String> list = new ArrayList<>();
                 for (SmpStategyClue smpStategyClue : smpStategyClues) {
                     if (brand.equals(smpStategyClue.getChannelName())) {
                         list.add(StringUtil.handletoRound(smpStategyClue.getClueNum()));
@@ -174,12 +174,12 @@ public class PutInStrategyServiceImpl implements PutInStrategyService {
     /**
      * 计算数据(成本)
      */
-    private List <Series> checkSeriesToCost(List <SmpStategyCost> smpStategyClues, Set <String> brandNames) {
-        List <Series> series = null;
+    private List<Series> checkSeriesToCost(List<SmpStategyCost> smpStategyClues, Set<String> brandNames) {
+        List<Series> series = null;
         if (CollectionUtil.listNotNull(smpStategyClues)) {
-            series = new ArrayList <>();
+            series = new ArrayList<>();
             for (String brand : brandNames) {
-                List <String> list = new ArrayList <>();
+                List<String> list = new ArrayList<>();
                 for (SmpStategyCost smpStategyClue : smpStategyClues) {
                     if (brand.equals(smpStategyClue.getCostChannelName())) {
                         list.add(StringUtil.handletoRound(smpStategyClue.getCost()));
@@ -195,20 +195,24 @@ public class PutInStrategyServiceImpl implements PutInStrategyService {
     /**
      * 拼接头部
      */
-    private List <THead> jointHead() {
-        return Arrays.asList(new THead("advType", "广告类型"),
-                new THead("channelInfo", "渠道特点"),
-                new THead("shopStrategy", "电商节策略"),
-                new THead("carStrategy", "车展策略"));
+    private List<THead> jointHead(List<SmpLaunchStategy> smpLaunchStategy) {
+        if (CollectionUtil.listNotNull(smpLaunchStategy)) {
+            return Arrays.asList(new THead("advType", "类型"),
+                    new THead("channelInfo", "成本"),
+                    new THead("shopStrategy", "成本变化趋势"),
+                    new THead("carStrategy", "建议投放策略"));
+        }
+        return null;
+
     }
 
     /**
      * 拼接主体
      */
-    private List <TBody> jointBody(List <SmpLaunchStategy> smpLaunchStategies) {
-        List <TBody> bodies = null;
+    private List<TBody> jointBody(List<SmpLaunchStategy> smpLaunchStategies) {
+        List<TBody> bodies = null;
         if (CollectionUtil.listNotNull(smpLaunchStategies)) {
-            bodies = new ArrayList <>();
+            bodies = new ArrayList<>();
             for (SmpLaunchStategy smpLaunchStategy : smpLaunchStategies) {
                 bodies.add(new TBody(smpLaunchStategy.getAdvertType(),
                         smpLaunchStategy.getChannelTrait(),
