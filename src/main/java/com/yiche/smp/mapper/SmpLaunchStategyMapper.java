@@ -6,6 +6,12 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface SmpLaunchStategyMapper {
+    /**
+     * 根据年份和季度查询对应的数据
+     * @param smpLaunchStategy
+     * @return
+     */
+    List<SmpLaunchStategy> selectByYearAndQuarter(SmpLaunchStategy smpLaunchStategy);
     int countByExample(SmpLaunchStategyExample example);
 
     int deleteByExample(SmpLaunchStategyExample example);

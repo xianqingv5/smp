@@ -2,9 +2,11 @@ package com.yiche.smp.api;
 
 import com.yiche.smp.common.ResultResponse;
 import com.yiche.smp.core.service.PutInStrategyService;
+import com.yiche.smp.domain.SmpLaunchStategy;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,8 +23,8 @@ public class PutInStrategyController {
 
     @RequestMapping(value = "/intelligent/getPutStrategyTable", method = RequestMethod.POST)
     @ApiOperation("投放策略表格")
-    public ResultResponse getPutStrategyTable() {
-        return ResultResponse.success(putInStrategyService.getPutStrategyTable());
+    public ResultResponse getPutStrategyTable(@RequestBody SmpLaunchStategy smpLaunchStategy) {
+        return ResultResponse.success(putInStrategyService.getPutStrategyTable(smpLaunchStategy));
     }
 
     @RequestMapping(value = "/intelligent/getPutStrategyChart", method = RequestMethod.POST)

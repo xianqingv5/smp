@@ -12,6 +12,24 @@ public class SmpLaunchStategy {
     private String carShowStategy;
 
     private String month;
+    private String quarterData;
+    private String yearData;
+
+    public String getQuarterData() {
+        return quarterData;
+    }
+
+    public void setQuarterData(String quarterData) {
+        this.quarterData = quarterData;
+    }
+
+    public String getYearData() {
+        return yearData;
+    }
+
+    public void setYearData(String yearData) {
+        this.yearData = yearData;
+    }
 
     public Integer getLaunchStategyId() {
         return launchStategyId;

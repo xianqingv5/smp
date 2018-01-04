@@ -32,8 +32,8 @@ public class PutInStrategyServiceImpl implements PutInStrategyService {
     /**
      * 表格
      */
-    public Data getPutStrategyTable() {
-        List <SmpLaunchStategy> smpLaunchStategies = smpLaunchStategyMapper.selectByExample(new SmpLaunchStategyExample());
+    public Data getPutStrategyTable(SmpLaunchStategy smpLaunchStategy) {
+        List <SmpLaunchStategy> smpLaunchStategies = smpLaunchStategyMapper.selectByYearAndQuarter(smpLaunchStategy);
         return new Data(jointHead(), jointBody(smpLaunchStategies));
     }
 
