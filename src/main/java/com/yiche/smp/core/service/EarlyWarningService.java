@@ -1,9 +1,7 @@
 package com.yiche.smp.core.service;
 
-import com.yiche.smp.common.barchart.Barchart;
 import com.yiche.smp.common.early.warning.EarlyWarning;
 import com.yiche.smp.common.early.warning.EarlyWarningPiece;
-import com.yiche.smp.common.early.warning.ResultBrand;
 import com.yiche.smp.common.euraka.data.Data;
 
 import java.text.ParseException;

@@ -7,9 +7,7 @@ import com.yiche.smp.common.key.index.ratio.TBody;
 import com.yiche.smp.common.key.index.ratio.THead;
 import com.yiche.smp.core.service.KeyIndexCompareService;
 import com.yiche.smp.domain.*;
-import com.yiche.smp.mapper.ChannelDetailMapper;
 import com.yiche.smp.mapper.KeyTargetCompareMapper;
-import com.yiche.smp.mapper.OverviewChannelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,10 +22,10 @@ import java.util.*;
 @Service
 public class KeyIndexCompareServiceImpl implements KeyIndexCompareService {
 
-    @Autowired
-    private OverviewChannelMapper overviewChannelMapper;
-    @Autowired
-    private ChannelDetailMapper channelDetailMapper;
+    // @Autowired
+    // private OverviewChannelMapper overviewChannelMapper;
+    // @Autowired
+    // private ChannelDetailMapper channelDetailMapper;
     @Autowired
     private KeyTargetCompareMapper keyTargetCompareMapper;
 

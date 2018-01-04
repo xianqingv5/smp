@@ -4,17 +4,10 @@ import com.yiche.smp.common.cluecost.CluePlantDataParam;
 import com.yiche.smp.core.service.ClueTotalTrendService;
 import com.yiche.smp.domain.*;
 import com.yiche.smp.mapper.*;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

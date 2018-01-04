@@ -1,11 +1,8 @@
 package com.yiche.smp.core.service.serviceImpl;
 
-import com.yiche.smp.common.util.DataCalculationUtils;
 import com.yiche.smp.core.service.ImportMySqlService;
 import com.yiche.smp.domain.ChannelDetail;
-import com.yiche.smp.domain.ChannelQuality;
 import com.yiche.smp.mapper.ChannelDetailMapper;
-import com.yiche.smp.mapper.ChannelQualityMapper;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -26,8 +23,8 @@ import java.io.FileInputStream;
 public class ImportMysqlServiceimpl implements ImportMySqlService {
     @Autowired
     private ChannelDetailMapper channelDetailMapper;
-    @Autowired
-    private ChannelQualityMapper channelqualityMapper;
+    // @Autowired
+    // private ChannelQualityMapper channelqualityMapper;
 
     @Override
     public void importData() {

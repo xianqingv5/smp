@@ -3,7 +3,6 @@ package com.yiche.smp.mapper;
 import com.yiche.smp.domain.ClueServiceConsume;
 import com.yiche.smp.domain.ClueServiceConsumeExample;
 
-import java.util.Date;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

@@ -5,7 +5,6 @@ import com.yiche.smp.common.ResultResponse;
 import com.yiche.smp.common.StringUtil;
 import com.yiche.smp.common.early.warning.EarlyWarning;
 import com.yiche.smp.common.early.warning.EarlyWarningPiece;
-import com.yiche.smp.common.early.warning.ResultBrand;
 import com.yiche.smp.common.euraka.data.Data;
 import com.yiche.smp.core.service.EarlyWarningService;
 import io.swagger.annotations.Api;

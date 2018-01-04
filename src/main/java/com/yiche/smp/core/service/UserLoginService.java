@@ -3,7 +3,6 @@ package com.yiche.smp.core.service;
 import com.yiche.smp.domain.UserPower;
 
 import java.io.IOException;
-import java.util.Map;
 
 /**
  * funtion:
