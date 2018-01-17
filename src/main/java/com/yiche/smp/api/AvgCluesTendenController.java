@@ -1,9 +1,7 @@
 package com.yiche.smp.api;
 
-import com.yiche.smp.common.CluesTrend.ClueTrend;
 import com.yiche.smp.common.CollectionUtil;
 import com.yiche.smp.common.ResultResponse;
-import com.yiche.smp.common.StringUtil;
 import com.yiche.smp.core.service.AvgCluesTendenService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
