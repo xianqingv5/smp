@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -47,6 +48,7 @@ public class DateUtil {
                     strings.add((year - 1) + "-" + flag--);
                 }
             }
+            Collections.reverse(strings);
         }
         return strings;
     }
