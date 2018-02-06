@@ -1,5 +1,7 @@
 package com.yiche.smp.domain;
 
+import com.yiche.smp.common.util.DataCalculationUtils;
+
 public class ChannelQuality {
     private Integer id;
 
@@ -110,7 +112,7 @@ public class ChannelQuality {
     }
 
     public Double getScoreChange() {
-        return scoreChange;
+        return DataCalculationUtils.doubleDeal(scoreChange);
     }
 
     public void setScoreChange(Double scoreChange) {
