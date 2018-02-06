@@ -45,10 +45,12 @@ public class ClueTendencyServiceImpl implements ClueTendencyService {
             List <MonthClueColumnar> monthClueColumnars = monthClueColumnarMapper.selectByExample(monthClueColumnarExample);
             if (CollectionUtil.listNotNull(monthClueColumnars)) {
                 monthClueColumnarList.addAll(monthClueColumnars);
+            }else{
+            	monthClueColumnarList.add(null);
             }
         }
         if (!CollectionUtil.listNotNull(monthClueColumnarList)) {
-            return null;
+        	return null;
         }
         //添加月份
         List <String> data = DateUtil.DisposeDateMonth(strings, "月");
