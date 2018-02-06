@@ -38,7 +38,7 @@ public class DataCalculationUtils {
      */
     public static double doubleDeal(double val) {
         double number = 0.0;
-        DecimalFormat df = new DecimalFormat("#.0");
+        DecimalFormat df = new DecimalFormat("#.00");
 //java默认的格式是HALF_EVEN   根据如果第二位为偶数第三位为5则五舍六入
         df.setRoundingMode(RoundingMode.HALF_UP);
         number = Double.parseDouble(df.format(val));
@@ -47,7 +47,7 @@ public class DataCalculationUtils {
 
     public static void main(String[] args) {
         // System.out.println(div(118822851.29,1000000.0,2));
-        System.out.println(doubleDeal(6.67));
+        System.out.println(doubleDeal(-0.66));
 
     }
 
