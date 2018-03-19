@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yiche.smp.mapper.ChannelNamesMapper">
+    <select id="selectChannelNames" parameterType="map" resultType="com.yiche.smp.common.Channel">
+        SELECT DISTINCT
+	    channelName
+        FROM
+	(
+		SELECT DISTINCT
+			"易车APP"    platformName,
+			channel_name channelName
+		FROM
+			yiche_app_app_leads_channel_day_all
+        where channel_name IS NOT NULL
+		UNION
+		SELECT DISTINCT
+			"报价APP"    platformName,
+			channel_name channelName
+		FROM
+			yiche_quote_app_leads_channel_day_all
+        where channel_name IS NOT NULL
+		UNION
+		SELECT DISTINCT
+			"PCWAP"    platformName,
+			channel_name channelName
+		FROM
+			yiche_pcwap_app_leads_channel_day_all
+        where channel_name IS NOT NULL
+	) yiche_channelNames_sum
+	<where>
+		<if test="platformName != null">
+			platformName = #{platformName}
+		</if>
+	</where>
+    </select>
+</mapper>

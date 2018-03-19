@@ -2,6 +2,7 @@ package com.yiche.smp.common;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -74,6 +75,40 @@ public class DateParseUtil {
             e.printStackTrace();
         }
         return null;
+    }
+
+    //获取当前系统前一天日期
+    public static Date getNextDay1(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DAY_OF_MONTH, -1);
+        date = calendar.getTime();
+        return date;
+    }
+    //  获取当前系统当天日期
+    public static Date getNextDay2(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DAY_OF_MONTH, 0);
+        date = calendar.getTime();
+        return date;
+    }
+
+    //获取当前系统下一天日期
+    public static Date getNextDay3(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+        date = calendar.getTime();
+        return date;
+    }
+
+    public static void main(String[] args) throws ParseException {
+        /*SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString="2000-03-01";
+        Date date = df.parse(dateString);
+        Date preDay = getPreDay(date);
+        System.out.println(dateTostring(preDay,"yyyy-MM-dd"));*/
     }
 
 }

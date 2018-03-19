@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yiche.smp.mapper.DisplayDayReportMapper">
+
+    <select id="getSumDataDay" resultType="com.yiche.smp.common.GatherYicheAPP" parameterType="map">
+        SELECT
+            SUM(leadsCnt)       leadsCnt,
+            SUM(leadsUserCnt)   leadsUserCnt,
+            SUM(actualConsume) actualConsume,
+            bt                  bt
+        FROM
+            (
+                SELECT
+                    SUM(leads_cnt)       leadsCnt,
+                    SUM(leads_user_cnt)  leadsUserCnt,
+                    SUM(actual_consume) actualConsume,
+                    bt                   bt
+                FROM
+                    yiche_app_app_leads_channel_day_all
+                WHERE
+                    bt = #{date}
+                    AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="易车APP")
+                UNION
+                SELECT
+                    SUM(leads_cnt)       leadsCnt,
+                    SUM(leads_user_cnt)  leadsUserCnt,
+                    SUM(actual_consume) actualConsume,
+                    bt                   bt
+                FROM
+                    yiche_quote_app_leads_channel_day_all
+                WHERE
+                    bt = #{date}
+                    AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="报价APP")
+                UNION
+                SELECT
+                    SUM(cluecount)       leadsCnt,
+                    SUM(clueusercount)   leadsUserCnt,
+                    SUM(actual_consume) actualConsume,
+                    dt                   bt
+                FROM
+                    yiche_pcwap_app_leads_channel_day_all
+                WHERE
+                    dt = #{date}
+                    AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="PCWAP")
+            ) yiche_sum_day_report
+    </select>
+
+
+    <select id="getPlatformDataDay" parameterType="map" resultType="com.yiche.smp.common.GatherYicheAPP">
+        SELECT
+            platformName   platformName,
+            leadsCnt       leadsCnt,
+            leadsUserCnt   leadsUserCnt,
+            actualConsume actualConsume,
+            bt             bt
+        FROM
+            (
+                SELECT
+                    "易车APP"             platformName,
+                    SUM(leads_cnt)       leadsCnt,
+                    SUM(leads_user_cnt)  leadsUserCnt,
+                    SUM(actual_consume) actualConsume,
+                    bt                   bt
+                FROM
+                    yiche_app_app_leads_channel_day_all
+                WHERE
+                    bt = #{date}
+                    AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="易车APP")
+                UNION
+                SELECT
+                    "报价APP"              platformName,
+                    SUM(leads_cnt)       leadsCnt,
+                    SUM(leads_user_cnt)  leadsUserCnt,
+                    SUM(actual_consume) actualConsume,
+                    bt                   bt
+                FROM
+                    yiche_quote_app_leads_channel_day_all
+                WHERE
+                    bt = #{date}
+                    AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="报价APP")
+                UNION
+                SELECT
+                    "PCWAP"              platformName,
+                    SUM(cluecount)       leadsCnt,
+                    SUM(clueusercount)   leadsUserCnt,
+                    SUM(actual_consume) actualConsume,
+                    dt                   bt
+                FROM
+                    yiche_pcwap_app_leads_channel_day_all
+                WHERE
+                    dt = #{date}
+                    AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="PCWAP")
+            ) yiche_platformName_day_report
+        WHERE platformName=#{platformName}
+    </select>
+
+    <select id="getplatformChannelDataDay" parameterType="map" resultType="com.yiche.smp.common.YichePlatform">
+        SELECT
+            platformName,
+            channelName,
+            leadsCnt,
+            leadsUserCnt,
+            actualConsume,
+            bt,
+            newUserCnt,
+            newUserCost,
+            systemId
+        FROM (
+            SELECT
+                "易车APP"          platformName,
+                a.channel_name    channelName,
+                a.leads_cnt       leadsCnt,
+                a.leads_user_cnt  leadsUserCnt,
+                a.actual_consume actualConsume,
+                a.bt              bt,
+                a.new_user_cnt    newUserCnt,
+                a.new_user_cost   newUserCost,
+                b.system_id       systemId
+            FROM
+                yiche_app_app_leads_channel_day_all a, imp_platform_channel b
+            WHERE
+                a.bt = #{date} AND a.channel_id = b.channel_id AND b.system_id =#{systemId} AND platform_name="易车APP"
+            UNION
+            SELECT
+                "报价APP"          platformName,
+                a.channel_name    channelName,
+                a.leads_cnt       leadsCnt,
+                a.leads_user_cnt  leadsUserCnt,
+                a.actual_consume actualConsume,
+                a.bt              bt,
+                a.new_user_cnt    newUserCnt,
+                a.new_user_cost   newUserCost,
+                b.system_id       systemId
+            FROM
+                yiche_quote_app_leads_channel_day_all a, imp_platform_channel b
+            WHERE
+                a.bt = #{date} AND a.channel_id = b.channel_id AND b.system_id =#{systemId} AND platform_name="报价APP"
+        ) yiche_quote_platform
+        WHERE platformName=#{platformName}
+    </select>
+
+    <select id="getPcwapchannelDataDay" parameterType="map" resultType="com.yiche.smp.common.YichePlatform">
+        SELECT
+            "PCWAP" platformName,
+            a.channel_name channelName,
+            a.cluecount leadsCnt,
+            a.clueusercount leadsUserCnt,
+            a.actual_consume actualConsume,
+            a.dt bt,
+            b.terminal_id
+        FROM
+            yiche_pcwap_app_leads_channel_day_all a,
+            imp_platform_channel b
+        WHERE
+            a.dt = #{date} AND a.channel_id = b.channel_id AND b.terminal_id =#{terminalId}
+    </select>
+
+
+
+</mapper>
