@@ -20,7 +20,7 @@ public class WebConfigurerAdapter extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginInterceptor()).excludePathPatterns("/intelligent/login", "/exportExcel",
                 "/download/enclosure", "/download/boost", "/download/apply",
-                "/upload/uncheatAttachment", "/upload/boost", "/upload/apply", "/", "/intelligent/loginOut"
+                "/upload/uncheatAttachment", "/upload/boost", "/upload/apply", "/", "/intelligent/loginOut","/exportSumExce","/intelligent/channelnames","/intelligent/pagechannelconsume","/intelligent/dayPlatformreport","/intelligent/dayEarlyWarning","/intelligent/monthChannelConsume","/intelligent/dayEarlyWarningData"
         );
     }
 
