@@ -1,0 +1,1227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yiche.smp.mapper.YicheQuoteAppLeadsChannelDayMapper" >
+  <resultMap id="BaseResultMap" type="com.yiche.smp.domain.YicheQuoteAppLeadsChannelDay" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="channel_id" property="channelId" jdbcType="VARCHAR" />
+    <result column="channel_name" property="channelName" jdbcType="VARCHAR" />
+    <result column="user_cnt" property="userCnt" jdbcType="BIGINT" />
+    <result column="overlap_7day" property="overlap7day" jdbcType="BIGINT" />
+    <result column="new_user_cnt" property="newUserCnt" jdbcType="BIGINT" />
+    <result column="new_user_cost" property="newUserCost" jdbcType="REAL" />
+    <result column="leads_cnt" property="leadsCnt" jdbcType="BIGINT" />
+    <result column="user_to_leads_reta" property="userToLeadsReta" jdbcType="REAL" />
+    <result column="leads_cost" property="leadsCost" jdbcType="REAL" />
+    <result column="new_leads_cnt" property="newLeadsCnt" jdbcType="BIGINT" />
+    <result column="new_leads_reta" property="newLeadsReta" jdbcType="REAL" />
+    <result column="new_leads_cost" property="newLeadsCost" jdbcType="REAL" />
+    <result column="user_to_leads_7day_cnt" property="userToLeads7dayCnt" jdbcType="BIGINT" />
+    <result column="user_to_leads_7day_reta" property="userToLeads7dayReta" jdbcType="REAL" />
+    <result column="user_to_leads_7day_cost" property="userToLeads7dayCost" jdbcType="REAL" />
+    <result column="user_to_leads_30day_cnt" property="userToLeads30dayCnt" jdbcType="BIGINT" />
+    <result column="user_to_leads_30day_reta" property="userToLeads30dayReta" jdbcType="REAL" />
+    <result column="user_to_leads_30day_cost" property="userToLeads30dayCost" jdbcType="REAL" />
+    <result column="leads_user_cnt" property="leadsUserCnt" jdbcType="BIGINT" />
+    <result column="leads_user_cnt_reta" property="leadsUserCntReta" jdbcType="REAL" />
+    <result column="leads_user_cost" property="leadsUserCost" jdbcType="REAL" />
+    <result column="new_leads_user_cnt" property="newLeadsUserCnt" jdbcType="BIGINT" />
+    <result column="new_leads_user_reta" property="newLeadsUserReta" jdbcType="REAL" />
+    <result column="brand_new_leads_user_cnt" property="brandNewLeadsUserCnt" jdbcType="BIGINT" />
+    <result column="brand_new_leads_user_reta" property="brandNewLeadsUserReta" jdbcType="REAL" />
+    <result column="new_leads_user_cost" property="newLeadsUserCost" jdbcType="REAL" />
+    <result column="new_user_to_leads_cnt" property="newUserToLeadsCnt" jdbcType="BIGINT" />
+    <result column="new_user_to_leads_reta" property="newUserToLeadsReta" jdbcType="REAL" />
+    <result column="new_user_to_leads_cost" property="newUserToLeadsCost" jdbcType="REAL" />
+    <result column="new_user_to_leads_7day_cnt" property="newUserToLeads7dayCnt" jdbcType="BIGINT" />
+    <result column="new_user_to_leads_7day_reta" property="newUserToLeads7dayReta" jdbcType="REAL" />
+    <result column="new_user_to_leads_7day_cost" property="newUserToLeads7dayCost" jdbcType="REAL" />
+    <result column="new_user_to_leads_30day_cnt" property="newUserToLeads30dayCnt" jdbcType="BIGINT" />
+    <result column="new_user_to_leads_30day_reta" property="newUserToLeads30dayReta" jdbcType="REAL" />
+    <result column="new_user_to_leads_30day_cost" property="newUserToLeads30dayCost" jdbcType="REAL" />
+    <result column="user_cnt_2reta" property="userCnt2reta" jdbcType="REAL" />
+    <result column="user_cnt_3reta" property="userCnt3reta" jdbcType="REAL" />
+    <result column="user_cnt_7reta" property="userCnt7reta" jdbcType="REAL" />
+    <result column="user_cnt_14reta" property="userCnt14reta" jdbcType="REAL" />
+    <result column="user_cnt_30reta" property="userCnt30reta" jdbcType="REAL" />
+    <result column="visit_time_avg" property="visitTimeAvg" jdbcType="REAL" />
+    <result column="visit_page_avg" property="visitPageAvg" jdbcType="REAL" />
+    <result column="visit_model_pv" property="visitModelPv" jdbcType="BIGINT" />
+    <result column="visit_model_reta" property="visitModelReta" jdbcType="REAL" />
+    <result column="visit_leads_pv" property="visitLeadsPv" jdbcType="BIGINT" />
+    <result column="visit_leads_reta" property="visitLeadsReta" jdbcType="REAL" />
+    <result column="call_user_cnt" property="callUserCnt" jdbcType="BIGINT" />
+    <result column="call_cnt" property="callCnt" jdbcType="BIGINT" />
+    <result column="call_answer_reta" property="callAnswerReta" jdbcType="REAL" />
+    <result column="call_questionnaire_done_reta" property="callQuestionnaireDoneReta" jdbcType="REAL" />
+    <result column="car_buy_plan_reta" property="carBuyPlanReta" jdbcType="REAL" />
+    <result column="exit_price_reta" property="exitPriceReta" jdbcType="REAL" />
+    <result column="exit_leads_user_cnt" property="exitLeadsUserCnt" jdbcType="BIGINT" />
+    <result column="overlap_year_reta" property="overlapYearReta" jdbcType="REAL" />
+    <result column="model_plan_cnt" property="modelPlanCnt" jdbcType="REAL" />
+    <result column="car_plan_cnt" property="carPlanCnt" jdbcType="REAL" />
+    <result column="brand_plan_cnt" property="brandPlanCnt" jdbcType="REAL" />
+    <result column="remote_leads_reta" property="remoteLeadsReta" jdbcType="REAL" />
+    <result column="bt" property="bt" jdbcType="VARCHAR" />
+    <result column="clue_avg" property="clueAvg" jdbcType="REAL" />
+    <result column="clueusercount_brandyear" property="clueusercountBrandyear" jdbcType="BIGINT" />
+    <result column="platform_userrepeat_percent" property="platformUserrepeatPercent" jdbcType="REAL" />
+    <result column="platform_brand_userrepeat_percent" property="platformBrandUserrepeatPercent" jdbcType="REAL" />
+    <result column="actual_consume" property="actualConsume" jdbcType="REAL" />
+    <result column="account_consume" property="accountConsume" jdbcType="REAL" />
+    <result column="agency_rebate" property="agencyRebate" jdbcType="REAL" />
+    <result column="media_rebate" property="mediaRebate" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, channel_id, channel_name, user_cnt, overlap_7day, new_user_cnt, new_user_cost, 
+    leads_cnt, user_to_leads_reta, leads_cost, new_leads_cnt, new_leads_reta, new_leads_cost, 
+    user_to_leads_7day_cnt, user_to_leads_7day_reta, user_to_leads_7day_cost, user_to_leads_30day_cnt, 
+    user_to_leads_30day_reta, user_to_leads_30day_cost, leads_user_cnt, leads_user_cnt_reta, 
+    leads_user_cost, new_leads_user_cnt, new_leads_user_reta, brand_new_leads_user_cnt, 
+    brand_new_leads_user_reta, new_leads_user_cost, new_user_to_leads_cnt, new_user_to_leads_reta, 
+    new_user_to_leads_cost, new_user_to_leads_7day_cnt, new_user_to_leads_7day_reta, 
+    new_user_to_leads_7day_cost, new_user_to_leads_30day_cnt, new_user_to_leads_30day_reta, 
+    new_user_to_leads_30day_cost, user_cnt_2reta, user_cnt_3reta, user_cnt_7reta, user_cnt_14reta, 
+    user_cnt_30reta, visit_time_avg, visit_page_avg, visit_model_pv, visit_model_reta, 
+    visit_leads_pv, visit_leads_reta, call_user_cnt, call_cnt, call_answer_reta, call_questionnaire_done_reta, 
+    car_buy_plan_reta, exit_price_reta, exit_leads_user_cnt, overlap_year_reta, model_plan_cnt, 
+    car_plan_cnt, brand_plan_cnt, remote_leads_reta, bt, clue_avg, clueusercount_brandyear, 
+    platform_userrepeat_percent, platform_brand_userrepeat_percent, actual_consume, account_consume, 
+    agency_rebate, media_rebate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yiche.smp.domain.YicheQuoteAppLeadsChannelDayExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from yiche_quote_app_leads_channel_day_all
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from yiche_quote_app_leads_channel_day_all
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from yiche_quote_app_leads_channel_day_all
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yiche.smp.domain.YicheQuoteAppLeadsChannelDayExample" >
+    delete from yiche_quote_app_leads_channel_day_all
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yiche.smp.domain.YicheQuoteAppLeadsChannelDay" >
+    insert into yiche_quote_app_leads_channel_day_all (id, channel_id, channel_name, 
+      user_cnt, overlap_7day, new_user_cnt, 
+      new_user_cost, leads_cnt, user_to_leads_reta, 
+      leads_cost, new_leads_cnt, new_leads_reta, 
+      new_leads_cost, user_to_leads_7day_cnt, user_to_leads_7day_reta, 
+      user_to_leads_7day_cost, user_to_leads_30day_cnt, user_to_leads_30day_reta, 
+      user_to_leads_30day_cost, leads_user_cnt, leads_user_cnt_reta, 
+      leads_user_cost, new_leads_user_cnt, new_leads_user_reta, 
+      brand_new_leads_user_cnt, brand_new_leads_user_reta, 
+      new_leads_user_cost, new_user_to_leads_cnt, new_user_to_leads_reta, 
+      new_user_to_leads_cost, new_user_to_leads_7day_cnt, 
+      new_user_to_leads_7day_reta, new_user_to_leads_7day_cost, 
+      new_user_to_leads_30day_cnt, new_user_to_leads_30day_reta, 
+      new_user_to_leads_30day_cost, user_cnt_2reta, user_cnt_3reta, 
+      user_cnt_7reta, user_cnt_14reta, user_cnt_30reta, 
+      visit_time_avg, visit_page_avg, visit_model_pv, 
+      visit_model_reta, visit_leads_pv, visit_leads_reta, 
+      call_user_cnt, call_cnt, call_answer_reta, 
+      call_questionnaire_done_reta, car_buy_plan_reta, exit_price_reta, 
+      exit_leads_user_cnt, overlap_year_reta, model_plan_cnt, 
+      car_plan_cnt, brand_plan_cnt, remote_leads_reta, 
+      bt, clue_avg, clueusercount_brandyear, 
+      platform_userrepeat_percent, platform_brand_userrepeat_percent, 
+      actual_consume, account_consume, agency_rebate, 
+      media_rebate)
+    values (#{id,jdbcType=BIGINT}, #{channelId,jdbcType=VARCHAR}, #{channelName,jdbcType=VARCHAR}, 
+      #{userCnt,jdbcType=BIGINT}, #{overlap7day,jdbcType=BIGINT}, #{newUserCnt,jdbcType=BIGINT}, 
+      #{newUserCost,jdbcType=REAL}, #{leadsCnt,jdbcType=BIGINT}, #{userToLeadsReta,jdbcType=REAL}, 
+      #{leadsCost,jdbcType=REAL}, #{newLeadsCnt,jdbcType=BIGINT}, #{newLeadsReta,jdbcType=REAL}, 
+      #{newLeadsCost,jdbcType=REAL}, #{userToLeads7dayCnt,jdbcType=BIGINT}, #{userToLeads7dayReta,jdbcType=REAL}, 
+      #{userToLeads7dayCost,jdbcType=REAL}, #{userToLeads30dayCnt,jdbcType=BIGINT}, #{userToLeads30dayReta,jdbcType=REAL}, 
+      #{userToLeads30dayCost,jdbcType=REAL}, #{leadsUserCnt,jdbcType=BIGINT}, #{leadsUserCntReta,jdbcType=REAL}, 
+      #{leadsUserCost,jdbcType=REAL}, #{newLeadsUserCnt,jdbcType=BIGINT}, #{newLeadsUserReta,jdbcType=REAL}, 
+      #{brandNewLeadsUserCnt,jdbcType=BIGINT}, #{brandNewLeadsUserReta,jdbcType=REAL}, 
+      #{newLeadsUserCost,jdbcType=REAL}, #{newUserToLeadsCnt,jdbcType=BIGINT}, #{newUserToLeadsReta,jdbcType=REAL}, 
+      #{newUserToLeadsCost,jdbcType=REAL}, #{newUserToLeads7dayCnt,jdbcType=BIGINT}, 
+      #{newUserToLeads7dayReta,jdbcType=REAL}, #{newUserToLeads7dayCost,jdbcType=REAL}, 
+      #{newUserToLeads30dayCnt,jdbcType=BIGINT}, #{newUserToLeads30dayReta,jdbcType=REAL}, 
+      #{newUserToLeads30dayCost,jdbcType=REAL}, #{userCnt2reta,jdbcType=REAL}, #{userCnt3reta,jdbcType=REAL}, 
+      #{userCnt7reta,jdbcType=REAL}, #{userCnt14reta,jdbcType=REAL}, #{userCnt30reta,jdbcType=REAL}, 
+      #{visitTimeAvg,jdbcType=REAL}, #{visitPageAvg,jdbcType=REAL}, #{visitModelPv,jdbcType=BIGINT}, 
+      #{visitModelReta,jdbcType=REAL}, #{visitLeadsPv,jdbcType=BIGINT}, #{visitLeadsReta,jdbcType=REAL}, 
+      #{callUserCnt,jdbcType=BIGINT}, #{callCnt,jdbcType=BIGINT}, #{callAnswerReta,jdbcType=REAL}, 
+      #{callQuestionnaireDoneReta,jdbcType=REAL}, #{carBuyPlanReta,jdbcType=REAL}, #{exitPriceReta,jdbcType=REAL}, 
+      #{exitLeadsUserCnt,jdbcType=BIGINT}, #{overlapYearReta,jdbcType=REAL}, #{modelPlanCnt,jdbcType=REAL}, 
+      #{carPlanCnt,jdbcType=REAL}, #{brandPlanCnt,jdbcType=REAL}, #{remoteLeadsReta,jdbcType=REAL}, 
+      #{bt,jdbcType=VARCHAR}, #{clueAvg,jdbcType=REAL}, #{clueusercountBrandyear,jdbcType=BIGINT}, 
+      #{platformUserrepeatPercent,jdbcType=REAL}, #{platformBrandUserrepeatPercent,jdbcType=REAL}, 
+      #{actualConsume,jdbcType=REAL}, #{accountConsume,jdbcType=REAL}, #{agencyRebate,jdbcType=REAL}, 
+      #{mediaRebate,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yiche.smp.domain.YicheQuoteAppLeadsChannelDay" >
+    insert into yiche_quote_app_leads_channel_day_all
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+      <if test="channelName != null" >
+        channel_name,
+      </if>
+      <if test="userCnt != null" >
+        user_cnt,
+      </if>
+      <if test="overlap7day != null" >
+        overlap_7day,
+      </if>
+      <if test="newUserCnt != null" >
+        new_user_cnt,
+      </if>
+      <if test="newUserCost != null" >
+        new_user_cost,
+      </if>
+      <if test="leadsCnt != null" >
+        leads_cnt,
+      </if>
+      <if test="userToLeadsReta != null" >
+        user_to_leads_reta,
+      </if>
+      <if test="leadsCost != null" >
+        leads_cost,
+      </if>
+      <if test="newLeadsCnt != null" >
+        new_leads_cnt,
+      </if>
+      <if test="newLeadsReta != null" >
+        new_leads_reta,
+      </if>
+      <if test="newLeadsCost != null" >
+        new_leads_cost,
+      </if>
+      <if test="userToLeads7dayCnt != null" >
+        user_to_leads_7day_cnt,
+      </if>
+      <if test="userToLeads7dayReta != null" >
+        user_to_leads_7day_reta,
+      </if>
+      <if test="userToLeads7dayCost != null" >
+        user_to_leads_7day_cost,
+      </if>
+      <if test="userToLeads30dayCnt != null" >
+        user_to_leads_30day_cnt,
+      </if>
+      <if test="userToLeads30dayReta != null" >
+        user_to_leads_30day_reta,
+      </if>
+      <if test="userToLeads30dayCost != null" >
+        user_to_leads_30day_cost,
+      </if>
+      <if test="leadsUserCnt != null" >
+        leads_user_cnt,
+      </if>
+      <if test="leadsUserCntReta != null" >
+        leads_user_cnt_reta,
+      </if>
+      <if test="leadsUserCost != null" >
+        leads_user_cost,
+      </if>
+      <if test="newLeadsUserCnt != null" >
+        new_leads_user_cnt,
+      </if>
+      <if test="newLeadsUserReta != null" >
+        new_leads_user_reta,
+      </if>
+      <if test="brandNewLeadsUserCnt != null" >
+        brand_new_leads_user_cnt,
+      </if>
+      <if test="brandNewLeadsUserReta != null" >
+        brand_new_leads_user_reta,
+      </if>
+      <if test="newLeadsUserCost != null" >
+        new_leads_user_cost,
+      </if>
+      <if test="newUserToLeadsCnt != null" >
+        new_user_to_leads_cnt,
+      </if>
+      <if test="newUserToLeadsReta != null" >
+        new_user_to_leads_reta,
+      </if>
+      <if test="newUserToLeadsCost != null" >
+        new_user_to_leads_cost,
+      </if>
+      <if test="newUserToLeads7dayCnt != null" >
+        new_user_to_leads_7day_cnt,
+      </if>
+      <if test="newUserToLeads7dayReta != null" >
+        new_user_to_leads_7day_reta,
+      </if>
+      <if test="newUserToLeads7dayCost != null" >
+        new_user_to_leads_7day_cost,
+      </if>
+      <if test="newUserToLeads30dayCnt != null" >
+        new_user_to_leads_30day_cnt,
+      </if>
+      <if test="newUserToLeads30dayReta != null" >
+        new_user_to_leads_30day_reta,
+      </if>
+      <if test="newUserToLeads30dayCost != null" >
+        new_user_to_leads_30day_cost,
+      </if>
+      <if test="userCnt2reta != null" >
+        user_cnt_2reta,
+      </if>
+      <if test="userCnt3reta != null" >
+        user_cnt_3reta,
+      </if>
+      <if test="userCnt7reta != null" >
+        user_cnt_7reta,
+      </if>
+      <if test="userCnt14reta != null" >
+        user_cnt_14reta,
+      </if>
+      <if test="userCnt30reta != null" >
+        user_cnt_30reta,
+      </if>
+      <if test="visitTimeAvg != null" >
+        visit_time_avg,
+      </if>
+      <if test="visitPageAvg != null" >
+        visit_page_avg,
+      </if>
+      <if test="visitModelPv != null" >
+        visit_model_pv,
+      </if>
+      <if test="visitModelReta != null" >
+        visit_model_reta,
+      </if>
+      <if test="visitLeadsPv != null" >
+        visit_leads_pv,
+      </if>
+      <if test="visitLeadsReta != null" >
+        visit_leads_reta,
+      </if>
+      <if test="callUserCnt != null" >
+        call_user_cnt,
+      </if>
+      <if test="callCnt != null" >
+        call_cnt,
+      </if>
+      <if test="callAnswerReta != null" >
+        call_answer_reta,
+      </if>
+      <if test="callQuestionnaireDoneReta != null" >
+        call_questionnaire_done_reta,
+      </if>
+      <if test="carBuyPlanReta != null" >
+        car_buy_plan_reta,
+      </if>
+      <if test="exitPriceReta != null" >
+        exit_price_reta,
+      </if>
+      <if test="exitLeadsUserCnt != null" >
+        exit_leads_user_cnt,
+      </if>
+      <if test="overlapYearReta != null" >
+        overlap_year_reta,
+      </if>
+      <if test="modelPlanCnt != null" >
+        model_plan_cnt,
+      </if>
+      <if test="carPlanCnt != null" >
+        car_plan_cnt,
+      </if>
+      <if test="brandPlanCnt != null" >
+        brand_plan_cnt,
+      </if>
+      <if test="remoteLeadsReta != null" >
+        remote_leads_reta,
+      </if>
+      <if test="bt != null" >
+        bt,
+      </if>
+      <if test="clueAvg != null" >
+        clue_avg,
+      </if>
+      <if test="clueusercountBrandyear != null" >
+        clueusercount_brandyear,
+      </if>
+      <if test="platformUserrepeatPercent != null" >
+        platform_userrepeat_percent,
+      </if>
+      <if test="platformBrandUserrepeatPercent != null" >
+        platform_brand_userrepeat_percent,
+      </if>
+      <if test="actualConsume != null" >
+        actual_consume,
+      </if>
+      <if test="accountConsume != null" >
+        account_consume,
+      </if>
+      <if test="agencyRebate != null" >
+        agency_rebate,
+      </if>
+      <if test="mediaRebate != null" >
+        media_rebate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="channelName != null" >
+        #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="userCnt != null" >
+        #{userCnt,jdbcType=BIGINT},
+      </if>
+      <if test="overlap7day != null" >
+        #{overlap7day,jdbcType=BIGINT},
+      </if>
+      <if test="newUserCnt != null" >
+        #{newUserCnt,jdbcType=BIGINT},
+      </if>
+      <if test="newUserCost != null" >
+        #{newUserCost,jdbcType=REAL},
+      </if>
+      <if test="leadsCnt != null" >
+        #{leadsCnt,jdbcType=BIGINT},
+      </if>
+      <if test="userToLeadsReta != null" >
+        #{userToLeadsReta,jdbcType=REAL},
+      </if>
+      <if test="leadsCost != null" >
+        #{leadsCost,jdbcType=REAL},
+      </if>
+      <if test="newLeadsCnt != null" >
+        #{newLeadsCnt,jdbcType=BIGINT},
+      </if>
+      <if test="newLeadsReta != null" >
+        #{newLeadsReta,jdbcType=REAL},
+      </if>
+      <if test="newLeadsCost != null" >
+        #{newLeadsCost,jdbcType=REAL},
+      </if>
+      <if test="userToLeads7dayCnt != null" >
+        #{userToLeads7dayCnt,jdbcType=BIGINT},
+      </if>
+      <if test="userToLeads7dayReta != null" >
+        #{userToLeads7dayReta,jdbcType=REAL},
+      </if>
+      <if test="userToLeads7dayCost != null" >
+        #{userToLeads7dayCost,jdbcType=REAL},
+      </if>
+      <if test="userToLeads30dayCnt != null" >
+        #{userToLeads30dayCnt,jdbcType=BIGINT},
+      </if>
+      <if test="userToLeads30dayReta != null" >
+        #{userToLeads30dayReta,jdbcType=REAL},
+      </if>
+      <if test="userToLeads30dayCost != null" >
+        #{userToLeads30dayCost,jdbcType=REAL},
+      </if>
+      <if test="leadsUserCnt != null" >
+        #{leadsUserCnt,jdbcType=BIGINT},
+      </if>
+      <if test="leadsUserCntReta != null" >
+        #{leadsUserCntReta,jdbcType=REAL},
+      </if>
+      <if test="leadsUserCost != null" >
+        #{leadsUserCost,jdbcType=REAL},
+      </if>
+      <if test="newLeadsUserCnt != null" >
+        #{newLeadsUserCnt,jdbcType=BIGINT},
+      </if>
+      <if test="newLeadsUserReta != null" >
+        #{newLeadsUserReta,jdbcType=REAL},
+      </if>
+      <if test="brandNewLeadsUserCnt != null" >
+        #{brandNewLeadsUserCnt,jdbcType=BIGINT},
+      </if>
+      <if test="brandNewLeadsUserReta != null" >
+        #{brandNewLeadsUserReta,jdbcType=REAL},
+      </if>
+      <if test="newLeadsUserCost != null" >
+        #{newLeadsUserCost,jdbcType=REAL},
+      </if>
+      <if test="newUserToLeadsCnt != null" >
+        #{newUserToLeadsCnt,jdbcType=BIGINT},
+      </if>
+      <if test="newUserToLeadsReta != null" >
+        #{newUserToLeadsReta,jdbcType=REAL},
+      </if>
+      <if test="newUserToLeadsCost != null" >
+        #{newUserToLeadsCost,jdbcType=REAL},
+      </if>
+      <if test="newUserToLeads7dayCnt != null" >
+        #{newUserToLeads7dayCnt,jdbcType=BIGINT},
+      </if>
+      <if test="newUserToLeads7dayReta != null" >
+        #{newUserToLeads7dayReta,jdbcType=REAL},
+      </if>
+      <if test="newUserToLeads7dayCost != null" >
+        #{newUserToLeads7dayCost,jdbcType=REAL},
+      </if>
+      <if test="newUserToLeads30dayCnt != null" >
+        #{newUserToLeads30dayCnt,jdbcType=BIGINT},
+      </if>
+      <if test="newUserToLeads30dayReta != null" >
+        #{newUserToLeads30dayReta,jdbcType=REAL},
+      </if>
+      <if test="newUserToLeads30dayCost != null" >
+        #{newUserToLeads30dayCost,jdbcType=REAL},
+      </if>
+      <if test="userCnt2reta != null" >
+        #{userCnt2reta,jdbcType=REAL},
+      </if>
+      <if test="userCnt3reta != null" >
+        #{userCnt3reta,jdbcType=REAL},
+      </if>
+      <if test="userCnt7reta != null" >
+        #{userCnt7reta,jdbcType=REAL},
+      </if>
+      <if test="userCnt14reta != null" >
+        #{userCnt14reta,jdbcType=REAL},
+      </if>
+      <if test="userCnt30reta != null" >
+        #{userCnt30reta,jdbcType=REAL},
+      </if>
+      <if test="visitTimeAvg != null" >
+        #{visitTimeAvg,jdbcType=REAL},
+      </if>
+      <if test="visitPageAvg != null" >
+        #{visitPageAvg,jdbcType=REAL},
+      </if>
+      <if test="visitModelPv != null" >
+        #{visitModelPv,jdbcType=BIGINT},
+      </if>
+      <if test="visitModelReta != null" >
+        #{visitModelReta,jdbcType=REAL},
+      </if>
+      <if test="visitLeadsPv != null" >
+        #{visitLeadsPv,jdbcType=BIGINT},
+      </if>
+      <if test="visitLeadsReta != null" >
+        #{visitLeadsReta,jdbcType=REAL},
+      </if>
+      <if test="callUserCnt != null" >
+        #{callUserCnt,jdbcType=BIGINT},
+      </if>
+      <if test="callCnt != null" >
+        #{callCnt,jdbcType=BIGINT},
+      </if>
+      <if test="callAnswerReta != null" >
+        #{callAnswerReta,jdbcType=REAL},
+      </if>
+      <if test="callQuestionnaireDoneReta != null" >
+        #{callQuestionnaireDoneReta,jdbcType=REAL},
+      </if>
+      <if test="carBuyPlanReta != null" >
+        #{carBuyPlanReta,jdbcType=REAL},
+      </if>
+      <if test="exitPriceReta != null" >
+        #{exitPriceReta,jdbcType=REAL},
+      </if>
+      <if test="exitLeadsUserCnt != null" >
+        #{exitLeadsUserCnt,jdbcType=BIGINT},
+      </if>
+      <if test="overlapYearReta != null" >
+        #{overlapYearReta,jdbcType=REAL},
+      </if>
+      <if test="modelPlanCnt != null" >
+        #{modelPlanCnt,jdbcType=REAL},
+      </if>
+      <if test="carPlanCnt != null" >
+        #{carPlanCnt,jdbcType=REAL},
+      </if>
+      <if test="brandPlanCnt != null" >
+        #{brandPlanCnt,jdbcType=REAL},
+      </if>
+      <if test="remoteLeadsReta != null" >
+        #{remoteLeadsReta,jdbcType=REAL},
+      </if>
+      <if test="bt != null" >
+        #{bt,jdbcType=VARCHAR},
+      </if>
+      <if test="clueAvg != null" >
+        #{clueAvg,jdbcType=REAL},
+      </if>
+      <if test="clueusercountBrandyear != null" >
+        #{clueusercountBrandyear,jdbcType=BIGINT},
+      </if>
+      <if test="platformUserrepeatPercent != null" >
+        #{platformUserrepeatPercent,jdbcType=REAL},
+      </if>
+      <if test="platformBrandUserrepeatPercent != null" >
+        #{platformBrandUserrepeatPercent,jdbcType=REAL},
+      </if>
+      <if test="actualConsume != null" >
+        #{actualConsume,jdbcType=REAL},
+      </if>
+      <if test="accountConsume != null" >
+        #{accountConsume,jdbcType=REAL},
+      </if>
+      <if test="agencyRebate != null" >
+        #{agencyRebate,jdbcType=REAL},
+      </if>
+      <if test="mediaRebate != null" >
+        #{mediaRebate,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yiche.smp.domain.YicheQuoteAppLeadsChannelDayExample" resultType="java.lang.Integer" >
+    select count(*) from yiche_quote_app_leads_channel_day_all
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update yiche_quote_app_leads_channel_day_all
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.channelId != null" >
+        channel_id = #{record.channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channelName != null" >
+        channel_name = #{record.channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userCnt != null" >
+        user_cnt = #{record.userCnt,jdbcType=BIGINT},
+      </if>
+      <if test="record.overlap7day != null" >
+        overlap_7day = #{record.overlap7day,jdbcType=BIGINT},
+      </if>
+      <if test="record.newUserCnt != null" >
+        new_user_cnt = #{record.newUserCnt,jdbcType=BIGINT},
+      </if>
+      <if test="record.newUserCost != null" >
+        new_user_cost = #{record.newUserCost,jdbcType=REAL},
+      </if>
+      <if test="record.leadsCnt != null" >
+        leads_cnt = #{record.leadsCnt,jdbcType=BIGINT},
+      </if>
+      <if test="record.userToLeadsReta != null" >
+        user_to_leads_reta = #{record.userToLeadsReta,jdbcType=REAL},
+      </if>
+      <if test="record.leadsCost != null" >
+        leads_cost = #{record.leadsCost,jdbcType=REAL},
+      </if>
+      <if test="record.newLeadsCnt != null" >
+        new_leads_cnt = #{record.newLeadsCnt,jdbcType=BIGINT},
+      </if>
+      <if test="record.newLeadsReta != null" >
+        new_leads_reta = #{record.newLeadsReta,jdbcType=REAL},
+      </if>
+      <if test="record.newLeadsCost != null" >
+        new_leads_cost = #{record.newLeadsCost,jdbcType=REAL},
+      </if>
+      <if test="record.userToLeads7dayCnt != null" >
+        user_to_leads_7day_cnt = #{record.userToLeads7dayCnt,jdbcType=BIGINT},
+      </if>
+      <if test="record.userToLeads7dayReta != null" >
+        user_to_leads_7day_reta = #{record.userToLeads7dayReta,jdbcType=REAL},
+      </if>
+      <if test="record.userToLeads7dayCost != null" >
+        user_to_leads_7day_cost = #{record.userToLeads7dayCost,jdbcType=REAL},
+      </if>
+      <if test="record.userToLeads30dayCnt != null" >
+        user_to_leads_30day_cnt = #{record.userToLeads30dayCnt,jdbcType=BIGINT},
+      </if>
+      <if test="record.userToLeads30dayReta != null" >
+        user_to_leads_30day_reta = #{record.userToLeads30dayReta,jdbcType=REAL},
+      </if>
+      <if test="record.userToLeads30dayCost != null" >
+        user_to_leads_30day_cost = #{record.userToLeads30dayCost,jdbcType=REAL},
+      </if>
+      <if test="record.leadsUserCnt != null" >
+        leads_user_cnt = #{record.leadsUserCnt,jdbcType=BIGINT},
+      </if>
+      <if test="record.leadsUserCntReta != null" >
+        leads_user_cnt_reta = #{record.leadsUserCntReta,jdbcType=REAL},
+      </if>
+      <if test="record.leadsUserCost != null" >
+        leads_user_cost = #{record.leadsUserCost,jdbcType=REAL},
+      </if>
+      <if test="record.newLeadsUserCnt != null" >
+        new_leads_user_cnt = #{record.newLeadsUserCnt,jdbcType=BIGINT},
+      </if>
+      <if test="record.newLeadsUserReta != null" >
+        new_leads_user_reta = #{record.newLeadsUserReta,jdbcType=REAL},
+      </if>
+      <if test="record.brandNewLeadsUserCnt != null" >
+        brand_new_leads_user_cnt = #{record.brandNewLeadsUserCnt,jdbcType=BIGINT},
+      </if>
+      <if test="record.brandNewLeadsUserReta != null" >
+        brand_new_leads_user_reta = #{record.brandNewLeadsUserReta,jdbcType=REAL},
+      </if>
+      <if test="record.newLeadsUserCost != null" >
+        new_leads_user_cost = #{record.newLeadsUserCost,jdbcType=REAL},
+      </if>
+      <if test="record.newUserToLeadsCnt != null" >
+        new_user_to_leads_cnt = #{record.newUserToLeadsCnt,jdbcType=BIGINT},
+      </if>
+      <if test="record.newUserToLeadsReta != null" >
+        new_user_to_leads_reta = #{record.newUserToLeadsReta,jdbcType=REAL},
+      </if>
+      <if test="record.newUserToLeadsCost != null" >
+        new_user_to_leads_cost = #{record.newUserToLeadsCost,jdbcType=REAL},
+      </if>
+      <if test="record.newUserToLeads7dayCnt != null" >
+        new_user_to_leads_7day_cnt = #{record.newUserToLeads7dayCnt,jdbcType=BIGINT},
+      </if>
+      <if test="record.newUserToLeads7dayReta != null" >
+        new_user_to_leads_7day_reta = #{record.newUserToLeads7dayReta,jdbcType=REAL},
+      </if>
+      <if test="record.newUserToLeads7dayCost != null" >
+        new_user_to_leads_7day_cost = #{record.newUserToLeads7dayCost,jdbcType=REAL},
+      </if>
+      <if test="record.newUserToLeads30dayCnt != null" >
+        new_user_to_leads_30day_cnt = #{record.newUserToLeads30dayCnt,jdbcType=BIGINT},
+      </if>
+      <if test="record.newUserToLeads30dayReta != null" >
+        new_user_to_leads_30day_reta = #{record.newUserToLeads30dayReta,jdbcType=REAL},
+      </if>
+      <if test="record.newUserToLeads30dayCost != null" >
+        new_user_to_leads_30day_cost = #{record.newUserToLeads30dayCost,jdbcType=REAL},
+      </if>
+      <if test="record.userCnt2reta != null" >
+        user_cnt_2reta = #{record.userCnt2reta,jdbcType=REAL},
+      </if>
+      <if test="record.userCnt3reta != null" >
+        user_cnt_3reta = #{record.userCnt3reta,jdbcType=REAL},
+      </if>
+      <if test="record.userCnt7reta != null" >
+        user_cnt_7reta = #{record.userCnt7reta,jdbcType=REAL},
+      </if>
+      <if test="record.userCnt14reta != null" >
+        user_cnt_14reta = #{record.userCnt14reta,jdbcType=REAL},
+      </if>
+      <if test="record.userCnt30reta != null" >
+        user_cnt_30reta = #{record.userCnt30reta,jdbcType=REAL},
+      </if>
+      <if test="record.visitTimeAvg != null" >
+        visit_time_avg = #{record.visitTimeAvg,jdbcType=REAL},
+      </if>
+      <if test="record.visitPageAvg != null" >
+        visit_page_avg = #{record.visitPageAvg,jdbcType=REAL},
+      </if>
+      <if test="record.visitModelPv != null" >
+        visit_model_pv = #{record.visitModelPv,jdbcType=BIGINT},
+      </if>
+      <if test="record.visitModelReta != null" >
+        visit_model_reta = #{record.visitModelReta,jdbcType=REAL},
+      </if>
+      <if test="record.visitLeadsPv != null" >
+        visit_leads_pv = #{record.visitLeadsPv,jdbcType=BIGINT},
+      </if>
+      <if test="record.visitLeadsReta != null" >
+        visit_leads_reta = #{record.visitLeadsReta,jdbcType=REAL},
+      </if>
+      <if test="record.callUserCnt != null" >
+        call_user_cnt = #{record.callUserCnt,jdbcType=BIGINT},
+      </if>
+      <if test="record.callCnt != null" >
+        call_cnt = #{record.callCnt,jdbcType=BIGINT},
+      </if>
+      <if test="record.callAnswerReta != null" >
+        call_answer_reta = #{record.callAnswerReta,jdbcType=REAL},
+      </if>
+      <if test="record.callQuestionnaireDoneReta != null" >
+        call_questionnaire_done_reta = #{record.callQuestionnaireDoneReta,jdbcType=REAL},
+      </if>
+      <if test="record.carBuyPlanReta != null" >
+        car_buy_plan_reta = #{record.carBuyPlanReta,jdbcType=REAL},
+      </if>
+      <if test="record.exitPriceReta != null" >
+        exit_price_reta = #{record.exitPriceReta,jdbcType=REAL},
+      </if>
+      <if test="record.exitLeadsUserCnt != null" >
+        exit_leads_user_cnt = #{record.exitLeadsUserCnt,jdbcType=BIGINT},
+      </if>
+      <if test="record.overlapYearReta != null" >
+        overlap_year_reta = #{record.overlapYearReta,jdbcType=REAL},
+      </if>
+      <if test="record.modelPlanCnt != null" >
+        model_plan_cnt = #{record.modelPlanCnt,jdbcType=REAL},
+      </if>
+      <if test="record.carPlanCnt != null" >
+        car_plan_cnt = #{record.carPlanCnt,jdbcType=REAL},
+      </if>
+      <if test="record.brandPlanCnt != null" >
+        brand_plan_cnt = #{record.brandPlanCnt,jdbcType=REAL},
+      </if>
+      <if test="record.remoteLeadsReta != null" >
+        remote_leads_reta = #{record.remoteLeadsReta,jdbcType=REAL},
+      </if>
+      <if test="record.bt != null" >
+        bt = #{record.bt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clueAvg != null" >
+        clue_avg = #{record.clueAvg,jdbcType=REAL},
+      </if>
+      <if test="record.clueusercountBrandyear != null" >
+        clueusercount_brandyear = #{record.clueusercountBrandyear,jdbcType=BIGINT},
+      </if>
+      <if test="record.platformUserrepeatPercent != null" >
+        platform_userrepeat_percent = #{record.platformUserrepeatPercent,jdbcType=REAL},
+      </if>
+      <if test="record.platformBrandUserrepeatPercent != null" >
+        platform_brand_userrepeat_percent = #{record.platformBrandUserrepeatPercent,jdbcType=REAL},
+      </if>
+      <if test="record.actualConsume != null" >
+        actual_consume = #{record.actualConsume,jdbcType=REAL},
+      </if>
+      <if test="record.accountConsume != null" >
+        account_consume = #{record.accountConsume,jdbcType=REAL},
+      </if>
+      <if test="record.agencyRebate != null" >
+        agency_rebate = #{record.agencyRebate,jdbcType=REAL},
+      </if>
+      <if test="record.mediaRebate != null" >
+        media_rebate = #{record.mediaRebate,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update yiche_quote_app_leads_channel_day_all
+    set id = #{record.id,jdbcType=BIGINT},
+      channel_id = #{record.channelId,jdbcType=VARCHAR},
+      channel_name = #{record.channelName,jdbcType=VARCHAR},
+      user_cnt = #{record.userCnt,jdbcType=BIGINT},
+      overlap_7day = #{record.overlap7day,jdbcType=BIGINT},
+      new_user_cnt = #{record.newUserCnt,jdbcType=BIGINT},
+      new_user_cost = #{record.newUserCost,jdbcType=REAL},
+      leads_cnt = #{record.leadsCnt,jdbcType=BIGINT},
+      user_to_leads_reta = #{record.userToLeadsReta,jdbcType=REAL},
+      leads_cost = #{record.leadsCost,jdbcType=REAL},
+      new_leads_cnt = #{record.newLeadsCnt,jdbcType=BIGINT},
+      new_leads_reta = #{record.newLeadsReta,jdbcType=REAL},
+      new_leads_cost = #{record.newLeadsCost,jdbcType=REAL},
+      user_to_leads_7day_cnt = #{record.userToLeads7dayCnt,jdbcType=BIGINT},
+      user_to_leads_7day_reta = #{record.userToLeads7dayReta,jdbcType=REAL},
+      user_to_leads_7day_cost = #{record.userToLeads7dayCost,jdbcType=REAL},
+      user_to_leads_30day_cnt = #{record.userToLeads30dayCnt,jdbcType=BIGINT},
+      user_to_leads_30day_reta = #{record.userToLeads30dayReta,jdbcType=REAL},
+      user_to_leads_30day_cost = #{record.userToLeads30dayCost,jdbcType=REAL},
+      leads_user_cnt = #{record.leadsUserCnt,jdbcType=BIGINT},
+      leads_user_cnt_reta = #{record.leadsUserCntReta,jdbcType=REAL},
+      leads_user_cost = #{record.leadsUserCost,jdbcType=REAL},
+      new_leads_user_cnt = #{record.newLeadsUserCnt,jdbcType=BIGINT},
+      new_leads_user_reta = #{record.newLeadsUserReta,jdbcType=REAL},
+      brand_new_leads_user_cnt = #{record.brandNewLeadsUserCnt,jdbcType=BIGINT},
+      brand_new_leads_user_reta = #{record.brandNewLeadsUserReta,jdbcType=REAL},
+      new_leads_user_cost = #{record.newLeadsUserCost,jdbcType=REAL},
+      new_user_to_leads_cnt = #{record.newUserToLeadsCnt,jdbcType=BIGINT},
+      new_user_to_leads_reta = #{record.newUserToLeadsReta,jdbcType=REAL},
+      new_user_to_leads_cost = #{record.newUserToLeadsCost,jdbcType=REAL},
+      new_user_to_leads_7day_cnt = #{record.newUserToLeads7dayCnt,jdbcType=BIGINT},
+      new_user_to_leads_7day_reta = #{record.newUserToLeads7dayReta,jdbcType=REAL},
+      new_user_to_leads_7day_cost = #{record.newUserToLeads7dayCost,jdbcType=REAL},
+      new_user_to_leads_30day_cnt = #{record.newUserToLeads30dayCnt,jdbcType=BIGINT},
+      new_user_to_leads_30day_reta = #{record.newUserToLeads30dayReta,jdbcType=REAL},
+      new_user_to_leads_30day_cost = #{record.newUserToLeads30dayCost,jdbcType=REAL},
+      user_cnt_2reta = #{record.userCnt2reta,jdbcType=REAL},
+      user_cnt_3reta = #{record.userCnt3reta,jdbcType=REAL},
+      user_cnt_7reta = #{record.userCnt7reta,jdbcType=REAL},
+      user_cnt_14reta = #{record.userCnt14reta,jdbcType=REAL},
+      user_cnt_30reta = #{record.userCnt30reta,jdbcType=REAL},
+      visit_time_avg = #{record.visitTimeAvg,jdbcType=REAL},
+      visit_page_avg = #{record.visitPageAvg,jdbcType=REAL},
+      visit_model_pv = #{record.visitModelPv,jdbcType=BIGINT},
+      visit_model_reta = #{record.visitModelReta,jdbcType=REAL},
+      visit_leads_pv = #{record.visitLeadsPv,jdbcType=BIGINT},
+      visit_leads_reta = #{record.visitLeadsReta,jdbcType=REAL},
+      call_user_cnt = #{record.callUserCnt,jdbcType=BIGINT},
+      call_cnt = #{record.callCnt,jdbcType=BIGINT},
+      call_answer_reta = #{record.callAnswerReta,jdbcType=REAL},
+      call_questionnaire_done_reta = #{record.callQuestionnaireDoneReta,jdbcType=REAL},
+      car_buy_plan_reta = #{record.carBuyPlanReta,jdbcType=REAL},
+      exit_price_reta = #{record.exitPriceReta,jdbcType=REAL},
+      exit_leads_user_cnt = #{record.exitLeadsUserCnt,jdbcType=BIGINT},
+      overlap_year_reta = #{record.overlapYearReta,jdbcType=REAL},
+      model_plan_cnt = #{record.modelPlanCnt,jdbcType=REAL},
+      car_plan_cnt = #{record.carPlanCnt,jdbcType=REAL},
+      brand_plan_cnt = #{record.brandPlanCnt,jdbcType=REAL},
+      remote_leads_reta = #{record.remoteLeadsReta,jdbcType=REAL},
+      bt = #{record.bt,jdbcType=VARCHAR},
+      clue_avg = #{record.clueAvg,jdbcType=REAL},
+      clueusercount_brandyear = #{record.clueusercountBrandyear,jdbcType=BIGINT},
+      platform_userrepeat_percent = #{record.platformUserrepeatPercent,jdbcType=REAL},
+      platform_brand_userrepeat_percent = #{record.platformBrandUserrepeatPercent,jdbcType=REAL},
+      actual_consume = #{record.actualConsume,jdbcType=REAL},
+      account_consume = #{record.accountConsume,jdbcType=REAL},
+      agency_rebate = #{record.agencyRebate,jdbcType=REAL},
+      media_rebate = #{record.mediaRebate,jdbcType=REAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yiche.smp.domain.YicheQuoteAppLeadsChannelDay" >
+    update yiche_quote_app_leads_channel_day_all
+    <set >
+      <if test="channelId != null" >
+        channel_id = #{channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="channelName != null" >
+        channel_name = #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="userCnt != null" >
+        user_cnt = #{userCnt,jdbcType=BIGINT},
+      </if>
+      <if test="overlap7day != null" >
+        overlap_7day = #{overlap7day,jdbcType=BIGINT},
+      </if>
+      <if test="newUserCnt != null" >
+        new_user_cnt = #{newUserCnt,jdbcType=BIGINT},
+      </if>
+      <if test="newUserCost != null" >
+        new_user_cost = #{newUserCost,jdbcType=REAL},
+      </if>
+      <if test="leadsCnt != null" >
+        leads_cnt = #{leadsCnt,jdbcType=BIGINT},
+      </if>
+      <if test="userToLeadsReta != null" >
+        user_to_leads_reta = #{userToLeadsReta,jdbcType=REAL},
+      </if>
+      <if test="leadsCost != null" >
+        leads_cost = #{leadsCost,jdbcType=REAL},
+      </if>
+      <if test="newLeadsCnt != null" >
+        new_leads_cnt = #{newLeadsCnt,jdbcType=BIGINT},
+      </if>
+      <if test="newLeadsReta != null" >
+        new_leads_reta = #{newLeadsReta,jdbcType=REAL},
+      </if>
+      <if test="newLeadsCost != null" >
+        new_leads_cost = #{newLeadsCost,jdbcType=REAL},
+      </if>
+      <if test="userToLeads7dayCnt != null" >
+        user_to_leads_7day_cnt = #{userToLeads7dayCnt,jdbcType=BIGINT},
+      </if>
+      <if test="userToLeads7dayReta != null" >
+        user_to_leads_7day_reta = #{userToLeads7dayReta,jdbcType=REAL},
+      </if>
+      <if test="userToLeads7dayCost != null" >
+        user_to_leads_7day_cost = #{userToLeads7dayCost,jdbcType=REAL},
+      </if>
+      <if test="userToLeads30dayCnt != null" >
+        user_to_leads_30day_cnt = #{userToLeads30dayCnt,jdbcType=BIGINT},
+      </if>
+      <if test="userToLeads30dayReta != null" >
+        user_to_leads_30day_reta = #{userToLeads30dayReta,jdbcType=REAL},
+      </if>
+      <if test="userToLeads30dayCost != null" >
+        user_to_leads_30day_cost = #{userToLeads30dayCost,jdbcType=REAL},
+      </if>
+      <if test="leadsUserCnt != null" >
+        leads_user_cnt = #{leadsUserCnt,jdbcType=BIGINT},
+      </if>
+      <if test="leadsUserCntReta != null" >
+        leads_user_cnt_reta = #{leadsUserCntReta,jdbcType=REAL},
+      </if>
+      <if test="leadsUserCost != null" >
+        leads_user_cost = #{leadsUserCost,jdbcType=REAL},
+      </if>
+      <if test="newLeadsUserCnt != null" >
+        new_leads_user_cnt = #{newLeadsUserCnt,jdbcType=BIGINT},
+      </if>
+      <if test="newLeadsUserReta != null" >
+        new_leads_user_reta = #{newLeadsUserReta,jdbcType=REAL},
+      </if>
+      <if test="brandNewLeadsUserCnt != null" >
+        brand_new_leads_user_cnt = #{brandNewLeadsUserCnt,jdbcType=BIGINT},
+      </if>
+      <if test="brandNewLeadsUserReta != null" >
+        brand_new_leads_user_reta = #{brandNewLeadsUserReta,jdbcType=REAL},
+      </if>
+      <if test="newLeadsUserCost != null" >
+        new_leads_user_cost = #{newLeadsUserCost,jdbcType=REAL},
+      </if>
+      <if test="newUserToLeadsCnt != null" >
+        new_user_to_leads_cnt = #{newUserToLeadsCnt,jdbcType=BIGINT},
+      </if>
+      <if test="newUserToLeadsReta != null" >
+        new_user_to_leads_reta = #{newUserToLeadsReta,jdbcType=REAL},
+      </if>
+      <if test="newUserToLeadsCost != null" >
+        new_user_to_leads_cost = #{newUserToLeadsCost,jdbcType=REAL},
+      </if>
+      <if test="newUserToLeads7dayCnt != null" >
+        new_user_to_leads_7day_cnt = #{newUserToLeads7dayCnt,jdbcType=BIGINT},
+      </if>
+      <if test="newUserToLeads7dayReta != null" >
+        new_user_to_leads_7day_reta = #{newUserToLeads7dayReta,jdbcType=REAL},
+      </if>
+      <if test="newUserToLeads7dayCost != null" >
+        new_user_to_leads_7day_cost = #{newUserToLeads7dayCost,jdbcType=REAL},
+      </if>
+      <if test="newUserToLeads30dayCnt != null" >
+        new_user_to_leads_30day_cnt = #{newUserToLeads30dayCnt,jdbcType=BIGINT},
+      </if>
+      <if test="newUserToLeads30dayReta != null" >
+        new_user_to_leads_30day_reta = #{newUserToLeads30dayReta,jdbcType=REAL},
+      </if>
+      <if test="newUserToLeads30dayCost != null" >
+        new_user_to_leads_30day_cost = #{newUserToLeads30dayCost,jdbcType=REAL},
+      </if>
+      <if test="userCnt2reta != null" >
+        user_cnt_2reta = #{userCnt2reta,jdbcType=REAL},
+      </if>
+      <if test="userCnt3reta != null" >
+        user_cnt_3reta = #{userCnt3reta,jdbcType=REAL},
+      </if>
+      <if test="userCnt7reta != null" >
+        user_cnt_7reta = #{userCnt7reta,jdbcType=REAL},
+      </if>
+      <if test="userCnt14reta != null" >
+        user_cnt_14reta = #{userCnt14reta,jdbcType=REAL},
+      </if>
+      <if test="userCnt30reta != null" >
+        user_cnt_30reta = #{userCnt30reta,jdbcType=REAL},
+      </if>
+      <if test="visitTimeAvg != null" >
+        visit_time_avg = #{visitTimeAvg,jdbcType=REAL},
+      </if>
+      <if test="visitPageAvg != null" >
+        visit_page_avg = #{visitPageAvg,jdbcType=REAL},
+      </if>
+      <if test="visitModelPv != null" >
+        visit_model_pv = #{visitModelPv,jdbcType=BIGINT},
+      </if>
+      <if test="visitModelReta != null" >
+        visit_model_reta = #{visitModelReta,jdbcType=REAL},
+      </if>
+      <if test="visitLeadsPv != null" >
+        visit_leads_pv = #{visitLeadsPv,jdbcType=BIGINT},
+      </if>
+      <if test="visitLeadsReta != null" >
+        visit_leads_reta = #{visitLeadsReta,jdbcType=REAL},
+      </if>
+      <if test="callUserCnt != null" >
+        call_user_cnt = #{callUserCnt,jdbcType=BIGINT},
+      </if>
+      <if test="callCnt != null" >
+        call_cnt = #{callCnt,jdbcType=BIGINT},
+      </if>
+      <if test="callAnswerReta != null" >
+        call_answer_reta = #{callAnswerReta,jdbcType=REAL},
+      </if>
+      <if test="callQuestionnaireDoneReta != null" >
+        call_questionnaire_done_reta = #{callQuestionnaireDoneReta,jdbcType=REAL},
+      </if>
+      <if test="carBuyPlanReta != null" >
+        car_buy_plan_reta = #{carBuyPlanReta,jdbcType=REAL},
+      </if>
+      <if test="exitPriceReta != null" >
+        exit_price_reta = #{exitPriceReta,jdbcType=REAL},
+      </if>
+      <if test="exitLeadsUserCnt != null" >
+        exit_leads_user_cnt = #{exitLeadsUserCnt,jdbcType=BIGINT},
+      </if>
+      <if test="overlapYearReta != null" >
+        overlap_year_reta = #{overlapYearReta,jdbcType=REAL},
+      </if>
+      <if test="modelPlanCnt != null" >
+        model_plan_cnt = #{modelPlanCnt,jdbcType=REAL},
+      </if>
+      <if test="carPlanCnt != null" >
+        car_plan_cnt = #{carPlanCnt,jdbcType=REAL},
+      </if>
+      <if test="brandPlanCnt != null" >
+        brand_plan_cnt = #{brandPlanCnt,jdbcType=REAL},
+      </if>
+      <if test="remoteLeadsReta != null" >
+        remote_leads_reta = #{remoteLeadsReta,jdbcType=REAL},
+      </if>
+      <if test="bt != null" >
+        bt = #{bt,jdbcType=VARCHAR},
+      </if>
+      <if test="clueAvg != null" >
+        clue_avg = #{clueAvg,jdbcType=REAL},
+      </if>
+      <if test="clueusercountBrandyear != null" >
+        clueusercount_brandyear = #{clueusercountBrandyear,jdbcType=BIGINT},
+      </if>
+      <if test="platformUserrepeatPercent != null" >
+        platform_userrepeat_percent = #{platformUserrepeatPercent,jdbcType=REAL},
+      </if>
+      <if test="platformBrandUserrepeatPercent != null" >
+        platform_brand_userrepeat_percent = #{platformBrandUserrepeatPercent,jdbcType=REAL},
+      </if>
+      <if test="actualConsume != null" >
+        actual_consume = #{actualConsume,jdbcType=REAL},
+      </if>
+      <if test="accountConsume != null" >
+        account_consume = #{accountConsume,jdbcType=REAL},
+      </if>
+      <if test="agencyRebate != null" >
+        agency_rebate = #{agencyRebate,jdbcType=REAL},
+      </if>
+      <if test="mediaRebate != null" >
+        media_rebate = #{mediaRebate,jdbcType=REAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yiche.smp.domain.YicheQuoteAppLeadsChannelDay" >
+    update yiche_quote_app_leads_channel_day_all
+    set channel_id = #{channelId,jdbcType=VARCHAR},
+      channel_name = #{channelName,jdbcType=VARCHAR},
+      user_cnt = #{userCnt,jdbcType=BIGINT},
+      overlap_7day = #{overlap7day,jdbcType=BIGINT},
+      new_user_cnt = #{newUserCnt,jdbcType=BIGINT},
+      new_user_cost = #{newUserCost,jdbcType=REAL},
+      leads_cnt = #{leadsCnt,jdbcType=BIGINT},
+      user_to_leads_reta = #{userToLeadsReta,jdbcType=REAL},
+      leads_cost = #{leadsCost,jdbcType=REAL},
+      new_leads_cnt = #{newLeadsCnt,jdbcType=BIGINT},
+      new_leads_reta = #{newLeadsReta,jdbcType=REAL},
+      new_leads_cost = #{newLeadsCost,jdbcType=REAL},
+      user_to_leads_7day_cnt = #{userToLeads7dayCnt,jdbcType=BIGINT},
+      user_to_leads_7day_reta = #{userToLeads7dayReta,jdbcType=REAL},
+      user_to_leads_7day_cost = #{userToLeads7dayCost,jdbcType=REAL},
+      user_to_leads_30day_cnt = #{userToLeads30dayCnt,jdbcType=BIGINT},
+      user_to_leads_30day_reta = #{userToLeads30dayReta,jdbcType=REAL},
+      user_to_leads_30day_cost = #{userToLeads30dayCost,jdbcType=REAL},
+      leads_user_cnt = #{leadsUserCnt,jdbcType=BIGINT},
+      leads_user_cnt_reta = #{leadsUserCntReta,jdbcType=REAL},
+      leads_user_cost = #{leadsUserCost,jdbcType=REAL},
+      new_leads_user_cnt = #{newLeadsUserCnt,jdbcType=BIGINT},
+      new_leads_user_reta = #{newLeadsUserReta,jdbcType=REAL},
+      brand_new_leads_user_cnt = #{brandNewLeadsUserCnt,jdbcType=BIGINT},
+      brand_new_leads_user_reta = #{brandNewLeadsUserReta,jdbcType=REAL},
+      new_leads_user_cost = #{newLeadsUserCost,jdbcType=REAL},
+      new_user_to_leads_cnt = #{newUserToLeadsCnt,jdbcType=BIGINT},
+      new_user_to_leads_reta = #{newUserToLeadsReta,jdbcType=REAL},
+      new_user_to_leads_cost = #{newUserToLeadsCost,jdbcType=REAL},
+      new_user_to_leads_7day_cnt = #{newUserToLeads7dayCnt,jdbcType=BIGINT},
+      new_user_to_leads_7day_reta = #{newUserToLeads7dayReta,jdbcType=REAL},
+      new_user_to_leads_7day_cost = #{newUserToLeads7dayCost,jdbcType=REAL},
+      new_user_to_leads_30day_cnt = #{newUserToLeads30dayCnt,jdbcType=BIGINT},
+      new_user_to_leads_30day_reta = #{newUserToLeads30dayReta,jdbcType=REAL},
+      new_user_to_leads_30day_cost = #{newUserToLeads30dayCost,jdbcType=REAL},
+      user_cnt_2reta = #{userCnt2reta,jdbcType=REAL},
+      user_cnt_3reta = #{userCnt3reta,jdbcType=REAL},
+      user_cnt_7reta = #{userCnt7reta,jdbcType=REAL},
+      user_cnt_14reta = #{userCnt14reta,jdbcType=REAL},
+      user_cnt_30reta = #{userCnt30reta,jdbcType=REAL},
+      visit_time_avg = #{visitTimeAvg,jdbcType=REAL},
+      visit_page_avg = #{visitPageAvg,jdbcType=REAL},
+      visit_model_pv = #{visitModelPv,jdbcType=BIGINT},
+      visit_model_reta = #{visitModelReta,jdbcType=REAL},
+      visit_leads_pv = #{visitLeadsPv,jdbcType=BIGINT},
+      visit_leads_reta = #{visitLeadsReta,jdbcType=REAL},
+      call_user_cnt = #{callUserCnt,jdbcType=BIGINT},
+      call_cnt = #{callCnt,jdbcType=BIGINT},
+      call_answer_reta = #{callAnswerReta,jdbcType=REAL},
+      call_questionnaire_done_reta = #{callQuestionnaireDoneReta,jdbcType=REAL},
+      car_buy_plan_reta = #{carBuyPlanReta,jdbcType=REAL},
+      exit_price_reta = #{exitPriceReta,jdbcType=REAL},
+      exit_leads_user_cnt = #{exitLeadsUserCnt,jdbcType=BIGINT},
+      overlap_year_reta = #{overlapYearReta,jdbcType=REAL},
+      model_plan_cnt = #{modelPlanCnt,jdbcType=REAL},
+      car_plan_cnt = #{carPlanCnt,jdbcType=REAL},
+      brand_plan_cnt = #{brandPlanCnt,jdbcType=REAL},
+      remote_leads_reta = #{remoteLeadsReta,jdbcType=REAL},
+      bt = #{bt,jdbcType=VARCHAR},
+      clue_avg = #{clueAvg,jdbcType=REAL},
+      clueusercount_brandyear = #{clueusercountBrandyear,jdbcType=BIGINT},
+      platform_userrepeat_percent = #{platformUserrepeatPercent,jdbcType=REAL},
+      platform_brand_userrepeat_percent = #{platformBrandUserrepeatPercent,jdbcType=REAL},
+      actual_consume = #{actualConsume,jdbcType=REAL},
+      account_consume = #{accountConsume,jdbcType=REAL},
+      agency_rebate = #{agencyRebate,jdbcType=REAL},
+      media_rebate = #{mediaRebate,jdbcType=REAL}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByNameDate" parameterType="com.yiche.smp.domain.YicheQuoteAppLeadsChannelDay">
+  	 update yiche_quote_app_leads_channel_day_all
+  	 set
+     actual_consume = #{actualConsume,jdbcType=REAL},
+     account_consume = #{accountConsume,jdbcType=REAL},
+     agency_rebate = #{agencyRebate,jdbcType=REAL},
+     media_rebate = #{mediaRebate,jdbcType=REAL}
+    where 
+  bt = #{bt,jdbcType=VARCHAR} and 
+     channel_name = #{channelName,jdbcType=VARCHAR}
+  </update>
+</mapper>

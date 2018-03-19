@@ -1,0 +1,825 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yiche.smp.mapper.YichePcwapAppLeadsChannelDayMapper" >
+  <resultMap id="BaseResultMap" type="com.yiche.smp.domain.YichePcwapAppLeadsChannelDay" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="dt" property="dt" jdbcType="VARCHAR" />
+    <result column="plat_form" property="platForm" jdbcType="VARCHAR" />
+    <result column="channel_id" property="channelId" jdbcType="VARCHAR" />
+    <result column="pathname" property="pathname" jdbcType="VARCHAR" />
+    <result column="media_no" property="mediaNo" jdbcType="VARCHAR" />
+    <result column="channel_name" property="channelName" jdbcType="VARCHAR" />
+    <result column="channel_door" property="channelDoor" jdbcType="VARCHAR" />
+    <result column="channel_loc" property="channelLoc" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="VARCHAR" />
+    <result column="pv" property="pv" jdbcType="BIGINT" />
+    <result column="uv" property="uv" jdbcType="BIGINT" />
+    <result column="view_click" property="viewClick" jdbcType="BIGINT" />
+    <result column="cluecount" property="cluecount" jdbcType="BIGINT" />
+    <result column="clueusercount" property="clueusercount" jdbcType="BIGINT" />
+    <result column="clueusercount_newplat" property="clueusercountNewplat" jdbcType="BIGINT" />
+    <result column="clueusercount_newbrand" property="clueusercountNewbrand" jdbcType="BIGINT" />
+    <result column="cluecount_newcar" property="cluecountNewcar" jdbcType="BIGINT" />
+    <result column="cluecount_newcaruser" property="cluecountNewcaruser" jdbcType="BIGINT" />
+    <result column="cluecount_400" property="cluecount400" jdbcType="BIGINT" />
+    <result column="cluecount_maintain" property="cluecountMaintain" jdbcType="BIGINT" />
+    <result column="cluecount_maintainuser" property="cluecountMaintainuser" jdbcType="BIGINT" />
+    <result column="cluecount_replace" property="cluecountReplace" jdbcType="BIGINT" />
+    <result column="cluecount_replaceuser" property="cluecountReplaceuser" jdbcType="BIGINT" />
+    <result column="cluecount_repair" property="cluecountRepair" jdbcType="BIGINT" />
+    <result column="cluecount_repairuser" property="cluecountRepairuser" jdbcType="BIGINT" />
+    <result column="cluecount_testcar" property="cluecountTestcar" jdbcType="BIGINT" />
+    <result column="cluecount_testcaruser" property="cluecountTestcaruser" jdbcType="BIGINT" />
+    <result column="cluecount_call400" property="cluecountCall400" jdbcType="BIGINT" />
+    <result column="cluecount_call400user" property="cluecountCall400user" jdbcType="BIGINT" />
+    <result column="lead_tran_percent" property="leadTranPercent" jdbcType="REAL" />
+    <result column="user_tran_percent" property="userTranPercent" jdbcType="REAL" />
+    <result column="platform_userrepeat_percent" property="platformUserrepeatPercent" jdbcType="REAL" />
+    <result column="platform_brand_userrepeat_percent" property="platformBrandUserrepeatPercent" jdbcType="REAL" />
+    <result column="viewpage_time" property="viewpageTime" jdbcType="REAL" />
+    <result column="viewpage_count" property="viewpageCount" jdbcType="REAL" />
+    <result column="view_carstylepage_count" property="viewCarstylepageCount" jdbcType="REAL" />
+    <result column="clue_avg" property="clueAvg" jdbcType="BIGINT" />
+    <result column="clueusercount_brandyear" property="clueusercountBrandyear" jdbcType="BIGINT" />
+    <result column="actual_consume" property="actualConsume" jdbcType="REAL" />
+    <result column="account_consume" property="accountConsume" jdbcType="REAL" />
+    <result column="agency_rebate" property="agencyRebate" jdbcType="REAL" />
+    <result column="media_rebate" property="mediaRebate" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, dt, plat_form, channel_id, pathname, media_no, channel_name, channel_door, channel_loc, 
+    level, pv, uv, view_click, cluecount, clueusercount, clueusercount_newplat, clueusercount_newbrand, 
+    cluecount_newcar, cluecount_newcaruser, cluecount_400, cluecount_maintain, cluecount_maintainuser, 
+    cluecount_replace, cluecount_replaceuser, cluecount_repair, cluecount_repairuser, 
+    cluecount_testcar, cluecount_testcaruser, cluecount_call400, cluecount_call400user, 
+    lead_tran_percent, user_tran_percent, platform_userrepeat_percent, platform_brand_userrepeat_percent, 
+    viewpage_time, viewpage_count, view_carstylepage_count, clue_avg, clueusercount_brandyear, 
+    actual_consume, account_consume, agency_rebate, media_rebate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yiche.smp.domain.YichePcwapAppLeadsChannelDayExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from yiche_pcwap_app_leads_channel_day_all
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from yiche_pcwap_app_leads_channel_day_all
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from yiche_pcwap_app_leads_channel_day_all
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yiche.smp.domain.YichePcwapAppLeadsChannelDayExample" >
+    delete from yiche_pcwap_app_leads_channel_day_all
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yiche.smp.domain.YichePcwapAppLeadsChannelDay" >
+    insert into yiche_pcwap_app_leads_channel_day_all (id, dt, plat_form, 
+      channel_id, pathname, media_no, 
+      channel_name, channel_door, channel_loc, 
+      level, pv, uv, view_click, 
+      cluecount, clueusercount, clueusercount_newplat, 
+      clueusercount_newbrand, cluecount_newcar, cluecount_newcaruser, 
+      cluecount_400, cluecount_maintain, cluecount_maintainuser, 
+      cluecount_replace, cluecount_replaceuser, cluecount_repair, 
+      cluecount_repairuser, cluecount_testcar, cluecount_testcaruser, 
+      cluecount_call400, cluecount_call400user, lead_tran_percent, 
+      user_tran_percent, platform_userrepeat_percent, platform_brand_userrepeat_percent, 
+      viewpage_time, viewpage_count, view_carstylepage_count, 
+      clue_avg, clueusercount_brandyear, actual_consume, 
+      account_consume, agency_rebate, media_rebate
+      )
+    values (#{id,jdbcType=BIGINT}, #{dt,jdbcType=VARCHAR}, #{platForm,jdbcType=VARCHAR}, 
+      #{channelId,jdbcType=VARCHAR}, #{pathname,jdbcType=VARCHAR}, #{mediaNo,jdbcType=VARCHAR}, 
+      #{channelName,jdbcType=VARCHAR}, #{channelDoor,jdbcType=VARCHAR}, #{channelLoc,jdbcType=VARCHAR}, 
+      #{level,jdbcType=VARCHAR}, #{pv,jdbcType=BIGINT}, #{uv,jdbcType=BIGINT}, #{viewClick,jdbcType=BIGINT}, 
+      #{cluecount,jdbcType=BIGINT}, #{clueusercount,jdbcType=BIGINT}, #{clueusercountNewplat,jdbcType=BIGINT}, 
+      #{clueusercountNewbrand,jdbcType=BIGINT}, #{cluecountNewcar,jdbcType=BIGINT}, #{cluecountNewcaruser,jdbcType=BIGINT}, 
+      #{cluecount400,jdbcType=BIGINT}, #{cluecountMaintain,jdbcType=BIGINT}, #{cluecountMaintainuser,jdbcType=BIGINT}, 
+      #{cluecountReplace,jdbcType=BIGINT}, #{cluecountReplaceuser,jdbcType=BIGINT}, #{cluecountRepair,jdbcType=BIGINT}, 
+      #{cluecountRepairuser,jdbcType=BIGINT}, #{cluecountTestcar,jdbcType=BIGINT}, #{cluecountTestcaruser,jdbcType=BIGINT}, 
+      #{cluecountCall400,jdbcType=BIGINT}, #{cluecountCall400user,jdbcType=BIGINT}, #{leadTranPercent,jdbcType=REAL}, 
+      #{userTranPercent,jdbcType=REAL}, #{platformUserrepeatPercent,jdbcType=REAL}, #{platformBrandUserrepeatPercent,jdbcType=REAL}, 
+      #{viewpageTime,jdbcType=REAL}, #{viewpageCount,jdbcType=REAL}, #{viewCarstylepageCount,jdbcType=REAL}, 
+      #{clueAvg,jdbcType=BIGINT}, #{clueusercountBrandyear,jdbcType=BIGINT}, #{actualConsume,jdbcType=REAL}, 
+      #{accountConsume,jdbcType=REAL}, #{agencyRebate,jdbcType=REAL}, #{mediaRebate,jdbcType=REAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yiche.smp.domain.YichePcwapAppLeadsChannelDay" >
+    insert into yiche_pcwap_app_leads_channel_day_all
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="dt != null" >
+        dt,
+      </if>
+      <if test="platForm != null" >
+        plat_form,
+      </if>
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+      <if test="pathname != null" >
+        pathname,
+      </if>
+      <if test="mediaNo != null" >
+        media_no,
+      </if>
+      <if test="channelName != null" >
+        channel_name,
+      </if>
+      <if test="channelDoor != null" >
+        channel_door,
+      </if>
+      <if test="channelLoc != null" >
+        channel_loc,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="pv != null" >
+        pv,
+      </if>
+      <if test="uv != null" >
+        uv,
+      </if>
+      <if test="viewClick != null" >
+        view_click,
+      </if>
+      <if test="cluecount != null" >
+        cluecount,
+      </if>
+      <if test="clueusercount != null" >
+        clueusercount,
+      </if>
+      <if test="clueusercountNewplat != null" >
+        clueusercount_newplat,
+      </if>
+      <if test="clueusercountNewbrand != null" >
+        clueusercount_newbrand,
+      </if>
+      <if test="cluecountNewcar != null" >
+        cluecount_newcar,
+      </if>
+      <if test="cluecountNewcaruser != null" >
+        cluecount_newcaruser,
+      </if>
+      <if test="cluecount400 != null" >
+        cluecount_400,
+      </if>
+      <if test="cluecountMaintain != null" >
+        cluecount_maintain,
+      </if>
+      <if test="cluecountMaintainuser != null" >
+        cluecount_maintainuser,
+      </if>
+      <if test="cluecountReplace != null" >
+        cluecount_replace,
+      </if>
+      <if test="cluecountReplaceuser != null" >
+        cluecount_replaceuser,
+      </if>
+      <if test="cluecountRepair != null" >
+        cluecount_repair,
+      </if>
+      <if test="cluecountRepairuser != null" >
+        cluecount_repairuser,
+      </if>
+      <if test="cluecountTestcar != null" >
+        cluecount_testcar,
+      </if>
+      <if test="cluecountTestcaruser != null" >
+        cluecount_testcaruser,
+      </if>
+      <if test="cluecountCall400 != null" >
+        cluecount_call400,
+      </if>
+      <if test="cluecountCall400user != null" >
+        cluecount_call400user,
+      </if>
+      <if test="leadTranPercent != null" >
+        lead_tran_percent,
+      </if>
+      <if test="userTranPercent != null" >
+        user_tran_percent,
+      </if>
+      <if test="platformUserrepeatPercent != null" >
+        platform_userrepeat_percent,
+      </if>
+      <if test="platformBrandUserrepeatPercent != null" >
+        platform_brand_userrepeat_percent,
+      </if>
+      <if test="viewpageTime != null" >
+        viewpage_time,
+      </if>
+      <if test="viewpageCount != null" >
+        viewpage_count,
+      </if>
+      <if test="viewCarstylepageCount != null" >
+        view_carstylepage_count,
+      </if>
+      <if test="clueAvg != null" >
+        clue_avg,
+      </if>
+      <if test="clueusercountBrandyear != null" >
+        clueusercount_brandyear,
+      </if>
+      <if test="actualConsume != null" >
+        actual_consume,
+      </if>
+      <if test="accountConsume != null" >
+        account_consume,
+      </if>
+      <if test="agencyRebate != null" >
+        agency_rebate,
+      </if>
+      <if test="mediaRebate != null" >
+        media_rebate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="dt != null" >
+        #{dt,jdbcType=VARCHAR},
+      </if>
+      <if test="platForm != null" >
+        #{platForm,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="pathname != null" >
+        #{pathname,jdbcType=VARCHAR},
+      </if>
+      <if test="mediaNo != null" >
+        #{mediaNo,jdbcType=VARCHAR},
+      </if>
+      <if test="channelName != null" >
+        #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="channelDoor != null" >
+        #{channelDoor,jdbcType=VARCHAR},
+      </if>
+      <if test="channelLoc != null" >
+        #{channelLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="pv != null" >
+        #{pv,jdbcType=BIGINT},
+      </if>
+      <if test="uv != null" >
+        #{uv,jdbcType=BIGINT},
+      </if>
+      <if test="viewClick != null" >
+        #{viewClick,jdbcType=BIGINT},
+      </if>
+      <if test="cluecount != null" >
+        #{cluecount,jdbcType=BIGINT},
+      </if>
+      <if test="clueusercount != null" >
+        #{clueusercount,jdbcType=BIGINT},
+      </if>
+      <if test="clueusercountNewplat != null" >
+        #{clueusercountNewplat,jdbcType=BIGINT},
+      </if>
+      <if test="clueusercountNewbrand != null" >
+        #{clueusercountNewbrand,jdbcType=BIGINT},
+      </if>
+      <if test="cluecountNewcar != null" >
+        #{cluecountNewcar,jdbcType=BIGINT},
+      </if>
+      <if test="cluecountNewcaruser != null" >
+        #{cluecountNewcaruser,jdbcType=BIGINT},
+      </if>
+      <if test="cluecount400 != null" >
+        #{cluecount400,jdbcType=BIGINT},
+      </if>
+      <if test="cluecountMaintain != null" >
+        #{cluecountMaintain,jdbcType=BIGINT},
+      </if>
+      <if test="cluecountMaintainuser != null" >
+        #{cluecountMaintainuser,jdbcType=BIGINT},
+      </if>
+      <if test="cluecountReplace != null" >
+        #{cluecountReplace,jdbcType=BIGINT},
+      </if>
+      <if test="cluecountReplaceuser != null" >
+        #{cluecountReplaceuser,jdbcType=BIGINT},
+      </if>
+      <if test="cluecountRepair != null" >
+        #{cluecountRepair,jdbcType=BIGINT},
+      </if>
+      <if test="cluecountRepairuser != null" >
+        #{cluecountRepairuser,jdbcType=BIGINT},
+      </if>
+      <if test="cluecountTestcar != null" >
+        #{cluecountTestcar,jdbcType=BIGINT},
+      </if>
+      <if test="cluecountTestcaruser != null" >
+        #{cluecountTestcaruser,jdbcType=BIGINT},
+      </if>
+      <if test="cluecountCall400 != null" >
+        #{cluecountCall400,jdbcType=BIGINT},
+      </if>
+      <if test="cluecountCall400user != null" >
+        #{cluecountCall400user,jdbcType=BIGINT},
+      </if>
+      <if test="leadTranPercent != null" >
+        #{leadTranPercent,jdbcType=REAL},
+      </if>
+      <if test="userTranPercent != null" >
+        #{userTranPercent,jdbcType=REAL},
+      </if>
+      <if test="platformUserrepeatPercent != null" >
+        #{platformUserrepeatPercent,jdbcType=REAL},
+      </if>
+      <if test="platformBrandUserrepeatPercent != null" >
+        #{platformBrandUserrepeatPercent,jdbcType=REAL},
+      </if>
+      <if test="viewpageTime != null" >
+        #{viewpageTime,jdbcType=REAL},
+      </if>
+      <if test="viewpageCount != null" >
+        #{viewpageCount,jdbcType=REAL},
+      </if>
+      <if test="viewCarstylepageCount != null" >
+        #{viewCarstylepageCount,jdbcType=REAL},
+      </if>
+      <if test="clueAvg != null" >
+        #{clueAvg,jdbcType=BIGINT},
+      </if>
+      <if test="clueusercountBrandyear != null" >
+        #{clueusercountBrandyear,jdbcType=BIGINT},
+      </if>
+      <if test="actualConsume != null" >
+        #{actualConsume,jdbcType=REAL},
+      </if>
+      <if test="accountConsume != null" >
+        #{accountConsume,jdbcType=REAL},
+      </if>
+      <if test="agencyRebate != null" >
+        #{agencyRebate,jdbcType=REAL},
+      </if>
+      <if test="mediaRebate != null" >
+        #{mediaRebate,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yiche.smp.domain.YichePcwapAppLeadsChannelDayExample" resultType="java.lang.Integer" >
+    select count(*) from yiche_pcwap_app_leads_channel_day_all
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update yiche_pcwap_app_leads_channel_day_all
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.dt != null" >
+        dt = #{record.dt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.platForm != null" >
+        plat_form = #{record.platForm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channelId != null" >
+        channel_id = #{record.channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pathname != null" >
+        pathname = #{record.pathname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mediaNo != null" >
+        media_no = #{record.mediaNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channelName != null" >
+        channel_name = #{record.channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channelDoor != null" >
+        channel_door = #{record.channelDoor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channelLoc != null" >
+        channel_loc = #{record.channelLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pv != null" >
+        pv = #{record.pv,jdbcType=BIGINT},
+      </if>
+      <if test="record.uv != null" >
+        uv = #{record.uv,jdbcType=BIGINT},
+      </if>
+      <if test="record.viewClick != null" >
+        view_click = #{record.viewClick,jdbcType=BIGINT},
+      </if>
+      <if test="record.cluecount != null" >
+        cluecount = #{record.cluecount,jdbcType=BIGINT},
+      </if>
+      <if test="record.clueusercount != null" >
+        clueusercount = #{record.clueusercount,jdbcType=BIGINT},
+      </if>
+      <if test="record.clueusercountNewplat != null" >
+        clueusercount_newplat = #{record.clueusercountNewplat,jdbcType=BIGINT},
+      </if>
+      <if test="record.clueusercountNewbrand != null" >
+        clueusercount_newbrand = #{record.clueusercountNewbrand,jdbcType=BIGINT},
+      </if>
+      <if test="record.cluecountNewcar != null" >
+        cluecount_newcar = #{record.cluecountNewcar,jdbcType=BIGINT},
+      </if>
+      <if test="record.cluecountNewcaruser != null" >
+        cluecount_newcaruser = #{record.cluecountNewcaruser,jdbcType=BIGINT},
+      </if>
+      <if test="record.cluecount400 != null" >
+        cluecount_400 = #{record.cluecount400,jdbcType=BIGINT},
+      </if>
+      <if test="record.cluecountMaintain != null" >
+        cluecount_maintain = #{record.cluecountMaintain,jdbcType=BIGINT},
+      </if>
+      <if test="record.cluecountMaintainuser != null" >
+        cluecount_maintainuser = #{record.cluecountMaintainuser,jdbcType=BIGINT},
+      </if>
+      <if test="record.cluecountReplace != null" >
+        cluecount_replace = #{record.cluecountReplace,jdbcType=BIGINT},
+      </if>
+      <if test="record.cluecountReplaceuser != null" >
+        cluecount_replaceuser = #{record.cluecountReplaceuser,jdbcType=BIGINT},
+      </if>
+      <if test="record.cluecountRepair != null" >
+        cluecount_repair = #{record.cluecountRepair,jdbcType=BIGINT},
+      </if>
+      <if test="record.cluecountRepairuser != null" >
+        cluecount_repairuser = #{record.cluecountRepairuser,jdbcType=BIGINT},
+      </if>
+      <if test="record.cluecountTestcar != null" >
+        cluecount_testcar = #{record.cluecountTestcar,jdbcType=BIGINT},
+      </if>
+      <if test="record.cluecountTestcaruser != null" >
+        cluecount_testcaruser = #{record.cluecountTestcaruser,jdbcType=BIGINT},
+      </if>
+      <if test="record.cluecountCall400 != null" >
+        cluecount_call400 = #{record.cluecountCall400,jdbcType=BIGINT},
+      </if>
+      <if test="record.cluecountCall400user != null" >
+        cluecount_call400user = #{record.cluecountCall400user,jdbcType=BIGINT},
+      </if>
+      <if test="record.leadTranPercent != null" >
+        lead_tran_percent = #{record.leadTranPercent,jdbcType=REAL},
+      </if>
+      <if test="record.userTranPercent != null" >
+        user_tran_percent = #{record.userTranPercent,jdbcType=REAL},
+      </if>
+      <if test="record.platformUserrepeatPercent != null" >
+        platform_userrepeat_percent = #{record.platformUserrepeatPercent,jdbcType=REAL},
+      </if>
+      <if test="record.platformBrandUserrepeatPercent != null" >
+        platform_brand_userrepeat_percent = #{record.platformBrandUserrepeatPercent,jdbcType=REAL},
+      </if>
+      <if test="record.viewpageTime != null" >
+        viewpage_time = #{record.viewpageTime,jdbcType=REAL},
+      </if>
+      <if test="record.viewpageCount != null" >
+        viewpage_count = #{record.viewpageCount,jdbcType=REAL},
+      </if>
+      <if test="record.viewCarstylepageCount != null" >
+        view_carstylepage_count = #{record.viewCarstylepageCount,jdbcType=REAL},
+      </if>
+      <if test="record.clueAvg != null" >
+        clue_avg = #{record.clueAvg,jdbcType=BIGINT},
+      </if>
+      <if test="record.clueusercountBrandyear != null" >
+        clueusercount_brandyear = #{record.clueusercountBrandyear,jdbcType=BIGINT},
+      </if>
+      <if test="record.actualConsume != null" >
+        actual_consume = #{record.actualConsume,jdbcType=REAL},
+      </if>
+      <if test="record.accountConsume != null" >
+        account_consume = #{record.accountConsume,jdbcType=REAL},
+      </if>
+      <if test="record.agencyRebate != null" >
+        agency_rebate = #{record.agencyRebate,jdbcType=REAL},
+      </if>
+      <if test="record.mediaRebate != null" >
+        media_rebate = #{record.mediaRebate,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update yiche_pcwap_app_leads_channel_day_all
+    set id = #{record.id,jdbcType=BIGINT},
+      dt = #{record.dt,jdbcType=VARCHAR},
+      plat_form = #{record.platForm,jdbcType=VARCHAR},
+      channel_id = #{record.channelId,jdbcType=VARCHAR},
+      pathname = #{record.pathname,jdbcType=VARCHAR},
+      media_no = #{record.mediaNo,jdbcType=VARCHAR},
+      channel_name = #{record.channelName,jdbcType=VARCHAR},
+      channel_door = #{record.channelDoor,jdbcType=VARCHAR},
+      channel_loc = #{record.channelLoc,jdbcType=VARCHAR},
+      level = #{record.level,jdbcType=VARCHAR},
+      pv = #{record.pv,jdbcType=BIGINT},
+      uv = #{record.uv,jdbcType=BIGINT},
+      view_click = #{record.viewClick,jdbcType=BIGINT},
+      cluecount = #{record.cluecount,jdbcType=BIGINT},
+      clueusercount = #{record.clueusercount,jdbcType=BIGINT},
+      clueusercount_newplat = #{record.clueusercountNewplat,jdbcType=BIGINT},
+      clueusercount_newbrand = #{record.clueusercountNewbrand,jdbcType=BIGINT},
+      cluecount_newcar = #{record.cluecountNewcar,jdbcType=BIGINT},
+      cluecount_newcaruser = #{record.cluecountNewcaruser,jdbcType=BIGINT},
+      cluecount_400 = #{record.cluecount400,jdbcType=BIGINT},
+      cluecount_maintain = #{record.cluecountMaintain,jdbcType=BIGINT},
+      cluecount_maintainuser = #{record.cluecountMaintainuser,jdbcType=BIGINT},
+      cluecount_replace = #{record.cluecountReplace,jdbcType=BIGINT},
+      cluecount_replaceuser = #{record.cluecountReplaceuser,jdbcType=BIGINT},
+      cluecount_repair = #{record.cluecountRepair,jdbcType=BIGINT},
+      cluecount_repairuser = #{record.cluecountRepairuser,jdbcType=BIGINT},
+      cluecount_testcar = #{record.cluecountTestcar,jdbcType=BIGINT},
+      cluecount_testcaruser = #{record.cluecountTestcaruser,jdbcType=BIGINT},
+      cluecount_call400 = #{record.cluecountCall400,jdbcType=BIGINT},
+      cluecount_call400user = #{record.cluecountCall400user,jdbcType=BIGINT},
+      lead_tran_percent = #{record.leadTranPercent,jdbcType=REAL},
+      user_tran_percent = #{record.userTranPercent,jdbcType=REAL},
+      platform_userrepeat_percent = #{record.platformUserrepeatPercent,jdbcType=REAL},
+      platform_brand_userrepeat_percent = #{record.platformBrandUserrepeatPercent,jdbcType=REAL},
+      viewpage_time = #{record.viewpageTime,jdbcType=REAL},
+      viewpage_count = #{record.viewpageCount,jdbcType=REAL},
+      view_carstylepage_count = #{record.viewCarstylepageCount,jdbcType=REAL},
+      clue_avg = #{record.clueAvg,jdbcType=BIGINT},
+      clueusercount_brandyear = #{record.clueusercountBrandyear,jdbcType=BIGINT},
+      actual_consume = #{record.actualConsume,jdbcType=REAL},
+      account_consume = #{record.accountConsume,jdbcType=REAL},
+      agency_rebate = #{record.agencyRebate,jdbcType=REAL},
+      media_rebate = #{record.mediaRebate,jdbcType=REAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yiche.smp.domain.YichePcwapAppLeadsChannelDay" >
+    update yiche_pcwap_app_leads_channel_day_all
+    <set >
+      <if test="dt != null" >
+        dt = #{dt,jdbcType=VARCHAR},
+      </if>
+      <if test="platForm != null" >
+        plat_form = #{platForm,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        channel_id = #{channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="pathname != null" >
+        pathname = #{pathname,jdbcType=VARCHAR},
+      </if>
+      <if test="mediaNo != null" >
+        media_no = #{mediaNo,jdbcType=VARCHAR},
+      </if>
+      <if test="channelName != null" >
+        channel_name = #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="channelDoor != null" >
+        channel_door = #{channelDoor,jdbcType=VARCHAR},
+      </if>
+      <if test="channelLoc != null" >
+        channel_loc = #{channelLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="pv != null" >
+        pv = #{pv,jdbcType=BIGINT},
+      </if>
+      <if test="uv != null" >
+        uv = #{uv,jdbcType=BIGINT},
+      </if>
+      <if test="viewClick != null" >
+        view_click = #{viewClick,jdbcType=BIGINT},
+      </if>
+      <if test="cluecount != null" >
+        cluecount = #{cluecount,jdbcType=BIGINT},
+      </if>
+      <if test="clueusercount != null" >
+        clueusercount = #{clueusercount,jdbcType=BIGINT},
+      </if>
+      <if test="clueusercountNewplat != null" >
+        clueusercount_newplat = #{clueusercountNewplat,jdbcType=BIGINT},
+      </if>
+      <if test="clueusercountNewbrand != null" >
+        clueusercount_newbrand = #{clueusercountNewbrand,jdbcType=BIGINT},
+      </if>
+      <if test="cluecountNewcar != null" >
+        cluecount_newcar = #{cluecountNewcar,jdbcType=BIGINT},
+      </if>
+      <if test="cluecountNewcaruser != null" >
+        cluecount_newcaruser = #{cluecountNewcaruser,jdbcType=BIGINT},
+      </if>
+      <if test="cluecount400 != null" >
+        cluecount_400 = #{cluecount400,jdbcType=BIGINT},
+      </if>
+      <if test="cluecountMaintain != null" >
+        cluecount_maintain = #{cluecountMaintain,jdbcType=BIGINT},
+      </if>
+      <if test="cluecountMaintainuser != null" >
+        cluecount_maintainuser = #{cluecountMaintainuser,jdbcType=BIGINT},
+      </if>
+      <if test="cluecountReplace != null" >
+        cluecount_replace = #{cluecountReplace,jdbcType=BIGINT},
+      </if>
+      <if test="cluecountReplaceuser != null" >
+        cluecount_replaceuser = #{cluecountReplaceuser,jdbcType=BIGINT},
+      </if>
+      <if test="cluecountRepair != null" >
+        cluecount_repair = #{cluecountRepair,jdbcType=BIGINT},
+      </if>
+      <if test="cluecountRepairuser != null" >
+        cluecount_repairuser = #{cluecountRepairuser,jdbcType=BIGINT},
+      </if>
+      <if test="cluecountTestcar != null" >
+        cluecount_testcar = #{cluecountTestcar,jdbcType=BIGINT},
+      </if>
+      <if test="cluecountTestcaruser != null" >
+        cluecount_testcaruser = #{cluecountTestcaruser,jdbcType=BIGINT},
+      </if>
+      <if test="cluecountCall400 != null" >
+        cluecount_call400 = #{cluecountCall400,jdbcType=BIGINT},
+      </if>
+      <if test="cluecountCall400user != null" >
+        cluecount_call400user = #{cluecountCall400user,jdbcType=BIGINT},
+      </if>
+      <if test="leadTranPercent != null" >
+        lead_tran_percent = #{leadTranPercent,jdbcType=REAL},
+      </if>
+      <if test="userTranPercent != null" >
+        user_tran_percent = #{userTranPercent,jdbcType=REAL},
+      </if>
+      <if test="platformUserrepeatPercent != null" >
+        platform_userrepeat_percent = #{platformUserrepeatPercent,jdbcType=REAL},
+      </if>
+      <if test="platformBrandUserrepeatPercent != null" >
+        platform_brand_userrepeat_percent = #{platformBrandUserrepeatPercent,jdbcType=REAL},
+      </if>
+      <if test="viewpageTime != null" >
+        viewpage_time = #{viewpageTime,jdbcType=REAL},
+      </if>
+      <if test="viewpageCount != null" >
+        viewpage_count = #{viewpageCount,jdbcType=REAL},
+      </if>
+      <if test="viewCarstylepageCount != null" >
+        view_carstylepage_count = #{viewCarstylepageCount,jdbcType=REAL},
+      </if>
+      <if test="clueAvg != null" >
+        clue_avg = #{clueAvg,jdbcType=BIGINT},
+      </if>
+      <if test="clueusercountBrandyear != null" >
+        clueusercount_brandyear = #{clueusercountBrandyear,jdbcType=BIGINT},
+      </if>
+      <if test="actualConsume != null" >
+        actual_consume = #{actualConsume,jdbcType=REAL},
+      </if>
+      <if test="accountConsume != null" >
+        account_consume = #{accountConsume,jdbcType=REAL},
+      </if>
+      <if test="agencyRebate != null" >
+        agency_rebate = #{agencyRebate,jdbcType=REAL},
+      </if>
+      <if test="mediaRebate != null" >
+        media_rebate = #{mediaRebate,jdbcType=REAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yiche.smp.domain.YichePcwapAppLeadsChannelDay" >
+    update yiche_pcwap_app_leads_channel_day_all
+    set dt = #{dt,jdbcType=VARCHAR},
+      plat_form = #{platForm,jdbcType=VARCHAR},
+      channel_id = #{channelId,jdbcType=VARCHAR},
+      pathname = #{pathname,jdbcType=VARCHAR},
+      media_no = #{mediaNo,jdbcType=VARCHAR},
+      channel_name = #{channelName,jdbcType=VARCHAR},
+      channel_door = #{channelDoor,jdbcType=VARCHAR},
+      channel_loc = #{channelLoc,jdbcType=VARCHAR},
+      level = #{level,jdbcType=VARCHAR},
+      pv = #{pv,jdbcType=BIGINT},
+      uv = #{uv,jdbcType=BIGINT},
+      view_click = #{viewClick,jdbcType=BIGINT},
+      cluecount = #{cluecount,jdbcType=BIGINT},
+      clueusercount = #{clueusercount,jdbcType=BIGINT},
+      clueusercount_newplat = #{clueusercountNewplat,jdbcType=BIGINT},
+      clueusercount_newbrand = #{clueusercountNewbrand,jdbcType=BIGINT},
+      cluecount_newcar = #{cluecountNewcar,jdbcType=BIGINT},
+      cluecount_newcaruser = #{cluecountNewcaruser,jdbcType=BIGINT},
+      cluecount_400 = #{cluecount400,jdbcType=BIGINT},
+      cluecount_maintain = #{cluecountMaintain,jdbcType=BIGINT},
+      cluecount_maintainuser = #{cluecountMaintainuser,jdbcType=BIGINT},
+      cluecount_replace = #{cluecountReplace,jdbcType=BIGINT},
+      cluecount_replaceuser = #{cluecountReplaceuser,jdbcType=BIGINT},
+      cluecount_repair = #{cluecountRepair,jdbcType=BIGINT},
+      cluecount_repairuser = #{cluecountRepairuser,jdbcType=BIGINT},
+      cluecount_testcar = #{cluecountTestcar,jdbcType=BIGINT},
+      cluecount_testcaruser = #{cluecountTestcaruser,jdbcType=BIGINT},
+      cluecount_call400 = #{cluecountCall400,jdbcType=BIGINT},
+      cluecount_call400user = #{cluecountCall400user,jdbcType=BIGINT},
+      lead_tran_percent = #{leadTranPercent,jdbcType=REAL},
+      user_tran_percent = #{userTranPercent,jdbcType=REAL},
+      platform_userrepeat_percent = #{platformUserrepeatPercent,jdbcType=REAL},
+      platform_brand_userrepeat_percent = #{platformBrandUserrepeatPercent,jdbcType=REAL},
+      viewpage_time = #{viewpageTime,jdbcType=REAL},
+      viewpage_count = #{viewpageCount,jdbcType=REAL},
+      view_carstylepage_count = #{viewCarstylepageCount,jdbcType=REAL},
+      clue_avg = #{clueAvg,jdbcType=BIGINT},
+      clueusercount_brandyear = #{clueusercountBrandyear,jdbcType=BIGINT},
+      actual_consume = #{actualConsume,jdbcType=REAL},
+      account_consume = #{accountConsume,jdbcType=REAL},
+      agency_rebate = #{agencyRebate,jdbcType=REAL},
+      media_rebate = #{mediaRebate,jdbcType=REAL}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByNameDate" parameterType="com.yiche.smp.domain.YichePcwapAppLeadsChannelDay">
+  	 update yiche_pcwap_app_leads_channel_day_all
+  	 set
+     actual_consume = #{actualConsume,jdbcType=REAL},
+     account_consume = #{accountConsume,jdbcType=REAL},
+     agency_rebate = #{agencyRebate,jdbcType=REAL},
+     media_rebate = #{mediaRebate,jdbcType=REAL}
+    where 
+  dt = #{dt,jdbcType=VARCHAR} and 
+     channel_name = #{channelName,jdbcType=VARCHAR}
+  </update>
+</mapper>
