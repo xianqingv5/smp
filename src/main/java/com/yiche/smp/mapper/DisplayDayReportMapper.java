@@ -3,8 +3,8 @@ package com.yiche.smp.mapper;
 
         import org.springframework.stereotype.Repository;
 
-import com.yiche.smp.everyday.GatherYicheAPP;
-import com.yiche.smp.everyday.YichePlatform;
+import com.yiche.smp.common.GatherYicheAPP;
+import com.yiche.smp.common.YichePlatform;
 
 import java.util.List;
         import java.util.Map;
