@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yiche.smp.mapper.DisplayWeekReportMapper">
+    <select id="selectSumDataWeek" parameterType="map" resultType="com.yiche.smp.common.GatherYicheAPP">
+      SELECT
+            SUM(leadsCnt)       leadsCnt,
+            SUM(leadsUserCnt)   leadsUserCnt,
+            SUM(actualConsume)  actualConsume,
+            SUM(leadsCost)      leadsCost,
+            bt                  bt
+        FROM
+            (
+                SELECT
+                    SUM(leads_cnt)       leadsCnt,
+                    SUM(leads_user_cnt)  leadsUserCnt,
+                    SUM(actual_consume) actualConsume,
+                    SUM(leads_cost)      leadsCost,
+                    week                  bt
+                FROM
+                    yiche_yiche_channel_week
+                WHERE
+                    week = #{week}
+                    AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="易车APP")
+                UNION
+                SELECT
+                    SUM(leads_cnt)       leadsCnt,
+                    SUM(leads_user_cnt)  leadsUserCnt,
+                    SUM(actual_consume) actualConsume,
+                    SUM(leads_cost)      leadsCost,
+                    week                   bt
+                FROM
+                    yiche_quote_channel_week
+                WHERE
+                    week = #{week}
+                    AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="报价APP")
+                UNION
+                SELECT
+                    SUM(leads_cnt)       leadsCnt,
+                    SUM(leads_user_cnt)   leadsUserCnt,
+                    SUM(actual_consume) actualConsume,
+                    SUM(leads_cost)      leadsCost,
+                    week                   bt
+                FROM
+                    yiche_pcwap_channel_week
+                WHERE
+                    week = #{week}
+                    AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="PCWAP")
+            ) yiche_sum_week_report
+    </select>
+
+    <select id="selectPlatformDataWeek" parameterType="map" resultType="com.yiche.smp.common.GatherYicheAPP">
+        SELECT
+            platformName   platformName,
+            leadsCnt       leadsCnt,
+            leadsUserCnt   leadsUserCnt,
+            actualConsume actualConsume,
+            leadsCost      leadsCost,
+            bt             bt
+        FROM
+            (
+                SELECT
+                    platform_name             platformName,
+                    SUM(leads_cnt)       leadsCnt,
+                    SUM(leads_user_cnt)  leadsUserCnt,
+                    SUM(actual_consume) actualConsume,
+                    sum(leads_cost)     leadsCost,
+                    week                   bt
+                FROM
+                    yiche_yiche_channel_week
+                WHERE
+                    week = #{week}
+                    AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="易车APP")
+                UNION
+                SELECT
+                    platform_name              platformName,
+                    SUM(leads_cnt)       leadsCnt,
+                    SUM(leads_user_cnt)  leadsUserCnt,
+                    SUM(actual_consume) actualConsume,
+                    sum(leads_cost)     leadsCost,
+                    week                   bt
+                FROM
+                    yiche_quote_channel_week
+                WHERE
+                    week = #{week}
+                    AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="报价APP")
+                UNION
+                SELECT
+                    platform_name              platformName,
+                    SUM(leads_cnt)       leadsCnt,
+                    SUM(leads_user_cnt)   leadsUserCnt,
+                    SUM(actual_consume) actualConsume,
+                    sum(leads_cost)     leadsCost,
+                    week                   bt
+                FROM
+                    yiche_quote_channel_week
+                WHERE
+                    week = #{week}
+                    AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="PCWAP")
+            ) yiche_platformName_week_report
+        WHERE platformName=#{platformName}
+    </select>
+
+    <select id="selectplatformChannelDataWeek" parameterType="map" resultType="com.yiche.smp.common.YichePlatform">
+        SELECT
+            platformName,
+            channelName,
+            leadsCnt,
+            leadsUserCnt,
+            actualConsume,
+            leadsCost,
+            bt,
+            newUserCnt,
+            newUserCost,
+            systemId
+        FROM (
+                 SELECT
+                     a.platform_name   platformName,
+                     a.channel_name    channelName,
+                     a.leads_cnt       leadsCnt,
+                     a.leads_user_cnt  leadsUserCnt,
+                     a.actual_consume actualConsume,
+                     a.leads_cost        leadsCost,
+                     a.week              bt,
+                     a.new_user_cnt    newUserCnt,
+                     a.new_user_cost   newUserCost,
+                     b.system_id       systemId
+                 FROM
+                     yiche_yiche_channel_week a, imp_platform_channel b
+                 WHERE
+                     a.week = #{week} AND a.channel_id = b.channel_id AND b.system_id =#{systemId}
+                 UNION
+                 SELECT
+                     a.platform_name   platformName,
+                     a.channel_name    channelName,
+                     a.leads_cnt       leadsCnt,
+                     a.leads_user_cnt  leadsUserCnt,
+                     a.actual_consume actualConsume,
+                     a.leads_cost        leadsCost,
+                     a.week              bt,
+                     a.new_user_cnt    newUserCnt,
+                     a.new_user_cost   newUserCost,
+                     b.system_id       systemId
+                 FROM
+                     yiche_quote_channel_week a, imp_platform_channel b
+                 WHERE
+                     a.week = #{week} AND a.channel_id = b.channel_id AND b.system_id =#{systemId}
+             ) yiche_quote_platform_week
+        WHERE platformName=#{platformName}
+    </select>
+
+    <select id="selectPcwapchannelDataWeek" parameterType="map" resultType="com.yiche.smp.common.YichePlatform">
+        SELECT
+            a.platform_name platformName,
+            a.channel_name channelName,
+            a.leads_cnt leadsCnt,
+            a.leads_user_cnt leadsUserCnt,
+            a.actual_consume actualConsume,
+            a.leads_cost leadsCost,
+            a.week bt,
+            b.terminal_id
+        FROM
+            yiche_pcwap_channel_week a,
+            imp_platform_channel b
+        WHERE
+            a.week = #{week} AND a.channel_id = b.channel_id AND b.terminal_id =#{terminalId}
+    </select>
+
+</mapper>

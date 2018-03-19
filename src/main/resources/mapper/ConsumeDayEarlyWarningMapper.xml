@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yiche.smp.mapper.ConsumeDayEarlyWarningMapper">
+    <select id="selectEarlyWarning" parameterType="map" resultType="com.yiche.smp.common.EarlyWarningData">
+        SELECT
+            a.platformName,
+            a.actualConsume,
+            a.leadsCnt,
+            a.bt,
+            b.month_day_avgclue_cnt monthDayAvgclueCnt,
+            b.base_number baseNumber,
+            b.day_budget dayBudget
+        FROM
+            (
+                SELECT
+                    "易车APP" platformName,
+                    SUM(actual_consume) actualConsume,
+                    SUM(leads_cnt) leadsCnt,
+                    bt bt
+                FROM
+                    yiche_app_app_leads_channel_day_all
+                WHERE
+                    bt BETWEEN #{startTime}
+                    AND #{endTime}
+                    AND channel_id IN (
+                        SELECT
+                            channel_id
+                        FROM
+                            imp_platform_channel
+                        WHERE
+                            platform_name = "易车APP"
+                    )
+                GROUP BY
+                    bt
+                UNION
+                SELECT
+                    "报价APP" platformName,
+                    SUM(actual_consume) actualConsume,
+                    SUM(leads_cnt) leadsCnt,
+                    bt bt
+                FROM
+                    yiche_quote_app_leads_channel_day_all
+                WHERE
+                    bt BETWEEN #{startTime}
+                    AND #{endTime}
+                    AND channel_id IN (
+                        SELECT
+                            channel_id
+                        FROM
+                            imp_platform_channel
+                        WHERE
+                            platform_name = "报价APP"
+                    )
+                GROUP BY
+                    bt
+                UNION
+                SELECT
+                    "PCWAP" platformName,
+                    SUM(actual_consume) actualConsume,
+                    SUM(cluecount) leadsCnt,
+                    dt bt
+                FROM
+                    yiche_pcwap_app_leads_channel_day_all
+                WHERE
+                    dt BETWEEN #{startTime}
+                    AND #{endTime}
+                    AND channel_id IN (
+                        SELECT
+                            channel_id
+                        FROM
+                            imp_platform_channel
+                        WHERE
+                            platform_name = "PCWAP"
+                    )
+                GROUP BY
+                    dt
+            ) a,
+            yiche_month_data_standard b
+        WHERE
+            a.platformName = b.platform_name
+            AND a.platformName = #{platformName}
+            AND b.month = #{month}
+    </select>
+
+    <select id="selectMonthChannelConsumeData" parameterType="map" resultType="com.yiche.smp.common.EarlyWarningData">
+        SELECT
+            a.platformName,
+            a.actualConsume,
+            a.leadsCnt,
+            b.month_day_avgclue_cnt monthDayAvgclueCnt,
+            b.base_number baseNumber,
+            b.day_budget dayBudget
+        FROM
+            (
+                SELECT
+                    "易车APP" platformName,
+                    SUM(actual_consume) actualConsume,
+                    SUM(leads_cnt) leadsCnt
+                FROM
+                    yiche_app_app_leads_channel_day_all
+                WHERE
+                    bt BETWEEN #{startTime}
+                    AND #{endTime}
+                    AND channel_id IN (
+                        SELECT
+                            channel_id
+                        FROM
+                            imp_platform_channel
+                        WHERE
+                            platform_name = "易车APP"
+                    )
+                UNION
+                SELECT
+                    "报价APP" platformName,
+                    SUM(actual_consume) actualConsume,
+                    SUM(leads_cnt) leadsCnt
+                FROM
+                    yiche_quote_app_leads_channel_day_all
+                WHERE
+                    bt BETWEEN #{startTime}
+                    AND #{endTime}
+                    AND channel_id IN (
+                        SELECT
+                            channel_id
+                        FROM
+                            imp_platform_channel
+                        WHERE
+                            platform_name = "报价APP"
+                    )
+                UNION
+                SELECT
+                    "PCWAP" platformName,
+                    SUM(actual_consume) actualConsume,
+                    SUM(cluecount) leadsCnt
+                FROM
+                    yiche_pcwap_app_leads_channel_day_all
+                WHERE
+                    dt BETWEEN #{startTime}
+                    AND #{endTime}
+                    AND channel_id IN (
+                        SELECT
+                            channel_id
+                        FROM
+                            imp_platform_channel
+                        WHERE
+                            platform_name = "PCWAP"
+                    )
+            ) a,
+            yiche_month_data_standard b
+        WHERE
+            a.platformName = b.platform_name
+            AND a.platformName = #{platformName}
+            AND b.month = #{month}
+    </select>
+
+</mapper>
