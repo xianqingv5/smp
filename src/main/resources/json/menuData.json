@@ -44,7 +44,13 @@
             "ischecked": false,
             "id": "42",
             "value": "weekwarning"
-        }]
+        },{
+            "name": "平台消耗每天预警",
+            "ischecked": false,
+            "id": "43",
+            "value": "daywarning"
+        }
+        ]
     },{
         "name": "投放策略",
         "ischecked": false,
@@ -87,6 +93,58 @@
             "value": "inspectionlist"
         }
         ]
-    }]
+    },{
+        "name": "业务数据上传",
+        "ischecked": false,
+        "value": "dataupload",
+        "children": [{
+            "name": "渠道消耗数据上传",
+            "ischecked": false,
+            "id": "71",
+            "value": "channeldata"
+        }]
+    },{
+        "name": "数据修正",
+        "ischecked": false,
+        "value": "dataamend",
+        "children": [{
+            "name": "渠道消耗数据修正申请",
+            "ischecked": false,
+            "id": "81",
+            "value": "dataamendapply",
+            },{
+            "name": "渠道消耗数据修正处理列表",
+            "ischecked": false,
+            "id": "82",
+            "value": "dataapplylist"
+       		 }]
+  
+    },{
+        "name":"报表",
+        "ischecked":false,
+        "value":"statement",
+        "children": [{
+            "name": "渠道消耗财务报表",
+            "ischecked": false,
+            "id": "91",
+            "value": "channelconsume"
+        },{
+            "name": "指标大盘",
+            "ischecked": false,
+            "id": "92",
+            "value": "indexgrail"
+        },{
+            "name": "月报",
+            "ischecked": false,
+            "id": "93",
+            "value": "monthreport"
+        },{
+            "name": "日报",
+            "ischecked": false,
+            "id": "94",
+            "value": "dayreport"
+        }]
+    }
+    ]
 }
 

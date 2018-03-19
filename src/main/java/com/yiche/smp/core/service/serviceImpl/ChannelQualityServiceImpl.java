@@ -43,7 +43,7 @@ public class ChannelQualityServiceImpl implements ChannelQualityService {
             return null;
         }
         //获取综述语句的对象
-        ChannelQualityOverviewExample channelQualityOverviewExample = new ChannelQualityOverviewExample();
+       ChannelQualityOverviewExample channelQualityOverviewExample = new ChannelQualityOverviewExample();
         ChannelQualityOverviewExample.Criteria criteria = channelQualityOverviewExample.createCriteria();
         criteria.andComeFromEqualTo(comeFrom);
         criteria.andMonthDataEqualTo(monthData);
@@ -57,13 +57,14 @@ public class ChannelQualityServiceImpl implements ChannelQualityService {
         map.put("comeFrom", comeFrom);
         map.put("monthData", monthData);
         map.put("channelTime", monthData);
+        //通过得分降序查询排序
         List <ChannelQuality> channelqualities1 = channelQualityMapper.selectByScoreAfterData(map);
         logger.info("综合得分靠后的渠道查询到的条数有：" + channelqualities1.size() + "第二条的id是：" + channelqualities1.get(1).getId());
 //        为第一张图设置数据
         ScoreData scoreAfterData = new ScoreData();
         scoreAfterData.setChannelScoreTitle("综合得分靠后的渠道");
-//        String channelScoreDesc="数据显示，"+mongth+"月份综合分分排名较靠后的渠道有"+channelqualities1.get(0).getChannelname()+"、"+channelqualities1.get(1).getChannelname()+"、"+channelqualities1.get(2).getChannelname();
-        String channelScoreDesc = channelQualityOverview.getScoreAfterData();
+     //strb.append ( channelScoreDesc="数据显示，"+monthData+"月份综合分分排名较靠后的渠道有"+channelqualities1.get(0).getChannelName()+"、"+channelqualities1.get(1).getChannelName()+"、"+channelqualities1.get(2).getChannelName());
+         String channelScoreDesc = channelQualityOverview.getScoreAfterData();
         scoreAfterData.setChannelScoreDesc(channelScoreDesc);
         //设置表格
         Table table1 = new Table();
@@ -78,11 +79,17 @@ public class ChannelQualityServiceImpl implements ChannelQualityService {
         ArrayList <Object> tBody1 = new ArrayList <>();
         for (ChannelQuality channelquality : channelqualities1) {
             Tbody1 tbody1 = new Tbody1();
+            //设置渠道的名字
             tbody1.setChannelName(channelquality.getChannelName());
+            //设置渠道的效率得分
             tbody1.setEfficiencyScore(channelquality.getEfficiencyScore());
+            //设置渠道的成本得分
             tbody1.setIndexScore(channelquality.getIndexScore());
+            //数量得分
             tbody1.setNumberScore(channelquality.getNumberScore());
+            //质量得分
             tbody1.setQualityScore(channelquality.getQualityScore());
+            //排名
             tbody1.setRank(channelquality.getRank());
             tBody1.add(tbody1);
         }

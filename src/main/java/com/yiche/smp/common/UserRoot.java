@@ -6,7 +6,8 @@ import org.junit.Test;
  * 使用枚举类型来封装异常码和异常信息
  */
 public enum UserRoot {
-    USER_COMMON(0, "没有权限的普通用户", "无权限"), USER_BLSQCZ(1, "业务申请部门", "操作员"), USER_BLSQSH(2, "业务申请部门", "审核员"), USER_BLSSCZ(3, "补量实施部门", "操作员"), USER_BLSSFH(4, "补量实施部门", "复核员"), USER_FZBSQ(5, "反作弊", "申请员"), USER_FZBSS(6, "反作弊", "操作员");
+    USER_COMMON(0, "没有权限的普通用户", "无权限"), USER_BLSQCZ(1, "业务申请部门", "操作员"), USER_BLSQSH(2, "业务申请部门", "审核员"), USER_BLSSCZ(3, "补量实施部门", "操作员"), USER_BLSSFH(4, "补量实施部门", "复核员"), USER_FZBSQ(5, "反作弊", "申请员"), USER_FZBSS(6, "反作弊", "操作员")
+    ,USER_SJXZSQ(7,"业务管理员,可进行数据修正申请","操作员"),USER_SJXZSH(8,"数据管理部","审核员"),USER_ZJL(9,"总经理","复核员"),USER_SJXZSS(10,"技术部门","数据处理");
 
     private String brand;
     private int code;

@@ -72,7 +72,21 @@ public class MenuController {
                 }
                 map.put("data", list);
                 resultData = map;
-            } else {
+            } else if(role==UserRoot.USER_SJXZSH.getCode()||role==UserRoot.USER_SJXZSS.getCode()){
+            	JSONArray data = dataJson.getJSONArray("data");// 找到data的json数组
+                Map<String, Object> map = new HashMap<>();
+                List<Object> list = new ArrayList<>();
+                for (int i = 0; i < data.size(); i++) {
+                    String name = data.getJSONObject(i).getString("name");
+                    if ("数据修正".equals(name) ) {
+                        JSONObject jsonObject = data.getJSONObject(i);
+                        list.add(jsonObject);
+                    }
+                }
+                map.put("data", list);
+                resultData = map;
+            }
+            else {
                 resultData = dataJson;
             }
             ResultResponse.success();
