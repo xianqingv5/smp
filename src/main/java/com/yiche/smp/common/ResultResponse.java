@@ -58,11 +58,13 @@ public class ResultResponse implements Serializable {
     public static ResultResponse fail(ErrorCodeMessage param) {
         return new ResultResponse(param.getCode(), param.getMsg(), null);
     }
-
+    
     public static ResultResponse error(String msg) {
         return new ResultResponse(500, msg, null);
     }
-
+    public static ResultResponse fail(DataName dataname) {
+        return new ResultResponse(dataname.getCode(), dataname.getMsg(), null);
+    }
 
     public String toString() {
         return "ResultResponse{code=" + this.code + ", msg='" + this.msg + '\'' + ", result=" + this.result + '}';
