@@ -29,11 +29,11 @@ import io.swagger.annotations.Api;
 public class ShowExcel {
 	@Autowired
 	private ImpChannelConsumeDataSerivce impChannelConsumeDataSerivce;
-    @RequestMapping(value = "/resource/getExcel", produces = MediaType.APPLICATION_JSON_UTF8_VALUE + ";charset=utf-8",method = RequestMethod.POST)
+    @RequestMapping(value = "/intelligent/getExcel", produces = MediaType.APPLICATION_JSON_UTF8_VALUE + ";charset=utf-8",method = RequestMethod.POST)
 	public ResultResponse getExcel(@RequestBody Map<String,String>map) {
     	//String filePath = "E:\\js\\File\\2018-01\\渠道质量评估分析明细-易车12月样例数据(1).xlsx";
     	String id = map.get("id");
-    	int a = Integer.parseInt(id);
+    	Integer a = Integer.parseInt(id);
         	ImpChannelConsumeData data = impChannelConsumeDataSerivce.selectFileExcelById(a);
         	String filepath = data.getFilepath();
     	
