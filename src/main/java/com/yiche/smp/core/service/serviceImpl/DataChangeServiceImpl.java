@@ -77,17 +77,26 @@ public class DataChangeServiceImpl implements DataChangeService {
 		 if (user != null) {
 	            Integer role = user.getRole();
 	            //业务申请部操作员
-	            if (role == UserRoot.USER_SJXZSQ.getCode()||role==UserRoot.USER_SJXZSS.getCode()) {
+	            if (role == UserRoot.USER_BLSQCZ.getCode()||role==UserRoot.USER_SJXZSS.getCode()) {
 	                List <ApplyChannelChange> list = applyMapper.selectAppltDeptUnCheckList();
 	                return list;
-	            } else if (role == UserRoot.USER_SJXZSH.getCode()) {//业务申请部门审核员
+	            } else if (role == UserRoot.USER_BLSQSH.getCode()) {//业务申请部门审核员
 	                List <ApplyChannelChange> list = applyMapper.selectCarryDeptOptionUnCheckList();
+	                for (ApplyChannelChange applyChannelChange : list) {
+	                	applyChannelChange.setWait("待处理");
+					}
 	                return list;
 	            } else if (role == UserRoot.USER_SJXZSH.getCode()) {//数据监控部门审核员
 	                List <ApplyChannelChange> list = applyMapper.selectCarryDeptAuditUnCheckList();
+	                for (ApplyChannelChange applyChannelChange : list) {
+	                	applyChannelChange.setWait("待处理");
+					}
 	                return list;
 	            }else if (role==UserRoot.USER_ZJL.getCode()){  //总经理岗
 	            	 List <ApplyChannelChange> list = applyMapper.selectCarryDeptOptionCheckList();
+	            	 for (ApplyChannelChange applyChannelChange : list) {
+		                	applyChannelChange.setWait("待处理");
+						}
 	            	 return list;
 	            }
 	        }
@@ -99,6 +108,22 @@ public class DataChangeServiceImpl implements DataChangeService {
 	@Override
 	public ApplyChannelChange selectOneById(int id) {
 		ApplyChannelChange selectByPrimaryKey = applyMapper.selectByPrimaryKey(id);
+		Integer status = selectByPrimaryKey.getStatus();
+		if(status==0){
+			selectByPrimaryKey.setPlan("待业务申请部进行审核");
+		}else if(status==1){
+			selectByPrimaryKey.setPlan("待数据管控部进行审核");
+		}else if(status==2){
+			selectByPrimaryKey.setPlan("待总经理进行审核");
+		}else if(status==3){
+			selectByPrimaryKey.setPlan("已完成");
+		}else if(status==-1){
+			selectByPrimaryKey.setPlan("业务申请部未通过");
+		}else if(status==-2){
+			selectByPrimaryKey.setPlan("数据管控部未通过");
+		}else if(status==-3){
+			selectByPrimaryKey.setPlan("总经理审核未通过");
+		}
 		return selectByPrimaryKey;
 	}
 	/*@Override
@@ -136,14 +161,14 @@ public class DataChangeServiceImpl implements DataChangeService {
 	            	applyChannelChange.setStatus(BoostApplyStatus.APPLY_DEPT_CHECK_UNPASS.getCode());
 	            }
 
-	        } else if (role == UserRoot.USER_BLSSCZ.getCode()) {
+	        } else if (role == UserRoot.USER_SJXZSH.getCode()) {
 	            if ("true".equals(checkResult)) {
 	            	applyChannelChange.setStatus(BoostApplyStatus.CARRY_DEPT_OPTION_PASS.getCode());
 	            } else {
 	            	applyChannelChange.setStatus(BoostApplyStatus.CARRY_DEPT_OPTION_UNPASS.getCode());
 	            }
 
-	        } else if (role == UserRoot.USER_BLSSFH.getCode()) {
+	        } else if (role == UserRoot.USER_ZJL.getCode()) {
 	            if ("true".equals(checkResult)) {
 	            	applyChannelChange.setStatus(BoostApplyStatus.CARRY_DEPT_AUDIT_PASS.getCode());
 	            } else {
