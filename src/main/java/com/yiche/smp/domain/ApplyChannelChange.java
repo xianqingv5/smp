@@ -37,6 +37,8 @@ public class ApplyChannelChange implements Serializable{
     
     //是否通过审核
     private String dataCheck;
+    private String plan;
+    private String wait;
 
 	public ApplyChannelChange() {
 		super();
@@ -61,6 +63,23 @@ public class ApplyChannelChange implements Serializable{
 		this.createtime = createtime;
 		this.refusereason = refusereason;
 		this.dataCheck = dataCheck;
+	}
+
+	
+	public String getWait() {
+		return wait;
+	}
+
+	public void setWait(String wait) {
+		this.wait = wait;
+	}
+
+	public String getPlan() {
+		return plan;
+	}
+
+	public void setPlan(String plan) {
+		this.plan = plan;
 	}
 
 	public Integer getId() {
