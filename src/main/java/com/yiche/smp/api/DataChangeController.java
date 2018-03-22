@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -37,6 +38,7 @@ import com.yiche.smp.common.util.UploadDataUtil;
 import com.yiche.smp.core.service.DataChangeService;
 import com.yiche.smp.core.service.ImPlatformService;
 import com.yiche.smp.core.service.UserService;
+import com.yiche.smp.domain.Apply;
 import com.yiche.smp.domain.ApplyChannelChange;
 import com.yiche.smp.domain.ImpPlatform;
 import com.yiche.smp.domain.User;
@@ -300,4 +302,18 @@ public class DataChangeController {
 		}
 		return ResultResponse.success();
 	}
+	
+	@RequestMapping(value ="/intelligent/downloadExcel", produces = MediaType.APPLICATION_JSON_UTF8_VALUE + ";charset=utf-8", method = RequestMethod.GET)
+    @ApiOperation("数据修正申请中上传附件的下载")
+    public void downloadEnclosure(Integer applyId, HttpServletResponse response) {
+        if (applyId == null) {
+            logger.info("下载上传附件时传入的id为空");
+            return;
+        }
+        //获取上传的附件
+        ApplyChannelChange applyChannelChange = dataChangeService.selectOneById(applyId);
+        String filepath = applyChannelChange.getFilepath();
+        String filename = applyChannelChange.getFilename();       
+        UploadDataUtil.processDownload(response, filepath, filename);
+    }
 }
