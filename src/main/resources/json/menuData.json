@@ -129,20 +129,20 @@
             "id": "91",
             "value": "channelconsume"
         },{
-            "name": "月报",
+            "name": "日报",
             "ischecked": false,
             "id": "92",
-            "value": "monthreport"
+            "value": "dayreport"
         },{
             "name": "周报",
             "ischecked": false,
             "id": "93",
             "value": "weekreport"
         },{
-            "name": "日报",
+            "name": "月报",
             "ischecked": false,
             "id": "94",
-            "value": "dayreport"
+            "value": "monthreport"
         }]
     }
     ]
