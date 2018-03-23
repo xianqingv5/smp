@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.yiche.smp.mapper.DisplayDayReportMapper">
 
-    <select id="getSumDataDay" resultType="com.yiche.smp.everyday.GatherYicheAPP" parameterType="map">
+    <select id="getSumDataDay" resultType="com.yiche.smp.common.GatherYicheAPP" parameterType="map">
         SELECT
             SUM(leadsCnt)       leadsCnt,
             SUM(leadsUserCnt)   leadsUserCnt,
@@ -46,7 +46,7 @@
     </select>
 
 
-    <select id="getPlatformDataDay" parameterType="map" resultType="com.yiche.smp.everyday.GatherYicheAPP">
+    <select id="getPlatformDataDay" parameterType="map" resultType="com.yiche.smp.common.GatherYicheAPP">
         SELECT
             platformName   platformName,
             leadsCnt       leadsCnt,
@@ -94,9 +94,10 @@
         WHERE platformName=#{platformName}
     </select>
 
-    <select id="getplatformChannelDataDay" parameterType="map" resultType="com.yiche.smp.everyday.YichePlatform">
+    <select id="getplatformChannelDataDay" parameterType="map" resultType="com.yiche.smp.common.YichePlatform">
         SELECT
             platformName,
+            channelId,
             channelName,
             leadsCnt,
             leadsUserCnt,
@@ -108,6 +109,7 @@
         FROM (
             SELECT
                 "易车APP"          platformName,
+                a.channel_id      channelId,
                 a.channel_name    channelName,
                 a.leads_cnt       leadsCnt,
                 a.leads_user_cnt  leadsUserCnt,
@@ -123,6 +125,7 @@
             UNION
             SELECT
                 "报价APP"          platformName,
+                a.channel_id      channelId,
                 a.channel_name    channelName,
                 a.leads_cnt       leadsCnt,
                 a.leads_user_cnt  leadsUserCnt,
@@ -139,15 +142,16 @@
         WHERE platformName=#{platformName}
     </select>
 
-    <select id="getPcwapchannelDataDay" parameterType="map" resultType="com.yiche.smp.everyday.YichePlatform">
+    <select id="getPcwapchannelDataDay" parameterType="map" resultType="com.yiche.smp.common.YichePlatform">
         SELECT
             "PCWAP" platformName,
+            a.channel_id      channelId,
             a.channel_name channelName,
             a.cluecount leadsCnt,
             a.clueusercount leadsUserCnt,
             a.actual_consume actualConsume,
             a.dt bt,
-            b.terminal_id
+            b.terminal_id terminalId
         FROM
             yiche_pcwap_app_leads_channel_day_all a,
             imp_platform_channel b

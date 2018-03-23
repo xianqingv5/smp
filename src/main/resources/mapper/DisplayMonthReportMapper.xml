@@ -7,7 +7,7 @@
             SUM(leadsUserCnt)   leadsUserCnt,
             SUM(actualConsume)  actualConsume,
             SUM(leadsCost)      leadsCost,
-            bt                  bt
+            month               month
         FROM
             (
                 SELECT
@@ -15,89 +15,106 @@
                     SUM(leads_user_cnt)  leadsUserCnt,
                     SUM(actual_consume) actualConsume,
                     SUM(leads_cost)      leadsCost,
-                    month                  bt
+                    month                  month
                 FROM
                     yiche_yiche_channel_month
                 WHERE
                     month = #{month}
-                    AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="易车APP")
                 UNION
                 SELECT
                     SUM(leads_cnt)       leadsCnt,
                     SUM(leads_user_cnt)  leadsUserCnt,
                     SUM(actual_consume) actualConsume,
                     SUM(leads_cost)      leadsCost,
-                    month                   bt
+                    month                   month
                 FROM
                     yiche_quote_channel_month
                 WHERE
                     month = #{month}
-                    AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="报价APP")
                 UNION
                 SELECT
                     SUM(leads_cnt)       leadsCnt,
                     SUM(leads_user_cnt)   leadsUserCnt,
                     SUM(actual_consume) actualConsume,
                     SUM(leads_cost)      leadsCost,
-                    month                   bt
+                    month                   month
                 FROM
                     yiche_pcwap_channel_month
                 WHERE
                     month = #{month}
-                    AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="PCWAP")
+                UNION
+                SELECT
+                    SUM(leads_cnt)       leadsCnt,
+                    SUM(leads_user_cnt)   leadsUserCnt,
+                    SUM(actual_consume) actualConsume,
+                    SUM(leads_cost)      leadsCost,
+                    month                   month
+                FROM
+                    yiche_third_party_channel_month
+                WHERE
+                    month = #{month}
             ) yiche_sum_month_report
     </select>
 
     <select id="selectPlatformDataMonth" parameterType="map" resultType="com.yiche.smp.common.GatherYicheAPP">
         SELECT
-        platformName   platformName,
-        leadsCnt       leadsCnt,
-        leadsUserCnt   leadsUserCnt,
-        actualConsume actualConsume,
-        leadsCost      leadsCost,
-        bt             bt
+            platformName  platformName,
+            leadsCnt      leadsCnt,
+            leadsUserCnt  leadsUserCnt,
+            actualConsume actualConsume,
+            leadsCost     leadsCost,
+            month         month
         FROM
-        (
-        SELECT
-        platform_name             platformName,
-        SUM(leads_cnt)       leadsCnt,
-        SUM(leads_user_cnt)  leadsUserCnt,
-        SUM(actual_consume) actualConsume,
-        sum(leads_cost)     leadsCost,
-        month                   bt
-        FROM
-        yiche_yiche_channel_month
-        WHERE
-        month = #{month}
-        AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="易车APP")
-        UNION
-        SELECT
-        platform_name              platformName,
-        SUM(leads_cnt)       leadsCnt,
-        SUM(leads_user_cnt)  leadsUserCnt,
-        SUM(actual_consume) actualConsume,
-        sum(leads_cost)     leadsCost,
-        month                  bt
-        FROM
-        yiche_quote_channel_month
-        WHERE
-        month = #{month}
-        AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="报价APP")
-        UNION
-        SELECT
-        platform_name              platformName,
-        SUM(leads_cnt)       leadsCnt,
-        SUM(leads_user_cnt)   leadsUserCnt,
-        SUM(actual_consume) actualConsume,
-        sum(leads_cost)     leadsCost,
-        month                   bt
-        FROM
-        yiche_quote_channel_month
-        WHERE
-        month = #{month}
-        AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="PCWAP")
-        ) yiche_platformName_month_report
-        WHERE platformName=#{platformName}
+            (
+                SELECT
+                    platform_name       platformName,
+                    SUM(leads_cnt)      leadsCnt,
+                    SUM(leads_user_cnt) leadsUserCnt,
+                    SUM(actual_consume) actualConsume,
+                    sum(leads_cost)     leadsCost,
+                    month               month
+                FROM
+                    yiche_yiche_channel_month
+                WHERE
+                    month = #{month}
+                UNION
+                SELECT
+                    platform_name       platformName,
+                    SUM(leads_cnt)      leadsCnt,
+                    SUM(leads_user_cnt) leadsUserCnt,
+                    SUM(actual_consume) actualConsume,
+                    sum(leads_cost)     leadsCost,
+                    month               month
+                FROM
+                    yiche_quote_channel_month
+                WHERE
+                    month = #{month}
+                UNION
+                SELECT
+                    platform_name       platformName,
+                    SUM(leads_cnt)      leadsCnt,
+                    SUM(leads_user_cnt) leadsUserCnt,
+                    SUM(actual_consume) actualConsume,
+                    sum(leads_cost)     leadsCost,
+                    month               month
+                FROM
+                    yiche_pcwap_channel_month
+                WHERE
+                    month = #{month}
+                UNION
+                SELECT
+                    platform_name       platformName,
+                    SUM(leads_cnt)      leadsCnt,
+                    SUM(leads_user_cnt) leadsUserCnt,
+                    SUM(actual_consume) actualConsume,
+                    sum(leads_cost)     leadsCost,
+                    month               month
+                FROM
+                    yiche_third_party_channel_month
+                WHERE
+                    month = #{month}
+            ) yiche_platformName_month_report
+        WHERE platformName = #{platformName}
     </select>
 
     <select id="selectplatformChannelDataMonth" parameterType="map" resultType="com.yiche.smp.common.YichePlatform">
@@ -108,60 +125,97 @@
         leadsUserCnt,
         actualConsume,
         leadsCost,
-        bt,
+        month,
         newUserCnt,
         newUserCost,
         systemId
         FROM (
         SELECT
-        a.platform_name   platformName,
-        a.channel_name    channelName,
-        a.leads_cnt       leadsCnt,
-        a.leads_user_cnt  leadsUserCnt,
-        a.actual_consume actualConsume,
-        a.leads_cost        leadsCost,
-        a.month              bt,
-        a.new_user_cnt    newUserCnt,
-        a.new_user_cost   newUserCost,
-        b.system_id       systemId
+        platform_name   platformName,
+        channel_name    channelName,
+        leads_cnt       leadsCnt,
+        leads_user_cnt  leadsUserCnt,
+        actual_consume actualConsume,
+        leads_cost        leadsCost,
+        month              month,
+        new_user_cnt    newUserCnt,
+        new_user_cost   newUserCost,
+        system_id       systemId
         FROM
-        yiche_yiche_channel_month a, imp_platform_channel b
+        yiche_yiche_channel_month
         WHERE
-        a.month = #{month} AND a.channel_id = b.channel_id AND b.system_id =#{systemId}
+        month = #{month} AND system_id =#{systemId}
         UNION
         SELECT
-        a.platform_name   platformName,
-        a.channel_name    channelName,
-        a.leads_cnt       leadsCnt,
-        a.leads_user_cnt  leadsUserCnt,
-        a.actual_consume actualConsume,
-        a.leads_cost        leadsCost,
-        a.month              bt,
-        a.new_user_cnt    newUserCnt,
-        a.new_user_cost   newUserCost,
-        b.system_id       systemId
+        platform_name   platformName,
+        channel_name    channelName,
+        leads_cnt       leadsCnt,
+        leads_user_cnt  leadsUserCnt,
+        actual_consume actualConsume,
+        leads_cost        leadsCost,
+        month              month,
+        new_user_cnt    newUserCnt,
+        new_user_cost   newUserCost,
+        system_id       systemId
         FROM
-        yiche_quote_channel_month a, imp_platform_channel b
+        yiche_quote_channel_month
         WHERE
-        a.month = #{month} AND a.channel_id = b.channel_id AND b.system_id =#{systemId}
+        month = #{month} AND system_id =#{systemId}
         ) yiche_quote_platform_month
         WHERE platformName=#{platformName}
     </select>
 
     <select id="selectPcwapchannelDataMonth" parameterType="map" resultType="com.yiche.smp.common.YichePlatform">
         SELECT
-        a.platform_name platformName,
-        a.channel_name channelName,
-        a.leads_cnt leadsCnt,
-        a.leads_user_cnt leadsUserCnt,
-        a.actual_consume actualConsume,
-        a.leads_cost leadsCost,
-        a.month bt,
-        b.terminal_id
+        platform_name platformName,
+        channel_name channelName,
+        leads_cnt leadsCnt,
+        leads_user_cnt leadsUserCnt,
+        actual_consume actualConsume,
+        leads_cost leadsCost,
+        month month,
+        terminal_id terminalId,
+        cooperation_day cooperationDay
         FROM
-        yiche_pcwap_channel_month a,
-        imp_platform_channel b
+        yiche_pcwap_channel_month
         WHERE
-        a.month = #{month} AND a.channel_id = b.channel_id AND b.terminal_id =#{terminalId}
+        month = #{month} AND terminal_id =#{terminalId}
     </select>
+
+    <select id="selectThirdPartychannelDataMonth" parameterType="map" resultType="com.yiche.smp.common.YichePlatform">
+        SELECT
+            platform_name platformName,
+            channel_name channelName,
+            leads_cnt leadsCnt,
+            leads_user_cnt leadsUserCnt,
+            actual_consume actualConsume,
+            leads_cost leadsCost,
+            month month
+        FROM smp.yiche_third_party_channel_month
+        WHERE month=#{month}
+    </select>
+
+    <insert id="insertPcwapMonthReport" parameterType="com.yiche.smp.common.YichePlatform">
+        INSERT INTO smp.yiche_pcwap_channel_month(platform_id,platform_name, channel_name, leads_cnt, leads_user_cnt, actual_consume, leads_cost,terminal_id, month, cooperation_day)
+        VALUES (#{platformId}, #{platformName}, #{channelName}, #{leadsCnt}, #{leadsUserCnt}, #{actualConsume},
+                               #{leadsCost},#{terminalId},#{month}, #{cooperationDay})
+    </insert>
+
+    <insert id="insertQuoteMonthReport" parameterType="com.yiche.smp.common.YichePlatform">
+        INSERT INTO smp.yiche_quote_channel_month(platform_id, platform_name, channel_name, leads_cnt, leads_user_cnt, actual_consume, leads_cost, new_user_cnt, new_user_cost, system_id, month)
+        VALUES(#{platformId}, #{platformName}, #{channelName}, #{leadsCnt}, #{leadsUserCnt}, #{actualConsume},
+               #{leadsCost},#{newUserCnt},#{newUserCost},#{systemId},#{month})
+    </insert>
+
+    <insert id="insertyicheMonthReport" parameterType="com.yiche.smp.common.YichePlatform">
+        INSERT INTO smp.yiche_yiche_channel_month(platform_id, platform_name, channel_name, leads_cnt, leads_user_cnt, actual_consume, leads_cost, new_user_cnt, new_user_cost, system_id, month)
+        VALUES(#{platformId}, #{platformName}, #{channelName}, #{leadsCnt}, #{leadsUserCnt}, #{actualConsume},
+                              #{leadsCost},#{newUserCnt},#{newUserCost},#{systemId},#{month})
+    </insert>
+
+    <insert id="insertThirdMonthReport" parameterType="com.yiche.smp.common.YichePlatform">
+        INSERT INTO smp.yiche_third_party_channel_month(platform_id, platform_name, channel_name, leads_cnt, leads_user_cnt, actual_consume,leads_cost,leads_user_cost, month)
+        VALUES(#{platformId}, #{platformName}, #{channelName}, #{leadsCnt}, #{leadsUserCnt}, #{actualConsume},
+                              #{leadsCost},#{leadsUserCost}, #{month})
+    </insert>
 </mapper>

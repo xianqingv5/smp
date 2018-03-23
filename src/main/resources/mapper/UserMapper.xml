@@ -193,4 +193,8 @@
       role = #{role,jdbcType=INTEGER}
     where userId = #{userid,jdbcType=VARCHAR}
   </update>
+
+  <select id="selectPlatformByUserId" parameterType="java.lang.String" resultType="java.lang.String">
+      SELECT platform FROM user WHERE userId=#{userId}
+  </select>
 </mapper>

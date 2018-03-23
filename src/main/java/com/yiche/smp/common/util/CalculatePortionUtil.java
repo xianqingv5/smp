@@ -2,6 +2,7 @@ package com.yiche.smp.common.util;
 
 import com.yiche.smp.common.GatherYicheAPP;
 import com.yiche.smp.common.Portion;
+import com.yiche.smp.common.StringUtil;
 
 /**
  *
@@ -21,8 +22,8 @@ public class CalculatePortionUtil {
     public static String  calculatePortion(Double data,Double data2){
         if (data2!=null&&data2!=0){
             double v = data / data2;
-            double v1 = DataCalculationUtils.doubleDeal(v);
-            return v1*100+"%";
+            String s = StringUtil.handleData(v);
+            return s;
         }
         return "100%";
 
@@ -30,18 +31,18 @@ public class CalculatePortionUtil {
 
     public static String calculatePortionLong(Long data,Long data2){
         if (data2!=null&&data2!=0){
-            double v = data / data2;
-            double v1 = DataCalculationUtils.doubleDeal(v);
-            return v1*100+"%";
+            double v =((double) data) / data2;
+            String s = StringUtil.handleData(v);
+            return s;
         }
         return "100%";
     }
 
     public static String calculatePortionFloat(Float data,Float data2){
         if (data2!=null&&data2!=0){
-            double v = data / data2;
-            double v1 = DataCalculationUtils.doubleDeal(v);
-            return v1*100+"%";
+            double v = ((double)data) / data2;
+            String s = StringUtil.handleData(v);
+            return s;
         }
         return "100%";
     }

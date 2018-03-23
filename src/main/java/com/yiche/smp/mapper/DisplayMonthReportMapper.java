@@ -20,4 +20,14 @@ public interface DisplayMonthReportMapper {
     public List<YichePlatform> selectplatformChannelDataMonth(Map<String, String> map);
 
     public List<YichePlatform> selectPcwapchannelDataMonth(Map<String, String> map);
+
+    public List<YichePlatform> selectThirdPartychannelDataMonth(Map<String, String> map);
+
+    int insertPcwapMonthReport(YichePlatform yichePlatform);
+
+    int insertQuoteMonthReport(YichePlatform yichePlatform);
+
+    int insertyicheMonthReport(YichePlatform yichePlatform);
+
+    int insertThirdMonthReport(YichePlatform yichePlatform);
 }

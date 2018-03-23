@@ -24,7 +24,7 @@ public class ChannelConsumeReportServiceImpl implements ChannelConsumeReportServ
     @Override
     public PageInfo<GatherYicheAPP> getChannelConsumeReport(String platformName, String channelName, String startTime, String endTime, int isDetail, Integer pageno, Integer pagesize) {
         Map<String, Object> map = new HashMap<>();
-        PageInfo<GatherYicheAPP> gatherYicheAPPPageInfo = new PageInfo<>();
+        PageInfo<GatherYicheAPP> gatherYicheAPPPageInfo;
         if ("全部".equals(platformName)) {
             platformName = null;
         }
@@ -39,11 +39,32 @@ public class ChannelConsumeReportServiceImpl implements ChannelConsumeReportServ
             PageHelper.startPage(pageno, pagesize);
             List<GatherYicheAPP> channelSumConsume = channelConsumeMapper.getChannelSumConsume(map);
             gatherYicheAPPPageInfo = new PageInfo<>(channelSumConsume);
+            List<GatherYicheAPP> list = gatherYicheAPPPageInfo.getList();
+            addPrice(list);
+            gatherYicheAPPPageInfo.setList(list);
         } else {
             PageHelper.startPage(pageno, pagesize);
             List<GatherYicheAPP> channelDetailConsume = channelConsumeMapper.getChannelDetailConsume(map);
             gatherYicheAPPPageInfo = new PageInfo<>(channelDetailConsume);
+            List<GatherYicheAPP> list = gatherYicheAPPPageInfo.getList();
+            addPrice(list);
+            gatherYicheAPPPageInfo.setList(list);
         }
         return gatherYicheAPPPageInfo;
+    }
+
+    public void addPrice(List<GatherYicheAPP> list){
+        for (GatherYicheAPP gatherYicheAPP:list){
+            if(gatherYicheAPP.getLeadsCnt()==null||gatherYicheAPP.getActualConsume()==null){
+                gatherYicheAPP.setCluePrice(0.0);
+            }else{
+                gatherYicheAPP.setCluePrice((double) (gatherYicheAPP.getActualConsume()/gatherYicheAPP.getLeadsCnt()));
+            }
+            if(gatherYicheAPP.getLeadsUserCnt()==null||gatherYicheAPP.getActualConsume()==null){
+                gatherYicheAPP.setUserPrice(0.0);
+            }else{
+                gatherYicheAPP.setUserPrice((double) (gatherYicheAPP.getActualConsume()/gatherYicheAPP.getLeadsUserCnt()));
+            }
+        }
     }
 }

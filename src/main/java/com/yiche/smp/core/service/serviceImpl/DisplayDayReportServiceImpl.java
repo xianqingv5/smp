@@ -37,7 +37,6 @@ public class DisplayDayReportServiceImpl implements DisplayDayReportService {
     @Override
     public DayReport getSumDataDay(String date, String date2) {
         Map<String, String> map = new HashMap<>();
-        Map<String,Object> map1 = new HashMap<>();
         Data data = new Data();
         Data data1 = new Data();
         Data data2 = new Data();
@@ -251,7 +250,7 @@ public class DisplayDayReportServiceImpl implements DisplayDayReportService {
         double leadsCost = 0.00;
         if (num2 != null && num2 != 0) {
             leadsCost = num1 / num2;
-            double v = DataCalculationUtils.doubleDeal(leadsCost);
+            double v = DataCalculationUtils.doubleDeal2(leadsCost);
             return v;
         }
         return leadsCost;

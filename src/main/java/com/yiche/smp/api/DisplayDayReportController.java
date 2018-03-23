@@ -84,8 +84,8 @@ public class DisplayDayReportController{
         //转换成字符串
         String pre1 = DateParseUtil.dateTostring(preDate1, "yyyy-MM-dd");
         String pre2 = DateParseUtil.dateTostring(preDate2, "yyyy-MM-dd");
-        map.put("pre1","2018-03-15");
-        map.put("pre2","2018-03-14");
+        map.put("pre1","2018-03-19");
+        map.put("pre2","2018-03-18");
         return map;
     }
 

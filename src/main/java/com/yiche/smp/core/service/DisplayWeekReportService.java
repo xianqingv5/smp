@@ -1,5 +1,6 @@
 package com.yiche.smp.core.service;
 
+import com.yiche.smp.common.DayReport.DayReport;
 import com.yiche.smp.common.GatherYicheAPP;
 import com.yiche.smp.common.YichePlatform;
 
@@ -11,11 +12,13 @@ import java.util.Map;
  */
 public interface DisplayWeekReportService {
 
-    public Map<String,Object> selectSumDataWeek();
+    public DayReport selectSumDataWeek(String week, String week1);
 
-    public Map<String,Object> getPlatformDataWeek();
+    public List<DayReport> getPlatformDataWeek(String week, String week1);
 
-    public Map<String, List<YichePlatform>> getplatformChannelDataWeek(String platformName);
+    public Map<String, List<YichePlatform>> getplatformChannelDataWeek(String platformName,String week, String week1);
 
-    public Map<String, List<YichePlatform>> getPcwapchannelDataWeek(String platformName);
+    public Map<String, List<YichePlatform>> getPcwapchannelDataWeek(String platformName,String week, String week1);
+
+    public Map<String, List<YichePlatform>> getThirdPartychannelDataWeek(String platformName,String week, String week1);
 }

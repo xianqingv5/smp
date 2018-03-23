@@ -111,7 +111,7 @@
             "name": "渠道消耗数据修正申请",
             "ischecked": false,
             "id": "81",
-            "value": "dataamendapply",
+            "value": "dataamendapply"
             },{
             "name": "渠道消耗数据修正处理列表",
             "ischecked": false,
@@ -129,15 +129,15 @@
             "id": "91",
             "value": "channelconsume"
         },{
-            "name": "指标大盘",
-            "ischecked": false,
-            "id": "92",
-            "value": "indexgrail"
-        },{
             "name": "月报",
             "ischecked": false,
-            "id": "93",
+            "id": "92",
             "value": "monthreport"
+        },{
+            "name": "周报",
+            "ischecked": false,
+            "id": "93",
+            "value": "weekreport"
         },{
             "name": "日报",
             "ischecked": false,

@@ -38,10 +38,28 @@ public class DataCalculationUtils {
      */
     public static double doubleDeal(double val) {
         double number = 0.0;
+        DecimalFormat df = new DecimalFormat("#.0000");
+//java默认的格式是HALF_EVEN   根据如果第二位为偶数第三位为5则五舍六入
+        df.setRoundingMode(RoundingMode.HALF_UP);
+        number = Double.parseDouble(df.format(val));
+        return number;
+    }
+
+    public static double doubleDeal2(double val) {
+        double number = 0.0;
         DecimalFormat df = new DecimalFormat("#.00");
 //java默认的格式是HALF_EVEN   根据如果第二位为偶数第三位为5则五舍六入
         df.setRoundingMode(RoundingMode.HALF_UP);
         number = Double.parseDouble(df.format(val));
+        return number;
+    }
+
+    public static float floatDeal(double val) {
+        float number = 0.0f;
+        DecimalFormat df = new DecimalFormat("#.00");
+//java默认的格式是HALF_EVEN   根据如果第二位为偶数第三位为5则五舍六入
+        df.setRoundingMode(RoundingMode.HALF_UP);
+        number = Float.parseFloat(df.format(val));
         return number;
     }
 

@@ -5,15 +5,16 @@ import com.yiche.smp.common.GatherYicheAPP;
 import com.yiche.smp.common.early.warning.EarlyWarning;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by xuhaiqiang on 2018/3/15
  */
 public interface ConsumeDayEarlyWarningService {
 
-    public List<EarlyWarningData> getEarlyWarningData(String platformName, String startTime, String endTime, String month);
+    public Map<String, Object> getEarlyWarningData(String platformName, String startTime, String endTime, String month);
 
     public List<GatherYicheAPP> getChannelConsumeData(String platformName, String startTime, String endTime);
 
-    public EarlyWarningData getMonthChannelConsumeData(String platformName, String startTime, String endTime, String month, int num);
+    public Map<String, Object> getMonthChannelConsumeData(String platformName, String startTime, String endTime, String month, int num);
 }

@@ -1,6 +1,7 @@
 package com.yiche.smp.mapper;
 
 import com.yiche.smp.common.Channel;
+import com.yiche.smp.common.Platform1;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
@@ -15,4 +16,6 @@ import java.util.Map;
 public interface ChannelNamesMapper {
 
     public List<Channel> selectChannelNames(Map<String, String> map);
+
+    List<Platform1> selectPlatformNames();
 }

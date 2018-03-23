@@ -1,5 +1,6 @@
 package com.yiche.smp.core.service.serviceImpl;
 
+import com.yiche.smp.common.CollectionUtil;
 import com.yiche.smp.common.EarlyWarningData;
 import com.yiche.smp.common.GatherYicheAPP;
 import com.yiche.smp.common.util.DataCalculationUtils;
@@ -27,24 +28,33 @@ public class ConsumeDayEarlyWarningServiceImpl implements ConsumeDayEarlyWarning
     private ChannelConsumeMapper channelConsumeMapper;
 
     @Override
-    public List<EarlyWarningData> getEarlyWarningData(String platformName, String startTime, String endTime,String month) {
+    public Map<String, Object> getEarlyWarningData(String platformName, String startTime, String endTime,String month) {
         List<EarlyWarningData> earlyWarningDataList = new ArrayList<>();
+        List<Long> cluearr = new ArrayList<>();
+        List<Float> comsumearr= new ArrayList<>();
+        List<Float> budgetarr= new ArrayList<>();
+        List<String> datearr = new ArrayList<>();
         Map<String, String> map = new HashMap<>();
+        Map<String, Object> map1 = new HashMap<>();
         map.put("platformName",platformName);
         map.put("startTime",startTime);
         map.put("endTime",endTime);
         map.put("month",month);
         List<EarlyWarningData> earlyWarningDatas = consumeDayEarlyWarningMapper.selectEarlyWarning(map);
-        if (earlyWarningDatas!=null){
+        if (CollectionUtil.listNotNull(earlyWarningDatas)){
             Double baseNumber = earlyWarningDatas.get(0).getBaseNumber();
             Float dayBudget = earlyWarningDatas.get(0).getDayBudget();
             Long monthDayAvgclueCnt = earlyWarningDatas.get(0).getMonthDayAvgclueCnt();
-            double expectPrice= DataCalculationUtils.doubleDeal(monthDayAvgclueCnt/dayBudget);
+            float expectPrice1=dayBudget/monthDayAvgclueCnt;
+            double expectPrice= DataCalculationUtils.floatDeal(expectPrice1);
             for (EarlyWarningData earlyWarningData:earlyWarningDatas){
+                double actualPrice=0;
+                earlyWarningData.setActualConsume(20000f);
                 Float actualConsume = earlyWarningData.getActualConsume();
-                actualConsume=20000f;
                 Long leadsCnt = earlyWarningData.getLeadsCnt();
-                double actualPrice=DataCalculationUtils.doubleDeal(leadsCnt/actualConsume);
+                if (leadsCnt!=0&&leadsCnt!=null){
+                    actualPrice=DataCalculationUtils.floatDeal(actualConsume/leadsCnt);
+                }
                 String warningMsg = getEarlyWarningMsg(leadsCnt, monthDayAvgclueCnt, actualConsume, dayBudget, actualPrice, expectPrice, baseNumber);
                 if (warningMsg!=null){
                     earlyWarningData.setActualPrice(actualPrice);
@@ -53,8 +63,19 @@ public class ConsumeDayEarlyWarningServiceImpl implements ConsumeDayEarlyWarning
                     earlyWarningDataList.add(earlyWarningData);
                 }
             }
+            for(EarlyWarningData earlyWarningData:earlyWarningDataList){
+                datearr.add(earlyWarningData.getBt());
+                cluearr.add(earlyWarningData.getLeadsCnt());
+                comsumearr.add(earlyWarningData.getActualConsume());
+                budgetarr.add(earlyWarningData.getDayBudget());
+            }
+            map1.put("data",earlyWarningDataList);
+            map1.put("datearr",datearr);
+            map1.put("cluearr",cluearr);
+            map1.put("consumearr",comsumearr);
+            map1.put("budgetarr",budgetarr);
         }
-        return earlyWarningDataList;
+        return map1;
     }
 
     @Override
@@ -64,12 +85,27 @@ public class ConsumeDayEarlyWarningServiceImpl implements ConsumeDayEarlyWarning
         map.put("startTime",startTime);
         map.put("endTime",endTime);
         List<GatherYicheAPP> channelDetailConsume = channelConsumeMapper.getChannelDetailConsume(map);
+        for(GatherYicheAPP gatherYicheAPP:channelDetailConsume){
+            if(gatherYicheAPP.getLeadsCnt()==null||gatherYicheAPP.getActualConsume()==null){
+                gatherYicheAPP.setCluePrice(0.0);
+            }else {
+                gatherYicheAPP.setCluePrice((double) (gatherYicheAPP.getActualConsume()/gatherYicheAPP.getLeadsCnt()));
+
+            }
+            if (gatherYicheAPP.getActualConsume()==null||gatherYicheAPP.getLeadsUserCnt()==null){
+                gatherYicheAPP.setUserPrice(0.0);
+            }else {
+                gatherYicheAPP.setUserPrice((double) (gatherYicheAPP.getActualConsume()/gatherYicheAPP.getLeadsUserCnt()));
+            }
+        }
         return channelDetailConsume;
     }
 
     @Override
-    public EarlyWarningData getMonthChannelConsumeData(String platformName, String startTime, String endTime, String month,int num) {
+    public Map<String, Object> getMonthChannelConsumeData(String platformName, String startTime, String endTime, String month,int num) {
         Map<String, String> map = new HashMap<>();
+        Map<String, Object> map1 = new HashMap<>();
+        List<Object> arr = new ArrayList<>();
         map.put("platformName",platformName);
         map.put("startTime",startTime);
         map.put("endTime",endTime);
@@ -77,7 +113,13 @@ public class ConsumeDayEarlyWarningServiceImpl implements ConsumeDayEarlyWarning
         EarlyWarningData earlyWarningData = consumeDayEarlyWarningMapper.selectMonthChannelConsumeData(map);
         earlyWarningData.setDayBudget(earlyWarningData.getDayBudget()*num);
         earlyWarningData.setMonthDayAvgclueCnt(earlyWarningData.getMonthDayAvgclueCnt()*num);
-        return earlyWarningData;
+        arr.add(earlyWarningData.getDayBudget());
+        arr.add(earlyWarningData.getActualConsume());
+        arr.add(earlyWarningData.getLeadsCnt());
+        arr.add(earlyWarningData.getMonthDayAvgclueCnt());
+        map1.put("data",earlyWarningData);
+        map1.put("arr",arr);
+        return map1;
     }
 
     public String getEarlyWarningMsg(Long leadsCnt,Long monthDayAvgclueCnt,Float actualConsume,Float dayBudget,Double actualPrice,Double expectPrice,Double baseNumber){

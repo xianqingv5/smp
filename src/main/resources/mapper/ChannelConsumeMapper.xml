@@ -16,10 +16,19 @@
         yiche_app_app_leads_channel_day_all
         <where>
             <if test="channelName!=NULL">
-                channelName = #{channelName}
+                channel_Name = #{channelName}
             </if>
             AND bt BETWEEN #{startTime}
-            AND #{endTime} GROUP BY
+            AND #{endTime}
+            AND channel_id IN (
+            SELECT
+            channel_id
+            FROM
+            imp_platform_channel
+            WHERE
+            platform_name = "易车APP"
+            )
+            GROUP BY
             channel_name
         </where>
         UNION
@@ -33,10 +42,19 @@
         yiche_quote_app_leads_channel_day_all
         <where>
             <if test="channelName!=NULL">
-                channelName = #{channelName}
+                channel_Name = #{channelName}
             </if>
             AND bt BETWEEN #{startTime}
-            AND #{endTime} GROUP BY
+            AND #{endTime}
+            AND channel_id IN (
+            SELECT
+            channel_id
+            FROM
+            imp_platform_channel
+            WHERE
+            platform_name = "报价APP"
+            )
+            GROUP BY
             channel_name
         </where>
         UNION
@@ -50,10 +68,19 @@
         yiche_pcwap_app_leads_channel_day_all
         <where>
             <if test="channelName!=NULL">
-                channelName = #{channelName}
+                channel_Name = #{channelName}
             </if>
             AND dt BETWEEN #{startTime}
-            AND #{endTime} GROUP BY
+            AND #{endTime}
+            AND channel_id IN (
+            SELECT
+            channel_id
+            FROM
+            imp_platform_channel
+            WHERE
+            platform_name = "PCWAP"
+            )
+            GROUP BY
             channel_name
         </where>
         ) yiche_channel_consume_sum
@@ -80,10 +107,18 @@
         yiche_app_app_leads_channel_day_all
         <where>
             <if test="channelName!=NULL">
-                channelName = #{channelName}
+                channel_Name = #{channelName}
             </if>
             AND bt BETWEEN #{startTime}
             AND #{endTime}
+            AND channel_id IN (
+            SELECT
+            channel_id
+            FROM
+            imp_platform_channel
+            WHERE
+            platform_name = "易车APP"
+            )
         </where>
         UNION
         SELECT
@@ -97,10 +132,18 @@
         yiche_quote_app_leads_channel_day_all
         <where>
             <if test="channelName!=NULL">
-                channelName = #{channelName}
+                channel_Name = #{channelName}
             </if>
             AND bt BETWEEN #{startTime}
             AND #{endTime}
+            AND channel_id IN (
+            SELECT
+            channel_id
+            FROM
+            imp_platform_channel
+            WHERE
+            platform_name = "报价APP"
+            )
         </where>
         UNION
         SELECT
@@ -114,10 +157,18 @@
         yiche_pcwap_app_leads_channel_day_all
         <where>
             <if test="channelName!=NULL">
-                channelName = #{channelName}
+                channel_Name = #{channelName}
             </if>
             AND dt BETWEEN #{startTime}
             AND #{endTime}
+            AND channel_id IN (
+            SELECT
+            channel_id
+            FROM
+            imp_platform_channel
+            WHERE
+            platform_name = "PCWAP"
+            )
         </where>
         ) yiche_channel_consume_detail
         <where>

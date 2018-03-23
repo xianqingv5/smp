@@ -1,5 +1,7 @@
 package com.yiche.smp.common;
 
+import com.yiche.smp.common.util.DataCalculationUtils;
+
 import java.io.Serializable;
 
 /**
@@ -27,6 +29,10 @@ public class GatherYicheAPP implements Serializable {
     private Double newUserCost;
 
     private String application;
+
+    private Double cluePrice;
+
+    private Double userPrice;
 
     public GatherYicheAPP(String platformName, String channelName, Long leadsCnt, Long leadsUserCnt, Float actualConsume, String bt) {
         this.platformName = platformName;
@@ -131,7 +137,10 @@ public class GatherYicheAPP implements Serializable {
     }
 
     public void setLeadsCost(Double leadsCost) {
-        this.leadsCost = leadsCost;
+        if (leadsCost==null){
+            leadsCost=0.0;
+        }
+        this.leadsCost = DataCalculationUtils.doubleDeal2(leadsCost);
     }
     public Long getNewUserCnt() {
         return newUserCnt;
@@ -155,6 +164,28 @@ public class GatherYicheAPP implements Serializable {
 
     public void setApplication(String application) {
         this.application = application;
+    }
+
+    public Double getCluePrice() {
+        return cluePrice;
+    }
+
+    public void setCluePrice(Double cluePrice) {
+        if (cluePrice==null){
+            cluePrice=0.0;
+        }
+        this.cluePrice = DataCalculationUtils.doubleDeal2(cluePrice);
+    }
+
+    public Double getUserPrice() {
+        return userPrice;
+    }
+
+    public void setUserPrice(Double userPrice) {
+        if (userPrice==null){
+            userPrice=0.0;
+        }
+        this.userPrice = DataCalculationUtils.doubleDeal2(userPrice);
     }
 
     @Override

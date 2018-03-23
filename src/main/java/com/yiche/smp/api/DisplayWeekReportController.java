@@ -1,5 +1,6 @@
 package com.yiche.smp.api;
 
+import com.yiche.smp.common.DayReport.DayReport;
 import com.yiche.smp.common.ReportCondition;
 import com.yiche.smp.common.ResultResponse;
 import com.yiche.smp.common.YichePlatform;
@@ -34,14 +35,17 @@ public class DisplayWeekReportController {
     @ApiOperation("平台渠道周报展示功能")
     public ResultResponse showSumDayReportData(){
 
-        Map<String, Object> map = displayWeekReportService.selectSumDataWeek();
+        String week="第7周";
+        String week1 = preWeek(week);
+        DayReport map = displayWeekReportService.selectSumDataWeek(week,week1);
         return ResultResponse.success(map);
     }
     @RequestMapping(value = "/intelligent/weekPlatformsumreport", produces = MediaType.APPLICATION_JSON_UTF8_VALUE + ";charset=utf-8", method = RequestMethod.POST)
     @ApiOperation("平台总和周报展示功能")
     public ResultResponse showPlatformWeekReportData(){
-
-        Map<String, Object> map = displayWeekReportService.getPlatformDataWeek();
+        String week="第7周";
+        String week1 = preWeek(week);
+        List<DayReport> map = displayWeekReportService.getPlatformDataWeek(week,week1);
         return ResultResponse.success(map);
 
     }
@@ -49,19 +53,45 @@ public class DisplayWeekReportController {
     @RequestMapping(value = "/intelligent/weekPlatformreport", produces = MediaType.APPLICATION_JSON_UTF8_VALUE + ";charset=utf-8", method = RequestMethod.POST)
     @ApiOperation("各个平台详细渠道周报展示功能")
     public ResultResponse showDayReportData(@RequestBody ReportCondition reportCondition) {
-
-        Map<String, List<YichePlatform>> map = displayWeekReportService.getplatformChannelDataWeek("易车APP");
+        String week="第7周";
+        String week1 = preWeek(week);
+        Map<String, List<YichePlatform>> map = displayWeekReportService.getplatformChannelDataWeek("易车APP",week,week1);
         return  ResultResponse.success(map);
     }
 
     @RequestMapping(value = "/intelligent/weekPcwapreport", produces = MediaType.APPLICATION_JSON_UTF8_VALUE + ";charset=utf-8", method = RequestMethod.POST)
     @ApiOperation("Pcwap平台详细渠道周报展示功能")
-    public ResultResponse showDayPcwapReportData(@RequestBody ReportCondition reportCondition){
+    public ResultResponse showWeekPcwapReportData(@RequestBody ReportCondition reportCondition){
         if (reportCondition!=null){
             String platformName = reportCondition.getPlatformName();
-            Map<String, List<YichePlatform>> map = displayWeekReportService.getPcwapchannelDataWeek(platformName);
+            String week="第7周";
+            String week1 = preWeek(week);
+            Map<String, List<YichePlatform>> map = displayWeekReportService.getPcwapchannelDataWeek(platformName,week,week1);
             return ResultResponse.success(map);
         }
         return ResultResponse.error();
+    }
+    @RequestMapping(value = "/intelligent/weekThirdPartyreport", produces = MediaType.APPLICATION_JSON_UTF8_VALUE + ";charset=utf-8", method = RequestMethod.POST)
+    @ApiOperation("第三方平台详细渠道周报展示功能")
+    public ResultResponse showWeekThirdPartyReportData(@RequestBody ReportCondition reportCondition) {
+        if (reportCondition!=null){
+            String platformName = reportCondition.getPlatformName();
+            String week="第7周";
+            String week1 = preWeek(week);
+            Map<String, List<YichePlatform>> map = displayWeekReportService.getThirdPartychannelDataWeek(platformName,week,week1);
+            return ResultResponse.success(map);
+        }
+        return ResultResponse.error();
+    }
+
+    /**
+     * 获取选中周期的上一周
+     * @param week
+     * @return
+     */
+    public String preWeek(String week){
+        Integer i = Integer.parseInt(week.substring(1,2));
+        String week1="第"+(i-1)+"周";
+        return week1;
     }
 }

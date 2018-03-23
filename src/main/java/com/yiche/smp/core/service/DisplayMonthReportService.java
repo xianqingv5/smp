@@ -1,5 +1,6 @@
 package com.yiche.smp.core.service;
 
+import com.yiche.smp.common.DayReport.DayReport;
 import com.yiche.smp.common.YichePlatform;
 
 import java.util.List;
@@ -10,11 +11,13 @@ import java.util.Map;
  */
 public interface DisplayMonthReportService {
 
-    public Map<String,Object> selectSumDatamonth();
+    public DayReport selectSumDatamonth(String month, String month1);
 
-    public Map<String,Object> getPlatformDatamonth();
+    public List<DayReport> getPlatformDatamonth(String month, String month1);
 
-    public Map<String, List<YichePlatform>> getplatformChannelDataMonth(String platformName);
+    public Map<String, List<YichePlatform>> getplatformChannelDataMonth(String platformName,String month, String month1);
 
-    public Map<String, List<YichePlatform>> getPcwapchannelDataMonth(String platformName);
+    public Map<String, List<YichePlatform>> getPcwapchannelDataMonth(String platformName,String month, String month1);
+
+    public Map<String, List<YichePlatform>> getThirdPartychannelDataMonth(String platformName,String month, String month1);
 }

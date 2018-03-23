@@ -19,4 +19,14 @@ public interface DisplayWeekReportMapper {
     public List<YichePlatform> selectplatformChannelDataWeek(Map<String, String> map);
 
     public List<YichePlatform> selectPcwapchannelDataWeek(Map<String, String> map);
+
+    public List<YichePlatform> selectThirdPartychannelDataWeek(Map<String, String> map);
+
+     int insertPcwapWeekReport(YichePlatform yichePlatform);
+
+     int insertQuoteWeekReport(YichePlatform yichePlatform);
+
+     int insertyicheWeekReport(YichePlatform yichePlatform);
+
+     int insertThirdWeekReport(YichePlatform yichePlatform);
 }

@@ -1,5 +1,7 @@
 package com.yiche.smp.common;
 
+import com.yiche.smp.common.util.DataCalculationUtils;
+
 import java.io.Serializable;
 
 /**
@@ -37,7 +39,26 @@ public class YichePlatform implements Serializable {
 
     private String systemId;
 
-    private String terminal;
+    private String terminalId;
+
+    private String weekDetail;//周期描述
+
+    private Integer cooperationDay;//合作天数
+
+    private String week;//周
+
+    private String month;//月
+
+    private String platformId;
+
+    private Double leadsUserCost;//用户成本
+
+    private String channelNamePath;//渠道路径
+
+    private String channelId;
+
+    public YichePlatform() {
+    }
 
     public YichePlatform(String platformName, String channelName, Long leadsCnt, Long leadsUserCnt, Float actualConsume, String bt, Double leadsCost, Long newUserCnt, Double newUserCost, String clueRatio, String userRatio, String leadsCostRatio, String newUserCntRatio, String consumeRatio) {
         this.platformName = platformName;
@@ -101,7 +122,10 @@ public class YichePlatform implements Serializable {
     }
 
     public Float getActualConsume() {
-        return actualConsume;
+        if (actualConsume==null){
+            actualConsume=0.0f;
+        }
+        return DataCalculationUtils.floatDeal(actualConsume);
     }
 
     public void setActualConsume(Float actualConsume) {
@@ -117,7 +141,10 @@ public class YichePlatform implements Serializable {
     }
 
     public Double getLeadsCost() {
-        return leadsCost;
+        if (leadsCost == null) {
+            leadsCost=0.0;
+        }
+        return DataCalculationUtils.doubleDeal2(leadsCost);
     }
 
     public void setLeadsCost(Double leadsCost) {
@@ -133,7 +160,10 @@ public class YichePlatform implements Serializable {
     }
 
     public Double getNewUserCost() {
-        return newUserCost;
+        if (newUserCost==null){
+            newUserCost=0.0;
+        }
+        return DataCalculationUtils.doubleDeal2(newUserCost);
     }
 
     public void setNewUserCost(Double newUserCost) {
@@ -188,18 +218,82 @@ public class YichePlatform implements Serializable {
         this.systemId = systemId;
     }
 
-    public String getTerminal() {
-        return terminal;
+    public String getTerminalId() {
+        return terminalId;
     }
 
-    public void setTerminal(String terminal) {
-        this.terminal = terminal;
+    public void setTerminalId(String terminalId) {
+        this.terminalId = terminalId;
     }
 
-    public YichePlatform() {
+    public String getWeekDetail() {
+        return weekDetail;
     }
 
-    public YichePlatform(String platformName, String channelName, Long leadsCnt, Long leadsUserCnt, Float actualConsume, String bt, Double leadsCost, Long newUserCnt, Double newUserCost, String clueRatio, String userRatio, String leadsCostRatio, String newUserCntRatio, String consumeRatio, String systemId, String terminal) {
+    public void setWeekDetail(String weekDetail) {
+        this.weekDetail = weekDetail;
+    }
+
+    public Integer getCooperationDay() {
+        return cooperationDay;
+    }
+
+    public void setCooperationDay(Integer cooperationDay) {
+        this.cooperationDay = cooperationDay;
+    }
+
+    public String getWeek() {
+        return week;
+    }
+
+    public void setWeek(String week) {
+        this.week = week;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public String getPlatformId() {
+        return platformId;
+    }
+
+    public void setPlatformId(String platformId) {
+        this.platformId = platformId;
+    }
+
+    public Double getLeadsUserCost() {
+        if (leadsUserCost==null){
+            leadsUserCost=0.0;
+        }
+        return DataCalculationUtils.doubleDeal2(leadsUserCost);
+    }
+
+    public void setLeadsUserCost(Double leadsUserCost) {
+        this.leadsUserCost = leadsUserCost;
+    }
+
+    public String getChannelNamePath() {
+        return channelNamePath;
+    }
+
+    public void setChannelNamePath(String channelNamePath) {
+        this.channelNamePath = channelNamePath;
+    }
+
+    public String getChannelId() {
+        return channelId;
+    }
+
+    public void setChannelId(String channelId) {
+        this.channelId = channelId;
+    }
+
+    public YichePlatform(String platformName, String channelName, Long leadsCnt, Long leadsUserCnt, Float actualConsume, String bt, Double leadsCost, Long newUserCnt, Double newUserCost, String clueRatio, String userRatio, String leadsCostRatio, String newUserCntRatio, String consumeRatio, String systemId, String terminalId, String weekDetail, Integer cooperationDay) {
         this.platformName = platformName;
         this.channelName = channelName;
         this.leadsCnt = leadsCnt;
@@ -215,6 +309,38 @@ public class YichePlatform implements Serializable {
         this.newUserCntRatio = newUserCntRatio;
         this.consumeRatio = consumeRatio;
         this.systemId = systemId;
-        this.terminal = terminal;
+        this.terminalId = terminalId;
+        this.weekDetail = weekDetail;
+        this.cooperationDay = cooperationDay;
+    }
+
+    @Override
+    public String toString() {
+        return "YichePlatform{" +
+                "platformName='" + platformName + '\'' +
+                ", channelName='" + channelName + '\'' +
+                ", leadsCnt=" + leadsCnt +
+                ", leadsUserCnt=" + leadsUserCnt +
+                ", actualConsume=" + actualConsume +
+                ", bt='" + bt + '\'' +
+                ", leadsCost=" + leadsCost +
+                ", newUserCnt=" + newUserCnt +
+                ", newUserCost=" + newUserCost +
+                ", clueRatio='" + clueRatio + '\'' +
+                ", userRatio='" + userRatio + '\'' +
+                ", leadsCostRatio='" + leadsCostRatio + '\'' +
+                ", newUserCntRatio='" + newUserCntRatio + '\'' +
+                ", consumeRatio='" + consumeRatio + '\'' +
+                ", systemId='" + systemId + '\'' +
+                ", terminalId='" + terminalId + '\'' +
+                ", weekDetail='" + weekDetail + '\'' +
+                ", cooperationDay=" + cooperationDay +
+                ", week='" + week + '\'' +
+                ", month='" + month + '\'' +
+                ", platformId='" + platformId + '\'' +
+                ", leadsUserCost=" + leadsUserCost +
+                ", channelNamePath='" + channelNamePath + '\'' +
+                ", channelId='" + channelId + '\'' +
+                '}';
     }
 }

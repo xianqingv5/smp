@@ -9,6 +9,16 @@ public class User {
 
     private Integer role;
 
+    private String platform; // 部门
+
+    public String getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(String platform) {
+        this.platform = platform;
+    }
+
     public String getUserid() {
         return userid;
     }

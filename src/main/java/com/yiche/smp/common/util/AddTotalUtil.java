@@ -19,17 +19,44 @@ public class AddTotalUtil {
         float consume=0f;
         for (int i=0;i<=lists.size()-1;i++){
             YichePlatform yichePlatform1 = lists.get(i);
-            clueCnt+=yichePlatform1.getLeadsCnt();
-            clueUserCnt+=yichePlatform1.getLeadsUserCnt();
-            leadsCost+=yichePlatform1.getLeadsCost();
-            newUserCnt+=yichePlatform1.getNewUserCnt();
-            newUserCost+=yichePlatform1.getNewUserCost();
-            consume+=200f;
+            if (yichePlatform1.getLeadsCnt()==null){
+                clueCnt+=0;
+            }else{
+                clueCnt+=yichePlatform1.getLeadsCnt();
+            }
+            if (yichePlatform1.getLeadsUserCnt()==null){
+                clueUserCnt+=0;
+            }else {
+                clueUserCnt+=yichePlatform1.getLeadsUserCnt();
+            }
+            if (yichePlatform1.getActualConsume()==null){
+                consume+=0f;
+            }else {
+                consume+=yichePlatform1.getActualConsume();
+            }
+            if (yichePlatform1.getLeadsCost()==null){
+                leadsCost+=0;
+            }else {
+                leadsCost+=yichePlatform1.getLeadsCost();
+            }
+            if (yichePlatform1.getNewUserCnt()==null){
+                newUserCnt+=0;
+            }else {
+                newUserCnt+=yichePlatform1.getNewUserCnt();
+            }
+            if (yichePlatform1.getNewUserCost()==null){
+                newUserCost+=0;
+            }else {
+                newUserCost+=yichePlatform1.getNewUserCost();
+            }
+
         }
         if("0".equals(flag)){
             yichePlatform.setChannelName("安卓合计");
+            yichePlatform.setChannelId("android");
         }else {
             yichePlatform.setChannelName("IOS合计");
+            yichePlatform.setChannelId("ios");
         }
         yichePlatform.setLeadsCnt(clueCnt);
         yichePlatform.setLeadsUserCnt(clueUserCnt);

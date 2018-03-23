@@ -1,5 +1,7 @@
 package com.yiche.smp.common;
 
+import com.yiche.smp.common.util.DataCalculationUtils;
+
 import java.io.Serializable;
 
 /**
@@ -71,7 +73,7 @@ public class EarlyWarningData implements Serializable {
     }
 
     public void setActualPrice(Double actualPrice) {
-        this.actualPrice = actualPrice;
+        this.actualPrice = DataCalculationUtils.doubleDeal2(actualPrice);
     }
 
     public Double getExpectPrice() {
@@ -79,7 +81,7 @@ public class EarlyWarningData implements Serializable {
     }
 
     public void setExpectPrice(Double expectPrice) {
-        this.expectPrice = expectPrice;
+        this.expectPrice = DataCalculationUtils.doubleDeal2(expectPrice);
     }
 
     public String getEarlyWarningMsg() {

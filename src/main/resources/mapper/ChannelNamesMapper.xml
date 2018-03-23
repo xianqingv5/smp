@@ -11,21 +11,21 @@
 			channel_name channelName
 		FROM
 			yiche_app_app_leads_channel_day_all
-        where channel_name IS NOT NULL
+        where channel_name IS NOT NULL AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="易车APP")
 		UNION
 		SELECT DISTINCT
 			"报价APP"    platformName,
 			channel_name channelName
 		FROM
 			yiche_quote_app_leads_channel_day_all
-        where channel_name IS NOT NULL
+        where channel_name IS NOT NULL AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="报价APP")
 		UNION
 		SELECT DISTINCT
 			"PCWAP"    platformName,
 			channel_name channelName
 		FROM
 			yiche_pcwap_app_leads_channel_day_all
-        where channel_name IS NOT NULL
+        where channel_name IS NOT NULL AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="PCWAP")
 	) yiche_channelNames_sum
 	<where>
 		<if test="platformName != null">
@@ -33,4 +33,7 @@
 		</if>
 	</where>
     </select>
+	<select id="selectPlatformNames" resultType="com.yiche.smp.common.Platform1">
+		SELECT id,platformName FROM smp.imp_platform;
+	</select>
 </mapper>
