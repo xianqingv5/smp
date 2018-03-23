@@ -59,20 +59,21 @@ public class MenuController {
                 result.append(s);
             }
             JSONObject dataJson = JSON.parseObject(result.toString());
-            if (role == UserRoot.USER_BLSQCZ.getCode() || role == UserRoot.USER_BLSQSH.getCode()) {
+            if (role == UserRoot.USER_BLSQCZ.getCode() || role == UserRoot.USER_BLSQSH.getCode()||role==UserRoot.USER_SJXZSH.getCode()||role==UserRoot.USER_SJXZSS.getCode()) {
                 JSONArray data = dataJson.getJSONArray("data");// 找到data的json数组
                 Map<String, Object> map = new HashMap<>();
                 List<Object> list = new ArrayList<>();
                 for (int i = 0; i < data.size(); i++) {
                     String name = data.getJSONObject(i).getString("name");
-                    if ("销售数据分析".equals(name) || "补量".equals(name) || "预警".equals(name)) {
+                    if ("销售数据分析".equals(name) || "补量".equals(name) || "预警".equals(name)||"数据修正".equals(name)||"业务数据上传".equals(name)) {
                         JSONObject jsonObject = data.getJSONObject(i);
                         list.add(jsonObject);
                     }
                 }
                 map.put("data", list);
                 resultData = map;
-            } else if(role==UserRoot.USER_SJXZSH.getCode()||role==UserRoot.USER_SJXZSS.getCode()){
+            }
+            /* else if(role==UserRoot.USER_SJXZSH.getCode()||role==UserRoot.USER_SJXZSS.getCode()){
             	JSONArray data = dataJson.getJSONArray("data");// 找到data的json数组
                 Map<String, Object> map = new HashMap<>();
                 List<Object> list = new ArrayList<>();
@@ -85,7 +86,7 @@ public class MenuController {
                 }
                 map.put("data", list);
                 resultData = map;
-            }
+            }*/
             else {
                 resultData = dataJson;
             }

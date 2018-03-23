@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -32,10 +33,12 @@ import com.yiche.smp.common.ErrorCodeMessage;
 import com.yiche.smp.common.ResultResponse;
 import com.yiche.smp.common.datachange.ApplyData;
 import com.yiche.smp.common.datachange.DataChangeVo;
+import com.yiche.smp.common.datachange.DataRole;
 import com.yiche.smp.common.util.UploadDataUtil;
 import com.yiche.smp.core.service.DataChangeService;
 import com.yiche.smp.core.service.ImPlatformService;
 import com.yiche.smp.core.service.UserService;
+import com.yiche.smp.domain.Apply;
 import com.yiche.smp.domain.ApplyChannelChange;
 import com.yiche.smp.domain.ImpPlatform;
 import com.yiche.smp.domain.User;
@@ -124,8 +127,11 @@ public class DataChangeController {
 			logger.info("获取数据修正申请列表时查询列表得到空");
 			return ResultResponse.fail(ErrorCodeMessage.DB_SERVICE_FUNCTION_NO_ACCESS);
 		}
+		DataRole dr = new DataRole();
+		dr.setList(applyLists);
+		dr.setRole(user.getRole());
 		HashMap<String, Object> map = new HashMap<>();
-		map.put("data", applyLists);
+		map.put("data", dr);
 		return ResultResponse.success(map);
 
 	}
@@ -172,19 +178,27 @@ public class DataChangeController {
 			if (user == null) {
 				return ResultResponse.fail(ErrorCodeMessage.DB_SERVICE_GET_USER_MESSAGE_ERROR);
 			}
-			dataChangeService.changeCheckMes(applyChannelChange, user);
-
+			int i = dataChangeService.changeCheckMes(applyChannelChange, user);
+					if(i==0){
+						return ResultResponse.fail(ErrorCodeMessage.APPLY_MESSAGE_CHECK_ERROR);
+					}
 		} catch (Exception e) {
 			logger.info("信息审核失败{" + e.getMessage() + "}");
 			return ResultResponse.fail(ErrorCodeMessage.APPLY_MESSAGE_CHECK_ERROR);
 		}
-
+		Integer status = applyChannelChange.getStatus();
+		if(status==1||status==2){
+			return ResultResponse.success();
+		}
+		if(status==-1||status==-2||status==-3){
+			return ResultResponse.error("审核未通过");
+		}
 		Integer id = applyChannelChange.getId();
 		ApplyChannelChange selectOneById = dataChangeService.selectOneById(id);
 		String filepath = selectOneById.getFilepath();
 		Date time = selectOneById.getApplystarttime();
 		String applychannel = selectOneById.getApplychannel();
-		File f = new File(filepath);
+		/*File f = new File(filepath);
 		XSSFWorkbook xw;
 		try {
 			xw = new XSSFWorkbook(new FileInputStream(f));
@@ -209,7 +223,7 @@ public class DataChangeController {
 		} catch (IOException e) {
 			e.printStackTrace();
 			return ResultResponse.error("读取excel文件失败,请检查文件格式");
-		}
+		}*/
 		try {
 			if (applychannel.equals("易车APP")) {
 				File file1 = new File(filepath);
@@ -288,4 +302,18 @@ public class DataChangeController {
 		}
 		return ResultResponse.success();
 	}
+	
+	@RequestMapping(value ="/intelligent/downloadExcel", produces = MediaType.APPLICATION_JSON_UTF8_VALUE + ";charset=utf-8", method = RequestMethod.GET)
+    @ApiOperation("数据修正申请中上传附件的下载")
+    public void downloadEnclosure(Integer applyId, HttpServletResponse response) {
+        if (applyId == null) {
+            logger.info("下载上传附件时传入的id为空");
+            return;
+        }
+        //获取上传的附件
+        ApplyChannelChange applyChannelChange = dataChangeService.selectOneById(applyId);
+        String filepath = applyChannelChange.getFilepath();
+        String filename = applyChannelChange.getFilename();       
+        UploadDataUtil.processDownload(response, filepath, filename);
+    }
 }

@@ -118,16 +118,24 @@ public class FileExcelController {
 		List<ImpPlatform> list = imPlatformService.selectImPlatform();
 		String name = file.getOriginalFilename();
 		User user = (User) session.getAttribute("user");
-		String[] names = name.split("-");
-		// 平台名称
-		String platname = names[0];
-		// 责任人
-		String username = names[2].substring(0, names[2].indexOf("."));
-		// 日期
-		String datename = names[1];
 		//扩展名
 		String subsing = name.substring(name.lastIndexOf(".") + 1);
 		if(!subsing.equals("xlsx")){
+			return ResultResponse.fail(DataName.FileFormatError);
+		}
+		// 平台名称
+		String platname=null;
+		// 责任人
+		String username=null;
+		// 日期
+		String datename=null;
+		try {
+			String[] names = name.split("-");
+			platname = names[0];
+			username = names[2].substring(0, names[2].indexOf("."));
+			datename = names[1];
+		} catch (Exception e2) {
+			e2.printStackTrace();
 			return ResultResponse.fail(DataName.FileFormatError);
 		}
 		

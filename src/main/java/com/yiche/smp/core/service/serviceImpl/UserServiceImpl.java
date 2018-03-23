@@ -21,6 +21,7 @@ private UserMapper userMapper;
 	@Override
 	public List<ReplaceVo> selectUser() {
 		UserExample example = new UserExample();
+		example.createCriteria().andRoleEqualTo(1);
 		List<User> list = userMapper.selectByExample(example);
 		 List <ReplaceVo> lists = new ArrayList <>();
 		for (User user : list) {
