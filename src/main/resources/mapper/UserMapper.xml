@@ -195,6 +195,6 @@
   </update>
 
   <select id="selectPlatformByUserId" parameterType="java.lang.String" resultType="java.lang.String">
-      SELECT platform FROM user WHERE userId=#{userId}
+      SELECT i.platformName FROM user u,imp_platform i WHERE u.platform_id=i.id AND u.userId=#{userId}
   </select>
 </mapper>

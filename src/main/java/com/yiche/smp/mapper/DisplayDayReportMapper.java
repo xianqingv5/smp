@@ -15,14 +15,33 @@ import java.util.List;
 
 @Repository
 public interface DisplayDayReportMapper {
+    /**
+     * 用于计算总量
+     * @param map
+     * @return
+     */
+    GatherYicheAPP getSumDataDay(Map<String,String> map);
 
-    public GatherYicheAPP getSumDataDay(Map<String,String> map);
+    /**
+     * 用于计算各平台总量
+     * @param map
+     * @return
+     */
+    GatherYicheAPP getPlatformDataDay(Map<String,String> map);
 
-    public GatherYicheAPP getPlatformDataDay(Map<String,String> map);
+    /**
+     * 用于计算易车APP,报价APP平台的详细数据
+     * @param map
+     * @return
+     */
+    List<YichePlatform> getplatformChannelDataDay(Map<String,String> map);
 
-    public List<YichePlatform> getplatformChannelDataDay(Map<String,String> map);
-
-    public List<YichePlatform> getPcwapchannelDataDay(Map<String,String> map);
+    /**
+     * 用于计算pcwap平台的详细数据
+     * @param map
+     * @return
+     */
+    List<YichePlatform> getPcwapchannelDataDay(Map<String,String> map);
 
 
 }

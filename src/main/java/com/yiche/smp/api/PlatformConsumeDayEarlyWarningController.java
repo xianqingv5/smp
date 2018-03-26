@@ -47,11 +47,11 @@ public class PlatformConsumeDayEarlyWarningController {
         if (user == null) {
             return ResultResponse.fail(ErrorCodeMessage.DB_SERVICE_GET_USER_MESSAGE_ERROR);
         }
-        String platformName = userMapper.selectPlatformByUserId(user.getUserid());
+        String platformName = userMapper.selectPlatformByUserId(user.getUserid());//通过用户的userI获取所对应的平台
         Map<String, String> date1 = getDate();
-        String startTime = date1.get("startTime");
-        String month1 = date1.get("month1");
-        LocalDate now = LocalDate.now();
+        String startTime = date1.get("startTime");//获取开始时间
+        String month1 = date1.get("month1");//获取当前月
+        LocalDate now = LocalDate.now();//获取当前时间,就是截止时间
         String date =now.toString();
         String endTime=date;
         Map<String, Object> map = consumeDayEarlyWarningService.getEarlyWarningData(platformName, startTime, endTime, month1);
@@ -103,7 +103,10 @@ public class PlatformConsumeDayEarlyWarningController {
         return ResultResponse.error("没有传递日期");
     }
 
-
+    /**
+     * 获取开始时间和当前月
+     * @return
+     */
     public Map<String,String> getDate(){
         HashMap<String, String> map = new HashMap<>();
         String startTime;

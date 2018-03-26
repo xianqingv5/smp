@@ -30,10 +30,10 @@ public class ConsumeDayEarlyWarningServiceImpl implements ConsumeDayEarlyWarning
     @Override
     public Map<String, Object> getEarlyWarningData(String platformName, String startTime, String endTime,String month) {
         List<EarlyWarningData> earlyWarningDataList = new ArrayList<>();
-        List<Long> cluearr = new ArrayList<>();
-        List<Float> comsumearr= new ArrayList<>();
-        List<Float> budgetarr= new ArrayList<>();
-        List<String> datearr = new ArrayList<>();
+        List<Long> cluearr = new ArrayList<>();//用于封装数据，将clue封装成一个集合
+        List<Float> comsumearr= new ArrayList<>();//用于封装数据，将消耗封装成一个集合
+        List<Float> budgetarr= new ArrayList<>();//用于封装数据，将预算封装成一个集合
+        List<String> datearr = new ArrayList<>();//用于封装数据，将日期封装成一个集合
         Map<String, String> map = new HashMap<>();
         Map<String, Object> map1 = new HashMap<>();
         map.put("platformName",platformName);
@@ -42,10 +42,10 @@ public class ConsumeDayEarlyWarningServiceImpl implements ConsumeDayEarlyWarning
         map.put("month",month);
         List<EarlyWarningData> earlyWarningDatas = consumeDayEarlyWarningMapper.selectEarlyWarning(map);
         if (CollectionUtil.listNotNull(earlyWarningDatas)){
-            Double baseNumber = earlyWarningDatas.get(0).getBaseNumber();
-            Float dayBudget = earlyWarningDatas.get(0).getDayBudget();
-            Long monthDayAvgclueCnt = earlyWarningDatas.get(0).getMonthDayAvgclueCnt();
-            float expectPrice1=dayBudget/monthDayAvgclueCnt;
+            Double baseNumber = earlyWarningDatas.get(0).getBaseNumber();//基数
+            Float dayBudget = earlyWarningDatas.get(0).getDayBudget();//日均预算
+            Long monthDayAvgclueCnt = earlyWarningDatas.get(0).getMonthDayAvgclueCnt();//去年当月日均线索量
+            float expectPrice1=dayBudget/monthDayAvgclueCnt;//预期希望单价
             double expectPrice= DataCalculationUtils.floatDeal(expectPrice1);
             for (EarlyWarningData earlyWarningData:earlyWarningDatas){
                 double actualPrice=0;
@@ -90,7 +90,6 @@ public class ConsumeDayEarlyWarningServiceImpl implements ConsumeDayEarlyWarning
                 gatherYicheAPP.setCluePrice(0.0);
             }else {
                 gatherYicheAPP.setCluePrice((double) (gatherYicheAPP.getActualConsume()/gatherYicheAPP.getLeadsCnt()));
-
             }
             if (gatherYicheAPP.getActualConsume()==null||gatherYicheAPP.getLeadsUserCnt()==null){
                 gatherYicheAPP.setUserPrice(0.0);
@@ -122,6 +121,17 @@ public class ConsumeDayEarlyWarningServiceImpl implements ConsumeDayEarlyWarning
         return map1;
     }
 
+    /**
+     * 通过下面规则计算出预警数据和预警提示
+     * @param leadsCnt
+     * @param monthDayAvgclueCnt
+     * @param actualConsume
+     * @param dayBudget
+     * @param actualPrice
+     * @param expectPrice
+     * @param baseNumber
+     * @return
+     */
     public String getEarlyWarningMsg(Long leadsCnt,Long monthDayAvgclueCnt,Float actualConsume,Float dayBudget,Double actualPrice,Double expectPrice,Double baseNumber){
 
         if (actualConsume>dayBudget){

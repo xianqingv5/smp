@@ -54,19 +54,23 @@ public class DisplayMonthReportController {
     @RequestMapping(value = "/intelligent/monthPlatformreport", produces = MediaType.APPLICATION_JSON_UTF8_VALUE + ";charset=utf-8", method = RequestMethod.POST)
     @ApiOperation("各个平台详细渠道月报展示功能")
     public ResultResponse showMonthReportData(@RequestBody ReportCondition reportCondition) {
-        String month="201802";
-        String month1 = preMonth(month);
-        Map<String, List<YichePlatform>> map = displayMonthReportService.getplatformChannelDataMonth("易车APP",month,month1);
-        return  ResultResponse.success(map);
+        String platformName = reportCondition.getPlatformName();
+        if (platformName!=null){
+            String month="201802";
+            String month1 = preMonth(month);
+            Map<String, List<YichePlatform>> map = displayMonthReportService.getplatformChannelDataMonth("易车APP",month,month1);
+            return  ResultResponse.success(map);
+        }
+        return ResultResponse.error();
     }
 
     @RequestMapping(value = "/intelligent/monthPcwapreport", produces = MediaType.APPLICATION_JSON_UTF8_VALUE + ";charset=utf-8", method = RequestMethod.POST)
     @ApiOperation("Pcwap平台详细渠道月报展示功能")
     public ResultResponse showMonthPcwapReportData(@RequestBody ReportCondition reportCondition){
-        if (reportCondition!=null){
+        String platformName = reportCondition.getPlatformName();
+        if (platformName!=null){
             String month="201802";
             String month1 = preMonth(month);
-            String platformName = reportCondition.getPlatformName();
             Map<String, List<YichePlatform>> map = displayMonthReportService.getPcwapchannelDataMonth(platformName,month,month1);
             return ResultResponse.success(map);
         }
@@ -76,11 +80,11 @@ public class DisplayMonthReportController {
     @RequestMapping(value = "/intelligent/monthThirdPartyreport", produces = MediaType.APPLICATION_JSON_UTF8_VALUE + ";charset=utf-8", method = RequestMethod.POST)
     @ApiOperation("第三方平台详细渠道月报展示功能")
     public ResultResponse showThirdPartyReportData(@RequestBody ReportCondition reportCondition){
-        if (reportCondition!=null){
+        String platformName = reportCondition.getPlatformName();
+        if (platformName!=null){
             String month="201802";
             String month1 = preMonth(month);
-            String platformName = reportCondition.getPlatformName();
-            Map<String, List<YichePlatform>> map = displayMonthReportService.getThirdPartychannelDataMonth(platformName,month,month1);
+                        Map<String, List<YichePlatform>> map = displayMonthReportService.getThirdPartychannelDataMonth(platformName,month,month1);
             return ResultResponse.success(map);
         }
         return ResultResponse.error();

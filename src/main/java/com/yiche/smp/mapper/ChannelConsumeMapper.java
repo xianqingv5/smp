@@ -11,8 +11,17 @@ import java.util.Map;
  */
 @Repository
 public interface ChannelConsumeMapper {
+    /**
+     * 用于求汇总的渠道财务报表
+     * @param map
+     * @return
+     */
+    List<GatherYicheAPP> getChannelSumConsume(Map<String, Object> map);
 
-    public List<GatherYicheAPP> getChannelSumConsume(Map<String, Object> map);
-
-    public List<GatherYicheAPP> getChannelDetailConsume(Map<String, Object> map);
+    /**
+     * 用于求明细的渠道财务报表
+     * @param map
+     * @return
+     */
+    List<GatherYicheAPP> getChannelDetailConsume(Map<String, Object> map);
 }

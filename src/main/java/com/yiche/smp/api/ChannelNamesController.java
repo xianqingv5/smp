@@ -37,8 +37,8 @@ public class ChannelNamesController {
     @RequestMapping(value = "/intelligent/channelallnames", produces = MediaType.APPLICATION_JSON_UTF8_VALUE + ";charset=utf-8", method = RequestMethod.POST)
     @ApiOperation("获取相应平台的所有渠道名称")
     public ResultResponse getChannelNames(@RequestBody ReportCondition reportCondition){
-        if (reportCondition!=null){
-            String platformName = reportCondition.getPlatformName();
+        String platformName= reportCondition.getPlatformName();
+        if (platformName!=null){
             List<Channel> channels = channelNamesService.selectChannelNames(platformName);
             System.err.println(channels.size());
             return ResultResponse.success(channels);
@@ -49,8 +49,9 @@ public class ChannelNamesController {
     @RequestMapping(value = "/intelligent/platformallnames", produces = MediaType.APPLICATION_JSON_UTF8_VALUE + ";charset=utf-8", method = RequestMethod.POST)
     @ApiOperation("获取相应平台的所有平台名称")
     public ResultResponse getplatformNames(){
+        //数据库没有全部的字段，通过对象设置进去。
         Platform1 platform1 = new Platform1();
-        HashMap<String, Object> map = new HashMap<>();
+        HashMap<String, List<Platform1>> map = new HashMap<>();
         List<Platform1> platform1s = channelNamesMapper.selectPlatformNames();
         platform1.setId(5);
         platform1.setPlatformName("全部");

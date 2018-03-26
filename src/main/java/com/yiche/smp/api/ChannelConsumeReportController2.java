@@ -58,9 +58,9 @@ public class ChannelConsumeReportController2 {
                 logger.info("查询数据时传参时结束时间为空");
                 return ResultResponse.fail(ErrorCodeMessage.DB_SERVICE_INVALID_PARAMETER);
             }
-            int isDetail = page.getIsDetail();
-            Integer pageno = page.getPageno();
-            Integer pagesize = page.getPagesize();
+            int isDetail = page.getIsDetail();//判断是否是明细 0是，1不是
+            Integer pageno = page.getPageno();//当前页数
+            Integer pagesize = page.getPagesize();//每页多少条数据
 
             PageInfo<GatherYicheAPP> channelConsumeReport = channelConsumeReportService.getChannelConsumeReport(platformName, channelName, startTime, endTime, isDetail, pageno, pagesize);
             return ResultResponse.success(channelConsumeReport);

@@ -51,8 +51,8 @@ public class DisplayDayReportController{
     @RequestMapping(value = "/intelligent/dayPlatformreport", produces = MediaType.APPLICATION_JSON_UTF8_VALUE + ";charset=utf-8", method = RequestMethod.POST)
     @ApiOperation("各个平台详细渠道日报展示功能")
     public ResultResponse showDayReportData(@RequestBody ReportCondition reportCondition) {
-        if(reportCondition!=null){
-            String platformName = reportCondition.getPlatformName();
+        String platformName = reportCondition.getPlatformName();
+        if(platformName!=null){
             Map<String, String> twoDay = getPreTwoDay();
             Map<String, List<YichePlatform>> map = displayDayReportService.getplatformChannelDataDay(platformName,twoDay.get("pre1"),twoDay.get("pre2"));
             return ResultResponse.success(map);
@@ -63,8 +63,8 @@ public class DisplayDayReportController{
     @RequestMapping(value = "/intelligent/dayPcwapreport", produces = MediaType.APPLICATION_JSON_UTF8_VALUE + ";charset=utf-8", method = RequestMethod.POST)
     @ApiOperation("Pcwap平台详细渠道日报展示功能")
     public ResultResponse showDayPcwapReportData(@RequestBody ReportCondition reportCondition){
-        if (reportCondition!=null){
-            String platformName = reportCondition.getPlatformName();
+        String platformName = reportCondition.getPlatformName();
+        if (platformName!=null){
             Map<String, String> twoDay = getPreTwoDay();
             Map<String, List<YichePlatform>> map = displayDayReportService.getPcwapchannelDataDay(platformName, twoDay.get("pre1"), twoDay.get("pre2"));
             return ResultResponse.success(map);
@@ -72,7 +72,11 @@ public class DisplayDayReportController{
         return ResultResponse.error();
     }
 
-    public Map<String,String> getPreTwoDay(){
+    /**
+     * 日报的功能获取前两天的数据，根据java自带api获取当前日期，调用方法获取前两天日期
+     * @return //返回前两天的集合
+     */
+    private Map<String,String> getPreTwoDay(){
         HashMap<String, String> map = new HashMap<>();
         //获取当前时间
         Date date = new Date();

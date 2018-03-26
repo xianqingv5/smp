@@ -22,6 +22,7 @@ public class ChannelNamesServiceImpl implements ChannelNamesService {
     @Override
     public List<Channel> selectChannelNames(String platformName) {
         Map<String, String> map = new HashMap<>();
+        //如果为全部的话，将platformName赋值为空
         if("全部".equals(platformName)){
             platformName=null;
         }

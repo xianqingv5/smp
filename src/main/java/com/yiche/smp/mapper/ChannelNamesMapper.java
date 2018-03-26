@@ -14,8 +14,16 @@ import java.util.Map;
 
 @Repository
 public interface ChannelNamesMapper {
+    /**
+     * 获取对应平台下的所有渠道
+     * @param map
+     * @return
+     */
+    List<Channel> selectChannelNames(Map<String, String> map);
 
-    public List<Channel> selectChannelNames(Map<String, String> map);
-
+    /**
+     * 获取部门下的所有平台名称
+     * @return
+     */
     List<Platform1> selectPlatformNames();
 }
