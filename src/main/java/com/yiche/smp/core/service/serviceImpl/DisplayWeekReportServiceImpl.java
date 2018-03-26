@@ -86,9 +86,9 @@ public class DisplayWeekReportServiceImpl implements DisplayWeekReportService{
         List<String> list = new ArrayList<>();
         Portion portion = new Portion();
         Ratio ratio = new Ratio();
-        list.add("易车APP");
-        list.add("报价APP");
         list.add("PCWAP");
+        list.add("报价APP");
+        list.add("易车APP");
         list.add("第三方");
         map.put("platformName",list.get(0));
         for (int i=0;i<=list.size()-1;i++){

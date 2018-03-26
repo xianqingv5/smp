@@ -101,9 +101,9 @@ public class DisplayDayReportServiceImpl implements DisplayDayReportService {
         List<Object> list2 = new ArrayList<>();
         Portion portion = new Portion();
         Ratio ratio = new Ratio();
-        list.add("易车APP");//将这些平台依此放进list里，为了依此获取对应平台的消耗财务数据
-        list.add("报价APP");
         list.add("PCWAP");
+        list.add("报价APP");//将这些平台依此放进list里，为了依此获取对应平台的消耗财务数据
+        list.add("易车APP");
         map.put("platformName",list.get(0));
         for (int i=0;i<=list.size()-1;i++){
             List<Data> datas = new ArrayList<>();
