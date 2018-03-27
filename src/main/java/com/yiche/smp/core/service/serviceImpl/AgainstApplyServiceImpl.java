@@ -67,7 +67,7 @@ public class AgainstApplyServiceImpl implements AgainstApplyService {
         //根据用户的角色类型查询相应的列表
         if (user.getRole() == 5) {
             applies = applyMapper.selectAllByUserId(userid);
-        } else if (user.getRole() == 6) {
+        } else if (user.getRole() == 6||user.getRole()==11) {
             applies = applyMapper.selectAll();
         } else {
             return null;

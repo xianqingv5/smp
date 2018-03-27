@@ -77,7 +77,7 @@ public class DataChangeServiceImpl implements DataChangeService {
 		 if (user != null) {
 	            Integer role = user.getRole();
 	            //业务申请部操作员
-	            if (role == UserRoot.USER_BLSQCZ.getCode()||role==UserRoot.USER_SJXZSS.getCode()) {
+	            if (role == UserRoot.USER_BLSQCZ.getCode()||role==UserRoot.USER_SJXZSS.getCode()||role==UserRoot.USER_ROOT.getCode()) {
 	                List <ApplyChannelChange> list = applyMapper.selectAppltDeptUnCheckList();
 	                return list;
 	            } else if (role == UserRoot.USER_BLSQSH.getCode()) {//业务申请部门审核员
@@ -154,7 +154,7 @@ public class DataChangeServiceImpl implements DataChangeService {
 		 String checkResult = applyChannelChange.getDataCheck();
 	        Integer role = user.getRole();
 	        //获取用户角色
-	        if (role == UserRoot.USER_BLSQSH.getCode()) {
+	        if (role == UserRoot.USER_BLSQSH.getCode()||role==UserRoot.USER_ROOT.getCode()) {
 	            if ("true".equals(checkResult)) {
 	            	applyChannelChange.setStatus(BoostApplyStatus.APPLY_DEPT_CHECK_PASS.getCode());
 	            } else {

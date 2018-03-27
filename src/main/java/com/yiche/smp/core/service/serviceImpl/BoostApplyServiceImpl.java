@@ -82,7 +82,7 @@ public class BoostApplyServiceImpl implements BoostApplyService {
         if (user != null) {
             Integer role = user.getRole();
             //业务审核员
-            if (role == UserRoot.USER_BLSQSH.getCode()) {
+            if (role == UserRoot.USER_BLSQSH.getCode()||role==UserRoot.USER_ROOT.getCode()) {
                 List <Boost> boosts = boostMapper.selectAppltDeptUnCheckList(user.getBrand());
                 return boosts;
             } else if (role == UserRoot.USER_BLSSCZ.getCode()) {//实施部门操作员
@@ -100,7 +100,7 @@ public class BoostApplyServiceImpl implements BoostApplyService {
     public List <Boost> selectBoostHandelList(UserPower user) {
         if (user != null) {
             Integer role = user.getRole();
-            if (role == UserRoot.USER_BLSQCZ.getCode()) {
+            if (role == UserRoot.USER_BLSQCZ.getCode()||role==UserRoot.USER_ROOT.getCode()) {
                 List <Boost> boosts = boostMapper.selectOwnApplyList(user.getUserid());
                 return boosts;
             } else if (role == UserRoot.USER_BLSQSH.getCode()) {
@@ -128,7 +128,7 @@ public class BoostApplyServiceImpl implements BoostApplyService {
         String checkResult = boost.getCheckResult();
         Integer role = user.getRole();
         //获取用户角色
-        if (role == UserRoot.USER_BLSQSH.getCode()) {
+        if (role == UserRoot.USER_BLSQSH.getCode()||role==UserRoot.USER_ROOT.getCode()) {
             if ("true".equals(checkResult)) {
                 boost.setStatus(BoostApplyStatus.APPLY_DEPT_CHECK_PASS.getCode());
             } else {
