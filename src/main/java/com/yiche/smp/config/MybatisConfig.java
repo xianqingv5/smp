@@ -1,6 +1,8 @@
 package com.yiche.smp.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.yiche.common.mybatis.SqlMonitorManager;
+import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
@@ -19,6 +21,7 @@ import org.springframework.util.ClassUtils;
 
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.util.Properties;
 
 /*
  * @see http://mybatis.github.io/spring/mappers.html
@@ -77,6 +80,11 @@ public class MybatisConfig {
 		sqlSessionFactory.setFailFast(true);
 		sqlSessionFactory.setMapperLocations(getResource("mapper", "**/*.xml"));
 //		sqlSessionFactory.setTypeHandlersPackage("demo.springboot.configuration.mybatis.typehandler");
+		SqlMonitorManager sqlMonitorManager = new SqlMonitorManager();
+		Properties properties = new Properties();
+		properties.setProperty("show_sql", "true");
+		sqlMonitorManager.setProperties(properties);
+		sqlSessionFactory.setPlugins(new Interceptor[]{sqlMonitorManager});
 		return sqlSessionFactory.getObject();
 	}
 

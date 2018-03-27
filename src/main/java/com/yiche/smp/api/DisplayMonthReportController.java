@@ -5,6 +5,7 @@ import com.yiche.smp.common.ReportCondition;
 import com.yiche.smp.common.ResultResponse;
 import com.yiche.smp.common.YichePlatform;
 import com.yiche.smp.core.service.DisplayMonthReportService;
+import com.yiche.smp.mapper.DisplayMonthReportMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.models.auth.In;
@@ -34,9 +35,9 @@ public class DisplayMonthReportController {
 
     @RequestMapping(value = "/intelligent/monthreport", produces = MediaType.APPLICATION_JSON_UTF8_VALUE + ";charset=utf-8", method = RequestMethod.POST)
     @ApiOperation("平台渠道月报展示功能")
-    public ResultResponse showSumMonthReportData(){
-
-        String month="201802";
+    public ResultResponse showSumMonthReportData(@RequestBody ReportCondition reportCondition){
+        String startTime = reportCondition.getStartTime();
+        String month=startTime;
         String month1 = preMonth(month);
         DayReport map = displayMonthReportService.selectSumDatamonth(month,month1);
         return ResultResponse.success(map);
@@ -44,8 +45,9 @@ public class DisplayMonthReportController {
 
     @RequestMapping(value = "/intelligent/monthPlatformsumreport", produces = MediaType.APPLICATION_JSON_UTF8_VALUE + ";charset=utf-8", method = RequestMethod.POST)
     @ApiOperation("平台总和月报展示功能")
-    public ResultResponse showPlatformWeekReportData(){
-        String month="201802";
+    public ResultResponse showPlatformWeekReportData(@RequestBody ReportCondition reportCondition){
+        String startTime = reportCondition.getStartTime();
+        String month=startTime;
         String month1 = preMonth(month);
         List<DayReport> map = displayMonthReportService.getPlatformDatamonth(month,month1);
         return ResultResponse.success(map);
@@ -55,8 +57,9 @@ public class DisplayMonthReportController {
     @ApiOperation("各个平台详细渠道月报展示功能")
     public ResultResponse showMonthReportData(@RequestBody ReportCondition reportCondition) {
         String platformName = reportCondition.getPlatformName();
+        String startTime = reportCondition.getStartTime();
+        String month=startTime;
         if (platformName!=null){
-            String month="201802";
             String month1 = preMonth(month);
             Map<String, List<YichePlatform>> map = displayMonthReportService.getplatformChannelDataMonth("易车APP",month,month1);
             return  ResultResponse.success(map);
@@ -68,8 +71,9 @@ public class DisplayMonthReportController {
     @ApiOperation("Pcwap平台详细渠道月报展示功能")
     public ResultResponse showMonthPcwapReportData(@RequestBody ReportCondition reportCondition){
         String platformName = reportCondition.getPlatformName();
+        String startTime = reportCondition.getStartTime();
+        String month=startTime;
         if (platformName!=null){
-            String month="201802";
             String month1 = preMonth(month);
             Map<String, List<YichePlatform>> map = displayMonthReportService.getPcwapchannelDataMonth(platformName,month,month1);
             return ResultResponse.success(map);
@@ -81,8 +85,9 @@ public class DisplayMonthReportController {
     @ApiOperation("第三方平台详细渠道月报展示功能")
     public ResultResponse showThirdPartyReportData(@RequestBody ReportCondition reportCondition){
         String platformName = reportCondition.getPlatformName();
+        String startTime = reportCondition.getStartTime();
+        String month=startTime;
         if (platformName!=null){
-            String month="201802";
             String month1 = preMonth(month);
                         Map<String, List<YichePlatform>> map = displayMonthReportService.getThirdPartychannelDataMonth(platformName,month,month1);
             return ResultResponse.success(map);

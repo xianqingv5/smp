@@ -38,23 +38,24 @@ public class ChannelConsumeReportServiceImpl implements ChannelConsumeReportServ
         map.put("channelName", channelName);
         map.put("startTime", startTime);
         map.put("endTime", endTime);
-        if (isDetail == 1) {//汇总的情况
-            PageHelper.startPage(pageno, pagesize);
-            List<GatherYicheAPP> channelSumConsume = channelConsumeMapper.getChannelSumConsume(map);
-            gatherYicheAPPPageInfo = new PageInfo<>(channelSumConsume);
-            List<GatherYicheAPP> list = gatherYicheAPPPageInfo.getList();
-            addPrice(list);//用于封装单价
-            gatherYicheAPPPageInfo.setList(list);
-        } else {//明细的情况
+        if (isDetail == 0) {//明细的情况
             PageHelper.startPage(pageno, pagesize);
             List<GatherYicheAPP> channelDetailConsume = channelConsumeMapper.getChannelDetailConsume(map);
             gatherYicheAPPPageInfo = new PageInfo<>(channelDetailConsume);
             List<GatherYicheAPP> list = gatherYicheAPPPageInfo.getList();
             addPrice(list);//用于封装单价
             gatherYicheAPPPageInfo.setList(list);
+        } else {//汇总的情况
+            PageHelper.startPage(pageno, pagesize);
+            List<GatherYicheAPP> channelSumConsume = channelConsumeMapper.getChannelSumConsume(map);
+            gatherYicheAPPPageInfo = new PageInfo<>(channelSumConsume);
+            List<GatherYicheAPP> list = gatherYicheAPPPageInfo.getList();
+            addPrice(list);//用于封装单价
+            gatherYicheAPPPageInfo.setList(list);
         }
         return gatherYicheAPPPageInfo;
     }
+
 
     /**
      *

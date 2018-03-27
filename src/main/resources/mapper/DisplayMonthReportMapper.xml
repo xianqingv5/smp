@@ -218,4 +218,8 @@
         VALUES(#{platformId}, #{platformName}, #{channelName}, #{leadsCnt}, #{leadsUserCnt}, #{actualConsume},
                               #{leadsCost},#{leadsUserCost}, #{month})
     </insert>
+
+    <select id="selectLastMonth" resultType="java.lang.String">
+        SELECT month FROM smp.yiche_pcwap_channel_month ORDER BY id DESC LIMIT 1
+    </select>
 </mapper>

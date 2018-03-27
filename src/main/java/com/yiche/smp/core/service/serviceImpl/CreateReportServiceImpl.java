@@ -22,7 +22,7 @@ public class CreateReportServiceImpl implements CreateReportService {
 
     @Override
     public List<GatherYicheAPP> getChannelConsumeData(String platformName, String channelName, String startTime, String endTime, int isDetail) {
-        List<GatherYicheAPP> channelSumConsume = new ArrayList<>();
+        List<GatherYicheAPP> channelSumConsume;
         Map<String, Object> map = new HashMap<>();
         if ("全部".equals(platformName)) {
             platformName = null;
@@ -34,10 +34,10 @@ public class CreateReportServiceImpl implements CreateReportService {
         map.put("channelName", channelName);
         map.put("startTime", startTime);
         map.put("endTime", endTime);
-        if (isDetail == 1) {
-            channelSumConsume = channelConsumeMapper.getChannelSumConsume(map);
-        }else {
+        if (isDetail == 0) {
             channelSumConsume = channelConsumeMapper.getChannelDetailConsume(map);
+        }else {
+            channelSumConsume = channelConsumeMapper.getChannelSumConsume(map);
         }
         return channelSumConsume;
 

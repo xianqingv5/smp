@@ -11,6 +11,8 @@ import com.yiche.smp.common.util.CalculatePortionUtil;
 import com.yiche.smp.common.util.CalculateRatioUtil;
 import com.yiche.smp.core.service.DisplayMonthReportService;
 import com.yiche.smp.mapper.DisplayMonthReportMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,8 +28,17 @@ import java.util.Map;
 public class DisplayMonthReportServiceImpl implements DisplayMonthReportService {
     @Autowired
     private DisplayMonthReportMapper displayMonthReportMapper;
+    private Logger logger = LoggerFactory.getLogger(DisplayMonthReportServiceImpl.class);
     @Override
     public DayReport selectSumDatamonth(String month,String month1) {
+        Long leadsCnt = 0l;
+        Long leadsCnt1 = 0l;
+        Long userCnt = 0l;
+        Long userCnt1 = 0l;
+        Float actualConsume = 0.0f;
+        Float actualConsume1 = 0.0f;
+        Double leadsCost = 0.0;
+        Double leadsCost1 = 0.0;
         HashMap<String, String> map = new HashMap<>();
         map.put("month",month);
         Data data = new Data();
@@ -38,32 +49,56 @@ public class DisplayMonthReportServiceImpl implements DisplayMonthReportService 
         DayReport dayReport = new DayReport();
         Ratio ratio = new Ratio();
         GatherYicheAPP sumConsumeDataMonth = displayMonthReportMapper.selectSumDataMonth(map);
+        if (sumConsumeDataMonth==null){
+            logger.info("此月没数据");
+        }else {
+            if (sumConsumeDataMonth.getLeadsCnt()!=null){
+                leadsCnt = sumConsumeDataMonth.getLeadsCnt();
+            }
+            if (sumConsumeDataMonth.getActualConsume()!=null){
+                actualConsume=sumConsumeDataMonth.getActualConsume();
+            }
+            if (sumConsumeDataMonth.getLeadsUserCnt()!=null){
+                userCnt=sumConsumeDataMonth.getLeadsUserCnt();
+            }
+            if (sumConsumeDataMonth.getLeadsCost()!=null){
+                leadsCost=sumConsumeDataMonth.getLeadsCost();
+            }
+        }
         map.replace("month",month1);
         GatherYicheAPP sumConsumeDataMonth1 = displayMonthReportMapper.selectSumDataMonth(map);
+        if (sumConsumeDataMonth1==null){
+            logger.info("此月没数据");
+        }else {
+            if (sumConsumeDataMonth1.getLeadsCnt()!=null){
+                leadsCnt1 = sumConsumeDataMonth1.getLeadsCnt();
+            }
+            if (sumConsumeDataMonth1.getActualConsume()!=null){
+                actualConsume1=sumConsumeDataMonth1.getActualConsume();
+            }
+            if (sumConsumeDataMonth1.getLeadsUserCnt()!=null){
+                userCnt1=sumConsumeDataMonth1.getLeadsUserCnt();
+            }
+            if (sumConsumeDataMonth1.getLeadsCost()!=null){
+                leadsCost1=sumConsumeDataMonth1.getLeadsCost();
+            }
+        }
         Ratio ratio1 = CalculateRatioUtil.calculateRatioSum(ratio,sumConsumeDataMonth,sumConsumeDataMonth1);
-        Long leadsCnt = sumConsumeDataMonth.getLeadsCnt();
-        Long leadsCnt1 = sumConsumeDataMonth1.getLeadsCnt();
         String clueRatio = ratio1.getClueRatio();
         data.setTitle("总线索量");
         data.setPreTwoDay(leadsCnt1);
         data.setPreOneDay(leadsCnt);
         data.setRatio(clueRatio);
-        Long userCnt = sumConsumeDataMonth.getLeadsUserCnt();
-        Long userCnt1 = sumConsumeDataMonth1.getLeadsUserCnt();
         String userRatio = ratio1.getUserRatio();
         data1.setTitle("总用户量");
         data1.setPreTwoDay(userCnt1);
         data1.setPreOneDay(userCnt);
         data1.setRatio(userRatio);
-        Float actualConsume = sumConsumeDataMonth.getActualConsume();
-        Float actualConsume1 = sumConsumeDataMonth1.getActualConsume();
         String consumeRatio = ratio1.getConsumeRatio();
         data2.setTitle("总体消耗");
         data2.setPreTwoDay(actualConsume1);
         data2.setPreOneDay(actualConsume);
         data2.setRatio(consumeRatio);
-        Double leadsCost = sumConsumeDataMonth.getLeadsCost();
-        Double leadsCost1 = sumConsumeDataMonth1.getLeadsCost();
         String costRatio = ratio1.getLeadsCostRatio();
         data3.setTitle("线索成本");
         data3.setPreTwoDay(leadsCost1);
@@ -91,6 +126,14 @@ public class DisplayMonthReportServiceImpl implements DisplayMonthReportService 
         list.add("第三方");
         map.put("platformName",list.get(0));
         for (int i=0;i<=list.size()-1;i++){
+            Long leadsCnt = 0l;
+            Long leadsCnt1=0l;
+            Long userCnt=0l;
+            Long userCnt1=0l;
+            Float actualConsume1=0f;
+            Float actualConsume=0f;
+            Double leadsCost=0.0;
+            Double leadsCost1=0.0;
             List<Data> datas = new ArrayList<>();
             DayReport dayReport = new DayReport();
             Data data = new Data();
@@ -102,31 +145,43 @@ public class DisplayMonthReportServiceImpl implements DisplayMonthReportService 
             }
             map.put("month",month);
             GatherYicheAPP platformDataMonth = displayMonthReportMapper.selectPlatformDataMonth(map);
+            if (platformDataMonth==null){
+                logger.info("此月没有数据");
+            }else {
+                if (platformDataMonth.getLeadsCnt()!=null){
+                    leadsCnt=platformDataMonth.getLeadsCnt();
+                }
+                if (platformDataMonth.getLeadsUserCnt()!=null){
+                    userCnt=platformDataMonth.getLeadsUserCnt();
+                }
+                if (platformDataMonth.getActualConsume()!=null){
+                    actualConsume=platformDataMonth.getActualConsume();
+                }
+                if (platformDataMonth.getLeadsCost()!=null){
+                    leadsCost=platformDataMonth.getLeadsCost();
+                }
+            }
             GatherYicheAPP sumDataMonth = displayMonthReportMapper.selectSumDataMonth(map);
             Portion portion1 = CalculatePortionUtil.calculatePortionSum(portion, platformDataMonth, sumDataMonth);
             map.replace("month",month1);
             GatherYicheAPP platformDataMonth1 = displayMonthReportMapper.selectPlatformDataMonth(map);
+            if (platformDataMonth1==null){
+                logger.info("此月没有数据");
+            }else {
+                if (platformDataMonth1.getLeadsCnt()!=null){
+                    leadsCnt1=platformDataMonth1.getLeadsCnt();
+                }
+                if (platformDataMonth1.getLeadsUserCnt()!=null){
+                    userCnt1=platformDataMonth1.getLeadsUserCnt();
+                }
+                if (platformDataMonth1.getActualConsume()!=null){
+                    actualConsume1=platformDataMonth1.getActualConsume();
+                }
+                if (platformDataMonth1.getLeadsCost()!=null){
+                    leadsCost1=platformDataMonth1.getLeadsCost();
+                }
+            }
             Ratio ratio1 = CalculateRatioUtil.calculateRatioSum(ratio, platformDataMonth, platformDataMonth1);
-            Long leadsCnt = 0l;
-            Long leadsCnt1=0l;
-            Long userCnt=0l;
-            Long userCnt1=0l;
-            Float actualConsume1=0f;
-            Float actualConsume=0f;
-            Double leadsCost=0.0;
-            Double leadsCost1=0.0;
-            if (platformDataMonth!=null){
-                leadsCnt = platformDataMonth.getLeadsCnt();
-                userCnt = platformDataMonth.getLeadsUserCnt();
-                actualConsume = platformDataMonth.getActualConsume();
-                leadsCost = platformDataMonth.getLeadsCost();
-            }
-            if (platformDataMonth1!=null){
-                leadsCnt1 = platformDataMonth1.getLeadsCnt();
-                userCnt1 = platformDataMonth1.getLeadsUserCnt();
-                actualConsume1 = platformDataMonth1.getActualConsume();
-                leadsCost1 = platformDataMonth1.getLeadsCost();
-            }
             String clueRatio = ratio1.getClueRatio();
             String cluePortion = portion1.getCluePortion();
             data.setTitle("线索量");
