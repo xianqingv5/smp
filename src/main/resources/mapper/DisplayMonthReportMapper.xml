@@ -20,6 +20,7 @@
                     yiche_yiche_channel_month
                 WHERE
                     month = #{month}
+                    GROUP BY month
                 UNION
                 SELECT
                     SUM(leads_cnt)       leadsCnt,
@@ -31,6 +32,7 @@
                     yiche_quote_channel_month
                 WHERE
                     month = #{month}
+                    GROUP BY month
                 UNION
                 SELECT
                     SUM(leads_cnt)       leadsCnt,
@@ -42,6 +44,7 @@
                     yiche_pcwap_channel_month
                 WHERE
                     month = #{month}
+                    GROUP BY month
                 UNION
                 SELECT
                     SUM(leads_cnt)       leadsCnt,
@@ -53,7 +56,9 @@
                     yiche_third_party_channel_month
                 WHERE
                     month = #{month}
+                    GROUP BY month
             ) yiche_sum_month_report
+            GROUP BY month
     </select>
 
     <select id="selectPlatformDataMonth" parameterType="map" resultType="com.yiche.smp.common.GatherYicheAPP">
@@ -77,6 +82,7 @@
                     yiche_yiche_channel_month
                 WHERE
                     month = #{month}
+                    GROUP BY month
                 UNION
                 SELECT
                     platform_name       platformName,
@@ -89,6 +95,7 @@
                     yiche_quote_channel_month
                 WHERE
                     month = #{month}
+                    GROUP BY month
                 UNION
                 SELECT
                     platform_name       platformName,
@@ -101,6 +108,7 @@
                     yiche_pcwap_channel_month
                 WHERE
                     month = #{month}
+                    GROUP BY month
                 UNION
                 SELECT
                     platform_name       platformName,
@@ -113,6 +121,7 @@
                     yiche_third_party_channel_month
                 WHERE
                     month = #{month}
+                    GROUP BY month
             ) yiche_platformName_month_report
         WHERE platformName = #{platformName}
     </select>
