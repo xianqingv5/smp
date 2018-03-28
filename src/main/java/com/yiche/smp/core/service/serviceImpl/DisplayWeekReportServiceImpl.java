@@ -25,12 +25,13 @@ import java.util.Map;
  * Created by xuhaiqiang on 2018/3/16
  */
 @Service
-public class DisplayWeekReportServiceImpl implements DisplayWeekReportService{
+public class DisplayWeekReportServiceImpl implements DisplayWeekReportService {
     @Autowired
     private DisplayWeekReportMapper displayWeekReportMapper;
     private Logger logger = LoggerFactory.getLogger(DisplayWeekReportServiceImpl.class);
+
     @Override
-    public DayReport selectSumDataWeek(String week,String week1) {
+    public DayReport selectSumDataWeek(String week, String week1) {
         Long leadsCnt = 0l;
         Long leadsCnt1 = 0l;
         Long userCnt = 0l;
@@ -40,53 +41,53 @@ public class DisplayWeekReportServiceImpl implements DisplayWeekReportService{
         Double leadsCost = 0.0;
         Double leadsCost1 = 0.0;
         HashMap<String, String> map = new HashMap<>();
-        map.put("week",week);
+        map.put("week", week);
         Data data = new Data();
         Data data1 = new Data();
         Data data2 = new Data();
-        Data data3= new Data();
+        Data data3 = new Data();
         ArrayList<Data> datas = new ArrayList<>();
         DayReport dayReport = new DayReport();
         Ratio ratio = new Ratio();
         GatherYicheAPP sumConsumeDataWeek = displayWeekReportMapper.selectSumDataWeek(map);
-        if (sumConsumeDataWeek==null){
+        if (sumConsumeDataWeek == null) {
             logger.info("此周没有数据");
-        }else {
-            if (sumConsumeDataWeek.getLeadsCnt()!=null){
-                leadsCnt=sumConsumeDataWeek.getLeadsCnt();
+        } else {
+            if (sumConsumeDataWeek.getLeadsCnt() != null) {
+                leadsCnt = sumConsumeDataWeek.getLeadsCnt();
             }
-            if (sumConsumeDataWeek.getLeadsUserCnt()!=null){
-                userCnt=sumConsumeDataWeek.getLeadsUserCnt();
+            if (sumConsumeDataWeek.getLeadsUserCnt() != null) {
+                userCnt = sumConsumeDataWeek.getLeadsUserCnt();
             }
-            if (sumConsumeDataWeek.getActualConsume()!=null){
-                actualConsume=sumConsumeDataWeek.getActualConsume();
+            if (sumConsumeDataWeek.getActualConsume() != null) {
+                actualConsume = sumConsumeDataWeek.getActualConsume();
             }
-            if (sumConsumeDataWeek.getLeadsCost()!=null){
-                leadsCost=sumConsumeDataWeek.getLeadsCost();
+            if (sumConsumeDataWeek.getLeadsCost() != null) {
+                leadsCost = sumConsumeDataWeek.getLeadsCost();
             }
         }
-        map.replace("week",week1);
+        map.replace("week", week1);
         GatherYicheAPP sumConsumeDataWeek1 = displayWeekReportMapper.selectSumDataWeek(map);
-        if (sumConsumeDataWeek1==null){
+        if (sumConsumeDataWeek1 == null) {
             logger.info("此周没有数据");
-        }else {
-            if (sumConsumeDataWeek1.getLeadsCnt()!=null){
-                leadsCnt1=sumConsumeDataWeek1.getLeadsCnt();
+        } else {
+            if (sumConsumeDataWeek1.getLeadsCnt() != null) {
+                leadsCnt1 = sumConsumeDataWeek1.getLeadsCnt();
             }
-            if (sumConsumeDataWeek1.getLeadsUserCnt()!=null){
-                userCnt1=sumConsumeDataWeek1.getLeadsUserCnt();
+            if (sumConsumeDataWeek1.getLeadsUserCnt() != null) {
+                userCnt1 = sumConsumeDataWeek1.getLeadsUserCnt();
             }
-            if (sumConsumeDataWeek1.getActualConsume()!=null){
-                actualConsume1=sumConsumeDataWeek1.getActualConsume();
+            if (sumConsumeDataWeek1.getActualConsume() != null) {
+                actualConsume1 = sumConsumeDataWeek1.getActualConsume();
             }
-            if (sumConsumeDataWeek1.getLeadsCost()!=null){
-                leadsCost1=sumConsumeDataWeek1.getLeadsCost();
+            if (sumConsumeDataWeek1.getLeadsCost() != null) {
+                leadsCost1 = sumConsumeDataWeek1.getLeadsCost();
             }
         }
-        if (sumConsumeDataWeek==null&&sumConsumeDataWeek1==null){
+        if (sumConsumeDataWeek == null && sumConsumeDataWeek1 == null) {
             return dayReport;
         }
-        Ratio ratio1 = CalculateRatioUtil.calculateRatioSum(ratio,sumConsumeDataWeek,sumConsumeDataWeek1);
+        Ratio ratio1 = CalculateRatioUtil.calculateRatioSum(ratio, sumConsumeDataWeek, sumConsumeDataWeek1);
         String clueRatio = ratio1.getClueRatio();
         data.setTitle("总线索量");
         data.setPreTwoDay(leadsCnt1);
@@ -117,7 +118,7 @@ public class DisplayWeekReportServiceImpl implements DisplayWeekReportService{
     }
 
     @Override
-    public List<DayReport> getPlatformDataWeek(String week,String week1) {
+    public List<DayReport> getPlatformDataWeek(String week, String week1) {
         Map<String, String> map = new HashMap<>();
         List<DayReport> list2 = new ArrayList<>();
         List<String> list = new ArrayList<>();
@@ -127,61 +128,61 @@ public class DisplayWeekReportServiceImpl implements DisplayWeekReportService{
         list.add("报价APP");
         list.add("易车APP");
         list.add("第三方");
-        map.put("platformName",list.get(0));
-        for (int i=0;i<=list.size()-1;i++){
+        map.put("platformName", list.get(0));
+        for (int i = 0; i <= list.size() - 1; i++) {
             Long leadsCnt = 0l;
-            Long leadsCnt1=0l;
-            Long userCnt=0l;
-            Long userCnt1=0l;
-            Float actualConsume1=0f;
-            Float actualConsume=0f;
-            Double leadsCost=0.0;
-            Double leadsCost1=0.0;
+            Long leadsCnt1 = 0l;
+            Long userCnt = 0l;
+            Long userCnt1 = 0l;
+            Float actualConsume1 = 0f;
+            Float actualConsume = 0f;
+            Double leadsCost = 0.0;
+            Double leadsCost1 = 0.0;
             List<Data> datas = new ArrayList<>();
             DayReport dayReport = new DayReport();
             Data data = new Data();
             Data data1 = new Data();
             Data data2 = new Data();
-            Data data3= new Data();
-            if(i>0){
-                map.replace("platformName",list.get(i));
+            Data data3 = new Data();
+            if (i > 0) {
+                map.replace("platformName", list.get(i));
             }
-            map.put("week",week);
+            map.put("week", week);
             GatherYicheAPP platformDataWeek = displayWeekReportMapper.selectPlatformDataWeek(map);
-            if (platformDataWeek==null){
+            if (platformDataWeek == null) {
                 logger.info("此月没有数据");
-            }else {
-                if (platformDataWeek.getLeadsCnt()!=null){
-                    leadsCnt=platformDataWeek.getLeadsCnt();
+            } else {
+                if (platformDataWeek.getLeadsCnt() != null) {
+                    leadsCnt = platformDataWeek.getLeadsCnt();
                 }
-                if (platformDataWeek.getLeadsUserCnt()!=null){
-                    userCnt=platformDataWeek.getLeadsUserCnt();
+                if (platformDataWeek.getLeadsUserCnt() != null) {
+                    userCnt = platformDataWeek.getLeadsUserCnt();
                 }
-                if (platformDataWeek.getActualConsume()!=null){
-                    actualConsume=platformDataWeek.getActualConsume();
+                if (platformDataWeek.getActualConsume() != null) {
+                    actualConsume = platformDataWeek.getActualConsume();
                 }
-                if (platformDataWeek.getLeadsCost()!=null){
-                    leadsCost=platformDataWeek.getLeadsCost();
+                if (platformDataWeek.getLeadsCost() != null) {
+                    leadsCost = platformDataWeek.getLeadsCost();
                 }
             }
             GatherYicheAPP sumDataWeek = displayWeekReportMapper.selectSumDataWeek(map);
             Portion portion1 = CalculatePortionUtil.calculatePortionSum(portion, platformDataWeek, sumDataWeek);
-            map.replace("week",week1);
+            map.replace("week", week1);
             GatherYicheAPP platformDataWeek1 = displayWeekReportMapper.selectPlatformDataWeek(map);
-            if (platformDataWeek1==null){
+            if (platformDataWeek1 == null) {
                 logger.info("此月没有数据");
-            }else {
-                if (platformDataWeek1.getLeadsCnt()!=null){
-                    leadsCnt1=platformDataWeek1.getLeadsCnt();
+            } else {
+                if (platformDataWeek1.getLeadsCnt() != null) {
+                    leadsCnt1 = platformDataWeek1.getLeadsCnt();
                 }
-                if (platformDataWeek1.getLeadsUserCnt()!=null){
-                    userCnt1=platformDataWeek1.getLeadsUserCnt();
+                if (platformDataWeek1.getLeadsUserCnt() != null) {
+                    userCnt1 = platformDataWeek1.getLeadsUserCnt();
                 }
-                if (platformDataWeek1.getActualConsume()!=null){
-                    actualConsume1=platformDataWeek1.getActualConsume();
+                if (platformDataWeek1.getActualConsume() != null) {
+                    actualConsume1 = platformDataWeek1.getActualConsume();
                 }
-                if (platformDataWeek1.getLeadsCost()!=null){
-                    leadsCost1=platformDataWeek1.getLeadsCost();
+                if (platformDataWeek1.getLeadsCost() != null) {
+                    leadsCost1 = platformDataWeek1.getLeadsCost();
                 }
             }
             Ratio ratio1 = CalculateRatioUtil.calculateRatioSum(ratio, platformDataWeek, platformDataWeek1);
@@ -225,57 +226,57 @@ public class DisplayWeekReportServiceImpl implements DisplayWeekReportService{
     }
 
     @Override
-    public Map<String, List<YichePlatform>> getplatformChannelDataWeek(String platformName,String week,String week1) {
+    public Map<String, List<YichePlatform>> getplatformChannelDataWeek(String platformName, String week, String week1) {
         Map<String, String> map = new HashMap<>();
         Map<String, List<YichePlatform>> map1 = new HashMap<>();
-        map.put("platformName",platformName);
-        map.put("systemId","0");
-        map.put("week",week);
+        map.put("platformName", platformName);
+        map.put("systemId", "0");
+        map.put("week", week);
         List<YichePlatform> yichePlatformsWeek = displayWeekReportMapper.selectplatformChannelDataWeek(map);
-        AddTotalUtil.addTotal(yichePlatformsWeek,map.get("systemId"));
-        map.replace("week",week1);
+        AddTotalUtil.addTotal(yichePlatformsWeek, map.get("systemId"));
+        map.replace("week", week1);
         List<YichePlatform> yichePlatformsWeek1 = displayWeekReportMapper.selectplatformChannelDataWeek(map);
-        AddTotalUtil.addTotal(yichePlatformsWeek1,map.get("systemId"));
-        List<YichePlatform> yichePlatformAndroidWeek= CalculateRatioUtil.addCalculateRatioWeek(yichePlatformsWeek, yichePlatformsWeek1);
-        map1.put("android",yichePlatformAndroidWeek);
-        map.replace("systemId","1");
-        map.replace("week",week);
+        AddTotalUtil.addTotal(yichePlatformsWeek1, map.get("systemId"));
+        List<YichePlatform> yichePlatformAndroidWeek = CalculateRatioUtil.addCalculateRatioWeek(yichePlatformsWeek, yichePlatformsWeek1);
+        map1.put("android", yichePlatformAndroidWeek);
+        map.replace("systemId", "1");
+        map.replace("week", week);
         List<YichePlatform> yichePlatformsWeekIos1 = displayWeekReportMapper.selectplatformChannelDataWeek(map);
-        AddTotalUtil.addTotal(yichePlatformsWeekIos1,map.get("systemId"));
-        map.replace("week",week1);
+        AddTotalUtil.addTotal(yichePlatformsWeekIos1, map.get("systemId"));
+        map.replace("week", week1);
         List<YichePlatform> yichePlatformsWeekIos2 = displayWeekReportMapper.selectplatformChannelDataWeek(map);
-        AddTotalUtil.addTotal(yichePlatformsWeekIos2,map.get("systemId"));
+        AddTotalUtil.addTotal(yichePlatformsWeekIos2, map.get("systemId"));
         List<YichePlatform> yichePlatformsWeekIos = CalculateRatioUtil.addCalculateRatioWeek(yichePlatformsWeekIos1, yichePlatformsWeekIos2);
-        map1.put("ios",yichePlatformsWeekIos);
+        map1.put("ios", yichePlatformsWeekIos);
         return map1;
     }
 
     @Override
-    public Map<String, List<YichePlatform>> getPcwapchannelDataWeek(String platformName,String week,String week1) {
+    public Map<String, List<YichePlatform>> getPcwapchannelDataWeek(String platformName, String week, String week1) {
         Map<String, String> map = new HashMap<>();
         Map<String, List<YichePlatform>> map1 = new HashMap<>();
-        map.put("platformName",platformName);
-        map.put("terminalId","0");
-        map.put("week",week);
+        map.put("platformName", platformName);
+        map.put("terminalId", "0");
+        map.put("week", week);
         List<YichePlatform> pcwapchannelDataWeekpc1 = displayWeekReportMapper.selectPcwapchannelDataWeek(map);
-        map.replace("week",week1);
+        map.replace("week", week1);
         List<YichePlatform> pcwapchannelDataWeekpc2 = displayWeekReportMapper.selectPcwapchannelDataWeek(map);
         List<YichePlatform> pcwapchannelDataWeekpc = CalculateRatioUtil.addCalculateRatioPcwapWeek(pcwapchannelDataWeekpc1, pcwapchannelDataWeekpc2);
-        map1.put("pc",pcwapchannelDataWeekpc);
-        map.replace("terminalId","1");
-        map.replace("week",week);
+        map1.put("pc", pcwapchannelDataWeekpc);
+        map.replace("terminalId", "1");
+        map.replace("week", week);
         List<YichePlatform> pcwapchannelDataWeekyd1 = displayWeekReportMapper.selectPcwapchannelDataWeek(map);
-        map.replace("week",week1);
+        map.replace("week", week1);
         List<YichePlatform> pcwapchannelDataWeekyd2 = displayWeekReportMapper.selectPcwapchannelDataWeek(map);
         List<YichePlatform> pcwapchannelDataWeekyd = CalculateRatioUtil.addCalculateRatioPcwapWeek(pcwapchannelDataWeekyd1, pcwapchannelDataWeekyd2);
-        map1.put("yd",pcwapchannelDataWeekyd);
-        map.replace("terminalId","2");
-        map.replace("week",week);
+        map1.put("yd", pcwapchannelDataWeekyd);
+        map.replace("terminalId", "2");
+        map.replace("week", week);
         List<YichePlatform> pcwapchannelDataWeekqt1 = displayWeekReportMapper.selectPcwapchannelDataWeek(map);
-        map.replace("week",week1);
+        map.replace("week", week1);
         List<YichePlatform> pcwapchannelDataWeekqt2 = displayWeekReportMapper.selectPcwapchannelDataWeek(map);
         List<YichePlatform> pcwapchannelDataWeekqt = CalculateRatioUtil.addCalculateRatioPcwapWeek(pcwapchannelDataWeekqt1, pcwapchannelDataWeekqt2);
-        map1.put("qt",pcwapchannelDataWeekqt);
+        map1.put("qt", pcwapchannelDataWeekqt);
         return map1;
     }
 
@@ -283,13 +284,13 @@ public class DisplayWeekReportServiceImpl implements DisplayWeekReportService{
     public Map<String, List<YichePlatform>> getThirdPartychannelDataWeek(String platformName, String week, String week1) {
         Map<String, String> map = new HashMap<>();
         Map<String, List<YichePlatform>> map1 = new HashMap<>();
-        map.put("platformName",platformName);
-        map.put("week",week);
+        map.put("platformName", platformName);
+        map.put("week", week);
         List<YichePlatform> thirdPartychannelDataWeek1 = displayWeekReportMapper.selectThirdPartychannelDataWeek(map);
-        map.replace("week",week1);
+        map.replace("week", week1);
         List<YichePlatform> thirdPartychannelDataWeek2 = displayWeekReportMapper.selectThirdPartychannelDataWeek(map);
         List<YichePlatform> thirdPartychannelDataWeek = CalculateRatioUtil.addCalculateRatioPcwapWeek(thirdPartychannelDataWeek1, thirdPartychannelDataWeek2);
-        map1.put("dsf",thirdPartychannelDataWeek);
+        map1.put("dsf", thirdPartychannelDataWeek);
         return map1;
     }
 }
