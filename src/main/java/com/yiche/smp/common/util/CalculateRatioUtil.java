@@ -76,6 +76,12 @@ public class CalculateRatioUtil {
     public static List<YichePlatform> addCalculateRatioPcwap(List<YichePlatform> channelDataDayPre, List<YichePlatform> channelDataDayPre2) {
         for (int i = 0; i <= channelDataDayPre.size() - 1; i++) {
             YichePlatform yichePlatform = channelDataDayPre.get(i);
+            if(channelDataDayPre2==null){
+                yichePlatform.setClueRatio("100%");
+                yichePlatform.setUserRatio("100%");
+                yichePlatform.setLeadsCostRatio("100%");
+                yichePlatform.setConsumeRatio("100%");
+            }
             for (int j = 0; j <= channelDataDayPre2.size() - 1; j++) {
                 YichePlatform yichePlatform1 = channelDataDayPre2.get(j);
                 if (yichePlatform.getChannelId().equals(yichePlatform1.getChannelId())) {
@@ -90,7 +96,6 @@ public class CalculateRatioUtil {
                     yichePlatform.setLeadsCostRatio("100%");
                     yichePlatform.setConsumeRatio("100%");
                 }
-
             }
         }
         return channelDataDayPre;
@@ -99,6 +104,12 @@ public class CalculateRatioUtil {
     public static List<YichePlatform> addCalculateRatioPcwapWeek(List<YichePlatform> channelDataDayPre, List<YichePlatform> channelDataDayPre2) {
         for (int i = 0; i <= channelDataDayPre.size() - 1; i++) {
             YichePlatform yichePlatform = channelDataDayPre.get(i);
+            if(channelDataDayPre2==null){
+                yichePlatform.setClueRatio("100%");
+                yichePlatform.setUserRatio("100%");
+                yichePlatform.setLeadsCostRatio("100%");
+                yichePlatform.setConsumeRatio("100%");
+            }
             for (int j = 0; j <= channelDataDayPre2.size() - 1; j++) {
                 YichePlatform yichePlatform1 = channelDataDayPre2.get(j);
                 if (yichePlatform.getChannelName().equals(yichePlatform1.getChannelName())) {
@@ -115,6 +126,7 @@ public class CalculateRatioUtil {
                 }
 
             }
+
         }
         return channelDataDayPre;
     }
@@ -182,7 +194,7 @@ public class CalculateRatioUtil {
     }
 
     public static String calculateRatio(Double data, Double data2) {
-        if (data.equals(data2)) {
+        if (data==null && data2==null) {
             return "0%";
         }
         if (data2 != null && data2 != 0) {
@@ -195,7 +207,7 @@ public class CalculateRatioUtil {
     }
 
     public static String calculateRatioLong(Long data, Long data2) {
-        if (data.equals(data2)) {
+        if (data==null && data2==null) {
             return "0%";
         }
         if (data2 != null && data2 != 0) {
@@ -207,7 +219,7 @@ public class CalculateRatioUtil {
     }
 
     public static String calculateRatioFloat(Float data, Float data2) {
-        if (data.equals(data2)) {
+        if (data==null && data2==null) {
             return "0%";
         }
         if (data2 != null && data2 != 0) {
