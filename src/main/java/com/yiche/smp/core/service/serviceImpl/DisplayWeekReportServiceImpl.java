@@ -67,7 +67,6 @@ public class DisplayWeekReportServiceImpl implements DisplayWeekReportService{
         }
         map.replace("week",week1);
         GatherYicheAPP sumConsumeDataWeek1 = displayWeekReportMapper.selectSumDataWeek(map);
-        Ratio ratio1 = CalculateRatioUtil.calculateRatioSum(ratio,sumConsumeDataWeek,sumConsumeDataWeek1);
         if (sumConsumeDataWeek1==null){
             logger.info("此周没有数据");
         }else {
@@ -84,6 +83,10 @@ public class DisplayWeekReportServiceImpl implements DisplayWeekReportService{
                 leadsCost1=sumConsumeDataWeek1.getLeadsCost();
             }
         }
+        if (sumConsumeDataWeek==null&&sumConsumeDataWeek1==null){
+            return dayReport;
+        }
+        Ratio ratio1 = CalculateRatioUtil.calculateRatioSum(ratio,sumConsumeDataWeek,sumConsumeDataWeek1);
         String clueRatio = ratio1.getClueRatio();
         data.setTitle("总线索量");
         data.setPreTwoDay(leadsCnt1);

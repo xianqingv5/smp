@@ -37,6 +37,7 @@ public class DisplayMonthReportController {
     @ApiOperation("平台渠道月报展示功能")
     public ResultResponse showSumMonthReportData(@RequestBody ReportCondition reportCondition){
         String startTime = reportCondition.getStartTime();
+        System.err.println("a"+"-"+startTime);
         String month=startTime;
         String month1 = preMonth(month);
         DayReport map = displayMonthReportService.selectSumDatamonth(month,month1);
@@ -47,6 +48,7 @@ public class DisplayMonthReportController {
     @ApiOperation("平台总和月报展示功能")
     public ResultResponse showPlatformWeekReportData(@RequestBody ReportCondition reportCondition){
         String startTime = reportCondition.getStartTime();
+        System.err.println("b"+"-"+startTime);
         String month=startTime;
         String month1 = preMonth(month);
         List<DayReport> map = displayMonthReportService.getPlatformDatamonth(month,month1);
@@ -58,6 +60,7 @@ public class DisplayMonthReportController {
     public ResultResponse showMonthReportData(@RequestBody ReportCondition reportCondition) {
         String platformName = reportCondition.getPlatformName();
         String startTime = reportCondition.getStartTime();
+        System.err.println("c"+"-"+startTime);
         String month=startTime;
         if (platformName!=null){
             String month1 = preMonth(month);
@@ -72,6 +75,7 @@ public class DisplayMonthReportController {
     public ResultResponse showMonthPcwapReportData(@RequestBody ReportCondition reportCondition){
         String platformName = reportCondition.getPlatformName();
         String startTime = reportCondition.getStartTime();
+        System.err.println("d"+"-"+startTime);
         String month=startTime;
         if (platformName!=null){
             String month1 = preMonth(month);
@@ -86,6 +90,7 @@ public class DisplayMonthReportController {
     public ResultResponse showThirdPartyReportData(@RequestBody ReportCondition reportCondition){
         String platformName = reportCondition.getPlatformName();
         String startTime = reportCondition.getStartTime();
+        System.err.println("e"+"-"+startTime);
         String month=startTime;
         if (platformName!=null){
             String month1 = preMonth(month);

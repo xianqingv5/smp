@@ -83,6 +83,9 @@ public class DisplayMonthReportServiceImpl implements DisplayMonthReportService 
                 leadsCost1=sumConsumeDataMonth1.getLeadsCost();
             }
         }
+        if (sumConsumeDataMonth==null&&sumConsumeDataMonth1==null){
+            return dayReport;
+        }
         Ratio ratio1 = CalculateRatioUtil.calculateRatioSum(ratio,sumConsumeDataMonth,sumConsumeDataMonth1);
         String clueRatio = ratio1.getClueRatio();
         data.setTitle("总线索量");
