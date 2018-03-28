@@ -39,9 +39,11 @@ public class DisplayDayReportController {
     @ApiOperation("平台渠道日报展示功能")
     public ResultResponse showSumDayReportData(@RequestBody ReportCondition reportCondition) {
         String startTime = reportCondition.getStartTime();
-        System.out.println("123"+"-"+startTime);
+        System.out.println("123" + "-" + startTime);
         Map<String, String> twoDay = getPreTwoDay(startTime);
-        DayReport sumDataDay = displayDayReportService.getSumDataDay(twoDay.get("pre1"), twoDay.get("pre2"));
+        String pre1 = twoDay.get("pre1");
+        String pre2 = twoDay.get("pre2");
+        DayReport sumDataDay = displayDayReportService.getSumDataDay(pre1, pre2);
         return ResultResponse.success(sumDataDay);
     }
 
@@ -49,9 +51,11 @@ public class DisplayDayReportController {
     @ApiOperation("平台总和日报展示功能")
     public ResultResponse showSumPlatformDayReportData(@RequestBody ReportCondition reportCondition) {
         String startTime = reportCondition.getStartTime();
-        System.out.println("456"+"-"+startTime);
+        System.out.println("456" + "-" + startTime);
         Map<String, String> twoDay = getPreTwoDay(startTime);
-        List<Object> platformDataDay = displayDayReportService.getPlatformDataDay(twoDay.get("pre1"), twoDay.get("pre2"));
+        String pre1 = twoDay.get("pre1");
+        String pre2 = twoDay.get("pre2");
+        List<Object> platformDataDay = displayDayReportService.getPlatformDataDay(pre1, pre2);
         return ResultResponse.success(platformDataDay);
     }
 
@@ -59,11 +63,13 @@ public class DisplayDayReportController {
     @ApiOperation("各个平台详细渠道日报展示功能")
     public ResultResponse showDayReportData(@RequestBody ReportCondition reportCondition) {
         String startTime = reportCondition.getStartTime();
-        System.out.println("789"+"-"+startTime);
+        System.out.println("789" + "-" + startTime);
         String platformName = reportCondition.getPlatformName();
         if (platformName != null) {
             Map<String, String> twoDay = getPreTwoDay(startTime);
-            Map<String, List<YichePlatform>> map = displayDayReportService.getplatformChannelDataDay(platformName, twoDay.get("pre1"), twoDay.get("pre2"));
+            String pre1 = twoDay.get("pre1");
+            String pre2 = twoDay.get("pre2");
+            Map<String, List<YichePlatform>> map = displayDayReportService.getplatformChannelDataDay(platformName, pre1, pre2);
             return ResultResponse.success(map);
         }
         return ResultResponse.error();
@@ -73,11 +79,13 @@ public class DisplayDayReportController {
     @ApiOperation("Pcwap平台详细渠道日报展示功能")
     public ResultResponse showDayPcwapReportData(@RequestBody ReportCondition reportCondition) {
         String startTime = reportCondition.getStartTime();
-        System.out.println("abc"+"-"+startTime);
+        System.out.println("abc" + "-" + startTime);
         String platformName = reportCondition.getPlatformName();
         if (platformName != null) {
             Map<String, String> twoDay = getPreTwoDay(startTime);
-            Map<String, List<YichePlatform>> map = displayDayReportService.getPcwapchannelDataDay(platformName, twoDay.get("pre1"), twoDay.get("pre2"));
+            String pre1 = twoDay.get("pre1");
+            String pre2 = twoDay.get("pre2");
+            Map<String, List<YichePlatform>> map = displayDayReportService.getPcwapchannelDataDay(platformName, pre1, pre2);
             return ResultResponse.success(map);
         }
         return ResultResponse.error();
@@ -94,7 +102,7 @@ public class DisplayDayReportController {
         //获取当前时间
         Date date;
         try {
-            date = format.parse(startTime,new ParsePosition(0));
+            date = format.parse(startTime, new ParsePosition(0));
             //Date nowDate = DateParseUtil.getNextDay2(date);
             //获取前一天
             Date preDate1 = DateParseUtil.getPreDay(date);
@@ -107,10 +115,9 @@ public class DisplayDayReportController {
             map.put("pre2", pre2);
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             return map;
         }
     }
-
 
 }
