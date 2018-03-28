@@ -147,7 +147,16 @@ public class DateParseUtil {
         calendar.add(Calendar.DAY_OF_MONTH, 1);  
         date = calendar.getTime();  
         return date;  
-    } 
+    }
+
+    //
+    public static Date getPreDay(Date date){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DATE, -1);
+        date = calendar.getTime();
+        return date;
+    }
    // 获取当前日期可上传日期时间集合
     public static List<Date> dateHoliday(ImpHoliday datenow,ImpHoliday datefront,ImpHoliday datelater){
     	Date now = datenow.getDate();
@@ -191,7 +200,7 @@ public class DateParseUtil {
 				Date parse = df.parse(value);
 				System.out.println(parse);
 				getNextDay1(parse);
-				System.out.println((getNextDay1(parse)));
+				System.out.println((getNextDay1(getNextDay1(parse))));
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -199,7 +208,7 @@ public class DateParseUtil {
 	   
 	   String parseTime = StringtoString("20180306");
 	   System.out.println(parseTime);
-	   boolean validDate = isValidDate("20180228");
+	   boolean validDate = isValidDate("20180229");
 	   System.out.println(validDate);
 } 
 }
