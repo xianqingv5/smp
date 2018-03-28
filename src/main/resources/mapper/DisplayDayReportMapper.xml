@@ -20,6 +20,7 @@
                 WHERE
                     bt = #{date}
                     AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="易车APP")
+                    GROUP BY bt
                 UNION
                 SELECT
                     SUM(leads_cnt)       leadsCnt,
@@ -31,6 +32,7 @@
                 WHERE
                     bt = #{date}
                     AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="报价APP")
+                    GROUP BY bt
                 UNION
                 SELECT
                     SUM(cluecount)       leadsCnt,
@@ -42,7 +44,9 @@
                 WHERE
                     dt = #{date}
                     AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="PCWAP")
+                    GROUP BY dt
             ) yiche_sum_day_report
+            GROUP BY bt
     </select>
 
 
@@ -66,6 +70,7 @@
                 WHERE
                     bt = #{date}
                     AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="易车APP")
+                    GROUP BY bt
                 UNION
                 SELECT
                     "报价APP"              platformName,
@@ -78,6 +83,7 @@
                 WHERE
                     bt = #{date}
                     AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="报价APP")
+                    GROUP BY bt
                 UNION
                 SELECT
                     "PCWAP"              platformName,
@@ -90,6 +96,7 @@
                 WHERE
                     dt = #{date}
                     AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="PCWAP")
+                    GROUP BY dt
             ) yiche_platformName_day_report
         WHERE platformName=#{platformName}
     </select>
