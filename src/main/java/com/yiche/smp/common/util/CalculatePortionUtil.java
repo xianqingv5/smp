@@ -65,7 +65,7 @@ public class CalculatePortionUtil {
     }
 
     private static String calculatePortion(Double data, Double data2) {
-        if (data==0.0&&data2==0.0){
+        if (data == 0.0 && data2 == 0.0) {
             return "0.0%";
         }
         if (data2 != null && data2 != 0) {
@@ -78,7 +78,7 @@ public class CalculatePortionUtil {
     }
 
     private static String calculatePortionLong(Long data, Long data2) {
-        if (data==0l&&data2==0l){
+        if (data == 0l && data2 == 0l) {
             return "0.0%";
         }
         if (data2 != null && data2 != 0) {
@@ -90,7 +90,7 @@ public class CalculatePortionUtil {
     }
 
     private static String calculatePortionFloat(Float data, Float data2) {
-        if (data==0.0f&&data2==0.0f){
+        if (data == 0.0f && data2 == 0.0f) {
             return "0.0%";
         }
         if (data2 != null && data2 != 0) {

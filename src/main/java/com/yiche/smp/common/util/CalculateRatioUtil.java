@@ -76,7 +76,7 @@ public class CalculateRatioUtil {
     public static List<YichePlatform> addCalculateRatioPcwap(List<YichePlatform> channelDataDayPre, List<YichePlatform> channelDataDayPre2) {
         for (int i = 0; i <= channelDataDayPre.size() - 1; i++) {
             YichePlatform yichePlatform = channelDataDayPre.get(i);
-            if(channelDataDayPre2==null||channelDataDayPre2.size()==0){
+            if (channelDataDayPre2 == null || channelDataDayPre2.size() == 0) {
                 yichePlatform.setClueRatio("100%");
                 yichePlatform.setUserRatio("100%");
                 yichePlatform.setLeadsCostRatio("100%");
@@ -104,7 +104,7 @@ public class CalculateRatioUtil {
     public static List<YichePlatform> addCalculateRatioPcwapWeek(List<YichePlatform> channelDataDayPre, List<YichePlatform> channelDataDayPre2) {
         for (int i = 0; i <= channelDataDayPre.size() - 1; i++) {
             YichePlatform yichePlatform = channelDataDayPre.get(i);
-            if(channelDataDayPre2==null){
+            if (channelDataDayPre2 == null||channelDataDayPre2.size()==0) {
                 yichePlatform.setClueRatio("100%");
                 yichePlatform.setUserRatio("100%");
                 yichePlatform.setLeadsCostRatio("100%");
@@ -194,7 +194,7 @@ public class CalculateRatioUtil {
     }
 
     public static String calculateRatio(Double data, Double data2) {
-        if (data==0.0 && data2==0.0) {
+        if ((data == null||data==0.0) && (data2 == null||data2==0.0)) {
             return "0.0%";
         }
         if (data2 != null && data2 != 0) {
@@ -207,7 +207,7 @@ public class CalculateRatioUtil {
     }
 
     public static String calculateRatioLong(Long data, Long data2) {
-        if (data==0l && data2==0l) {
+        if ((data == null ||data==0l) && (data2 == null||data2==0l)) {
             return "0.0%";
         }
         if (data2 != null && data2 != 0) {
@@ -219,7 +219,7 @@ public class CalculateRatioUtil {
     }
 
     public static String calculateRatioFloat(Float data, Float data2) {
-        if (data==0.0f && data2==0.0f) {
+        if ((data == null ||data==0.0f) && (data2 == null||data2==0.0f)){
             return "0.0%";
         }
         if (data2 != null && data2 != 0) {
