@@ -100,14 +100,26 @@ public class CreateReportController2 {
 
             List<GatherYicheAPP> channelConsumeData = createReportService.getChannelConsumeData(platformName, channelName, startTime, endTime, isDetail);
             for (GatherYicheAPP gatherYicheAPP:channelConsumeData){
+                Float actualConsume=0.0f;
+                Float cluePrice=0.0f;
+                Float userPrice=0.0f;
                 HSSFRow row = sheet.createRow(sheet.getLastRowNum() + 1);
                 row.createCell(0).setCellValue(gatherYicheAPP.getPlatformName());
                 row.createCell(1).setCellValue(gatherYicheAPP.getChannelName());
                 row.createCell(2).setCellValue(gatherYicheAPP.getLeadsCnt());
                 row.createCell(3).setCellValue(gatherYicheAPP.getLeadsUserCnt());
-                row.createCell(4).setCellValue(200f);
-                row.createCell(5).setCellValue(gatherYicheAPP.getLeadsCnt()/200f);
-                row.createCell(6).setCellValue(gatherYicheAPP.getLeadsUserCnt()/200f);
+                if (gatherYicheAPP.getActualConsume()!=null){
+                    actualConsume=gatherYicheAPP.getActualConsume();
+                }
+                row.createCell(4).setCellValue(actualConsume);
+                if (gatherYicheAPP.getLeadsCnt()!=null&&gatherYicheAPP.getLeadsCnt()!=0){
+                    cluePrice=actualConsume/gatherYicheAPP.getLeadsCnt();
+                }
+                row.createCell(5).setCellValue(cluePrice);
+                if (gatherYicheAPP.getLeadsUserCnt()!=null&&gatherYicheAPP.getLeadsUserCnt()!=0){
+                    userPrice=actualConsume/gatherYicheAPP.getLeadsUserCnt();
+                }
+                row.createCell(6).setCellValue(userPrice);
                 if (isDetail==0){
                     row.createCell(7).setCellValue(gatherYicheAPP.getBt());
                 }
