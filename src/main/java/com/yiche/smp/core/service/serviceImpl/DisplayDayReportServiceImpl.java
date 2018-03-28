@@ -88,6 +88,9 @@ public class DisplayDayReportServiceImpl implements DisplayDayReportService {
         }
             sumDataDayPre2.setLeadsCost(calculateLeadsCost(leadsCnt1,actualConsume1));
         }
+        if (sumDataDayPre==null&&sumDataDayPre2==null){
+            return dayReport;
+        }
         Ratio ratio1 = CalculateRatioUtil.calculateRatioSum(ratio, sumDataDayPre, sumDataDayPre2);//计算环比
         String clueRatio = ratio1.getClueRatio();
         data.setTitle("总线索量");//将总线索量封装到对应的格式里面

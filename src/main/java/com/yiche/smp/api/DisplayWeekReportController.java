@@ -36,7 +36,9 @@ public class DisplayWeekReportController {
     @ApiOperation("平台渠道周报展示功能")
     public ResultResponse showSumDayReportData(@RequestBody ReportCondition reportCondition){
         String startTime = reportCondition.getStartTime();
-        String week="第"+startTime+"周";
+        int i = Integer.parseInt(startTime);
+        System.err.println("a"+"-"+startTime);
+        String week="第"+i+"周";
         String week1 = preWeek(startTime);
         DayReport map = displayWeekReportService.selectSumDataWeek(week,week1);
         return ResultResponse.success(map);
@@ -45,7 +47,9 @@ public class DisplayWeekReportController {
     @ApiOperation("平台总和周报展示功能")
     public ResultResponse showPlatformWeekReportData(@RequestBody ReportCondition reportCondition){
         String startTime = reportCondition.getStartTime();
-        String week="第"+startTime+"周";
+        int i = Integer.parseInt(startTime);
+        System.err.println("b"+"-"+startTime);
+        String week="第"+i+"周";
         String week1 = preWeek(startTime);
         List<DayReport> map = displayWeekReportService.getPlatformDataWeek(week,week1);
         return ResultResponse.success(map);
@@ -56,7 +60,9 @@ public class DisplayWeekReportController {
     @ApiOperation("各个平台详细渠道周报展示功能")
     public ResultResponse showDayReportData(@RequestBody ReportCondition reportCondition) {
         String startTime = reportCondition.getStartTime();
-        String week="第"+startTime+"周";
+        int i = Integer.parseInt(startTime);
+        System.err.println("c"+"-"+startTime);
+        String week="第"+i+"周";
         String week1 = preWeek(startTime);
         Map<String, List<YichePlatform>> map = displayWeekReportService.getplatformChannelDataWeek("易车APP",week,week1);
         return  ResultResponse.success(map);
@@ -67,7 +73,9 @@ public class DisplayWeekReportController {
     public ResultResponse showWeekPcwapReportData(@RequestBody ReportCondition reportCondition){
         String platformName = reportCondition.getPlatformName();
         String startTime = reportCondition.getStartTime();
-        String week="第"+startTime+"周";
+        int i = Integer.parseInt(startTime);
+        System.err.println("d"+"-"+startTime);
+        String week="第"+i+"周";
         if (platformName!=null){
             String week1 = preWeek(startTime);
             Map<String, List<YichePlatform>> map = displayWeekReportService.getPcwapchannelDataWeek(platformName,week,week1);
@@ -80,7 +88,9 @@ public class DisplayWeekReportController {
     public ResultResponse showWeekThirdPartyReportData(@RequestBody ReportCondition reportCondition) {
         String platformName = reportCondition.getPlatformName();
         String startTime = reportCondition.getStartTime();
-        String week="第"+startTime+"周";
+        int i = Integer.parseInt(startTime);
+        System.err.println("e"+"-"+startTime);
+        String week="第"+i+"周";
         if (platformName!=null){
             String week1 = preWeek(startTime);
             Map<String, List<YichePlatform>> map = displayWeekReportService.getThirdPartychannelDataWeek(platformName,week,week1);

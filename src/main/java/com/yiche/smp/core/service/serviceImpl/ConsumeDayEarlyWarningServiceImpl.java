@@ -49,8 +49,10 @@ public class ConsumeDayEarlyWarningServiceImpl implements ConsumeDayEarlyWarning
             double expectPrice= DataCalculationUtils.floatDeal(expectPrice1);
             for (EarlyWarningData earlyWarningData:earlyWarningDatas){
                 double actualPrice=0;
-                earlyWarningData.setActualConsume(20000f);
-                Float actualConsume = earlyWarningData.getActualConsume();
+                Float actualConsume=0.0f;
+                if (earlyWarningData.getActualConsume()!=null){
+                    actualConsume=earlyWarningData.getActualConsume();
+                }
                 Long leadsCnt = earlyWarningData.getLeadsCnt();
                 if (leadsCnt!=0&&leadsCnt!=null){
                     actualPrice=DataCalculationUtils.floatDeal(actualConsume/leadsCnt);

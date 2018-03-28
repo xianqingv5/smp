@@ -74,7 +74,7 @@ public class CreateReportController2 {
             //设置居中
             cellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
-            HSSFSheet sheet = hssfWorkbook.createSheet("123");
+            HSSFSheet sheet = hssfWorkbook.createSheet("sheet1");
             sheet.setDefaultColumnStyle(0, cellStyle);
             sheet.setDefaultColumnStyle(1, cellStyle);
             sheet.setDefaultColumnStyle(2, cellStyle);
@@ -82,7 +82,9 @@ public class CreateReportController2 {
             sheet.setDefaultColumnStyle(4, cellStyle);
             sheet.setDefaultColumnStyle(5, cellStyle);
             sheet.setDefaultColumnStyle(6, cellStyle);
-
+            if (isDetail==0){
+                sheet.setDefaultColumnStyle(7, cellStyle);
+            }
             //表头
             HSSFRow headRow = sheet.createRow(0);
             headRow.createCell(0).setCellValue("平台名称");
@@ -92,6 +94,9 @@ public class CreateReportController2 {
             headRow.createCell(4).setCellValue("消耗");
             headRow.createCell(5).setCellValue("线索单价");
             headRow.createCell(6).setCellValue("用户单价");
+            if (isDetail==0){
+                headRow.createCell(7).setCellValue("日期");
+            }
 
             List<GatherYicheAPP> channelConsumeData = createReportService.getChannelConsumeData(platformName, channelName, startTime, endTime, isDetail);
             for (GatherYicheAPP gatherYicheAPP:channelConsumeData){
