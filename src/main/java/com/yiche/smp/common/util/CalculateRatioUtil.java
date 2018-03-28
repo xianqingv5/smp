@@ -76,7 +76,7 @@ public class CalculateRatioUtil {
     public static List<YichePlatform> addCalculateRatioPcwap(List<YichePlatform> channelDataDayPre, List<YichePlatform> channelDataDayPre2) {
         for (int i = 0; i <= channelDataDayPre.size() - 1; i++) {
             YichePlatform yichePlatform = channelDataDayPre.get(i);
-            if(channelDataDayPre2==null){
+            if(channelDataDayPre2==null||channelDataDayPre2.size()==0){
                 yichePlatform.setClueRatio("100%");
                 yichePlatform.setUserRatio("100%");
                 yichePlatform.setLeadsCostRatio("100%");
@@ -144,7 +144,7 @@ public class CalculateRatioUtil {
                 }
                 ratio.setClueRatio(calculateRatioLong(leadsCnt, leadsCnt1));
                 Long leadsUserCnt = yichePlatform.getLeadsUserCnt();
-                Long leadsUserCnt1 = yichePlatform.getLeadsUserCnt();
+                Long leadsUserCnt1 = yichePlatform2.getLeadsUserCnt();
                 if (leadsUserCnt == null) {
                     leadsUserCnt = 0l;
                 }
@@ -185,17 +185,17 @@ public class CalculateRatioUtil {
                 ratio.setLeadsCostRatio("-100%");
                 return ratio;
             }
-            ratio.setClueRatio("0%");
-            ratio.setUserRatio("0%");
-            ratio.setConsumeRatio("0%");
-            ratio.setLeadsCostRatio("0%");
+            ratio.setClueRatio("0.0%");
+            ratio.setUserRatio("0.0%");
+            ratio.setConsumeRatio("0.0%");
+            ratio.setLeadsCostRatio("0.0%");
             return ratio;
         }
     }
 
     public static String calculateRatio(Double data, Double data2) {
-        if (data==null && data2==null) {
-            return "0%";
+        if (data==0.0 && data2==0.0) {
+            return "0.0%";
         }
         if (data2 != null && data2 != 0) {
             double v = (data - data2) / data2;
@@ -207,8 +207,8 @@ public class CalculateRatioUtil {
     }
 
     public static String calculateRatioLong(Long data, Long data2) {
-        if (data==null && data2==null) {
-            return "0%";
+        if (data==0l && data2==0l) {
+            return "0.0%";
         }
         if (data2 != null && data2 != 0) {
             double v = ((double) (data - data2)) / data2;
@@ -219,8 +219,8 @@ public class CalculateRatioUtil {
     }
 
     public static String calculateRatioFloat(Float data, Float data2) {
-        if (data==null && data2==null) {
-            return "0%";
+        if (data==0.0f && data2==0.0f) {
+            return "0.0%";
         }
         if (data2 != null && data2 != 0) {
             double v = ((double) (data - data2)) / data2;

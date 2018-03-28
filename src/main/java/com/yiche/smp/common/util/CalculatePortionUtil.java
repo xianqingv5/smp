@@ -51,20 +51,23 @@ public class CalculatePortionUtil {
                 portion.setLeadsCostPortion(calculatePortion(leadsCost, leadsCost1));
                 return portion;
             }
-            portion.setCluePortion("0%");
-            portion.setLeadsCostPortion("0%");
-            portion.setUserPortion("0%");
-            portion.setConsumePortion("0%");
+            portion.setCluePortion("0.0%");
+            portion.setLeadsCostPortion("0.0%");
+            portion.setUserPortion("0.0%");
+            portion.setConsumePortion("0.0%");
             return portion;
         }
-        portion.setCluePortion("0%");
-        portion.setLeadsCostPortion("0%");
-        portion.setUserPortion("0%");
-        portion.setConsumePortion("0%");
+        portion.setCluePortion("0.0%");
+        portion.setLeadsCostPortion("0.0%");
+        portion.setUserPortion("0.0%");
+        portion.setConsumePortion("0.0%");
         return portion;
     }
 
     private static String calculatePortion(Double data, Double data2) {
+        if (data==0.0&&data2==0.0){
+            return "0.0%";
+        }
         if (data2 != null && data2 != 0) {
             double v = data / data2;
             String s = StringUtil.handleData(v);
@@ -75,6 +78,9 @@ public class CalculatePortionUtil {
     }
 
     private static String calculatePortionLong(Long data, Long data2) {
+        if (data==0l&&data2==0l){
+            return "0.0%";
+        }
         if (data2 != null && data2 != 0) {
             double v = ((double) data) / data2;
             String s = StringUtil.handleData(v);
@@ -84,6 +90,9 @@ public class CalculatePortionUtil {
     }
 
     private static String calculatePortionFloat(Float data, Float data2) {
+        if (data==0.0f&&data2==0.0f){
+            return "0.0%";
+        }
         if (data2 != null && data2 != 0) {
             double v = ((double) data) / data2;
             String s = StringUtil.handleData(v);
