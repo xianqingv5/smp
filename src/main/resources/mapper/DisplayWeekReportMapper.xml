@@ -222,4 +222,8 @@
         VALUES(#{platformId}, #{platformName},#{channelId},#{channelName}, #{leadsCnt}, #{leadsUserCnt}, #{actualConsume},
                               #{leadsCost},#{leadsUserCost}, #{week}, #{weekDetail}, #{cooperationDay})
     </insert>
+
+    <select id="selectlastWeek" resultType="java.lang.String">
+        SELECT week FROM smp.yiche_yiche_channel_week ORDER BY id DESC LIMIT 1
+    </select>
 </mapper>

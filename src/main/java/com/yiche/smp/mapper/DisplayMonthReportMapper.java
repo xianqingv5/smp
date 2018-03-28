@@ -30,4 +30,6 @@ public interface DisplayMonthReportMapper {
     int insertyicheMonthReport(YichePlatform yichePlatform);
 
     int insertThirdMonthReport(YichePlatform yichePlatform);
+
+    String selectLastMonth();
 }

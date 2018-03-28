@@ -34,10 +34,11 @@ public class CreateReportController2 {
     @Autowired
     private CreateReportService createReportService;
 
-    @RequestMapping(value = "/exportSumExcel", produces = MediaType.APPLICATION_JSON_UTF8_VALUE + ";charset=utf-8", method = RequestMethod.POST)
+    @RequestMapping(value = "/intelligent/exportSumExcel", produces = MediaType.APPLICATION_JSON_UTF8_VALUE + ";charset=utf-8", method = RequestMethod.GET)
     @ApiOperation("导出相应渠道消耗汇总报表")
-    public ResultResponse getExcel(@RequestBody ReportCondition reportCondition, HttpServletResponse response, HttpServletRequest request) throws Exception {
+    public ResultResponse getExcel(ReportCondition reportCondition, HttpServletResponse response, HttpServletRequest request) throws Exception {
         logger.info("传进来的参数是：" + reportCondition);
+        String s;
         if (reportCondition!=null){
             //获取platformName
             String platformName = reportCondition.getPlatformName();
@@ -107,7 +108,12 @@ public class CreateReportController2 {
                 }
             }
             response.setContentType("application/vnd.ms-excel");
-            String fileName = "店均线索趋势报表.xls";
+            if (isDetail==0){
+                s="明细";
+            }else {
+                s="汇总";
+            }
+            String fileName = startTime+"-"+endTime+platformName+"-"+channelName+s+"财务报表.xls";
             String agent = request.getHeader("user-agent");
             fileName = FileUtils.encodeDownloadFilename(fileName, agent);
             response.setHeader("Content-Disposition",

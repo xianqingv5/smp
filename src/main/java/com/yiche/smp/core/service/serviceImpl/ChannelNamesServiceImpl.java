@@ -21,6 +21,7 @@ public class ChannelNamesServiceImpl implements ChannelNamesService {
 
     @Override
     public List<Channel> selectChannelNames(String platformName) {
+        Channel channel = new Channel();
         Map<String, String> map = new HashMap<>();
         //如果为全部的话，将platformName赋值为空
         if("全部".equals(platformName)){
@@ -28,6 +29,9 @@ public class ChannelNamesServiceImpl implements ChannelNamesService {
         }
         map.put("platformName",platformName);
         List<Channel> channels = channelNamesMapper.selectChannelNames(map);
+        channel.setPlatformName(platformName);
+        channel.setChannelName("全部");
+        channels.add(channel);
         return channels;
     }
 }

@@ -29,4 +29,6 @@ public interface DisplayWeekReportMapper {
      int insertyicheWeekReport(YichePlatform yichePlatform);
 
      int insertThirdWeekReport(YichePlatform yichePlatform);
+
+     String selectlastWeek();
 }

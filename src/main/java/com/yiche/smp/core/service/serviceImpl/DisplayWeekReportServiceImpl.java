@@ -11,6 +11,8 @@ import com.yiche.smp.common.util.CalculatePortionUtil;
 import com.yiche.smp.common.util.CalculateRatioUtil;
 import com.yiche.smp.core.service.DisplayWeekReportService;
 import com.yiche.smp.mapper.DisplayWeekReportMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,9 +28,17 @@ import java.util.Map;
 public class DisplayWeekReportServiceImpl implements DisplayWeekReportService{
     @Autowired
     private DisplayWeekReportMapper displayWeekReportMapper;
-
+    private Logger logger = LoggerFactory.getLogger(DisplayWeekReportServiceImpl.class);
     @Override
     public DayReport selectSumDataWeek(String week,String week1) {
+        Long leadsCnt = 0l;
+        Long leadsCnt1 = 0l;
+        Long userCnt = 0l;
+        Long userCnt1 = 0l;
+        Float actualConsume = 0.0f;
+        Float actualConsume1 = 0.0f;
+        Double leadsCost = 0.0;
+        Double leadsCost1 = 0.0;
         HashMap<String, String> map = new HashMap<>();
         map.put("week",week);
         Data data = new Data();
@@ -39,32 +49,56 @@ public class DisplayWeekReportServiceImpl implements DisplayWeekReportService{
         DayReport dayReport = new DayReport();
         Ratio ratio = new Ratio();
         GatherYicheAPP sumConsumeDataWeek = displayWeekReportMapper.selectSumDataWeek(map);
+        if (sumConsumeDataWeek==null){
+            logger.info("此周没有数据");
+        }else {
+            if (sumConsumeDataWeek.getLeadsCnt()!=null){
+                leadsCnt=sumConsumeDataWeek.getLeadsCnt();
+            }
+            if (sumConsumeDataWeek.getLeadsUserCnt()!=null){
+                userCnt=sumConsumeDataWeek.getLeadsUserCnt();
+            }
+            if (sumConsumeDataWeek.getActualConsume()!=null){
+                actualConsume=sumConsumeDataWeek.getActualConsume();
+            }
+            if (sumConsumeDataWeek.getLeadsCost()!=null){
+                leadsCost=sumConsumeDataWeek.getLeadsCost();
+            }
+        }
         map.replace("week",week1);
         GatherYicheAPP sumConsumeDataWeek1 = displayWeekReportMapper.selectSumDataWeek(map);
         Ratio ratio1 = CalculateRatioUtil.calculateRatioSum(ratio,sumConsumeDataWeek,sumConsumeDataWeek1);
-        Long leadsCnt = sumConsumeDataWeek.getLeadsCnt();
-        Long leadsCnt1 = sumConsumeDataWeek1.getLeadsCnt();
+        if (sumConsumeDataWeek1==null){
+            logger.info("此周没有数据");
+        }else {
+            if (sumConsumeDataWeek1.getLeadsCnt()!=null){
+                leadsCnt1=sumConsumeDataWeek1.getLeadsCnt();
+            }
+            if (sumConsumeDataWeek1.getLeadsUserCnt()!=null){
+                userCnt1=sumConsumeDataWeek1.getLeadsUserCnt();
+            }
+            if (sumConsumeDataWeek1.getActualConsume()!=null){
+                actualConsume1=sumConsumeDataWeek1.getActualConsume();
+            }
+            if (sumConsumeDataWeek1.getLeadsCost()!=null){
+                leadsCost1=sumConsumeDataWeek1.getLeadsCost();
+            }
+        }
         String clueRatio = ratio1.getClueRatio();
         data.setTitle("总线索量");
         data.setPreTwoDay(leadsCnt1);
         data.setPreOneDay(leadsCnt);
         data.setRatio(clueRatio);
-        Long leadsUserCnt = sumConsumeDataWeek.getLeadsUserCnt();
-        Long leadsUserCnt1 = sumConsumeDataWeek1.getLeadsUserCnt();
         String userRatio = ratio1.getUserRatio();
         data1.setTitle("总用户量");
-        data1.setPreTwoDay(leadsUserCnt);
-        data1.setPreOneDay(leadsUserCnt1);
+        data1.setPreTwoDay(userCnt1);
+        data1.setPreOneDay(userCnt);
         data1.setRatio(userRatio);
-        Float actualConsume = sumConsumeDataWeek.getActualConsume();
-        Float actualConsume1 = sumConsumeDataWeek1.getActualConsume();
         String consumeRatio = ratio1.getConsumeRatio();
         data2.setTitle("总体消耗");
         data2.setPreTwoDay(actualConsume1);
         data2.setPreOneDay(actualConsume);
         data2.setRatio(consumeRatio);
-        Double leadsCost = sumConsumeDataWeek.getLeadsCost();
-        Double leadsCost1 = sumConsumeDataWeek1.getLeadsCost();
         String leadsCostRatio = ratio1.getLeadsCostRatio();
         data3.setTitle("线索成本");
         data3.setPreTwoDay(leadsCost1);
@@ -92,6 +126,14 @@ public class DisplayWeekReportServiceImpl implements DisplayWeekReportService{
         list.add("第三方");
         map.put("platformName",list.get(0));
         for (int i=0;i<=list.size()-1;i++){
+            Long leadsCnt = 0l;
+            Long leadsCnt1=0l;
+            Long userCnt=0l;
+            Long userCnt1=0l;
+            Float actualConsume1=0f;
+            Float actualConsume=0f;
+            Double leadsCost=0.0;
+            Double leadsCost1=0.0;
             List<Data> datas = new ArrayList<>();
             DayReport dayReport = new DayReport();
             Data data = new Data();
@@ -103,13 +145,43 @@ public class DisplayWeekReportServiceImpl implements DisplayWeekReportService{
             }
             map.put("week",week);
             GatherYicheAPP platformDataWeek = displayWeekReportMapper.selectPlatformDataWeek(map);
+            if (platformDataWeek==null){
+                logger.info("此月没有数据");
+            }else {
+                if (platformDataWeek.getLeadsCnt()!=null){
+                    leadsCnt=platformDataWeek.getLeadsCnt();
+                }
+                if (platformDataWeek.getLeadsUserCnt()!=null){
+                    userCnt=platformDataWeek.getLeadsUserCnt();
+                }
+                if (platformDataWeek.getActualConsume()!=null){
+                    actualConsume=platformDataWeek.getActualConsume();
+                }
+                if (platformDataWeek.getLeadsCost()!=null){
+                    leadsCost=platformDataWeek.getLeadsCost();
+                }
+            }
             GatherYicheAPP sumDataWeek = displayWeekReportMapper.selectSumDataWeek(map);
             Portion portion1 = CalculatePortionUtil.calculatePortionSum(portion, platformDataWeek, sumDataWeek);
             map.replace("week",week1);
             GatherYicheAPP platformDataWeek1 = displayWeekReportMapper.selectPlatformDataWeek(map);
+            if (platformDataWeek1==null){
+                logger.info("此月没有数据");
+            }else {
+                if (platformDataWeek1.getLeadsCnt()!=null){
+                    leadsCnt1=platformDataWeek1.getLeadsCnt();
+                }
+                if (platformDataWeek1.getLeadsUserCnt()!=null){
+                    userCnt1=platformDataWeek1.getLeadsUserCnt();
+                }
+                if (platformDataWeek1.getActualConsume()!=null){
+                    actualConsume1=platformDataWeek1.getActualConsume();
+                }
+                if (platformDataWeek1.getLeadsCost()!=null){
+                    leadsCost1=platformDataWeek1.getLeadsCost();
+                }
+            }
             Ratio ratio1 = CalculateRatioUtil.calculateRatioSum(ratio, platformDataWeek, platformDataWeek1);
-            Long leadsCnt = platformDataWeek.getLeadsCnt();
-            Long leadsCnt1 = platformDataWeek1.getLeadsCnt();
             String clueRatio = ratio1.getClueRatio();
             String cluePortion = portion1.getCluePortion();
             data.setTitle("线索量");
@@ -117,8 +189,6 @@ public class DisplayWeekReportServiceImpl implements DisplayWeekReportService{
             data.setPreOneDay(leadsCnt);
             data.setRatio(clueRatio);
             data.setPortion(cluePortion);
-            Long userCnt = platformDataWeek.getLeadsUserCnt();
-            Long userCnt1 = platformDataWeek1.getLeadsUserCnt();
             String userRatio = ratio1.getUserRatio();
             String userPortion = portion1.getUserPortion();
             data1.setTitle("用户量");
@@ -126,8 +196,6 @@ public class DisplayWeekReportServiceImpl implements DisplayWeekReportService{
             data1.setPreOneDay(userCnt);
             data1.setRatio(userRatio);
             data1.setPortion(userPortion);
-            Float actualConsume = platformDataWeek.getActualConsume();
-            Float actualConsume1 = platformDataWeek1.getActualConsume();
             String consumeRatio = ratio1.getConsumeRatio();
             String consumePortion = portion1.getConsumePortion();
             data2.setTitle("消耗");
@@ -135,8 +203,6 @@ public class DisplayWeekReportServiceImpl implements DisplayWeekReportService{
             data2.setPreOneDay(actualConsume);
             data2.setRatio(consumeRatio);
             data2.setPortion(consumePortion);
-            Double leadsCost = platformDataWeek.getLeadsCost();
-            Double leadsCost1 = platformDataWeek1.getLeadsCost();
             String costRatio = ratio1.getLeadsCostRatio();
             String costPortion = portion.getLeadsCostPortion();
             data3.setTitle("线索成本");

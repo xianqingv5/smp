@@ -84,7 +84,7 @@ public class CalculateRatioUtil {
                     yichePlatform.setLeadsCostRatio(CalculateRatioUtil.calculateRatio(yichePlatform.getLeadsCost(), yichePlatform1.getLeadsCost()));
                     yichePlatform.setConsumeRatio(CalculateRatioUtil.calculateRatioFloat(yichePlatform.getActualConsume(), yichePlatform1.getActualConsume()));
                     break;
-                }else{
+                } else {
                     yichePlatform.setClueRatio("100%");
                     yichePlatform.setUserRatio("100%");
                     yichePlatform.setLeadsCostRatio("100%");
@@ -107,7 +107,7 @@ public class CalculateRatioUtil {
                     yichePlatform.setLeadsCostRatio(CalculateRatioUtil.calculateRatio(yichePlatform.getLeadsCost(), yichePlatform1.getLeadsCost()));
                     yichePlatform.setConsumeRatio(CalculateRatioUtil.calculateRatioFloat(yichePlatform.getActualConsume(), yichePlatform1.getActualConsume()));
                     break;
-                }else{
+                } else {
                     yichePlatform.setClueRatio("100%");
                     yichePlatform.setUserRatio("100%");
                     yichePlatform.setLeadsCostRatio("100%");
@@ -120,21 +120,71 @@ public class CalculateRatioUtil {
     }
 
     public static Ratio calculateRatioSum(Ratio ratio, GatherYicheAPP yichePlatform, GatherYicheAPP yichePlatform2) {
-        if (yichePlatform2!=null){
-            ratio.setClueRatio(calculateRatioLong(yichePlatform.getLeadsCnt(), yichePlatform2.getLeadsCnt()));
-            ratio.setUserRatio(calculateRatioLong(yichePlatform.getLeadsUserCnt(), yichePlatform2.getLeadsUserCnt()));
-            ratio.setConsumeRatio(calculateRatioFloat(yichePlatform.getActualConsume(), yichePlatform2.getActualConsume()));
-            ratio.setLeadsCostRatio(calculateRatio(yichePlatform.getLeadsCost(), yichePlatform2.getLeadsCost()));
+        if (yichePlatform != null) {
+            if (yichePlatform2 != null) {
+                Long leadsCnt = yichePlatform.getLeadsCnt();
+                Long leadsCnt1 = yichePlatform2.getLeadsCnt();
+                if (leadsCnt == null) {
+                    leadsCnt = 0l;
+                }
+                if (leadsCnt1 == null) {
+                    leadsCnt1 = 0l;
+                }
+                ratio.setClueRatio(calculateRatioLong(leadsCnt, leadsCnt1));
+                Long leadsUserCnt = yichePlatform.getLeadsUserCnt();
+                Long leadsUserCnt1 = yichePlatform.getLeadsUserCnt();
+                if (leadsUserCnt == null) {
+                    leadsUserCnt = 0l;
+                }
+                if (leadsUserCnt1 == null) {
+                    leadsUserCnt1 = 0l;
+                }
+                ratio.setUserRatio(calculateRatioLong(leadsUserCnt, leadsUserCnt1));
+                Float actualConsume = yichePlatform.getActualConsume();
+                Float actualConsume1 = yichePlatform2.getActualConsume();
+                if (actualConsume == null) {
+                    actualConsume = 0.0f;
+                }
+                if (actualConsume1 == null) {
+                    actualConsume1 = 0.0f;
+                }
+                ratio.setConsumeRatio(calculateRatioFloat(actualConsume, actualConsume1));
+                Double leadsCost = yichePlatform.getLeadsCost();
+                Double leadsCost1 = yichePlatform2.getLeadsCost();
+                if (leadsCost == null) {
+                    leadsCost = 0.0;
+                }
+                if (leadsCost1 == null) {
+                    leadsCost1 = 0.0;
+                }
+                ratio.setLeadsCostRatio(calculateRatio(leadsCost, leadsCost1));
+                return ratio;
+            }
+            ratio.setClueRatio("100%");
+            ratio.setUserRatio("100%");
+            ratio.setConsumeRatio("100%");
+            ratio.setLeadsCostRatio("100%");
+            return ratio;
+        } else {
+            if (yichePlatform2 != null) {
+                ratio.setClueRatio("-100%");
+                ratio.setUserRatio("-100%");
+                ratio.setConsumeRatio("-100%");
+                ratio.setLeadsCostRatio("-100%");
+                return ratio;
+            }
+            ratio.setClueRatio("0%");
+            ratio.setUserRatio("0%");
+            ratio.setConsumeRatio("0%");
+            ratio.setLeadsCostRatio("0%");
             return ratio;
         }
-        ratio.setClueRatio("100%");
-        ratio.setUserRatio("100%");
-        ratio.setConsumeRatio("100%");
-        ratio.setLeadsCostRatio("100%");
-        return ratio;
     }
 
     public static String calculateRatio(Double data, Double data2) {
+        if (data.equals(data2)) {
+            return "0%";
+        }
         if (data2 != null && data2 != 0) {
             double v = (data - data2) / data2;
             String s = StringUtil.handleData(v);
@@ -145,6 +195,9 @@ public class CalculateRatioUtil {
     }
 
     public static String calculateRatioLong(Long data, Long data2) {
+        if (data.equals(data2)) {
+            return "0%";
+        }
         if (data2 != null && data2 != 0) {
             double v = ((double) (data - data2)) / data2;
             String s = StringUtil.handleData(v);
@@ -154,8 +207,11 @@ public class CalculateRatioUtil {
     }
 
     public static String calculateRatioFloat(Float data, Float data2) {
+        if (data.equals(data2)) {
+            return "0%";
+        }
         if (data2 != null && data2 != 0) {
-            double v = ((double)(data - data2)) / data2;
+            double v = ((double) (data - data2)) / data2;
             String s = StringUtil.handleData(v);
             return s;
         }
