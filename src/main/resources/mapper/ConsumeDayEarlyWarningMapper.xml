@@ -77,7 +77,8 @@
                 SELECT
                     "易车APP" platformName,
                     SUM(actual_consume) actualConsume,
-                    SUM(leads_cnt) leadsCnt
+                    SUM(leads_cnt) leadsCnt,
+                    platform_id platformId
                 FROM
                     yiche_app_app_leads_channel_day_all a,
                     imp_platform_channel b
@@ -92,7 +93,8 @@
                 SELECT
                     "报价APP" platformName,
                     SUM(actual_consume) actualConsume,
-                    SUM(leads_cnt) leadsCnt
+                    SUM(leads_cnt) leadsCnt,
+                    platform_id platformId
                 FROM
                     yiche_quote_app_leads_channel_day_all a,
                     imp_platform_channel b
@@ -107,7 +109,8 @@
                 SELECT
                     "PCWAP" platformName,
                     SUM(actual_consume) actualConsume,
-                    SUM(cluecount) leadsCnt
+                    SUM(cluecount) leadsCnt,
+                    platform_id platformId
                 FROM
                     yiche_pcwap_app_leads_channel_day_all a,
                     imp_platform_channel b
