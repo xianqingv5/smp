@@ -36,10 +36,12 @@ public class DisplayWeekReportController {
     @ApiOperation("平台渠道周报展示功能")
     public ResultResponse showSumDayReportData(@RequestBody ReportCondition reportCondition){
         String startTime = reportCondition.getStartTime();
-        int i = Integer.parseInt(startTime);
+        String s = startTime.substring(0, 4);
+        String s1= startTime.substring(4);
+        int i = Integer.parseInt(s1);
         System.err.println("a"+"-"+startTime);
-        String week="2018年"+"第"+i+"周";
-        String week1 = preWeek(startTime);
+        String week=s+"年"+"第"+i+"周";
+        String week1 = preWeek(s,i);
         DayReport map = displayWeekReportService.selectSumDataWeek(week,week1);
         return ResultResponse.success(map);
     }
@@ -47,10 +49,12 @@ public class DisplayWeekReportController {
     @ApiOperation("平台总和周报展示功能")
     public ResultResponse showPlatformWeekReportData(@RequestBody ReportCondition reportCondition){
         String startTime = reportCondition.getStartTime();
-        int i = Integer.parseInt(startTime);
+        String s = startTime.substring(0, 4);
+        String s1= startTime.substring(4);
+        int i = Integer.parseInt(s1);
         System.err.println("b"+"-"+startTime);
-        String week="2018年"+"第"+i+"周";
-        String week1 = preWeek(startTime);
+        String week=s+"年"+"第"+i+"周";
+        String week1 = preWeek(s,i);
         List<DayReport> map = displayWeekReportService.getPlatformDataWeek(week,week1);
         return ResultResponse.success(map);
 
@@ -60,11 +64,14 @@ public class DisplayWeekReportController {
     @ApiOperation("各个平台详细渠道周报展示功能")
     public ResultResponse showDayReportData(@RequestBody ReportCondition reportCondition) {
         String startTime = reportCondition.getStartTime();
-        int i = Integer.parseInt(startTime);
+        String platformName = reportCondition.getPlatformName();
+        String s = startTime.substring(0, 4);
+        String s1= startTime.substring(4);
+        int i = Integer.parseInt(s1);
         System.err.println("c"+"-"+startTime);
-        String week="2018年"+"第"+i+"周";
-        String week1 = preWeek(startTime);
-        Map<String, List<YichePlatform>> map = displayWeekReportService.getplatformChannelDataWeek("易车APP",week,week1);
+        String week=s+"年"+"第"+i+"周";
+        String week1 = preWeek(s,i);
+        Map<String, List<YichePlatform>> map = displayWeekReportService.getplatformChannelDataWeek(platformName,week,week1);
         return  ResultResponse.success(map);
     }
 
@@ -73,11 +80,13 @@ public class DisplayWeekReportController {
     public ResultResponse showWeekPcwapReportData(@RequestBody ReportCondition reportCondition){
         String platformName = reportCondition.getPlatformName();
         String startTime = reportCondition.getStartTime();
-        int i = Integer.parseInt(startTime);
+        String s = startTime.substring(0, 4);
+        String s1= startTime.substring(4);
+        int i = Integer.parseInt(s1);
         System.err.println("d"+"-"+startTime);
-        String week="2018年"+"第"+i+"周";
+        String week=s+"年"+"第"+i+"周";
         if (platformName!=null){
-            String week1 = preWeek(startTime);
+            String week1 = preWeek(s,i);
             Map<String, List<YichePlatform>> map = displayWeekReportService.getPcwapchannelDataWeek(platformName,week,week1);
             return ResultResponse.success(map);
         }
@@ -88,11 +97,13 @@ public class DisplayWeekReportController {
     public ResultResponse showWeekThirdPartyReportData(@RequestBody ReportCondition reportCondition) {
         String platformName = reportCondition.getPlatformName();
         String startTime = reportCondition.getStartTime();
-        int i = Integer.parseInt(startTime);
+        String s = startTime.substring(0, 4);
+        String s1= startTime.substring(4);
+        int i = Integer.parseInt(s1);
         System.err.println("e"+"-"+startTime);
-        String week="2018年"+"第"+i+"周";
+        String week=s+"年"+"第"+i+"周";
         if (platformName!=null){
-            String week1 = preWeek(startTime);
+            String week1 = preWeek(s,i);
             Map<String, List<YichePlatform>> map = displayWeekReportService.getThirdPartychannelDataWeek(platformName,week,week1);
             return ResultResponse.success(map);
         }
@@ -101,12 +112,11 @@ public class DisplayWeekReportController {
 
     /**
      * 获取选中周期的上一周
-     * @param startTime
+     * @param s,i
      * @return
      */
-    public String preWeek(String startTime){
-        int i = Integer.parseInt(startTime);
-        String week1="2018年"+"第"+(i-1)+"周";
+    public String preWeek(String s,int i){
+        String week1=s+"年"+"第"+(i-1)+"周";
         return week1;
     }
 }
