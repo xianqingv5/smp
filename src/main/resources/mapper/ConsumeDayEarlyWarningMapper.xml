@@ -3,83 +3,65 @@
 <mapper namespace="com.yiche.smp.mapper.ConsumeDayEarlyWarningMapper">
     <select id="selectEarlyWarning" parameterType="map" resultType="com.yiche.smp.common.EarlyWarningData">
         SELECT
-            a.platformName,
-            a.actualConsume,
-            a.leadsCnt,
-            a.bt,
-            b.month_day_avgclue_cnt monthDayAvgclueCnt,
-            b.base_number baseNumber,
-            b.day_budget dayBudget
+            c.platformName          platformName,
+            c.actualConsume         actualConsume,
+            c.leadsCnt              leadsCnt,
+            c.bt                    bt,
+            d.month_day_avgclue_cnt monthDayAvgclueCnt,
+            d.base_number           baseNumber,
+            d.day_budget            dayBudget
         FROM
             (
                 SELECT
-                    "易车APP" platformName,
+                    platform_name   platformName,
                     SUM(actual_consume) actualConsume,
-                    SUM(leads_cnt) leadsCnt,
-                    bt bt
+                    SUM(leads_cnt)   leadsCnt,
+                    bt             bt
                 FROM
-                    yiche_app_app_leads_channel_day_all
+                    yiche_app_app_leads_channel_day_all a, imp_platform_channel b
                 WHERE
-                    bt BETWEEN #{startTime}
+                    a.channel_id = b.channel_id
+                    AND b.platform_id = '1'
+                    AND
+                    a.bt BETWEEN #{startTime}
                     AND #{endTime}
-                    AND channel_id IN (
-                        SELECT
-                            channel_id
-                        FROM
-                            imp_platform_channel
-                        WHERE
-                            platform_name = "易车APP"
-                    )
-                GROUP BY
-                    bt
+                    GROUP BY bt
                 UNION
                 SELECT
-                    "报价APP" platformName,
+                    platform_name   platformName,
                     SUM(actual_consume) actualConsume,
-                    SUM(leads_cnt) leadsCnt,
-                    bt bt
+                    SUM(leads_cnt)   leadsCnt,
+                    bt             bt
                 FROM
-                    yiche_quote_app_leads_channel_day_all
+                    yiche_quote_app_leads_channel_day_all a, imp_platform_channel b
                 WHERE
-                    bt BETWEEN #{startTime}
+                    a.channel_id = b.channel_id
+                    AND b.platform_id = '2'
+                    AND
+                    a.bt BETWEEN #{startTime}
                     AND #{endTime}
-                    AND channel_id IN (
-                        SELECT
-                            channel_id
-                        FROM
-                            imp_platform_channel
-                        WHERE
-                            platform_name = "报价APP"
-                    )
-                GROUP BY
-                    bt
+                    GROUP BY bt
                 UNION
                 SELECT
-                    "PCWAP" platformName,
+                    platform_name  platformName,
                     SUM(actual_consume) actualConsume,
-                    SUM(cluecount) leadsCnt,
-                    dt bt
+                    SUM(cluecount)   leadsCnt,
+                    dt             bt
                 FROM
-                    yiche_pcwap_app_leads_channel_day_all
+                    yiche_pcwap_app_leads_channel_day_all a, imp_platform_channel b
                 WHERE
-                    dt BETWEEN #{startTime}
+                    a.channel_id = b.channel_id
+                    AND b.platform_id = '3'
+                    AND
+                    a.dt BETWEEN #{startTime}
                     AND #{endTime}
-                    AND channel_id IN (
-                        SELECT
-                            channel_id
-                        FROM
-                            imp_platform_channel
-                        WHERE
-                            platform_name = "PCWAP"
-                    )
-                GROUP BY
-                    dt
-            ) a,
-            yiche_month_data_standard b
+                    GROUP BY dt
+            ) c,
+            yiche_month_data_standard d
         WHERE
-            a.platformName = b.platform_name
-            AND a.platformName = #{platformName}
-            AND b.month = #{month}
+            c.platformName = d.platform_name
+            AND c.platformName = #{platformName}
+            AND d.month = #{month}
     </select>
 
     <select id="selectMonthChannelConsumeData" parameterType="map" resultType="com.yiche.smp.common.EarlyWarningData">
