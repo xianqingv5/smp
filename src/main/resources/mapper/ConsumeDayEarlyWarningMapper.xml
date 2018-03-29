@@ -13,7 +13,7 @@
         FROM
             (
                 SELECT
-                    platform_name   platformName,
+                    "易车APP"   platformName,
                     SUM(actual_consume) actualConsume,
                     SUM(leads_cnt)   leadsCnt,
                     bt             bt
@@ -28,7 +28,7 @@
                     GROUP BY bt
                 UNION
                 SELECT
-                    platform_name   platformName,
+                    "报价APP"   platformName,
                     SUM(actual_consume) actualConsume,
                     SUM(leads_cnt)   leadsCnt,
                     bt             bt
@@ -43,7 +43,7 @@
                     GROUP BY bt
                 UNION
                 SELECT
-                    platform_name  platformName,
+                    "PCWAP"  platformName,
                     SUM(actual_consume) actualConsume,
                     SUM(cluecount)   leadsCnt,
                     dt             bt
