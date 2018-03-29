@@ -14,6 +14,7 @@
             (
                 SELECT
                     "易车APP"   platformName,
+                    "1"         platformId,
                     SUM(actual_consume) actualConsume,
                     SUM(leads_cnt)   leadsCnt,
                     bt             bt
@@ -29,6 +30,7 @@
                 UNION
                 SELECT
                     "报价APP"   platformName,
+                    "2"         platformId,
                     SUM(actual_consume) actualConsume,
                     SUM(leads_cnt)   leadsCnt,
                     bt             bt
@@ -44,6 +46,7 @@
                 UNION
                 SELECT
                     "PCWAP"  platformName,
+                    "3"         platformId,
                     SUM(actual_consume) actualConsume,
                     SUM(cluecount)   leadsCnt,
                     dt             bt
@@ -58,10 +61,13 @@
                     GROUP BY dt
             ) c,
             yiche_month_data_standard d
-        WHERE
-            c.platformName = d.platform_name
-            AND c.platformName = #{platformName}
+        <where>
+            <if test="platformId!=null">
+                c.platformId = #{platformId}
+            </if>
+            AND c.platformName = d.platform_name
             AND d.month = #{month}
+        </where>
     </select>
 
     <select id="selectMonthChannelConsumeData" parameterType="map" resultType="com.yiche.smp.common.EarlyWarningData">
@@ -123,10 +129,67 @@
                     platform_id
             ) c,
             yiche_month_data_standard d
-        WHERE
-            c.platformName = d.platform_name
-            AND c.platformName = #{platformName}
+        <where>
+            <if test="platformId!=NULL">
+                platformId=#{platformId}
+            </if>
+            AND c.platformName = d.platform_name
             AND d.month = #{month}
+        </where>
+    </select>
+
+    <select id="getChannelDetailConsume" parameterType="map" resultType="com.yiche.smp.common.GatherYicheAPP">
+        SELECT
+        platformName,channelName,leadsCnt,leadsUserCnt,actualConsume,bt
+        FROM
+        (
+        SELECT
+        "易车APP" platformName,
+        a.channel_name channelName,
+        leads_cnt leadsCnt,
+        leads_user_cnt leadsUserCnt,
+        actual_consume actualConsume,
+        bt bt,
+        platform_id platformId
+        FROM
+        yiche_app_app_leads_channel_day_all a,imp_platform_channel b
+        WHERE a.channel_id=b.channel_id
+        AND b.platform_name="易车APP"
+        AND bt=#{bt}
+        UNION
+        SELECT
+        "报价APP" platformName,
+        a.channel_name channelName,
+        leads_cnt leadsCnt,
+        leads_user_cnt leadsUserCnt,
+        actual_consume actualConsume,
+        bt bt,
+        platform_id platformId
+        FROM
+        yiche_quote_app_leads_channel_day_all a,imp_platform_channel b
+        WHERE a.channel_id=b.channel_id
+        AND b.platform_name="报价APP"
+        AND bt=#{bt}
+        UNION
+        SELECT
+        "PCWAP" platformName,
+        a.channel_name channelName,
+        cluecount leadsCnt,
+        clueusercount leadsUserCnt,
+        actual_consume actualConsume,
+        dt bt,
+        platform_id platformId
+        FROM
+        yiche_pcwap_app_leads_channel_day_all a,imp_platform_channel b
+        WHERE a.channel_id=b.channel_id
+        AND b.platform_name="PCWAP"
+        AND dt=#{bt}
+        ) yiche_channel_consume_detail
+        <where>
+            <if test="platformId!=null">
+                platformId=#{platformId}
+            </if>
+        </where>
     </select>
 
 </mapper>

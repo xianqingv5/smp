@@ -24,11 +24,9 @@ public class ConsumeDayEarlyWarningServiceImpl implements ConsumeDayEarlyWarning
     @Autowired
     private ConsumeDayEarlyWarningMapper consumeDayEarlyWarningMapper;
 
-    @Autowired
-    private ChannelConsumeMapper channelConsumeMapper;
 
     @Override
-    public Map<String, Object> getEarlyWarningData(String platformName, String startTime, String endTime,String month) {
+    public Map<String, Object> getEarlyWarningData(String platformId, String startTime, String endTime,String month) {
         List<EarlyWarningData> earlyWarningDataList = new ArrayList<>();
         List<Long> cluearr = new ArrayList<>();//用于封装数据，将clue封装成一个集合
         List<Float> comsumearr= new ArrayList<>();//用于封装数据，将消耗封装成一个集合
@@ -36,7 +34,11 @@ public class ConsumeDayEarlyWarningServiceImpl implements ConsumeDayEarlyWarning
         List<String> datearr = new ArrayList<>();//用于封装数据，将日期封装成一个集合
         Map<String, String> map = new HashMap<>();
         Map<String, Object> map1 = new HashMap<>();
-        map.put("platformName",platformName);
+        int i = Integer.parseInt(platformId);
+        if (i>=5){
+            platformId=null;
+        }
+        map.put("platformId",platformId);
         map.put("startTime",startTime);
         map.put("endTime",endTime);
         map.put("month",month);
@@ -81,12 +83,15 @@ public class ConsumeDayEarlyWarningServiceImpl implements ConsumeDayEarlyWarning
     }
 
     @Override
-    public List<GatherYicheAPP> getChannelConsumeData(String platformName, String startTime, String endTime) {
-        Map<String,Object> map = new HashMap<>();
-        map.put("platformName",platformName);
-        map.put("startTime",startTime);
-        map.put("endTime",endTime);
-        List<GatherYicheAPP> channelDetailConsume = channelConsumeMapper.getChannelDetailConsume(map);
+    public List<GatherYicheAPP> getChannelConsumeData(String platformId, String startTime) {
+        Map<String,String> map = new HashMap<>();
+        int i = Integer.parseInt(platformId);
+        if (i>=5){
+            platformId=null;
+        }
+        map.put("platformId",platformId);
+        map.put("bt",startTime);
+        List<GatherYicheAPP> channelDetailConsume = consumeDayEarlyWarningMapper.getChannelDetailConsume(map);
         for(GatherYicheAPP gatherYicheAPP:channelDetailConsume){
             if(gatherYicheAPP.getLeadsCnt()==null||gatherYicheAPP.getActualConsume()==null){
                 gatherYicheAPP.setCluePrice(0.0);
@@ -103,11 +108,15 @@ public class ConsumeDayEarlyWarningServiceImpl implements ConsumeDayEarlyWarning
     }
 
     @Override
-    public Map<String, Object> getMonthChannelConsumeData(String platformName, String startTime, String endTime, String month,int num) {
+    public Map<String, Object> getMonthChannelConsumeData(String platformId, String startTime, String endTime, String month,int num) {
         Map<String, String> map = new HashMap<>();
         Map<String, Object> map1 = new HashMap<>();
         List<Object> arr = new ArrayList<>();
-        map.put("platformName",platformName);
+        int i = Integer.parseInt(platformId);
+        if (i>=5){
+            platformId=null;
+        }
+        map.put("platformId",platformId);
         map.put("startTime",startTime);
         map.put("endTime",endTime);
         map.put("month",month);

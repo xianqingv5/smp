@@ -12,9 +12,9 @@ import java.util.Map;
  */
 public interface ConsumeDayEarlyWarningService {
 
-    public Map<String, Object> getEarlyWarningData(String platformName, String startTime, String endTime, String month);
+    public Map<String, Object> getEarlyWarningData(String platformId, String startTime, String endTime, String month);
 
-    public List<GatherYicheAPP> getChannelConsumeData(String platformName, String startTime, String endTime);
+    public List<GatherYicheAPP> getChannelConsumeData(String platformId, String startTime);
 
-    public Map<String, Object> getMonthChannelConsumeData(String platformName, String startTime, String endTime, String month, int num);
+    public Map<String, Object> getMonthChannelConsumeData(String platformId, String startTime, String endTime, String month, int num);
 }

@@ -47,14 +47,14 @@ public class PlatformConsumeDayEarlyWarningController {
         if (user == null) {
             return ResultResponse.fail(ErrorCodeMessage.DB_SERVICE_GET_USER_MESSAGE_ERROR);
         }
-        String platformName = userMapper.selectPlatformByUserId(user.getUserid());//通过用户的userI获取所对应的平台
+        String platformId = userMapper.selectPlatformByUserId(user.getUserid());//通过用户的userI获取所对应的平台
         Map<String, String> date1 = getDate();
         String startTime = date1.get("startTime");//获取开始时间
         String month1 = date1.get("month1");//获取当前月
         LocalDate now = LocalDate.now();//获取当前时间,就是截止时间
         String date =now.toString();
         String endTime=date;
-        Map<String, Object> map = consumeDayEarlyWarningService.getEarlyWarningData(platformName, startTime, endTime, month1);
+        Map<String, Object> map = consumeDayEarlyWarningService.getEarlyWarningData(platformId, startTime, endTime, month1);
         return ResultResponse.success(map);
 
     }
@@ -67,7 +67,7 @@ public class PlatformConsumeDayEarlyWarningController {
         if (user == null) {
             return ResultResponse.fail(ErrorCodeMessage.DB_SERVICE_GET_USER_MESSAGE_ERROR);
         }
-        String platformName = userMapper.selectPlatformByUserId(user.getUserid());
+        String platformId = userMapper.selectPlatformByUserId(user.getUserid());
         Calendar cal = Calendar.getInstance();
         int a=cal.get(Calendar.DAY_OF_MONTH);
         Map<String, String> date1 = getDate();
@@ -76,7 +76,7 @@ public class PlatformConsumeDayEarlyWarningController {
         LocalDate now = LocalDate.now();
         String date =now.toString();
         String endTime=date;
-        Map<String, Object> map = consumeDayEarlyWarningService.getMonthChannelConsumeData(platformName, startTime, endTime, month1, a);
+        Map<String, Object> map = consumeDayEarlyWarningService.getMonthChannelConsumeData(platformId, startTime, endTime, month1, a);
         return ResultResponse.success(map);
     }
 
@@ -93,10 +93,9 @@ public class PlatformConsumeDayEarlyWarningController {
             if (user == null) {
                 return ResultResponse.fail(ErrorCodeMessage.DB_SERVICE_GET_USER_MESSAGE_ERROR);
             }
-            String platformName = userMapper.selectPlatformByUserId(user.getUserid());
+            String platformId = userMapper.selectPlatformByUserId(user.getUserid());
             String startTime=endTime1;
-            String endTime=endTime1;
-            List<GatherYicheAPP> channelConsumeData = consumeDayEarlyWarningService.getChannelConsumeData(platformName, startTime, endTime);
+            List<GatherYicheAPP> channelConsumeData = consumeDayEarlyWarningService.getChannelConsumeData(platformId, startTime);
             map.put("data",channelConsumeData);
             return ResultResponse.success(map);
         }

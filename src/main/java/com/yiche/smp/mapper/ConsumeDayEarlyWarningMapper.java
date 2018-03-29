@@ -1,6 +1,7 @@
 package com.yiche.smp.mapper;
 
 import com.yiche.smp.common.EarlyWarningData;
+import com.yiche.smp.common.GatherYicheAPP;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,4 +16,6 @@ public interface ConsumeDayEarlyWarningMapper {
     public List<EarlyWarningData> selectEarlyWarning(Map<String, String> map);
 
     public EarlyWarningData selectMonthChannelConsumeData(Map<String, String> map);
+
+    List<GatherYicheAPP> getChannelDetailConsume(Map<String, String> map);
 }
