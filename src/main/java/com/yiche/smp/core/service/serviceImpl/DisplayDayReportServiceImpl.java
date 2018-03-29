@@ -96,22 +96,22 @@ public class DisplayDayReportServiceImpl implements DisplayDayReportService {
         }
         Ratio ratio1 = CalculateRatioUtil.calculateRatioSum(ratio, sumDataDayPre, sumDataDayPre2);//计算环比
         String clueRatio = ratio1.getClueRatio();
-        data.setTitle("总线索量");//将总线索量封装到对应的格式里面
+        data.setTitle("总线索量(条)");//将总线索量封装到对应的格式里面
         data.setPreTwoDay(leadsCnt1);
         data.setPreOneDay(leadsCnt);
         data.setRatio(clueRatio);
         String userRatio = ratio1.getUserRatio();
-        data1.setTitle("总用户量");//将总用户量封装到对应的格式里面
+        data1.setTitle("总用户量(个)");//将总用户量封装到对应的格式里面
         data1.setPreTwoDay(userCnt1);
         data1.setPreOneDay(userCnt);
         data1.setRatio(userRatio);
         String consumeRatio = ratio1.getConsumeRatio();
-        data2.setTitle("总体消耗");//将总体消耗封装到对应的格式里面
+        data2.setTitle("总体消耗(元)");//将总体消耗封装到对应的格式里面
         data2.setPreTwoDay(actualConsume1);
         data2.setPreOneDay(actualConsume);
         data2.setRatio(consumeRatio);
         String costRatio = ratio1.getLeadsCostRatio();
-        data3.setTitle("线索成本");//将线索成本封装到对应的格式里面
+        data3.setTitle("线索成本(元)");//将线索成本封装到对应的格式里面
         data3.setPreTwoDay(leadsCost1);
         data3.setPreOneDay(leadsCost);
         data3.setRatio(costRatio);
@@ -212,28 +212,28 @@ public class DisplayDayReportServiceImpl implements DisplayDayReportService {
             Ratio ratio1 = CalculateRatioUtil.calculateRatioSum(ratio, platformDataDay, platformDataDay1);
             String clueRatio = ratio1.getClueRatio();
             String cluePortion = portion1.getCluePortion();
-            data.setTitle("线索量");
+            data.setTitle("线索量(条)");
             data.setPreTwoDay(leadsCnt1);
             data.setPreOneDay(leadsCnt);
             data.setRatio(clueRatio);
             data.setPortion(cluePortion);
             String userRatio = ratio1.getUserRatio();
             String userPortion = portion1.getUserPortion();
-            data1.setTitle("用户量");
+            data1.setTitle("用户量(个)");
             data1.setPreTwoDay(userCnt1);
             data1.setPreOneDay(userCnt);
             data1.setRatio(userRatio);
             data1.setPortion(userPortion);
             String consumeRatio = ratio1.getConsumeRatio();
             String consumePortion = portion1.getConsumePortion();
-            data2.setTitle("消耗");
+            data2.setTitle("消耗(元)");
             data2.setPreTwoDay(actualConsume1);
             data2.setPreOneDay(actualConsume);
             data2.setRatio(consumeRatio);
             data2.setPortion(consumePortion);
             String costRatio = ratio1.getLeadsCostRatio();
             String costPortion = portion.getLeadsCostPortion();
-            data3.setTitle("线索成本");
+            data3.setTitle("线索成本(元)");
             data3.setPreTwoDay(leadsCost1);
             data3.setPreOneDay(leadsCost);
             data3.setRatio(costRatio);
