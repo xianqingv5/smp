@@ -112,12 +112,14 @@ public class ConsumeDayEarlyWarningServiceImpl implements ConsumeDayEarlyWarning
         map.put("endTime",endTime);
         map.put("month",month);
         EarlyWarningData earlyWarningData = consumeDayEarlyWarningMapper.selectMonthChannelConsumeData(map);
+        if (earlyWarningData!=null){
         earlyWarningData.setDayBudget(earlyWarningData.getDayBudget()*num);
         earlyWarningData.setMonthDayAvgclueCnt(earlyWarningData.getMonthDayAvgclueCnt()*num);
         arr.add(earlyWarningData.getDayBudget());
         arr.add(earlyWarningData.getActualConsume());
         arr.add(earlyWarningData.getLeadsCnt());
         arr.add(earlyWarningData.getMonthDayAvgclueCnt());
+        }
         map1.put("data",earlyWarningData);
         map1.put("arr",arr);
         return map1;

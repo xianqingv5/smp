@@ -72,7 +72,7 @@
         FROM
             (
                 SELECT
-                    platform_name             platformName,
+                    "易车APP"             platformName,
                     SUM(leads_cnt)       leadsCnt,
                     SUM(leads_user_cnt)  leadsUserCnt,
                     SUM(actual_consume) actualConsume,
@@ -85,7 +85,7 @@
                     GROUP BY week
                 UNION
                 SELECT
-                    platform_name              platformName,
+                    "报价APP"              platformName,
                     SUM(leads_cnt)       leadsCnt,
                     SUM(leads_user_cnt)  leadsUserCnt,
                     SUM(actual_consume) actualConsume,
@@ -98,7 +98,7 @@
                     GROUP BY week
                 UNION
                 SELECT
-                    platform_name              platformName,
+                    "PCWAP"             platformName,
                     SUM(leads_cnt)       leadsCnt,
                     SUM(leads_user_cnt)   leadsUserCnt,
                     SUM(actual_consume) actualConsume,
@@ -111,7 +111,7 @@
                     GROUP BY week
                 UNION
                 SELECT
-                    platform_name              platformName,
+                    "第三方"              platformName,
                     SUM(leads_cnt)       leadsCnt,
                     SUM(leads_user_cnt)   leadsUserCnt,
                     SUM(actual_consume) actualConsume,
