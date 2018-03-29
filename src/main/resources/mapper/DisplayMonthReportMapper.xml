@@ -58,7 +58,7 @@
                     month = #{month}
                     GROUP BY month
             ) yiche_sum_month_report
-            GROUP BY month
+            GROUP BY yiche_sum_month_report.month
     </select>
 
     <select id="selectPlatformDataMonth" parameterType="map" resultType="com.yiche.smp.common.GatherYicheAPP">
@@ -72,7 +72,7 @@
         FROM
             (
                 SELECT
-                    platform_name       platformName,
+                    "易车APP"       platformName,
                     SUM(leads_cnt)      leadsCnt,
                     SUM(leads_user_cnt) leadsUserCnt,
                     SUM(actual_consume) actualConsume,
@@ -85,7 +85,7 @@
                     GROUP BY month
                 UNION
                 SELECT
-                    platform_name       platformName,
+                    "报价APP"       platformName,
                     SUM(leads_cnt)      leadsCnt,
                     SUM(leads_user_cnt) leadsUserCnt,
                     SUM(actual_consume) actualConsume,
@@ -98,7 +98,7 @@
                     GROUP BY month
                 UNION
                 SELECT
-                    platform_name       platformName,
+                    "PCWAP"       platformName,
                     SUM(leads_cnt)      leadsCnt,
                     SUM(leads_user_cnt) leadsUserCnt,
                     SUM(actual_consume) actualConsume,
@@ -111,7 +111,7 @@
                     GROUP BY month
                 UNION
                 SELECT
-                    platform_name       platformName,
+                    "第三方"       platformName,
                     SUM(leads_cnt)      leadsCnt,
                     SUM(leads_user_cnt) leadsUserCnt,
                     SUM(actual_consume) actualConsume,
@@ -123,7 +123,7 @@
                     month = #{month}
                     GROUP BY month
             ) yiche_platformName_month_report
-        WHERE platformName = #{platformName}
+        WHERE yiche_platformName_month_report.platformName = #{platformName}
     </select>
 
     <select id="selectplatformChannelDataMonth" parameterType="map" resultType="com.yiche.smp.common.YichePlatform">

@@ -84,9 +84,9 @@
 
     <select id="selectMonthChannelConsumeData" parameterType="map" resultType="com.yiche.smp.common.EarlyWarningData">
         SELECT
-            a.platformName,
-            a.actualConsume,
-            a.leadsCnt,
+            a.platformName platformName,
+            a.actualConsume actualConsume,
+            a.leadsCnt leadsCnt,
             b.month_day_avgclue_cnt monthDayAvgclueCnt,
             b.base_number baseNumber,
             b.day_budget dayBudget

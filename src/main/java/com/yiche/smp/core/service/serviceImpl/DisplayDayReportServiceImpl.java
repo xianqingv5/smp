@@ -72,6 +72,7 @@ public class DisplayDayReportServiceImpl implements DisplayDayReportService {
                 userCnt = sumDataDayPre.getLeadsUserCnt();
             }
             sumDataDayPre.setLeadsCost(calculateLeadsCost(leadsCnt, actualConsume));//通过计算添加上线索成本属性
+            leadsCost = sumDataDayPre.getLeadsCost();
         }
         map.replace("date", date2);//通过替换日期，获取前两天的数据
         GatherYicheAPP sumDataDayPre2 = displayDayReportMapper.getSumDataDay(map);
@@ -88,6 +89,7 @@ public class DisplayDayReportServiceImpl implements DisplayDayReportService {
                 userCnt1 = sumDataDayPre2.getLeadsUserCnt();
             }
             sumDataDayPre2.setLeadsCost(calculateLeadsCost(leadsCnt1, actualConsume1));
+            leadsCost1 = sumDataDayPre2.getLeadsCost();
         }
         if (sumDataDayPre == null && sumDataDayPre2 == null) {
             return dayReport;
@@ -162,13 +164,21 @@ public class DisplayDayReportServiceImpl implements DisplayDayReportService {
             }
             map.put("date", date);
             GatherYicheAPP platformDataDay = displayDayReportMapper.getPlatformDataDay(map);
-            if (platformDataDay.getLeadsCnt() != null) {
-                leadsCnt = platformDataDay.getLeadsCnt();
+            if (platformDataDay==null){
+                logger.info("这一天没有数据");
+            }else {
+                if (platformDataDay.getLeadsCnt() != null) {
+                    leadsCnt = platformDataDay.getLeadsCnt();
+                }
+                if (platformDataDay.getActualConsume() != null) {
+                    actualConsume = platformDataDay.getActualConsume();
+                }
+                if (platformDataDay.getLeadsUserCnt() != null) {
+                    userCnt = platformDataDay.getLeadsUserCnt();
+                }
+                platformDataDay.setLeadsCost(calculateLeadsCost(leadsCnt, actualConsume));
+                leadsCost = platformDataDay.getLeadsCost();
             }
-            if (platformDataDay.getActualConsume() != null) {
-                actualConsume = platformDataDay.getActualConsume();
-            }
-            platformDataDay.setLeadsCost(calculateLeadsCost(leadsCnt, actualConsume));
             GatherYicheAPP sumDataDay = displayDayReportMapper.getSumDataDay(map);
             if (sumDataDay == null) {
                 logger.info("这一天没有数据");
@@ -184,13 +194,21 @@ public class DisplayDayReportServiceImpl implements DisplayDayReportService {
             Portion portion1 = CalculatePortionUtil.calculatePortionSum(portion, platformDataDay, sumDataDay);//计算对应平台占总量的份额
             map.replace("date", date2);
             GatherYicheAPP platformDataDay1 = displayDayReportMapper.getPlatformDataDay(map);
-            if (platformDataDay1.getLeadsCnt() != null) {
-                leadsCnt1 = platformDataDay1.getLeadsCnt();
+            if (platformDataDay1==null){
+                logger.info("这一天没有数据");
+            }else {
+                if (platformDataDay1.getLeadsCnt() != null) {
+                    leadsCnt1 = platformDataDay1.getLeadsCnt();
+                }
+                if (platformDataDay1.getActualConsume() != null) {
+                    actualConsume1 = platformDataDay1.getActualConsume();
+                }
+                if (platformDataDay1.getLeadsUserCnt() != null) {
+                    userCnt1 = platformDataDay1.getLeadsUserCnt();
+                }
+                platformDataDay1.setLeadsCost(calculateLeadsCost(leadsCnt1, actualConsume1));
+                leadsCost1 = platformDataDay1.getLeadsCost();
             }
-            if (platformDataDay1.getActualConsume() != null) {
-                actualConsume1 = platformDataDay1.getActualConsume();
-            }
-            platformDataDay1.setLeadsCost(calculateLeadsCost(leadsCnt1, actualConsume1));
             Ratio ratio1 = CalculateRatioUtil.calculateRatioSum(ratio, platformDataDay, platformDataDay1);
             String clueRatio = ratio1.getClueRatio();
             String cluePortion = portion1.getCluePortion();
@@ -202,12 +220,6 @@ public class DisplayDayReportServiceImpl implements DisplayDayReportService {
             String userRatio = ratio1.getUserRatio();
             String userPortion = portion1.getUserPortion();
             data1.setTitle("用户量");
-            if (platformDataDay.getLeadsUserCnt() != null) {
-                userCnt = platformDataDay.getLeadsUserCnt();
-            }
-            if (platformDataDay1.getLeadsUserCnt() != null) {
-                userCnt1 = platformDataDay1.getLeadsUserCnt();
-            }
             data1.setPreTwoDay(userCnt1);
             data1.setPreOneDay(userCnt);
             data1.setRatio(userRatio);
