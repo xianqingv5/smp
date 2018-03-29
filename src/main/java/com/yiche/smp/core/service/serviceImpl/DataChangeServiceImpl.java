@@ -79,20 +79,23 @@ public class DataChangeServiceImpl implements DataChangeService {
 	            //业务申请部操作员
 	            if (role == UserRoot.USER_BLSQCZ.getCode()||role==UserRoot.USER_SJXZSS.getCode()||role==UserRoot.USER_ROOT.getCode()) {
 	                List <ApplyChannelChange> list = applyMapper.selectAppltDeptUnCheckList();
+	                for (ApplyChannelChange applyChannelChange : list) {
+	                	applyChannelChange.setWait("待处理");
+					}
 	                return list;
-	            } else if (role == UserRoot.USER_BLSQSH.getCode()) {//业务申请部门审核员
+	            } else if (role == UserRoot.USER_BLSQSH.getCode()||role==UserRoot.USER_ROOT.getCode()) {//业务申请部门审核员
 	                List <ApplyChannelChange> list = applyMapper.selectCarryDeptOptionUnCheckList();
 	                for (ApplyChannelChange applyChannelChange : list) {
 	                	applyChannelChange.setWait("待处理");
 					}
 	                return list;
-	            } else if (role == UserRoot.USER_SJXZSH.getCode()) {//数据监控部门审核员
+	            } else if (role == UserRoot.USER_SJXZSH.getCode()||role==UserRoot.USER_ROOT.getCode()) {//数据监控部门审核员
 	                List <ApplyChannelChange> list = applyMapper.selectCarryDeptAuditUnCheckList();
 	                for (ApplyChannelChange applyChannelChange : list) {
 	                	applyChannelChange.setWait("待处理");
 					}
 	                return list;
-	            }else if (role==UserRoot.USER_ZJL.getCode()){  //总经理岗
+	            }else if (role==UserRoot.USER_ZJL.getCode()||role==UserRoot.USER_ROOT.getCode()){  //总经理岗
 	            	 List <ApplyChannelChange> list = applyMapper.selectCarryDeptOptionCheckList();
 	            	 for (ApplyChannelChange applyChannelChange : list) {
 		                	applyChannelChange.setWait("待处理");
