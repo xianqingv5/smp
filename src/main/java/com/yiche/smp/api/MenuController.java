@@ -65,7 +65,7 @@ public class MenuController {
                 List<Object> list = new ArrayList<>();
                 for (int i = 0; i < data.size(); i++) {
                     String name = data.getJSONObject(i).getString("name");
-                    if ("销售数据分析".equals(name) || "补量".equals(name) || "预警".equals(name)||"数据修正".equals(name)||"业务数据上传".equals(name)) {
+                    if ("销售数据分析".equals(name) || "补量".equals(name) || "预警".equals(name)||"数据修正".equals(name)||"业务数据上传".equals(name)||"报表".equals(name)) {
                         JSONObject jsonObject = data.getJSONObject(i);
                         list.add(jsonObject);
                     }
