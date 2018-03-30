@@ -39,7 +39,6 @@ public class DisplayWeekReportController {
         String s = startTime.substring(0, 4);
         String s1= startTime.substring(4);
         int i = Integer.parseInt(s1);
-        System.err.println("a"+"-"+startTime);
         String week=s+"年"+"第"+i+"周";
         String week1 = preWeek(s,i);
         DayReport map = displayWeekReportService.selectSumDataWeek(week,week1);
@@ -52,7 +51,6 @@ public class DisplayWeekReportController {
         String s = startTime.substring(0, 4);
         String s1= startTime.substring(4);
         int i = Integer.parseInt(s1);
-        System.err.println("b"+"-"+startTime);
         String week=s+"年"+"第"+i+"周";
         String week1 = preWeek(s,i);
         List<DayReport> map = displayWeekReportService.getPlatformDataWeek(week,week1);
@@ -68,7 +66,6 @@ public class DisplayWeekReportController {
         String s = startTime.substring(0, 4);
         String s1= startTime.substring(4);
         int i = Integer.parseInt(s1);
-        System.err.println("c"+"-"+startTime);
         String week=s+"年"+"第"+i+"周";
         String week1 = preWeek(s,i);
         Map<String, List<YichePlatform>> map = displayWeekReportService.getplatformChannelDataWeek(platformName,week,week1);
@@ -83,7 +80,6 @@ public class DisplayWeekReportController {
         String s = startTime.substring(0, 4);
         String s1= startTime.substring(4);
         int i = Integer.parseInt(s1);
-        System.err.println("d"+"-"+startTime);
         String week=s+"年"+"第"+i+"周";
         if (platformName!=null){
             String week1 = preWeek(s,i);
@@ -100,7 +96,6 @@ public class DisplayWeekReportController {
         String s = startTime.substring(0, 4);
         String s1= startTime.substring(4);
         int i = Integer.parseInt(s1);
-        System.err.println("e"+"-"+startTime);
         String week=s+"年"+"第"+i+"周";
         if (platformName!=null){
             String week1 = preWeek(s,i);

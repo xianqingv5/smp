@@ -35,9 +35,9 @@ public class ChannelConsumeReportController2 {
     @ApiOperation("渠道报表展示功能")
     public ResultResponse displayChannelConsumeReport(@RequestBody Page<T> page){
         if (page!=null){
-            String platformName = page.getPlatformName();
-            if (platformName==null){
-                logger.info("查询数据时传参时平台名为空");
+            String platformId = page.getPlatformId();
+            if (platformId==null){
+                logger.info("查询数据时传参时平台ID为空");
                 return ResultResponse.fail(ErrorCodeMessage.DB_SERVICE_INVALID_PARAMETER);
             }
             //获取channelName
@@ -62,7 +62,7 @@ public class ChannelConsumeReportController2 {
             Integer pageno = page.getPageno();//当前页数
             Integer pagesize = page.getPagesize();//每页多少条数据
 
-            PageInfo<GatherYicheAPP> channelConsumeReport = channelConsumeReportService.getChannelConsumeReport(platformName, channelName, startTime, endTime, isDetail, pageno, pagesize);
+            PageInfo<GatherYicheAPP> channelConsumeReport = channelConsumeReportService.getChannelConsumeReport(platformId, channelName, startTime, endTime, isDetail, pageno, pagesize);
             return ResultResponse.success(channelConsumeReport);
         }
         return ResultResponse.error();

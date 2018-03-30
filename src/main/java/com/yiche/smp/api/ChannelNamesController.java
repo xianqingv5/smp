@@ -37,9 +37,9 @@ public class ChannelNamesController {
     @RequestMapping(value = "/intelligent/channelallnames", produces = MediaType.APPLICATION_JSON_UTF8_VALUE + ";charset=utf-8", method = RequestMethod.POST)
     @ApiOperation("获取相应平台的所有渠道名称")
     public ResultResponse getChannelNames(@RequestBody ReportCondition reportCondition){
-        String platformName= reportCondition.getPlatformName();
-        if (platformName!=null){
-            List<Channel> channels = channelNamesService.selectChannelNames(platformName);
+        String platformId = reportCondition.getPlatformId();
+        if (platformId!=null){
+            List<Channel> channels = channelNamesService.selectChannelNames(platformId);
             System.err.println(channels.size());
             return ResultResponse.success(channels);
         }

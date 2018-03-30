@@ -9,5 +9,5 @@ import java.util.List;
  */
 public interface ChannelNamesService {
 
-    public List<Channel> selectChannelNames(String platformName);
+    public List<Channel> selectChannelNames(String platformId);
 }

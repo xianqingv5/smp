@@ -41,8 +41,8 @@ public class CreateReportController2 {
         String s;
         if (reportCondition!=null){
             //获取platformName
-            String platformName = reportCondition.getPlatformName();
-            if (platformName==null){
+            String platformId = reportCondition.getPlatformId();
+            if (platformId==null){
                 logger.info("导出报表时传参时平台名为空");
                 return ResultResponse.fail(ErrorCodeMessage.DB_SERVICE_INVALID_PARAMETER);
             }
@@ -98,7 +98,7 @@ public class CreateReportController2 {
                 headRow.createCell(7).setCellValue("日期");
             }
 
-            List<GatherYicheAPP> channelConsumeData = createReportService.getChannelConsumeData(platformName, channelName, startTime, endTime, isDetail);
+            List<GatherYicheAPP> channelConsumeData = createReportService.getChannelConsumeData(platformId, channelName, startTime, endTime, isDetail);
             for (GatherYicheAPP gatherYicheAPP:channelConsumeData){
                 Float actualConsume=0.0f;
                 Float cluePrice=0.0f;
@@ -129,6 +129,14 @@ public class CreateReportController2 {
                 s="明细";
             }else {
                 s="汇总";
+            }
+            String platformName="全部";
+            if ("1".equals(platformId)){
+                platformName="易车APP";
+            }if ("2".equals(platformId)){
+                platformName="报价APP";
+            }if ("3".equals(platformId)){
+                platformName="PCWAP";
             }
             String fileName = startTime+"-"+endTime+platformName+"-"+channelName+s+"财务报表.xls";
             String agent = request.getHeader("user-agent");

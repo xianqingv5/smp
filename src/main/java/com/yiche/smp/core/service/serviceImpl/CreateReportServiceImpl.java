@@ -21,16 +21,16 @@ public class CreateReportServiceImpl implements CreateReportService {
     private ChannelConsumeMapper channelConsumeMapper;
 
     @Override
-    public List<GatherYicheAPP> getChannelConsumeData(String platformName, String channelName, String startTime, String endTime, int isDetail) {
+    public List<GatherYicheAPP> getChannelConsumeData(String platformId, String channelName, String startTime, String endTime, int isDetail) {
         List<GatherYicheAPP> channelSumConsume;
         Map<String, Object> map = new HashMap<>();
-        if ("全部".equals(platformName)) {
-            platformName = null;
+        if ("5".equals(platformId)) {
+            platformId = null;
         }
         if ("全部".equals(channelName)) {
             channelName = null;
         }
-        map.put("platformName", platformName);
+        map.put("platformId", platformId);
         map.put("channelName", channelName);
         map.put("startTime", startTime);
         map.put("endTime", endTime);

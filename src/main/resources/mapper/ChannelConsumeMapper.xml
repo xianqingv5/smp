@@ -8,85 +8,70 @@
         (
         SELECT
         "易车APP" platformName,
-        channel_name channelName,
+        "1"       platformId,
+        a.channel_name channelName,
         SUM(leads_cnt) leadsCnt,
-        sum(leads_user_cnt) leadsUserCnt,
-        sum(actual_consume) actualConsume
+        SUM(leads_user_cnt) leadsUserCnt,
+        SUM(actual_consume) actualConsume
         FROM
-        yiche_app_app_leads_channel_day_all
+        yiche_app_app_leads_channel_day_all a,imp_platform_channel b
         <where>
             <if test="channelName!=NULL">
-                channel_Name = #{channelName}
+                a.channel_name = #{channelName}
             </if>
             AND bt BETWEEN #{startTime}
             AND #{endTime}
-            AND channel_id IN (
-            SELECT
-            channel_id
-            FROM
-            imp_platform_channel
-            WHERE
-            platform_name = "易车APP"
-            )
+            AND a.channel_id=b.channel_id
+            AND b.platform_id='1'
             GROUP BY
-            channel_name
+            a.channel_name
         </where>
         UNION
         SELECT
         "报价APP" platformName,
-        channel_name channelName,
+        "2"       platformId,
+        a.channel_name channelName,
         SUM(leads_cnt) leadsCnt,
-        sum(leads_user_cnt) leadsUserCnt,
-        sum(actual_consume) actualConsume
+        SUM(leads_user_cnt) leadsUserCnt,
+        SUM(actual_consume) actualConsume
         FROM
-        yiche_quote_app_leads_channel_day_all
+        yiche_quote_app_leads_channel_day_all a,imp_platform_channel b
         <where>
             <if test="channelName!=NULL">
-                channel_Name = #{channelName}
+                a.channel_name = #{channelName}
             </if>
             AND bt BETWEEN #{startTime}
             AND #{endTime}
-            AND channel_id IN (
-            SELECT
-            channel_id
-            FROM
-            imp_platform_channel
-            WHERE
-            platform_name = "报价APP"
-            )
+            AND a.channel_id=b.channel_id
+            AND b.platform_id='2'
             GROUP BY
-            channel_name
+            a.channel_name
         </where>
         UNION
         SELECT
         "PCWAP" platformName,
-        channel_name channelName,
+        "3"       platformId,
+        a.channel_name channelName,
         SUM(cluecount) leadsCnt,
-        sum(clueusercount) leadsUserCnt,
-        sum(actual_consume) actualConsume
+        SUM(clueusercount) leadsUserCnt,
+        SUM(actual_consume) actualConsume
         FROM
-        yiche_pcwap_app_leads_channel_day_all
+        yiche_pcwap_app_leads_channel_day_all a,imp_platform_channel b
         <where>
             <if test="channelName!=NULL">
-                channel_Name = #{channelName}
+                a.channel_name = #{channelName}
             </if>
             AND dt BETWEEN #{startTime}
             AND #{endTime}
-            AND channel_id IN (
-            SELECT
-            channel_id
-            FROM
-            imp_platform_channel
-            WHERE
-            platform_name = "PCWAP"
-            )
+            AND a.channel_id=b.channel_id
+            AND b.platform_id='3'
             GROUP BY
-            channel_name
+            a.channel_name
         </where>
         ) yiche_channel_consume_sum
         <where>
-            <if test="platformName!=null">
-                platformName=#{platformName}
+            <if test="platformId!=null">
+                platformId=#{platformId}
             </if>
         </where>
     </select>
@@ -98,82 +83,67 @@
         (
         SELECT
         "易车APP" platformName,
-        channel_name channelName,
+        "1"       platformId,
+        a.channel_name channelName,
         leads_cnt leadsCnt,
         leads_user_cnt leadsUserCnt,
         actual_consume actualConsume,
         bt bt
         FROM
-        yiche_app_app_leads_channel_day_all
+        yiche_app_app_leads_channel_day_all a,imp_platform_channel b
         <where>
             <if test="channelName!=NULL">
-                channel_Name = #{channelName}
+                a.channel_name = #{channelName}
             </if>
             AND bt BETWEEN #{startTime}
             AND #{endTime}
-            AND channel_id IN (
-            SELECT
-            channel_id
-            FROM
-            imp_platform_channel
-            WHERE
-            platform_name = "易车APP"
-            )
+            AND a.channel_id=b.channel_id
+            AND b.platform_id='1'
         </where>
         UNION
         SELECT
         "报价APP" platformName,
-        channel_name channelName,
+        "2"       platformId,
+        a.channel_name channelName,
         leads_cnt leadsCnt,
         leads_user_cnt leadsUserCnt,
         actual_consume actualConsume,
         bt bt
         FROM
-        yiche_quote_app_leads_channel_day_all
+        yiche_quote_app_leads_channel_day_all a,imp_platform_channel b
         <where>
             <if test="channelName!=NULL">
-                channel_Name = #{channelName}
+                a.channel_name = #{channelName}
             </if>
             AND bt BETWEEN #{startTime}
             AND #{endTime}
-            AND channel_id IN (
-            SELECT
-            channel_id
-            FROM
-            imp_platform_channel
-            WHERE
-            platform_name = "报价APP"
-            )
+            AND a.channel_id=b.channel_id
+            AND b.platform_id='2'
         </where>
         UNION
         SELECT
         "PCWAP" platformName,
-        channel_name channelName,
+        "3"       platformId,
+        a.channel_name channelName,
         cluecount leadsCnt,
         clueusercount leadsUserCnt,
         actual_consume actualConsume,
         dt bt
         FROM
-        yiche_pcwap_app_leads_channel_day_all
+        yiche_pcwap_app_leads_channel_day_all a,imp_platform_channel b
         <where>
             <if test="channelName!=NULL">
-                channel_Name = #{channelName}
+                a.channel_name = #{channelName}
             </if>
             AND dt BETWEEN #{startTime}
             AND #{endTime}
-            AND channel_id IN (
-            SELECT
-            channel_id
-            FROM
-            imp_platform_channel
-            WHERE
-            platform_name = "PCWAP"
-            )
+            AND a.channel_id=b.channel_id
+            AND b.platform_id='3'
         </where>
         ) yiche_channel_consume_detail
         <where>
-            <if test="platformName!=null">
-                platformName=#{platformName}
+            <if test="platformId!=null">
+                platformId=#{platformId}
             </if>
         </where>
     </select>

@@ -9,5 +9,5 @@ import java.util.List;
  */
 public interface CreateReportService {
 
-    public List<GatherYicheAPP> getChannelConsumeData(String platformName, String channelName, String startTime, String endTime, int isDetail);
+    public List<GatherYicheAPP> getChannelConsumeData(String platformId, String channelName, String startTime, String endTime, int isDetail);
 }

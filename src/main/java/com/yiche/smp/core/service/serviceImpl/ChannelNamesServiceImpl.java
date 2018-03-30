@@ -20,16 +20,15 @@ public class ChannelNamesServiceImpl implements ChannelNamesService {
     private ChannelNamesMapper channelNamesMapper;
 
     @Override
-    public List<Channel> selectChannelNames(String platformName) {
+    public List<Channel> selectChannelNames(String platformId) {
         Channel channel = new Channel();
         Map<String, String> map = new HashMap<>();
         //如果为全部的话，将platformName赋值为空
-        if("全部".equals(platformName)){
-            platformName=null;
+        if("5".equals(platformId)){
+            platformId=null;
         }
-        map.put("platformName",platformName);
+        map.put("platformId",platformId);
         List<Channel> channels = channelNamesMapper.selectChannelNames(map);
-        channel.setPlatformName(platformName);
         channel.setChannelName("全部");
         channels.add(channel);
         return channels;

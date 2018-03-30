@@ -39,7 +39,6 @@ public class DisplayDayReportController {
     @ApiOperation("平台渠道日报展示功能")
     public ResultResponse showSumDayReportData(@RequestBody ReportCondition reportCondition) {
         String startTime = reportCondition.getStartTime();
-        System.out.println("123" + "-" + startTime);
         Map<String, String> twoDay = getPreTwoDay(startTime);
         String pre1 = twoDay.get("pre1");
         String pre2 = twoDay.get("pre2");
@@ -51,7 +50,6 @@ public class DisplayDayReportController {
     @ApiOperation("平台总和日报展示功能")
     public ResultResponse showSumPlatformDayReportData(@RequestBody ReportCondition reportCondition) {
         String startTime = reportCondition.getStartTime();
-        System.out.println("456" + "-" + startTime);
         Map<String, String> twoDay = getPreTwoDay(startTime);
         String pre1 = twoDay.get("pre1");
         String pre2 = twoDay.get("pre2");
@@ -63,7 +61,6 @@ public class DisplayDayReportController {
     @ApiOperation("各个平台详细渠道日报展示功能")
     public ResultResponse showDayReportData(@RequestBody ReportCondition reportCondition) {
         String startTime = reportCondition.getStartTime();
-        System.out.println("789" + "-" + startTime);
         String platformName = reportCondition.getPlatformName();
         if (platformName != null) {
             Map<String, String> twoDay = getPreTwoDay(startTime);
@@ -79,7 +76,6 @@ public class DisplayDayReportController {
     @ApiOperation("Pcwap平台详细渠道日报展示功能")
     public ResultResponse showDayPcwapReportData(@RequestBody ReportCondition reportCondition) {
         String startTime = reportCondition.getStartTime();
-        System.out.println("abc" + "-" + startTime);
         String platformName = reportCondition.getPlatformName();
         if (platformName != null) {
             Map<String, String> twoDay = getPreTwoDay(startTime);

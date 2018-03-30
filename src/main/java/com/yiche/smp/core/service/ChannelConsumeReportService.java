@@ -12,5 +12,5 @@ import java.util.List;
  */
 public interface ChannelConsumeReportService {
 
-    public PageInfo<GatherYicheAPP> getChannelConsumeReport(String platformName, String channelName, String startTime, String endTime, int isDetail, Integer pageno, Integer pagesize);
+    PageInfo<GatherYicheAPP> getChannelConsumeReport(String platformId, String channelName, String startTime, String endTime, int isDetail, Integer pageno, Integer pagesize);
 }

@@ -22,19 +22,19 @@ public class ChannelConsumeReportServiceImpl implements ChannelConsumeReportServ
     private ChannelConsumeMapper channelConsumeMapper;
 
     @Override
-    public PageInfo<GatherYicheAPP> getChannelConsumeReport(String platformName, String channelName, String startTime, String endTime, int isDetail, Integer pageno, Integer pagesize) {
+    public PageInfo<GatherYicheAPP> getChannelConsumeReport(String platformId, String channelName, String startTime, String endTime, int isDetail, Integer pageno, Integer pagesize) {
         Map<String, Object> map = new HashMap<>();
         PageInfo<GatherYicheAPP> gatherYicheAPPPageInfo;
         //如果是全部的话，将他赋值为空
-        if ("全部".equals(platformName)) {
-            platformName = null;
+        if ("5".equals(platformId)) {
+            platformId = null;
         }
         //如果是全部的话，将他赋值为空
         if ("全部".equals(channelName)) {
             channelName = null;
         }
         //将所有参数放到map中。
-        map.put("platformName", platformName);
+        map.put("platformName", platformId);
         map.put("channelName", channelName);
         map.put("startTime", startTime);
         map.put("endTime", endTime);

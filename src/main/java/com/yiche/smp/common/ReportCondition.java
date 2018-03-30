@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by xuhaiqiang on 2018/3/7
  */
 public class ReportCondition implements Serializable {
-
+    private String platformId;
     private String platformName;
     private String channelName;
     private String startTime;
@@ -72,6 +72,14 @@ public class ReportCondition implements Serializable {
 
     public void setIsDetail(int isDetail) {
         this.isDetail = isDetail;
+    }
+
+    public String getPlatformId() {
+        return platformId;
+    }
+
+    public void setPlatformId(String platformId) {
+        this.platformId = platformId;
     }
 
     @Override
