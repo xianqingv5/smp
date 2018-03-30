@@ -156,22 +156,25 @@ public class DataChangeServiceImpl implements DataChangeService {
 	public int changeCheckMes(ApplyChannelChange applyChannelChange, User user) {
 		 String checkResult = applyChannelChange.getDataCheck();
 	        Integer role = user.getRole();
+	        Integer id = applyChannelChange.getId();
+	        ApplyChannelChange selectByPrimaryKey = applyMapper.selectByPrimaryKey(id);
+			Integer status = selectByPrimaryKey.getStatus();
 	        //获取用户角色
-	        if (role == UserRoot.USER_BLSQSH.getCode()||role==UserRoot.USER_ROOT.getCode()) {
+	        if (role == UserRoot.USER_BLSQSH.getCode()||(role==UserRoot.USER_ROOT.getCode()&&status==0)) {
 	            if ("true".equals(checkResult)) {
 	            	applyChannelChange.setStatus(BoostApplyStatus.APPLY_DEPT_CHECK_PASS.getCode());
 	            } else {
 	            	applyChannelChange.setStatus(BoostApplyStatus.APPLY_DEPT_CHECK_UNPASS.getCode());
 	            }
 
-	        } else if (role == UserRoot.USER_SJXZSH.getCode()) {
+	        } else if (role == UserRoot.USER_SJXZSH.getCode()||(role==UserRoot.USER_ROOT.getCode()&&status==1)) {
 	            if ("true".equals(checkResult)) {
 	            	applyChannelChange.setStatus(BoostApplyStatus.CARRY_DEPT_OPTION_PASS.getCode());
 	            } else {
 	            	applyChannelChange.setStatus(BoostApplyStatus.CARRY_DEPT_OPTION_UNPASS.getCode());
 	            }
 
-	        } else if (role == UserRoot.USER_ZJL.getCode()) {
+	        } else if (role == UserRoot.USER_ZJL.getCode()||(role==UserRoot.USER_ROOT.getCode()&&status==2)) {
 	            if ("true".equals(checkResult)) {
 	            	applyChannelChange.setStatus(BoostApplyStatus.CARRY_DEPT_AUDIT_PASS.getCode());
 	            } else {
