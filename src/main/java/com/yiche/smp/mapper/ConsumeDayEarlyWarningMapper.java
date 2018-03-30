@@ -13,9 +13,9 @@ import java.util.Map;
 @Repository
 public interface ConsumeDayEarlyWarningMapper {
 
-    public List<EarlyWarningData> selectEarlyWarning(Map<String, String> map);
+    List<EarlyWarningData> selectEarlyWarning(Map<String, String> map);
 
-    public EarlyWarningData selectMonthChannelConsumeData(Map<String, String> map);
+    List<EarlyWarningData> selectMonthChannelConsumeData(Map<String, String> map);
 
     List<GatherYicheAPP> getChannelDetailConsume(Map<String, String> map);
 }

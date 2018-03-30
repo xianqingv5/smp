@@ -84,18 +84,15 @@ public class PlatformConsumeDayEarlyWarningController {
     @RequestMapping(value ="/intelligent/dayEarlyWarningData", produces = MediaType.APPLICATION_JSON_UTF8_VALUE + ";charset=utf-8", method = RequestMethod.POST)
     @ApiOperation("平台消耗每天预警-渠道详细数据")
     public ResultResponse showChannelConsumeDayEarlyingWarningData(@RequestBody ReportCondition reportCondition,HttpServletRequest request) {
-        if (reportCondition!=null){
-            String endTime1 = reportCondition.getEndTime();
+        String endTime = reportCondition.getEndTime();
+        if (endTime!=null){
+            String platformName = reportCondition.getPlatformName();
             Map<String, Object> map = new HashMap<>();
             HttpSession session = request.getSession();
             //从session中获取用户信息
             UserPower user = (UserPower) session.getAttribute("user");
-            if (user == null) {
-                return ResultResponse.fail(ErrorCodeMessage.DB_SERVICE_GET_USER_MESSAGE_ERROR);
-            }
-            String platformId = userMapper.selectPlatformByUserId(user.getUserid());
-            String startTime=endTime1;
-            List<GatherYicheAPP> channelConsumeData = consumeDayEarlyWarningService.getChannelConsumeData(platformId, startTime);
+            String startTime=endTime;
+            List<GatherYicheAPP> channelConsumeData = consumeDayEarlyWarningService.getChannelConsumeData(platformName, startTime);
             map.put("data",channelConsumeData);
             return ResultResponse.success(map);
         }

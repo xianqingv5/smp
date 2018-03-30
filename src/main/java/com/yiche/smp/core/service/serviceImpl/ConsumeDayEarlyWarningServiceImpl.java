@@ -1,5 +1,6 @@
 package com.yiche.smp.core.service.serviceImpl;
 
+import com.alibaba.druid.sql.visitor.functions.If;
 import com.yiche.smp.common.CollectionUtil;
 import com.yiche.smp.common.EarlyWarningData;
 import com.yiche.smp.common.GatherYicheAPP;
@@ -83,12 +84,16 @@ public class ConsumeDayEarlyWarningServiceImpl implements ConsumeDayEarlyWarning
     }
 
     @Override
-    public List<GatherYicheAPP> getChannelConsumeData(String platformId, String startTime) {
-        Map<String,String> map = new HashMap<>();
-        int i = Integer.parseInt(platformId);
-        if (i>=5){
-            platformId=null;
+    public List<GatherYicheAPP> getChannelConsumeData(String platformName, String startTime) {
+        String platformId="";
+        if ("易车APP".equals(platformName)){
+            platformId="1";
+        }if ("报价APP".equals(platformName)){
+            platformId="2";
+        }else if ("PCWAP".equals(platformName)){
+            platformId="3";
         }
+        Map<String,String> map = new HashMap<>();
         map.put("platformId",platformId);
         map.put("bt",startTime);
         List<GatherYicheAPP> channelDetailConsume = consumeDayEarlyWarningMapper.getChannelDetailConsume(map);
@@ -111,7 +116,10 @@ public class ConsumeDayEarlyWarningServiceImpl implements ConsumeDayEarlyWarning
     public Map<String, Object> getMonthChannelConsumeData(String platformId, String startTime, String endTime, String month,int num) {
         Map<String, String> map = new HashMap<>();
         Map<String, Object> map1 = new HashMap<>();
-        List<Object> arr = new ArrayList<>();
+        List<Float> daybudgetArr = new ArrayList<>();
+        List<Float> consumeArr = new ArrayList<>();
+        List<Long> leadsCntArr = new ArrayList<>();
+        List<Long> monthDayAvgClueCntArr = new ArrayList<>();
         int i = Integer.parseInt(platformId);
         if (i>=5){
             platformId=null;
@@ -120,32 +128,46 @@ public class ConsumeDayEarlyWarningServiceImpl implements ConsumeDayEarlyWarning
         map.put("startTime",startTime);
         map.put("endTime",endTime);
         map.put("month",month);
-        EarlyWarningData earlyWarningData = consumeDayEarlyWarningMapper.selectMonthChannelConsumeData(map);
-        if (earlyWarningData!=null){
-        earlyWarningData.setDayBudget(earlyWarningData.getDayBudget()*num);
-        earlyWarningData.setMonthDayAvgclueCnt(earlyWarningData.getMonthDayAvgclueCnt()*num);
-        arr.add(earlyWarningData.getDayBudget());
-        arr.add(earlyWarningData.getActualConsume());
-        arr.add(earlyWarningData.getLeadsCnt());
-        arr.add(earlyWarningData.getMonthDayAvgclueCnt());
+        List<EarlyWarningData> earlyWarningDataList = consumeDayEarlyWarningMapper.selectMonthChannelConsumeData(map);
+        if (CollectionUtil.listNotNull(earlyWarningDataList)) {
+            for (EarlyWarningData earlyWarningData:earlyWarningDataList){
+                if (earlyWarningData != null) {
+                    earlyWarningData.setDayBudget(earlyWarningData.getDayBudget() * num);
+                    earlyWarningData.setMonthDayAvgclueCnt(earlyWarningData.getMonthDayAvgclueCnt() * num);
+                    daybudgetArr.add(earlyWarningData.getDayBudget());
+                    Float actualConsume = earlyWarningData.getActualConsume();
+                    if (actualConsume==null){
+                        actualConsume=0.0f;
+                    }
+                    consumeArr.add(actualConsume);
+                    Long leadsCnt = earlyWarningData.getLeadsCnt();
+                    if (leadsCnt==null){
+                        leadsCnt=0l;
+                    }
+                    leadsCntArr.add(leadsCnt);
+                    monthDayAvgClueCntArr.add(earlyWarningData.getMonthDayAvgclueCnt());
+                }
+            }
         }
-        map1.put("data",earlyWarningData);
-        map1.put("arr",arr);
+        map1.put("daybudgetArr",daybudgetArr);
+        map1.put("consumeArr",consumeArr);
+        map1.put("leadsCntArr",leadsCntArr);
+        map1.put("monthDayAvgClueCntArr",monthDayAvgClueCntArr);
         return map1;
     }
 
     /**
      * 通过下面规则计算出预警数据和预警提示
-     * @param leadsCnt
-     * @param monthDayAvgclueCnt
-     * @param actualConsume
-     * @param dayBudget
-     * @param actualPrice
-     * @param expectPrice
-     * @param baseNumber
-     * @return
+     * @param leadsCnt 线索量
+     * @param monthDayAvgclueCnt 去年月日均线索量
+     * @param actualConsume 实际消耗
+     * @param dayBudget 预算
+     * @param actualPrice 实际单价
+     * @param expectPrice 预算单价
+     * @param baseNumber 基数
+     * @return getEarlyWarningMsg
      */
-    public String getEarlyWarningMsg(Long leadsCnt,Long monthDayAvgclueCnt,Float actualConsume,Float dayBudget,Double actualPrice,Double expectPrice,Double baseNumber){
+    private String getEarlyWarningMsg(Long leadsCnt,Long monthDayAvgclueCnt,Float actualConsume,Float dayBudget,Double actualPrice,Double expectPrice,Double baseNumber){
 
         if (actualConsume>dayBudget){
             if (leadsCnt>monthDayAvgclueCnt){

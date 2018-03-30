@@ -14,7 +14,7 @@ public interface ConsumeDayEarlyWarningService {
 
     public Map<String, Object> getEarlyWarningData(String platformId, String startTime, String endTime, String month);
 
-    public List<GatherYicheAPP> getChannelConsumeData(String platformId, String startTime);
+    public List<GatherYicheAPP> getChannelConsumeData(String platformName, String startTime);
 
     public Map<String, Object> getMonthChannelConsumeData(String platformId, String startTime, String endTime, String month, int num);
 }
