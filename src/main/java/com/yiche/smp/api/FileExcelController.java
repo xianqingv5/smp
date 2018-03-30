@@ -94,10 +94,10 @@ public class FileExcelController {
 	@RequestMapping(value = "/selectUser", produces = MediaType.APPLICATION_JSON_UTF8_VALUE
 			+ ";charset=utf-8", method = RequestMethod.POST)
 	@ApiOperation(value = "代上传人列表")
-	public ResultResponse selectUser() {
+	public ResultResponse selectUser(HttpSession session) {
 		Map<String, Object> map = new HashMap<>();
-
-		map.put("data", userService.selectUser());
+		 List<ReplaceVo> selectUser = userService.selectUser(session);
+		 map.put("data", selectUser);
 
 		return ResultResponse.success(map);
 	}

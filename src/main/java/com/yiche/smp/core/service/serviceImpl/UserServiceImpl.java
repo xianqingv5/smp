@@ -3,6 +3,8 @@ package com.yiche.smp.core.service.serviceImpl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,13 +21,15 @@ public class UserServiceImpl implements UserService {
 private UserMapper userMapper;
 
 	@Override
-	public List<ReplaceVo> selectUser() {
+	public List<ReplaceVo> selectUser(HttpSession session) {
 		UserExample example = new UserExample();
 		//example.createCriteria().andRoleEqualTo(1);
 		List<Integer> values = new ArrayList<>();
 		values.add(1);
 		values.add(11);
-		example.createCriteria().andRoleIn(values);
+		User u = (User) session.getAttribute("user");
+		String userid = u.getUserid();
+		example.createCriteria().andRoleIn(values).andUseridNotEqualTo(userid);
 		List<User> list = userMapper.selectByExample(example);
 		 List <ReplaceVo> lists = new ArrayList <>();
 		for (User user : list) {
@@ -45,6 +49,23 @@ private UserMapper userMapper;
 		example.createCriteria().andRoleIn(values);
 		List<User> list = userMapper.selectByExample(example);
 		return list;
+	}
+
+	@Override
+	public List<ReplaceVo> selectUser() {
+		UserExample example = new UserExample();
+		//example.createCriteria().andRoleEqualTo(1);
+		List<Integer> values = new ArrayList<>();
+		values.add(1);
+		values.add(11);
+		example.createCriteria().andRoleIn(values);
+		List<User> list = userMapper.selectByExample(example);
+		 List <ReplaceVo> lists = new ArrayList <>();
+		for (User user : list) {
+			
+			lists.add(new ReplaceVo(user.getUserid(), user.getUsername()));
+		}
+		return lists;
 	}
 
 }
