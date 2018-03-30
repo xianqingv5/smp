@@ -154,7 +154,7 @@
         FROM
         yiche_app_app_leads_channel_day_all a,imp_platform_channel b
         WHERE a.channel_id=b.channel_id
-        AND b.platform_name="易车APP"
+        AND b.platform_id = '1'
         AND bt=#{bt}
         UNION
         SELECT
@@ -168,7 +168,7 @@
         FROM
         yiche_quote_app_leads_channel_day_all a,imp_platform_channel b
         WHERE a.channel_id=b.channel_id
-        AND b.platform_name="报价APP"
+        AND b.platform_id = '2'
         AND bt=#{bt}
         UNION
         SELECT
@@ -182,7 +182,7 @@
         FROM
         yiche_pcwap_app_leads_channel_day_all a,imp_platform_channel b
         WHERE a.channel_id=b.channel_id
-        AND b.platform_name="PCWAP"
+        AND b.platform_id = '3'
         AND dt=#{bt}
         ) yiche_channel_consume_detail
         <where>
