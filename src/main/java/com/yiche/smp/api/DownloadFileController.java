@@ -217,7 +217,7 @@ public class DownloadFileController {
         sheet.addMergedRegion(new CellRangeAddress(0, 0, 26, 27));
         sheet.addMergedRegion(new CellRangeAddress(0, 0, 29, 30));
         for (CopyShopAvgClus shopAvgClues1 : shopAvgClues) {
-            HSSFRow row = sheet.createRow(sheet.getLastRowNum() + 1);
+            HSSFRow row = sheet.createRow(sheet.getLastRowNum() + 1); //sheet.getLastRowNum 获得已经定义的最后逻辑(非物理行数)行数,即1.
             row.createCell(0).setCellValue(shopAvgClues1.getIsTop());
             row.createCell(1).setCellValue(shopAvgClues1.getBrandName());
             row.createCell(2).setCellValue(shopAvgClues1.getTrendDecide());

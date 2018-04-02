@@ -118,7 +118,7 @@ public class UploadFileController {
         }
     }
 
-    private Map <String, String> processUpload(MultipartFile uploadFile) throws IOException {
+    private  Map <String, String> processUpload(MultipartFile uploadFile) throws IOException {
         //获取上传文件的内容
         byte[] content = uploadFile.getBytes();
         //获取文件的名称

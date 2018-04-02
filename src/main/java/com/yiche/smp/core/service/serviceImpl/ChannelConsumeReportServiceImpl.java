@@ -34,7 +34,7 @@ public class ChannelConsumeReportServiceImpl implements ChannelConsumeReportServ
             channelName = null;
         }
         //将所有参数放到map中。
-        map.put("platformName", platformId);
+        map.put("platformId", platformId);
         map.put("channelName", channelName);
         map.put("startTime", startTime);
         map.put("endTime", endTime);

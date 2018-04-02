@@ -5,7 +5,7 @@ package com.yiche.smp.common;
  */
 public class MonthUtil {
     public static String getPrevMonthDate(String monthdata) {
-        //获取月份
+        //获取上月月份
         String[] split = monthdata.split("-");
         String year = split[0];
         String mongth = split[1];

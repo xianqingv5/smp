@@ -102,12 +102,9 @@ public class DisplayDayReportController {
             //Date nowDate = DateParseUtil.getNextDay2(date);
             //获取前一天
             Date preDate1 = DateParseUtil.getPreDay(date);
-            //获取前两天
-            Date preDate2 = DateParseUtil.getPreDay(preDate1);
             //转换成字符串
-            String pre1 = DateParseUtil.dateTostring(preDate1, "yyyy-MM-dd");
-            String pre2 = DateParseUtil.dateTostring(preDate2, "yyyy-MM-dd");
-            map.put("pre1", pre1);
+            String pre2 = DateParseUtil.dateTostring(preDate1, "yyyy-MM-dd");
+            map.put("pre1", startTime);
             map.put("pre2", pre2);
         } catch (Exception e) {
             e.printStackTrace();

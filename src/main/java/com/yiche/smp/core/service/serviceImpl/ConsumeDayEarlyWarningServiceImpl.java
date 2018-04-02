@@ -44,6 +44,10 @@ public class ConsumeDayEarlyWarningServiceImpl implements ConsumeDayEarlyWarning
         map.put("endTime",endTime);
         map.put("month",month);
         List<EarlyWarningData> earlyWarningDatas = consumeDayEarlyWarningMapper.selectEarlyWarning(map);
+        System.err.println("-----"+earlyWarningDatas.size());
+        for (EarlyWarningData earlyWarningData:earlyWarningDatas){
+            System.err.println(earlyWarningData);
+        }
         if (CollectionUtil.listNotNull(earlyWarningDatas)){
             Double baseNumber = earlyWarningDatas.get(0).getBaseNumber();//基数
             Float dayBudget = earlyWarningDatas.get(0).getDayBudget();//日均预算
@@ -129,6 +133,10 @@ public class ConsumeDayEarlyWarningServiceImpl implements ConsumeDayEarlyWarning
         map.put("endTime",endTime);
         map.put("month",month);
         List<EarlyWarningData> earlyWarningDataList = consumeDayEarlyWarningMapper.selectMonthChannelConsumeData(map);
+        System.err.println("*******"+earlyWarningDataList.size());
+        for (EarlyWarningData earlyWarningData:earlyWarningDataList){
+            System.err.println(earlyWarningData);
+        }
         if (CollectionUtil.listNotNull(earlyWarningDataList)) {
             for (EarlyWarningData earlyWarningData:earlyWarningDataList){
                 if (earlyWarningData != null) {
