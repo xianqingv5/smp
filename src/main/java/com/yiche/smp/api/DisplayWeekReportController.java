@@ -39,7 +39,7 @@ public class DisplayWeekReportController {
         String s = startTime.substring(0, 4);
         String s1= startTime.substring(4);
         int i = Integer.parseInt(s1);
-        String week=s+"年"+"第"+i+"周";
+        String week=s+"-"+i;
         String week1 = preWeek(s,i);
         DayReport map = displayWeekReportService.selectSumDataWeek(week,week1);
         return ResultResponse.success(map);
@@ -51,7 +51,7 @@ public class DisplayWeekReportController {
         String s = startTime.substring(0, 4);
         String s1= startTime.substring(4);
         int i = Integer.parseInt(s1);
-        String week=s+"年"+"第"+i+"周";
+        String week=s+"-"+i;
         String week1 = preWeek(s,i);
         List<DayReport> map = displayWeekReportService.getPlatformDataWeek(week,week1);
         return ResultResponse.success(map);
@@ -66,7 +66,7 @@ public class DisplayWeekReportController {
         String s = startTime.substring(0, 4);
         String s1= startTime.substring(4);
         int i = Integer.parseInt(s1);
-        String week=s+"年"+"第"+i+"周";
+        String week=s+"-"+i;
         String week1 = preWeek(s,i);
         Map<String, List<YichePlatform>> map = displayWeekReportService.getplatformChannelDataWeek(platformName,week,week1);
         return  ResultResponse.success(map);
@@ -80,7 +80,7 @@ public class DisplayWeekReportController {
         String s = startTime.substring(0, 4);
         String s1= startTime.substring(4);
         int i = Integer.parseInt(s1);
-        String week=s+"年"+"第"+i+"周";
+        String week=s+"-"+i;
         if (platformName!=null){
             String week1 = preWeek(s,i);
             Map<String, List<YichePlatform>> map = displayWeekReportService.getPcwapchannelDataWeek(platformName,week,week1);
@@ -96,7 +96,7 @@ public class DisplayWeekReportController {
         String s = startTime.substring(0, 4);
         String s1= startTime.substring(4);
         int i = Integer.parseInt(s1);
-        String week=s+"年"+"第"+i+"周";
+        String week=s+"-"+i;
         if (platformName!=null){
             String week1 = preWeek(s,i);
             Map<String, List<YichePlatform>> map = displayWeekReportService.getThirdPartychannelDataWeek(platformName,week,week1);
@@ -111,7 +111,7 @@ public class DisplayWeekReportController {
      * @return
      */
     public String preWeek(String s,int i){
-        String week1=s+"年"+"第"+(i-1)+"周";
+        String week1=s+"-"+(i-1);
         return week1;
     }
 }
