@@ -36,6 +36,7 @@ public class ChannelConsumeReportController2 {
     public ResultResponse displayChannelConsumeReport(@RequestBody Page<T> page){
         if (page!=null){
             String platformId = page.getPlatformId();
+            System.err.println("-----------------------------------------"+platformId);
             if (platformId==null){
                 logger.info("查询数据时传参时平台ID为空");
                 return ResultResponse.fail(ErrorCodeMessage.DB_SERVICE_INVALID_PARAMETER);

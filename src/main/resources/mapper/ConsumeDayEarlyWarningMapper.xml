@@ -65,7 +65,7 @@
             <if test="platformId!=null">
                 c.platformId = #{platformId}
             </if>
-            AND c.platformName = d.platform_name
+            AND c.platformId = d.platform_id
             AND d.month = #{month}
         </where>
     </select>
@@ -133,7 +133,6 @@
             <if test="platformId!=NULL">
                 platformId=#{platformId}
             </if>
-            AND c.platformName = d.platform_name
             AND d.month = #{month}
         </where>
     </select>
