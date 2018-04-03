@@ -57,6 +57,18 @@ public class YichePlatform implements Serializable {
 
     private String channelId;
 
+    private String qfLeadsCnt;
+
+    private String qfLeadsUserCnt;
+
+    private String qfActualConsume;
+
+    private String qfNewUserCnt;
+
+    private String qfNewUserCost;
+
+    private String qfLeadsCost;
+
     public YichePlatform() {
     }
 
@@ -293,6 +305,54 @@ public class YichePlatform implements Serializable {
         this.channelId = channelId;
     }
 
+    public String getQfLeadsCnt() {
+        return qfLeadsCnt;
+    }
+
+    public void setQfLeadsCnt(String qfLeadsCnt) {
+        this.qfLeadsCnt = qfLeadsCnt;
+    }
+
+    public String getQfLeadsUserCnt() {
+        return qfLeadsUserCnt;
+    }
+
+    public void setQfLeadsUserCnt(String qfLeadsUserCnt) {
+        this.qfLeadsUserCnt = qfLeadsUserCnt;
+    }
+
+    public String getQfActualConsume() {
+        return qfActualConsume;
+    }
+
+    public void setQfActualConsume(String qfActualConsume) {
+        this.qfActualConsume = qfActualConsume;
+    }
+
+    public String getQfNewUserCnt() {
+        return qfNewUserCnt;
+    }
+
+    public void setQfNewUserCnt(String qfNewUserCnt) {
+        this.qfNewUserCnt = qfNewUserCnt;
+    }
+
+    public String getQfNewUserCost() {
+        return qfNewUserCost;
+    }
+
+    public void setQfNewUserCost(String qfNewUserCost) {
+        this.qfNewUserCost = qfNewUserCost;
+    }
+
+    public String getQfLeadsCost() {
+        return qfLeadsCost;
+    }
+
+    public void setQfLeadsCost(String qfLeadsCost) {
+        this.qfLeadsCost = qfLeadsCost;
+    }
+
     public YichePlatform(String platformName, String channelName, Long leadsCnt, Long leadsUserCnt, Float actualConsume, String bt, Double leadsCost, Long newUserCnt, Double newUserCost, String clueRatio, String userRatio, String leadsCostRatio, String newUserCntRatio, String consumeRatio, String systemId, String terminalId, String weekDetail, Integer cooperationDay) {
         this.platformName = platformName;
         this.channelName = channelName;
@@ -341,6 +401,12 @@ public class YichePlatform implements Serializable {
                 ", leadsUserCost=" + leadsUserCost +
                 ", channelNamePath='" + channelNamePath + '\'' +
                 ", channelId='" + channelId + '\'' +
+                ", qfLeadsCnt='" + qfLeadsCnt + '\'' +
+                ", qfLeadsUserCnt='" + qfLeadsUserCnt + '\'' +
+                ", qfActualConsume='" + qfActualConsume + '\'' +
+                ", qfNewUserCnt='" + qfNewUserCnt + '\'' +
+                ", qfNewUserCost='" + qfNewUserCost + '\'' +
+                ", qfLeadsCost='" + qfLeadsCost + '\'' +
                 '}';
     }
 }

@@ -64,6 +64,12 @@ public class AddTotalUtil {
         yichePlatform.setNewUserCnt(newUserCnt);
         yichePlatform.setNewUserCost(newUserCost);
         yichePlatform.setActualConsume(consume);
+        yichePlatform.setQfLeadsCnt(DataCalculationUtils.fmtMicrometer(clueCnt));
+        yichePlatform.setQfLeadsUserCnt(DataCalculationUtils.fmtMicrometer(clueUserCnt));
+        yichePlatform.setQfLeadsCost(DataCalculationUtils.fmtMicrometer2(DataCalculationUtils.doubleDeal2(leadsCost)));
+        yichePlatform.setQfNewUserCnt(DataCalculationUtils.fmtMicrometer(newUserCnt));
+        yichePlatform.setQfNewUserCost(DataCalculationUtils.fmtMicrometer2(DataCalculationUtils.doubleDeal2(newUserCost)));
+        yichePlatform.setQfActualConsume(DataCalculationUtils.fmtMicrometer1(DataCalculationUtils.floatDeal(consume)));
         lists.add(yichePlatform);
     }
 }

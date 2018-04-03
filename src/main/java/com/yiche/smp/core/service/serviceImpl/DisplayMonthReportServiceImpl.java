@@ -32,14 +32,14 @@ public class DisplayMonthReportServiceImpl implements DisplayMonthReportService 
 
     @Override
     public DayReport selectSumDatamonth(String month, String month1) {
-        Long leadsCnt = 0l;
-        Long leadsCnt1 = 0l;
-        Long userCnt = 0l;
-        Long userCnt1 = 0l;
-        Float actualConsume = 0.0f;
-        Float actualConsume1 = 0.0f;
-        Double leadsCost = 0.0;
-        Double leadsCost1 = 0.0;
+        String qfLeadsCnt="";
+        String qfLeadsCnt1="";
+        String qfUserCnt="";
+        String qfUserCnt1="";
+        String qfActualConsume="";
+        String qfActualConsume1="";
+        String qfLeadsCost="";
+        String qfLeadsCost1="";
         HashMap<String, String> map = new HashMap<>();
         map.put("month", month);
         Data data = new Data();
@@ -53,17 +53,17 @@ public class DisplayMonthReportServiceImpl implements DisplayMonthReportService 
         if (sumConsumeDataMonth == null) {
             logger.info("此月没数据");
         } else {
-            if (sumConsumeDataMonth.getLeadsCnt() != null) {
-                leadsCnt = sumConsumeDataMonth.getLeadsCnt();
+            if (sumConsumeDataMonth.getQfLeadsCnt()!=null){
+                qfLeadsCnt=sumConsumeDataMonth.getQfLeadsCnt();
             }
-            if (sumConsumeDataMonth.getActualConsume() != null) {
-                actualConsume = sumConsumeDataMonth.getActualConsume();
+            if (sumConsumeDataMonth.getQfLeadsUserCnt()!=null){
+                qfUserCnt=sumConsumeDataMonth.getQfLeadsUserCnt();
             }
-            if (sumConsumeDataMonth.getLeadsUserCnt() != null) {
-                userCnt = sumConsumeDataMonth.getLeadsUserCnt();
+            if (sumConsumeDataMonth.getQfActualConsume()!=null){
+                qfActualConsume="￥"+sumConsumeDataMonth.getQfActualConsume();
             }
-            if (sumConsumeDataMonth.getLeadsCost() != null) {
-                leadsCost = sumConsumeDataMonth.getLeadsCost();
+            if (sumConsumeDataMonth.getQfLeadsCost()!=null){
+                qfLeadsCost="￥"+sumConsumeDataMonth.getQfLeadsCost();
             }
         }
         map.replace("month", month1);
@@ -71,17 +71,17 @@ public class DisplayMonthReportServiceImpl implements DisplayMonthReportService 
         if (sumConsumeDataMonth1 == null) {
             logger.info("此月没数据");
         } else {
-            if (sumConsumeDataMonth1.getLeadsCnt() != null) {
-                leadsCnt1 = sumConsumeDataMonth1.getLeadsCnt();
+            if (sumConsumeDataMonth1.getQfLeadsCnt()!=null){
+                qfLeadsCnt1=sumConsumeDataMonth1.getQfLeadsCnt();
             }
-            if (sumConsumeDataMonth1.getActualConsume() != null) {
-                actualConsume1 = sumConsumeDataMonth1.getActualConsume();
+            if (sumConsumeDataMonth1.getQfLeadsUserCnt()!=null){
+                qfUserCnt1=sumConsumeDataMonth1.getQfLeadsUserCnt();
             }
-            if (sumConsumeDataMonth1.getLeadsUserCnt() != null) {
-                userCnt1 = sumConsumeDataMonth1.getLeadsUserCnt();
+            if (sumConsumeDataMonth1.getQfActualConsume()!=null){
+                qfActualConsume1="￥"+sumConsumeDataMonth1.getQfActualConsume();
             }
-            if (sumConsumeDataMonth1.getLeadsCost() != null) {
-                leadsCost1 = sumConsumeDataMonth1.getLeadsCost();
+            if (sumConsumeDataMonth1.getQfLeadsCost()!=null){
+                qfLeadsCost1="￥"+sumConsumeDataMonth1.getQfLeadsCost();
             }
         }
         if (sumConsumeDataMonth == null && sumConsumeDataMonth1 == null) {
@@ -90,23 +90,23 @@ public class DisplayMonthReportServiceImpl implements DisplayMonthReportService 
         Ratio ratio1 = CalculateRatioUtil.calculateRatioSum(ratio, sumConsumeDataMonth, sumConsumeDataMonth1);
         String clueRatio = ratio1.getClueRatio();
         data.setTitle("总线索量(条)");
-        data.setPreTwoDay(leadsCnt1);
-        data.setPreOneDay(leadsCnt);
+        data.setPreTwoDay(qfLeadsCnt1);
+        data.setPreOneDay(qfLeadsCnt);
         data.setRatio(clueRatio);
         String userRatio = ratio1.getUserRatio();
         data1.setTitle("总用户量(个)");
-        data1.setPreTwoDay(userCnt1);
-        data1.setPreOneDay(userCnt);
+        data1.setPreTwoDay(qfUserCnt1);
+        data1.setPreOneDay(qfUserCnt);
         data1.setRatio(userRatio);
         String consumeRatio = ratio1.getConsumeRatio();
         data2.setTitle("总体消耗(元)");
-        data2.setPreTwoDay(actualConsume1);
-        data2.setPreOneDay(actualConsume);
+        data2.setPreTwoDay(qfActualConsume1);
+        data2.setPreOneDay(qfActualConsume);
         data2.setRatio(consumeRatio);
         String costRatio = ratio1.getLeadsCostRatio();
         data3.setTitle("线索成本(元)");
-        data3.setPreTwoDay(leadsCost1);
-        data3.setPreOneDay(leadsCost);
+        data3.setPreTwoDay(qfLeadsCost1);
+        data3.setPreOneDay(qfLeadsCost);
         data3.setRatio(costRatio);
         dayReport.setTitle("总数据");
         datas.add(data);
@@ -130,14 +130,14 @@ public class DisplayMonthReportServiceImpl implements DisplayMonthReportService 
         list.add("第三方");
         map.put("platformName", list.get(0));
         for (int i = 0; i <= list.size() - 1; i++) {
-            Long leadsCnt = 0l;
-            Long leadsCnt1 = 0l;
-            Long userCnt = 0l;
-            Long userCnt1 = 0l;
-            Float actualConsume1 = 0f;
-            Float actualConsume = 0f;
-            Double leadsCost = 0.0;
-            Double leadsCost1 = 0.0;
+            String qfLeadsCnt="";
+            String qfLeadsCnt1="";
+            String qfUserCnt="";
+            String qfUserCnt1="";
+            String qfActualConsume="";
+            String qfActualConsume1="";
+            String qfLeadsCost="";
+            String qfLeadsCost1="";
             List<Data> datas = new ArrayList<>();
             DayReport dayReport = new DayReport();
             Data data = new Data();
@@ -152,17 +152,17 @@ public class DisplayMonthReportServiceImpl implements DisplayMonthReportService 
             if (platformDataMonth == null) {
                 logger.info("此月没有数据");
             } else {
-                if (platformDataMonth.getLeadsCnt() != null) {
-                    leadsCnt = platformDataMonth.getLeadsCnt();
+                if (platformDataMonth.getQfLeadsCnt()!=null){
+                    qfLeadsCnt=platformDataMonth.getQfLeadsCnt();
                 }
-                if (platformDataMonth.getLeadsUserCnt() != null) {
-                    userCnt = platformDataMonth.getLeadsUserCnt();
+                if (platformDataMonth.getLeadsUserCnt()!=null){
+                    qfUserCnt=platformDataMonth.getQfLeadsUserCnt();
                 }
-                if (platformDataMonth.getActualConsume() != null) {
-                    actualConsume = platformDataMonth.getActualConsume();
+                if (platformDataMonth.getQfActualConsume()!=null){
+                    qfActualConsume="￥"+platformDataMonth.getQfActualConsume();
                 }
-                if (platformDataMonth.getLeadsCost() != null) {
-                    leadsCost = platformDataMonth.getLeadsCost();
+                if (platformDataMonth.getQfLeadsCost()!=null){
+                    qfLeadsCost="￥"+platformDataMonth.getQfLeadsCost();
                 }
             }
             GatherYicheAPP sumDataMonth = displayMonthReportMapper.selectSumDataMonth(map);
@@ -172,46 +172,46 @@ public class DisplayMonthReportServiceImpl implements DisplayMonthReportService 
             if (platformDataMonth1 == null) {
                 logger.info("此月没有数据");
             } else {
-                if (platformDataMonth1.getLeadsCnt() != null) {
-                    leadsCnt1 = platformDataMonth1.getLeadsCnt();
+                if (platformDataMonth1.getQfLeadsCnt()!=null){
+                    qfLeadsCnt1=platformDataMonth1.getQfLeadsCnt();
                 }
-                if (platformDataMonth1.getLeadsUserCnt() != null) {
-                    userCnt1 = platformDataMonth1.getLeadsUserCnt();
+                if (platformDataMonth1.getLeadsUserCnt()!=null){
+                    qfUserCnt1=platformDataMonth1.getQfLeadsUserCnt();
                 }
-                if (platformDataMonth1.getActualConsume() != null) {
-                    actualConsume1 = platformDataMonth1.getActualConsume();
+                if (platformDataMonth1.getQfActualConsume()!=null){
+                    qfActualConsume1="￥"+platformDataMonth1.getQfActualConsume();
                 }
-                if (platformDataMonth1.getLeadsCost() != null) {
-                    leadsCost1 = platformDataMonth1.getLeadsCost();
+                if (platformDataMonth1.getQfLeadsCost()!=null){
+                    qfLeadsCost1="￥"+platformDataMonth1.getQfLeadsCost();
                 }
             }
             Ratio ratio1 = CalculateRatioUtil.calculateRatioSum(ratio, platformDataMonth, platformDataMonth1);
             String clueRatio = ratio1.getClueRatio();
             String cluePortion = portion1.getCluePortion();
             data.setTitle("线索量(条)");
-            data.setPreTwoDay(leadsCnt1);
-            data.setPreOneDay(leadsCnt);
+            data.setPreTwoDay(qfLeadsCnt1);
+            data.setPreOneDay(qfLeadsCnt);
             data.setRatio(clueRatio);
             data.setPortion(cluePortion);
             String userRatio = ratio1.getUserRatio();
             String userPortion = portion1.getUserPortion();
             data1.setTitle("用户量(个)");
-            data1.setPreTwoDay(userCnt1);
-            data1.setPreOneDay(userCnt);
+            data1.setPreTwoDay(qfUserCnt1);
+            data1.setPreOneDay(qfUserCnt);
             data1.setRatio(userRatio);
             data1.setPortion(userPortion);
             String consumeRatio = ratio1.getConsumeRatio();
             String consumePortion = portion1.getConsumePortion();
             data2.setTitle("消耗(元)");
-            data2.setPreTwoDay(actualConsume1);
-            data2.setPreOneDay(actualConsume);
+            data2.setPreTwoDay(qfActualConsume1);
+            data2.setPreOneDay(qfActualConsume);
             data2.setRatio(consumeRatio);
             data2.setPortion(consumePortion);
             String costRatio = ratio1.getLeadsCostRatio();
             String costPortion = portion.getLeadsCostPortion();
             data3.setTitle("线索成本(元)");
-            data3.setPreTwoDay(leadsCost1);
-            data3.setPreOneDay(leadsCost);
+            data3.setPreTwoDay(qfLeadsCost1);
+            data3.setPreOneDay(qfLeadsCost);
             data3.setRatio(costRatio);
             data3.setPortion(costPortion);
             datas.add(data);
