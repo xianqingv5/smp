@@ -120,6 +120,7 @@ public class ConsumeDayEarlyWarningServiceImpl implements ConsumeDayEarlyWarning
     public Map<String, Object> getMonthChannelConsumeData(String platformId, String startTime, String endTime, String month,int num) {
         Map<String, String> map = new HashMap<>();
         Map<String, Object> map1 = new HashMap<>();
+        List<String> platformArr=new ArrayList<>();
         List<Float> daybudgetArr = new ArrayList<>();
         List<Float> consumeArr = new ArrayList<>();
         List<Long> leadsCntArr = new ArrayList<>();
@@ -140,6 +141,7 @@ public class ConsumeDayEarlyWarningServiceImpl implements ConsumeDayEarlyWarning
         if (CollectionUtil.listNotNull(earlyWarningDataList)) {
             for (EarlyWarningData earlyWarningData:earlyWarningDataList){
                 if (earlyWarningData != null) {
+                    platformArr.add(earlyWarningData.getPlatformName());
                     earlyWarningData.setDayBudget(earlyWarningData.getDayBudget() * num);
                     earlyWarningData.setMonthDayAvgclueCnt(earlyWarningData.getMonthDayAvgclueCnt() * num);
                     daybudgetArr.add(earlyWarningData.getDayBudget());
@@ -157,6 +159,7 @@ public class ConsumeDayEarlyWarningServiceImpl implements ConsumeDayEarlyWarning
                 }
             }
         }
+        map1.put("platformArr",platformArr);
         map1.put("daybudgetArr",daybudgetArr);
         map1.put("consumeArr",consumeArr);
         map1.put("leadsCntArr",leadsCntArr);
