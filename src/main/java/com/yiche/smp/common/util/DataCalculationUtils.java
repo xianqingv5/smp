@@ -66,6 +66,10 @@ public class DataCalculationUtils {
     public static void main(String[] args) {
         // System.out.println(div(118822851.29,1000000.0,2));
         System.out.println(doubleDeal(-0.66));
+        System.out.println(doubleDeal2(1235.235));
+        double floatDeal = floatDeal(1000.45/3);
+        System.out.println(floatDeal);
+        System.out.println(floatDeal(1000.45/3));
 
     }
 
