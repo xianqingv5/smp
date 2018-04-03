@@ -9,7 +9,10 @@
             c.bt                    bt,
             d.month_day_avgclue_cnt monthDayAvgclueCnt,
             d.base_number           baseNumber,
-            d.day_budget            dayBudget
+            d.day_budget            dayBudget,
+            FORMAT(c.actualConsume,2) qfActualConsume,
+            FORMAT(c.leadsCnt,0) qfLeadsCnt,
+            FORMAT(d.day_budget,2) qfDayBudget
         FROM
             (
                 SELECT
@@ -133,13 +136,22 @@
             <if test="platformId!=NULL">
                 platformId=#{platformId}
             </if>
+            AND c.platformId = d.platform_id
             AND d.month = #{month}
         </where>
     </select>
 
     <select id="getChannelDetailConsume" parameterType="map" resultType="com.yiche.smp.common.GatherYicheAPP">
         SELECT
-        platformName,channelName,leadsCnt,leadsUserCnt,actualConsume,bt
+        platformName,
+        channelName,
+        leadsCnt,
+        leadsUserCnt,
+        actualConsume,
+        FORMAT(leadsCnt,0)    qfLeadsCnt,
+        FORMAT(leadsUserCnt,0)   qfLeadsUserCnt,
+        FORMAT(actualConsume,2)  qfActualConsume,
+        bt
         FROM
         (
         SELECT

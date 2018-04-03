@@ -1,6 +1,7 @@
 package com.yiche.smp.api;
 
 import com.yiche.smp.common.*;
+import com.yiche.smp.common.util.DataCalculationUtils;
 import com.yiche.smp.core.service.CreateReportService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -100,26 +101,30 @@ public class CreateReportController2 {
 
             List<GatherYicheAPP> channelConsumeData = createReportService.getChannelConsumeData(platformId, channelName, startTime, endTime, isDetail);
             for (GatherYicheAPP gatherYicheAPP:channelConsumeData){
+                String qfActualConsume="";
                 Float actualConsume=0.0f;
                 Float cluePrice=0.0f;
                 Float userPrice=0.0f;
                 HSSFRow row = sheet.createRow(sheet.getLastRowNum() + 1);
                 row.createCell(0).setCellValue(gatherYicheAPP.getPlatformName());
                 row.createCell(1).setCellValue(gatherYicheAPP.getChannelName());
-                row.createCell(2).setCellValue(gatherYicheAPP.getLeadsCnt());
-                row.createCell(3).setCellValue(gatherYicheAPP.getLeadsUserCnt());
+                row.createCell(2).setCellValue(gatherYicheAPP.getQfLeadsCnt());
+                row.createCell(3).setCellValue(gatherYicheAPP.getQfLeadsUserCnt());
                 if (gatherYicheAPP.getActualConsume()!=null){
                     actualConsume=gatherYicheAPP.getActualConsume();
                 }
-                row.createCell(4).setCellValue(actualConsume);
+                if (gatherYicheAPP.getQfActualConsume()!=null){
+                    qfActualConsume=gatherYicheAPP.getQfActualConsume();
+                }
+                row.createCell(4).setCellValue(qfActualConsume);
                 if (gatherYicheAPP.getLeadsCnt()!=null&&gatherYicheAPP.getLeadsCnt()!=0){
                     cluePrice=actualConsume/gatherYicheAPP.getLeadsCnt();
                 }
-                row.createCell(5).setCellValue(cluePrice);
+                row.createCell(5).setCellValue(DataCalculationUtils.floatDeal(cluePrice));
                 if (gatherYicheAPP.getLeadsUserCnt()!=null&&gatherYicheAPP.getLeadsUserCnt()!=0){
                     userPrice=actualConsume/gatherYicheAPP.getLeadsUserCnt();
                 }
-                row.createCell(6).setCellValue(userPrice);
+                row.createCell(6).setCellValue(DataCalculationUtils.floatDeal(userPrice));
                 if (isDetail==0){
                     row.createCell(7).setCellValue(gatherYicheAPP.getBt());
                 }

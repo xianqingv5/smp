@@ -3,7 +3,14 @@
 <mapper namespace="com.yiche.smp.mapper.ChannelConsumeMapper">
     <select id="getChannelSumConsume" parameterType="map" resultType="com.yiche.smp.common.GatherYicheAPP">
         SELECT
-        platformName,channelName,leadsCnt,leadsUserCnt,actualConsume
+        platformName,
+        channelName,
+        leadsCnt,
+        leadsUserCnt,
+        actualConsume,
+        FORMAT(leadsCnt,0) qfLeadsCnt,
+        FORMAT(leadsUserCnt,0) qfLeadsUserCnt,
+        FORMAT(actualConsume,0) qfActualConsume
         FROM
         (
         SELECT
@@ -78,7 +85,15 @@
 
     <select id="getChannelDetailConsume" parameterType="map" resultType="com.yiche.smp.common.GatherYicheAPP">
         SELECT
-        platformName,channelName,leadsCnt,leadsUserCnt,actualConsume,bt
+        platformName,
+        channelName,
+        leadsCnt,
+        leadsUserCnt,
+        actualConsume,
+        bt,
+        FORMAT(leadsCnt,0) qfLeadsCnt,
+        FORMAT(leadsUserCnt,0) qfLeadsUserCnt,
+        FORMAT(actualConsume,0) qfActualConsume
         FROM
         (
         SELECT

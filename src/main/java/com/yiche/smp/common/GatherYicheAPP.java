@@ -34,6 +34,14 @@ public class GatherYicheAPP implements Serializable {
 
     private Double userPrice;
 
+    private String qfLeadsCnt;
+
+    private String qfLeadsUserCnt;
+
+    private String qfActualConsume;
+
+    private String qfLeadsCost;
+
     public GatherYicheAPP(String platformName, String channelName, Long leadsCnt, Long leadsUserCnt, Float actualConsume, String bt) {
         this.platformName = platformName;
         this.channelName = channelName;
@@ -188,14 +196,57 @@ public class GatherYicheAPP implements Serializable {
         this.userPrice = DataCalculationUtils.doubleDeal2(userPrice);
     }
 
+    public String getQfLeadsCnt() {
+        return qfLeadsCnt;
+    }
+
+    public void setQfLeadsCnt(String qfLeadsCnt) {
+        this.qfLeadsCnt = qfLeadsCnt;
+    }
+
+    public String getQfLeadsUserCnt() {
+        return qfLeadsUserCnt;
+    }
+
+    public void setQfLeadsUserCnt(String qfLeadsUserCnt) {
+        this.qfLeadsUserCnt = qfLeadsUserCnt;
+    }
+
+    public String getQfActualConsume() {
+        return qfActualConsume;
+    }
+
+    public void setQfActualConsume(String qfActualConsume) {
+        this.qfActualConsume = qfActualConsume;
+    }
+
+    public String getQfLeadsCost() {
+        return qfLeadsCost;
+    }
+
+    public void setQfLeadsCost(String qfLeadsCost) {
+        this.qfLeadsCost = qfLeadsCost;
+    }
+
     @Override
     public String toString() {
         return "GatherYicheAPP{" +
-                "channelName='" + channelName + '\'' +
+                "platformName='" + platformName + '\'' +
+                ", channelName='" + channelName + '\'' +
                 ", leadsCnt=" + leadsCnt +
                 ", leadsUserCnt=" + leadsUserCnt +
                 ", actualConsume=" + actualConsume +
+                ", bt='" + bt + '\'' +
+                ", leadsCost=" + leadsCost +
+                ", newUserCnt=" + newUserCnt +
+                ", newUserCost=" + newUserCost +
+                ", application='" + application + '\'' +
+                ", cluePrice=" + cluePrice +
+                ", userPrice=" + userPrice +
+                ", qfLeadsCnt='" + qfLeadsCnt + '\'' +
+                ", qfLeadsUserCnt='" + qfLeadsUserCnt + '\'' +
+                ", qfActualConsume='" + qfActualConsume + '\'' +
+                ", qfLeadsCost='" + qfLeadsCost + '\'' +
                 '}';
     }
-
 }

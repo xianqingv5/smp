@@ -7,6 +7,9 @@
             SUM(leadsCnt)       leadsCnt,
             SUM(leadsUserCnt)   leadsUserCnt,
             SUM(actualConsume) actualConsume,
+            FORMAT(SUM(leadsCnt),0)    qfLeadsCnt,
+            FORMAT(SUM(leadsUserCnt),0)   qfLeadsUserCnt,
+            FORMAT(SUM(actualConsume),2)  qfActualConsume,
             bt                  bt
         FROM
             (
@@ -56,6 +59,9 @@
             leadsCnt       leadsCnt,
             leadsUserCnt   leadsUserCnt,
             actualConsume actualConsume,
+            FORMAT(leadsCnt,0)    qfLeadsCnt,
+            FORMAT(leadsUserCnt,0)   qfLeadsUserCnt,
+            FORMAT(actualConsume,2)  qfActualConsume,
             bt             bt
         FROM
             (
@@ -112,6 +118,11 @@
             bt,
             newUserCnt,
             newUserCost,
+            FORMAT(leadsCnt,0)    qfLeadsCnt,
+            FORMAT(leadsUserCnt,0)   qfLeadsUserCnt,
+            FORMAT(actualConsume,2)  qfActualConsume,
+            FORMAT(newUserCnt,0) qfNewUserCnt,
+            FORMAT(newUserCost,2) qfNewUserCost,
             systemId
         FROM (
             SELECT
@@ -157,6 +168,9 @@
             a.cluecount leadsCnt,
             a.clueusercount leadsUserCnt,
             a.actual_consume actualConsume,
+            FORMAT(a.cluecount,0)    qfLeadsCnt,
+            FORMAT(a.clueusercount,0)   qfLeadsUserCnt,
+            FORMAT(a.actual_consume,2)  qfActualConsume,
             a.dt bt,
             b.terminal_id terminalId
         FROM

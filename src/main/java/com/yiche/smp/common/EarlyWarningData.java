@@ -19,6 +19,9 @@ public class EarlyWarningData implements Serializable {
     private String bt;
     private Double baseNumber; //基数
     private Long  monthDayAvgclueCnt;//去年当月日均线索量
+    private String qfActualConsume;
+    private String qfLeadsCnt;
+    private String qfDayBudget;
 
     public EarlyWarningData() {
     }
@@ -116,6 +119,30 @@ public class EarlyWarningData implements Serializable {
         this.monthDayAvgclueCnt = monthDayAvgclueCnt;
     }
 
+    public String getQfActualConsume() {
+        return qfActualConsume;
+    }
+
+    public void setQfActualConsume(String qfActualConsume) {
+        this.qfActualConsume = qfActualConsume;
+    }
+
+    public String getQfLeadsCnt() {
+        return qfLeadsCnt;
+    }
+
+    public void setQfLeadsCnt(String qfLeadsCnt) {
+        this.qfLeadsCnt = qfLeadsCnt;
+    }
+
+    public String getQfDayBudget() {
+        return qfDayBudget;
+    }
+
+    public void setQfDayBudget(String qfDayBudget) {
+        this.qfDayBudget = qfDayBudget;
+    }
+
     @Override
     public String toString() {
         return "EarlyWarningData{" +
@@ -126,6 +153,12 @@ public class EarlyWarningData implements Serializable {
                 ", actualPrice=" + actualPrice +
                 ", expectPrice=" + expectPrice +
                 ", EarlyWarningMsg='" + EarlyWarningMsg + '\'' +
+                ", bt='" + bt + '\'' +
+                ", baseNumber=" + baseNumber +
+                ", monthDayAvgclueCnt=" + monthDayAvgclueCnt +
+                ", qfActualConsume='" + qfActualConsume + '\'' +
+                ", qfLeadsCnt='" + qfLeadsCnt + '\'' +
+                ", qfDayBudget='" + qfDayBudget + '\'' +
                 '}';
     }
 }

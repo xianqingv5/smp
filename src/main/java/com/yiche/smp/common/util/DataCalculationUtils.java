@@ -63,10 +63,37 @@ public class DataCalculationUtils {
         return number;
     }
 
-    public static void main(String[] args) {
+/*    public static void main(String[] args) {
         // System.out.println(div(118822851.29,1000000.0,2));
         System.out.println(doubleDeal(-0.66));
 
+    }*/
+
+    public static String fmtMicrometer(Long data){
+        BigDecimal a=new BigDecimal(data);
+        DecimalFormat df=new DecimalFormat(",###,##0"); //没有小数
+        String format = df.format(a);
+        return format;
+    }
+
+    public static String fmtMicrometer1(Float data){
+        BigDecimal a=new BigDecimal(data);
+        DecimalFormat df=new DecimalFormat(",###,##0.00"); //保留两位小数
+        String format = df.format(a);
+        return format;
+    }
+
+    public static String fmtMicrometer2(Double data){
+        BigDecimal a=new BigDecimal(data);
+        DecimalFormat df=new DecimalFormat(",###,##0.00"); //保留两位小数
+        String format = df.format(a);
+        return format;
+    }
+
+
+    public static void main(String[] args) {
+        String s = fmtMicrometer1(122222.556f);
+        System.out.println(s);
     }
 
 }

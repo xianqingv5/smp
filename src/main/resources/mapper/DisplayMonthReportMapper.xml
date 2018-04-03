@@ -7,6 +7,10 @@
             SUM(leadsUserCnt)   leadsUserCnt,
             SUM(actualConsume)  actualConsume,
             SUM(leadsCost)      leadsCost,
+            FORMAT(SUM(leadsCnt),0)    qfLeadsCnt,
+            FORMAT(SUM(leadsUserCnt),0)   qfLeadsUserCnt,
+            FORMAT(SUM(actualConsume),2)  qfActualConsume,
+            FORMAT(SUM(leadsCost),2) qfLeadsCost,
             month               month
         FROM
             (
@@ -68,6 +72,10 @@
             leadsUserCnt  leadsUserCnt,
             actualConsume actualConsume,
             leadsCost     leadsCost,
+            FORMAT(leadsCnt,0)    qfLeadsCnt,
+            FORMAT(leadsUserCnt,0)   qfLeadsUserCnt,
+            FORMAT(actualConsume,2)  qfActualConsume,
+            FORMAT(leadsCost,2) qfLeadsCost,
             month         month
         FROM
             (
@@ -137,6 +145,12 @@
         month,
         newUserCnt,
         newUserCost,
+        FORMAT(leadsCnt,0)    qfLeadsCnt,
+        FORMAT(leadsUserCnt,0)   qfLeadsUserCnt,
+        FORMAT(actualConsume,2)  qfActualConsume,
+        FORMAT(leadsCost,2) qfLeadsCost,
+        FORMAT(newUserCnt,0) qfNewUserCnt,
+        FORMAT(newUserCost,2) qfNewUserCost,
         systemId
         FROM (
         SELECT
@@ -182,6 +196,10 @@
         leads_user_cnt leadsUserCnt,
         actual_consume actualConsume,
         leads_cost leadsCost,
+        FORMAT(leads_cnt,0)    qfLeadsCnt,
+        FORMAT(leads_user_cnt,0)   qfLeadsUserCnt,
+        FORMAT(actual_consume,2)  qfActualConsume,
+        FORMAT(leads_cost,2) qfLeadsCost,
         month month,
         terminal_id terminalId,
         cooperation_day cooperationDay
@@ -199,6 +217,10 @@
             leads_user_cnt leadsUserCnt,
             actual_consume actualConsume,
             leads_cost leadsCost,
+            FORMAT(leads_cnt,0)    qfLeadsCnt,
+            FORMAT(leads_user_cnt,0)   qfLeadsUserCnt,
+            FORMAT(actual_consume,2)  qfActualConsume,
+            FORMAT(leads_cost,2) qfLeadsCost,
             month month
         FROM smp.yiche_third_party_channel_month
         WHERE month=#{month}
