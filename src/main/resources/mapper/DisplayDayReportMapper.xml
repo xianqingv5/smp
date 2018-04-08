@@ -19,10 +19,13 @@
                     SUM(actual_consume) actualConsume,
                     bt                   bt
                 FROM
-                    yiche_app_app_leads_channel_day_all
+                    yiche_app_app_leads_channel_day_all a,imp_platform_channel b
                 WHERE
                     bt = #{date}
-                    AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="易车APP")
+                    AND
+                    a.channel_id = b.channel_id
+                    AND
+                    b.platform_id='1'
                     GROUP BY bt
                 UNION
                 SELECT
@@ -31,10 +34,13 @@
                     SUM(actual_consume) actualConsume,
                     bt                   bt
                 FROM
-                    yiche_quote_app_leads_channel_day_all
+                    yiche_quote_app_leads_channel_day_all a,imp_platform_channel b
                 WHERE
                     bt = #{date}
-                    AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="报价APP")
+                    AND
+                    a.channel_id=b.channel_id
+                    AND
+                    b.platform_id='2'
                     GROUP BY bt
                 UNION
                 SELECT
@@ -43,10 +49,13 @@
                     SUM(actual_consume) actualConsume,
                     dt                   bt
                 FROM
-                    yiche_pcwap_app_leads_channel_day_all
+                    yiche_pcwap_app_leads_channel_day_all a,imp_platform_channel b
                 WHERE
                     dt = #{date}
-                    AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="PCWAP")
+                    AND
+                    a.channel_id =b.channel_id
+                    AND
+                    b.platform_id='3'
                     GROUP BY dt
             ) yiche_sum_day_report
             GROUP BY bt
@@ -72,10 +81,13 @@
                     SUM(actual_consume) actualConsume,
                     bt                   bt
                 FROM
-                    yiche_app_app_leads_channel_day_all
+                    yiche_app_app_leads_channel_day_all a,imp_platform_channel b
                 WHERE
                     bt = #{date}
-                    AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="易车APP")
+                    AND
+                    a.channel_id = b.channel_id
+                    AND
+                    b.platform_id='1'
                     GROUP BY bt
                 UNION
                 SELECT
@@ -85,10 +97,13 @@
                     SUM(actual_consume) actualConsume,
                     bt                   bt
                 FROM
-                    yiche_quote_app_leads_channel_day_all
+                    yiche_quote_app_leads_channel_day_all a,imp_platform_channel b
                 WHERE
                     bt = #{date}
-                    AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="报价APP")
+                    AND
+                    a.channel_id = b.channel_id
+                    AND
+                    b.platform_id='2'
                     GROUP BY bt
                 UNION
                 SELECT
@@ -98,10 +113,13 @@
                     SUM(actual_consume) actualConsume,
                     dt                   bt
                 FROM
-                    yiche_pcwap_app_leads_channel_day_all
+                    yiche_pcwap_app_leads_channel_day_all a,imp_platform_channel b
                 WHERE
                     dt = #{date}
-                    AND channel_id IN (SELECT channel_id FROM imp_platform_channel WHERE platform_name="PCWAP")
+                    AND
+                    a.channel_id = b.channel_id
+                    AND
+                    b.platform_id='3'
                     GROUP BY dt
             ) yiche_platformName_day_report
         WHERE platformName=#{platformName}
@@ -139,7 +157,13 @@
             FROM
                 yiche_app_app_leads_channel_day_all a, imp_platform_channel b
             WHERE
-                a.bt = #{date} AND a.channel_id = b.channel_id AND b.system_id =#{systemId}
+                a.bt = #{date}
+                AND
+                a.channel_id = b.channel_id
+                AND
+                b.system_id =#{systemId}
+                AND
+                b.platform_id='1'
             UNION
             SELECT
                 "报价APP"          platformName,
@@ -155,7 +179,13 @@
             FROM
                 yiche_quote_app_leads_channel_day_all a, imp_platform_channel b
             WHERE
-                a.bt = #{date} AND a.channel_id = b.channel_id AND b.system_id =#{systemId}
+                a.bt = #{date}
+                AND
+                a.channel_id = b.channel_id
+                AND
+                b.system_id =#{systemId}
+                AND
+                b.platform_id='2'
         ) yiche_quote_platform
         WHERE platformName=#{platformName}
     </select>
@@ -177,7 +207,13 @@
             yiche_pcwap_app_leads_channel_day_all a,
             imp_platform_channel b
         WHERE
-            a.dt = #{date} AND a.channel_id = b.channel_id AND b.terminal_id =#{terminalId}
+            a.dt = #{date}
+            AND
+            a.channel_id = b.channel_id
+            AND
+            b.terminal_id =#{terminalId}
+            AND
+            b.platform_id='3'
     </select>
 
 
