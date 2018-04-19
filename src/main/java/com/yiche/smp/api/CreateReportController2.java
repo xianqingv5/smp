@@ -145,7 +145,7 @@ public class CreateReportController2 {
             }
             String fileName = startTime+"-"+endTime+platformName+"-"+channelName+s+"财务报表.xls";
             String agent = request.getHeader("user-agent");
-            fileName = FileUtils.encodeDownloadFilename(fileName, agent);
+            fileName = FileUtils.encodeDownloadFilename1(fileName, agent);
             response.setHeader("Content-Disposition",
                     "attachment;filename=" + fileName);
             ServletOutputStream outputStream = response.getOutputStream();
