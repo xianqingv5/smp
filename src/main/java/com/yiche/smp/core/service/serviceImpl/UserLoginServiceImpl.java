@@ -6,6 +6,9 @@ import com.yiche.smp.core.service.UserLoginService;
 import com.yiche.smp.domain.User;
 import com.yiche.smp.domain.UserPower;
 import com.yiche.smp.mapper.UserMapper;
+import com.yiche.webservice.LoginResult;
+import com.yiche.webservice.LoginService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,8 +33,13 @@ public class UserLoginServiceImpl implements UserLoginService {
     public UserPower checkoutUserLogin(UserPower userFrom) throws IOException {
         //check user is not exist
         UserPower userPower = null;
-        String s = httpclient.get(userFrom.getUsername(), userFrom.getPassword());
-        if (Integer.valueOf(JSON.parseObject(s).getString("code")) == 0) {
+        //String s = httpclient.get(userFrom.getUsername(), userFrom.getPassword());
+        LoginResult login = new LoginService().getLoginServiceSoap().login(userFrom.getUsername(),userFrom.getPassword());
+        
+        if("SUCCESS".equals(login.name())){
+        	
+        
+      //  if (Integer.valueOf(JSON.parseObject(s).getString("code")) == 0) {
             //请求数据库获取此用户的信息
             User user = userMapper.selectByPrimaryKey(userFrom.getUsername());
             if (user != null) {
